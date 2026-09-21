@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
@@ -33,7 +34,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 	public static final int INDEX_OUTPUT = 8;
 
 	public final CookingPotBlockEntity blockEntity;
-	public final ItemStackHandler inventory;
+	public final ResourceHandlerSlot inventory;
 	private final ContainerData cookingPotData;
 	private final ContainerLevelAccess canInteractWithCallable;
 	protected final Level level;
@@ -65,7 +66,7 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 		}
 
 		// Meal Display
-		this.addSlot(new CookingPotMealSlot(inventory, 6, 124, 26));
+		this.addSlot(new CookingPotMealSlot(inventory, , 6, 124, 26));
 
 		// Bowl Input
 		this.addSlot(new SlotItemHandler(inventory, 7, 92, 55)
