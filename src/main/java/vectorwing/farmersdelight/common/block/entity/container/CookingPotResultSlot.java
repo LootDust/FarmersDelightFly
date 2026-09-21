@@ -3,7 +3,6 @@ package vectorwing.farmersdelight.common.block.entity.container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.transfer.ResourceHandler;
-import net.neoforged.neoforge.transfer.StacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
@@ -19,7 +18,7 @@ public class CookingPotResultSlot extends ResourceHandlerSlot
 	private int removeCount;
 
 	public CookingPotResultSlot(Player player, CookingPotBlockEntity blockEntity, ResourceHandler<ItemResource> inventory, int index, int xPosition, int yPosition) {
-		super(inventory, , index, xPosition, yPosition);
+		super(inventory, (i, resource, amount) -> {}, index, xPosition, yPosition);
 		this.cookingPot = blockEntity;
 		this.player = player;
 	}
@@ -53,9 +52,9 @@ public class CookingPotResultSlot extends ResourceHandlerSlot
 
 	@Override
 	protected void checkTakeAchievements(ItemStack stack) {
-		stack.onCraftedBy(this.player.level(), this.player, this.removeCount);
+		stack.onCraftedBy(this.player, this.removeCount);
 
-		if (!this.player.level().isClientSide) {
+		if (!this.player.level().isClientSide()) {
 			cookingPot.awardUsedRecipes(this.player, cookingPot.getDroppableInventory());
 		}
 
