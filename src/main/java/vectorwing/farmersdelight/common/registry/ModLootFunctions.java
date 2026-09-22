@@ -14,6 +14,8 @@ public class ModLootFunctions
 {
 	public static final DeferredRegister<MapCodec<? extends LootItemFunction>> LOOT_FUNCTIONS = DeferredRegister.create(Registries.LOOT_FUNCTION_TYPE, FarmersDelight.MODID);
 
+	/*
 	public static final Supplier<MapCodec<? extends LootItemFunction>> COPY_SKILLET = LOOT_FUNCTIONS.register("copy_skillet", () -> CopySkilletFunction.MAP_CODEC);
 	public static final Supplier<MapCodec<? extends LootItemFunction>> SMOKER_COOK = LOOT_FUNCTIONS.register("smoker_cook", () -> SmokerCookFunction.MAP_CODEC);
+	 */
 }

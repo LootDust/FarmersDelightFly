@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.client.event;
 
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+// import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.item.ItemProperties;
+// import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,6 +35,7 @@ import vectorwing.farmersdelight.common.registry.*;
 @EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class ClientSetupEvents
 {
+	/*
 	public static void init(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> ItemProperties.register(ModItems.SKILLET.get(), Identifier.withDefaultNamespace("cooking"),
 			(stack, world, entity, s) -> stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY).getStack().isEmpty() ? 0 : 1)
@@ -95,4 +96,5 @@ public class ClientSetupEvents
 		event.registerSpriteSet(ModParticleTypes.STEAM.get(), SteamParticle.Factory::new);
 		event.registerSpriteSet(ModParticleTypes.SPARKLE.get(), SparkleParticle.Factory::new);
 	}
+	 */
 }

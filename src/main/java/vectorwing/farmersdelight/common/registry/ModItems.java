@@ -57,6 +57,7 @@ public class ModItems
 		return new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
 	}
 
+	/*
 	// Blocks
 	public static final Supplier<Item> STOVE = registerWithTab("stove",
 			() -> new BlockItem(ModBlocks.STOVE.get(), basicItem()));
@@ -70,10 +71,12 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.WOODEN_BASKET.get(), basicItem()));
 	public static final Supplier<Item> BAMBOO_BASKET = registerWithTab("bamboo_basket",
 			() -> new BlockItem(ModBlocks.BAMBOO_BASKET.get(), basicItem()));
+	 */
 
 	/**
 	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
 	 */
+	/*
 	@Deprecated(
 		forRemoval = true,
 		since = "1.3"
@@ -507,4 +510,5 @@ public class ModItems
 					tooltip.add(TextUtils.DEBUG_ITEM);
 				}
 			});
+	 */
 }

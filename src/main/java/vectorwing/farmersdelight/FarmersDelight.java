@@ -24,14 +24,16 @@ public class FarmersDelight
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
-		// Somethings with villagers are broken
+		// TODO: Fix villagers
 		// WIP
+		/*
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.getDist().isClient()) {
 			// WIP
 			modEventBus.addListener(ClientSetupEvents::init);
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
+		 */
 
 		modContainer.registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
@@ -53,8 +55,8 @@ public class FarmersDelight
 		// WIP
 		ModBiomeFeatures.FEATURES.register(modEventBus);
 		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
-		// WIP
-		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
+		// WIP, TODO: Huge rebuild for whole class
+		// ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
@@ -65,6 +67,6 @@ public class FarmersDelight
 		RegistryAliases.addRegistryAliases();
 
 		// WIP
-		NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
+		// NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 	}
 }

@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+// import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -16,8 +16,9 @@ import net.minecraft.world.phys.Vec2;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
 
-public class DefaultStoveRenderer<T extends AbstractStoveBlockEntity> implements BlockEntityRenderer<T>
+public class DefaultStoveRenderer<T extends AbstractStoveBlockEntity> // implements BlockEntityRenderer<T>
 {
+	/*
 	private static final float SIZE = 0.375F;
 	private final ItemRenderer itemRenderer;
 
@@ -59,4 +60,5 @@ public class DefaultStoveRenderer<T extends AbstractStoveBlockEntity> implements
 			poseStack.popPose();
 		}
 	}
+	 */
 }

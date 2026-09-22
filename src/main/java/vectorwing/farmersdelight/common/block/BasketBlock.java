@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -39,8 +39,9 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
+public class BasketBlock // extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
+	/*
 	public static final MapCodec<BasketBlock> CODEC = simpleCodec(BasketBlock::new);
 
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -191,4 +192,5 @@ public class BasketBlock extends BaseEntityBlock implements SimpleWaterloggedBlo
 	public BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
+	 */
 }

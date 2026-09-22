@@ -6,8 +6,9 @@ import net.minecraft.core.particles.SimpleParticleType;
 
 import javax.annotation.Nonnull;
 
-public class SteamParticle extends TextureSheetParticle
+public class SteamParticle // extends TextureSheetParticle
 {
+	/*
 	protected SteamParticle(ClientLevel level, double x, double y, double z, double motionX, double motionY, double motionZ) {
 		super(level, x, y, z);
 		this.scale(2.0F);
@@ -60,4 +61,5 @@ public class SteamParticle extends TextureSheetParticle
 			return particle;
 		}
 	}
+	 */
 }

@@ -3,8 +3,8 @@ package vectorwing.farmersdelight.client.gui;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
+// import net.minecraft.client.gui.GuiGraphics;
+// import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
-import net.minecraft.world.level.GameRules;
+// import net.minecraft.world.level.GameRules;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +30,7 @@ import java.util.Random;
 
 public class HUDOverlays
 {
+	/*
 	public static int healthIconsOffset;
 	public static int foodIconsOffset;
 	private static final Identifier MOD_ICONS_TEXTURE = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/fd_icons.png");
@@ -200,4 +201,5 @@ public class HUDOverlays
 
 		RenderSystem.disableBlend();
 	}
+	 */
 }

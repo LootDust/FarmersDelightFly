@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -29,7 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -47,9 +47,11 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+// TODO: Further research on BaseEntityBlock
 @SuppressWarnings("deprecation")
-public abstract class AbstractStoveBlock extends BaseEntityBlock
+public abstract class AbstractStoveBlock // extends BaseEntityBlock
 {
+	/*
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
@@ -193,10 +195,12 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 		}
 		super.onRemove(state, level, pos, newState, isMoving);
 	}
+	 */
 
 	/**
 	 * Checks if the state is a Stove, and if the grilling area is being obstructed by the block above.
 	 */
+	/*
 	public static boolean isStoveTopCovered(Level level, BlockPos pos, BlockState stoveState) {
 		if (!(stoveState.getBlock() instanceof StoveBlock)) return false;
 		BlockPos abovePos = pos.above();
@@ -231,4 +235,5 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 	public BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
+	 */
 }

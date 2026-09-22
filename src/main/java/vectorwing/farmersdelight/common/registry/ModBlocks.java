@@ -39,6 +39,7 @@ public class ModBlocks
 		return (state) -> state.getValue(FeastBlock.SERVINGS) * 3;
 	}
 
+	/*
 	// Workstations
 	public static final Supplier<Block> STOVE = BLOCKS.register("stove",
 			() -> new StoveBlock(Block.Properties.ofFullCopy(Blocks.BRICKS).lightLevel(litBlockEmission(13))));
@@ -52,10 +53,12 @@ public class ModBlocks
 			() -> new BasketBlock(Block.Properties.of().strength(1.5F).sound(SoundType.BAMBOO_WOOD)));
 	public static final Supplier<Block> CUTTING_BOARD = BLOCKS.register("cutting_board",
 			() -> new CuttingBoardBlock(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.WOOD)));
+	*/
 
 	/**
 	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
 	 */
+	/*
 	@Deprecated(forRemoval = true)
 	public static final Supplier<Block> BASKET = BAMBOO_BASKET;
 
@@ -335,4 +338,5 @@ public class ModBlocks
 			() -> new GleamingSaladBlock(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).lightLevel(glowingFeastBlockEmission()), ModItems.GLEAMING_SALAD, true));
 	public static final Supplier<Block> RICE_ROLL_MEDLEY_BLOCK = BLOCKS.register("rice_roll_medley_block",
 			() -> new RiceRollMedleyBlock(Block.Properties.ofFullCopy(Blocks.CAKE)));
+	 */
 }

@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.client.gui;
 
-import net.minecraft.client.gui.GuiGraphics;
+// import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractSignEditScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -12,8 +12,9 @@ import org.joml.Vector3f;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.state.CanvasSign;
 
-public class HangingCanvasSignEditScreen extends AbstractSignEditScreen
+public class HangingCanvasSignEditScreen // extends AbstractSignEditScreen
 {
+	/*
 	private static final Vector3f TEXT_SCALE = new Vector3f(0.9F, 0.9F, 0.9F);
 
 	protected DyeColor dye;
@@ -45,4 +46,5 @@ public class HangingCanvasSignEditScreen extends AbstractSignEditScreen
 	protected Vector3f getSignTextScale() {
 		return TEXT_SCALE;
 	}
+	 */
 }

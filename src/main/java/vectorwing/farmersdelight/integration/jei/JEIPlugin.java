@@ -6,7 +6,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.*;
-import net.minecraft.MethodsReturnNonnullByDefault;
+// import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,10 +27,11 @@ import java.util.List;
 
 @JeiPlugin
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
+// @MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")
-public class JEIPlugin implements IModPlugin
+public class JEIPlugin // implements IModPlugin
 {
+	/*
 	private static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "jei_plugin");
 
 	@Override
@@ -91,4 +92,5 @@ public class JEIPlugin implements IModPlugin
 	public Identifier getPluginUid() {
 		return ID;
 	}
+	 */
 }

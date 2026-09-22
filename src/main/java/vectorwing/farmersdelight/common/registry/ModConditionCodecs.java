@@ -13,5 +13,7 @@ public class ModConditionCodecs
 {
 	public static final DeferredRegister<MapCodec<? extends ICondition>> CONDITION_CODECS = DeferredRegister.create(NeoForgeRegistries.CONDITION_SERIALIZERS, FarmersDelight.MODID);
 
+	/*
 	public static final Supplier<MapCodec<? extends ICondition>> VANILLA_CRATE_ENABLED = CONDITION_CODECS.register("vanilla_crates_enabled", () -> VanillaCrateEnabledCondition.CODEC);
+	 */
 }

@@ -5,10 +5,10 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
-import net.minecraft.client.resources.model.Material;
+// import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
@@ -20,8 +20,9 @@ import vectorwing.farmersdelight.common.registry.ModAtlases;
 
 import javax.annotation.Nullable;
 
-public class HangingCanvasSignRenderer extends CanvasSignRenderer
+public class HangingCanvasSignRenderer // extends CanvasSignRenderer
 {
+	/*
 	private static final Vec3 TEXT_OFFSET = new Vec3(0.0D, (double) -0.32F, (double) 0.073F);
 	private final HangingSignRenderer.HangingSignModel signModel;
 
@@ -80,4 +81,5 @@ public class HangingCanvasSignRenderer extends CanvasSignRenderer
 	Vec3 getTextOffset() {
 		return TEXT_OFFSET;
 	}
+	 */
 }

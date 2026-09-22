@@ -5,8 +5,9 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 
-public class StarParticle extends TextureSheetParticle
+public class StarParticle // extends TextureSheetParticle
 {
+	/*
 	protected StarParticle(ClientLevel level, double posX, double posY, double posZ) {
 		super(level, posX, posY, posZ, 0.0D, 0.0D, 0.0D);
 		this.xd *= 0.01F;
@@ -69,4 +70,5 @@ public class StarParticle extends TextureSheetParticle
 			return particle;
 		}
 	}
+	 */
 }

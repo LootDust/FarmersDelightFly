@@ -8,12 +8,12 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
-import net.minecraft.client.resources.model.Material;
+// import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.FastColor;
+// import net.minecraft.util.FastColor;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -31,8 +31,9 @@ import vectorwing.farmersdelight.common.registry.ModAtlases;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CanvasSignRenderer extends StandingSignRenderer
+public class CanvasSignRenderer // extends StandingSignRenderer
 {
+	/*
 	public static final Vec3 TEXT_OFFSET = new Vec3(0.0D, (double) 0.33333334F, (double) 0.046666667F);
 	private static final int OUTLINE_RENDER_DISTANCE = Mth.square(16);
 
@@ -183,4 +184,5 @@ public class CanvasSignRenderer extends StandingSignRenderer
 	public Material getCanvasSignMaterial(@Nullable DyeColor dyeColor) {
 		return ModAtlases.getCanvasSignMaterial(dyeColor);
 	}
+	 */
 }

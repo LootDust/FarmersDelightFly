@@ -14,14 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.FarmBlock;
+// import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
-import net.neoforged.neoforge.common.util.TriState;
+// import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.EventHooks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -30,8 +30,9 @@ import vectorwing.farmersdelight.common.registry.ModItems;
  * Once mature, a budding bush can "grow past" it, and turn into something different.
  */
 @SuppressWarnings("deprecation")
-public class BuddingBushBlock extends BushBlock
+public class BuddingBushBlock // extends BushBlock
 {
+	/*
 	public static final MapCodec<BuddingBushBlock> CODEC = simpleCodec(BuddingBushBlock::new);
 
 	public static final int MAX_AGE = 3;
@@ -105,10 +106,12 @@ public class BuddingBushBlock extends BushBlock
 			}
 		}
 	}
+	 */
 
 	/**
 	 * Determines if this bush should keep ticking at max age. If true, calls growPastMaxAge() on each growth success.
 	 */
+	/*
 	public boolean canGrowPastMaxAge() {
 		return false;
 	}
@@ -195,4 +198,5 @@ public class BuddingBushBlock extends BushBlock
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
 	}
+	 */
 }

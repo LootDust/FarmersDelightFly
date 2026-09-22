@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import vectorwing.farmersdelight.common.block.entity.CabinetBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -28,8 +28,9 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class CabinetBlock extends BaseEntityBlock
+public class CabinetBlock // extends BaseEntityBlock
 {
+	/*
 	public static final MapCodec<CabinetBlock> CODEC = simpleCodec(CabinetBlock::new);
 
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -115,4 +116,5 @@ public class CabinetBlock extends BaseEntityBlock
 	public BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));
 	}
+	 */
 }

@@ -32,9 +32,9 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+// import net.neoforged.neoforge.items.IItemHandler;
+// import net.neoforged.neoforge.items.ItemStackHandler;
+// import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
@@ -52,8 +52,9 @@ import java.util.List;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
-public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Clearable
+public class CuttingBoardBlockEntity // extends SyncedBlockEntity implements Clearable
 {
+	/*
 	private final ItemStackHandler inventory;
 	private final RecipeManager.CachedCheck<CuttingBoardRecipeInput, CuttingBoardRecipe> quickCheck;
 	private Identifier lastRecipeID;
@@ -239,4 +240,5 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 	public void clearContent() {
 		ItemUtils.clearItems(inventory);
 	}
+	 */
 }

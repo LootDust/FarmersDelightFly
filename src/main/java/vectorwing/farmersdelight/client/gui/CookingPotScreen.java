@@ -2,7 +2,7 @@ package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.GuiGraphics;
+// import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.ClickType;
+// import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -26,9 +26,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Further research on AbstractContainerScreen
 @ParametersAreNonnullByDefault
-public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> implements RecipeUpdateListener
+public class CookingPotScreen // extends AbstractContainerScreen<CookingPotMenu> implements RecipeUpdateListener
 {
+	/*
 	private static final WidgetSprites RECIPE_BUTTON = new WidgetSprites(Identifier.withDefaultNamespace("recipe_book/button"), Identifier.withDefaultNamespace("recipe_book/button"));
 	private static final Identifier BACKGROUND_TEXTURE = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "textures/gui/cooking_pot.png");
 	private static final Rectangle HEAT_ICON = new Rectangle(47, 55, 17, 15);
@@ -174,4 +176,5 @@ public class CookingPotScreen extends AbstractContainerScreen<CookingPotMenu> im
 	public RecipeBookComponent getRecipeBookComponent() {
 		return this.recipeBookComponent;
 	}
+	 */
 }

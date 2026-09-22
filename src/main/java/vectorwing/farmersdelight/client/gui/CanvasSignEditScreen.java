@@ -2,11 +2,11 @@ package vectorwing.farmersdelight.client.gui;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.gui.GuiGraphics;
+// import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.SignEditScreen;
-import net.minecraft.client.renderer.blockentity.SignRenderer;
+// import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
+// import net.minecraft.client.resources.model.Material;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.StandingSignBlock;
@@ -17,8 +17,10 @@ import vectorwing.farmersdelight.common.registry.ModAtlases;
 
 import javax.annotation.Nullable;
 
-public class CanvasSignEditScreen extends SignEditScreen
+// TODO: Further research on SignEditScreen
+public class CanvasSignEditScreen //extends SignEditScreen
 {
+	/*
 	@Nullable
 	protected SignRenderer.SignModel signModel;
 	@Nullable
@@ -55,4 +57,5 @@ public class CanvasSignEditScreen extends SignEditScreen
 			this.signModel.root.render(guiGraphics.pose(), vertexconsumer, 15728880, OverlayTexture.NO_OVERLAY);
 		}
 	}
+	 */
 }

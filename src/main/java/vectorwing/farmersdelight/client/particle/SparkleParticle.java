@@ -4,8 +4,9 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 
-public class SparkleParticle extends TextureSheetParticle
+public class SparkleParticle // extends TextureSheetParticle
 {
+	/*
 	private final SpriteSet sprites;
 
 	protected SparkleParticle(ClientLevel level, double x, double y, double z, SpriteSet sprites, float gravity) {
@@ -48,4 +49,5 @@ public class SparkleParticle extends TextureSheetParticle
 			return new SparkleParticle(level, x, y, z, this.sprites, 0.0F);
 		}
 	}
+	 */
 }

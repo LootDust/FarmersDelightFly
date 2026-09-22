@@ -13,6 +13,8 @@ public class ModMenuTypes
 {
 	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Registries.MENU, FarmersDelight.MODID);
 
+	/*
 	public static final Supplier<MenuType<CookingPotMenu>> COOKING_POT = MENU_TYPES
 			.register("cooking_pot", () -> IMenuTypeExtension.create(CookingPotMenu::new));
+	 */
 }

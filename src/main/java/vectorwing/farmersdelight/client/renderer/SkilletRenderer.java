@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.client.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
@@ -11,14 +11,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
+// import net.neoforged.neoforge.items.IItemHandler;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 
 import java.util.Random;
 
-public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
+public class SkilletRenderer // implements BlockEntityRenderer<SkilletBlockEntity>
 {
+	/*
 	private final Random random = new Random();
 
 	public SkilletRenderer(BlockEntityRendererProvider.Context context) {
@@ -70,4 +71,5 @@ public class SkilletRenderer implements BlockEntityRenderer<SkilletBlockEntity>
 
 		return modelCount;
 	}
+	 */
 }

@@ -13,6 +13,7 @@ public class ModBlockEntityTypes
 {
 	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, FarmersDelight.MODID);
 
+	/*
 	public static final Supplier<BlockEntityType<StoveBlockEntity>> STOVE = TILES.register("stove",
 			() -> new BlockEntityType<>(StoveBlockEntity::new, ModBlocks.STOVE.get()));
 	public static final Supplier<BlockEntityType<CookingPotBlockEntity>> COOKING_POT = TILES.register("cooking_pot",
@@ -108,4 +109,5 @@ public class ModBlockEntityTypes
 							ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(),
 							ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(),
 							ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get()));
+	 */
 }

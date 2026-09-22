@@ -1,14 +1,15 @@
 package vectorwing.farmersdelight.client.recipebook;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.RecipeBookCategories;
+// import net.minecraft.client.RecipeBookCategories;
 import net.minecraft.world.inventory.RecipeBookType;
-import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
+// import net.neoforged.neoforge.client.event.RegisterRecipeBookCategoriesEvent;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 
 public class RecipeCategories
 {
+	/*
 	public static RecipeBookCategories COOKING_SEARCH = RecipeBookCategories.valueOf("FARMERSDELIGHT_COOKING_SEARCH");
 	public static RecipeBookCategories COOKING_MEALS = RecipeBookCategories.valueOf("FARMERSDELIGHT_COOKING_MEALS");
 	public static RecipeBookCategories COOKING_DRINKS = RecipeBookCategories.valueOf("FARMERSDELIGHT_COOKING_DRINKS");
@@ -32,4 +33,5 @@ public class RecipeCategories
 			return COOKING_MISC;
 		});
 	}
+	 */
 }

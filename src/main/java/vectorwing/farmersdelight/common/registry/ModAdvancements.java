@@ -12,5 +12,7 @@ public class ModAdvancements
 {
 	public static final DeferredRegister<CriterionTrigger<?>> TRIGGERS = DeferredRegister.create(Registries.TRIGGER_TYPE, FarmersDelight.MODID);
 
+	/*
 	public static final Supplier<CuttingBoardTrigger> USE_CUTTING_BOARD = TRIGGERS.register("use_cutting_board", CuttingBoardTrigger::new);
+	 */
 }

@@ -3,10 +3,10 @@ package vectorwing.farmersdelight.client.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+// import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
@@ -16,8 +16,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Random;
 
-public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlockEntity>
+public class CuttingBoardRenderer // implements BlockEntityRenderer<CuttingBoardBlockEntity>
 {
+	/*
 	private final Random random = new Random();
 
 	public CuttingBoardRenderer(BlockEntityRendererProvider.Context context) {
@@ -121,4 +122,5 @@ public class CuttingBoardRenderer implements BlockEntityRenderer<CuttingBoardBlo
 
 		return modelCount;
 	}
+	 */
 }

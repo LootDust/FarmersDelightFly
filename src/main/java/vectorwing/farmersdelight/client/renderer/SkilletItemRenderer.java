@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+// import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
@@ -20,8 +20,9 @@ import vectorwing.farmersdelight.common.item.SkilletItem;
 import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 
-public class SkilletItemRenderer extends BlockEntityWithoutLevelRenderer
+public class SkilletItemRenderer // extends BlockEntityWithoutLevelRenderer
 {
+	/*
 	public SkilletItemRenderer() {
 		super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
 	}
@@ -101,4 +102,5 @@ public class SkilletItemRenderer extends BlockEntityWithoutLevelRenderer
             }
 		}
 	}
+	 */
 }

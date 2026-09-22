@@ -32,6 +32,7 @@ public class ModBiomeModifiers
 	public static DeferredRegister<MapCodec<? extends BiomeModifier>> BIOME_MODIFIER_SERIALIZERS =
 			DeferredRegister.create(NeoForgeRegistries.BIOME_MODIFIER_SERIALIZERS, FarmersDelight.MODID);
 
+	/*
 	public static Supplier<MapCodec<AddFeaturesByFilterBiomeModifier>> ADD_FEATURES_BY_FILTER = BIOME_MODIFIER_SERIALIZERS.register("add_features_by_filter", () ->
 			RecordCodecBuilder.mapCodec(builder -> builder.group(
 					Biome.LIST_CODEC.fieldOf("allowed_biomes").forGetter(AddFeaturesByFilterBiomeModifier::allowedBiomes),
@@ -135,6 +136,7 @@ public class ModBiomeModifiers
 				GenerationStep.Decoration.VEGETAL_DECORATION
 		));
 	}
+	 */
 
 	private static BiomeModifier createSimpleModifier(Holder<Biome> biomeHolder, Holder<PlacedFeature> placedFeatureHolder) {
 		return new BiomeModifiers.AddFeaturesBiomeModifier(

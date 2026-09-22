@@ -38,9 +38,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+// import net.neoforged.neoforge.items.IItemHandler;
+// import net.neoforged.neoforge.items.ItemStackHandler;
+// import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.entity.container.CookingPotMenu;
@@ -59,8 +59,9 @@ import java.util.Optional;
 import static java.util.Map.entry;
 
 @EventBusSubscriber(modid = FarmersDelight.MODID)
-public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeCraftingHolder, Clearable
+public class CookingPotBlockEntity // extends SyncedBlockEntity implements MenuProvider, HeatableBlockEntity, Nameable, RecipeCraftingHolder, Clearable
 {
+	/*
 	public static final int MEAL_DISPLAY_SLOT = 6;
 	public static final int CONTAINER_SLOT = 7;
 	public static final int OUTPUT_SLOT = 8;
@@ -566,4 +567,5 @@ public class CookingPotBlockEntity extends SyncedBlockEntity implements MenuProv
 	public void clearContent() {
 		ItemUtils.clearItems(inventory);
 	}
+	 */
 }
