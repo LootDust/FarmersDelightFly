@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +23,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -35,8 +35,9 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
-public class FeastBlock extends Block
+public class FeastBlock // extends Block
 {
+	/*
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty SERVINGS = IntegerProperty.create("servings", 0, 4);
 
@@ -51,6 +52,7 @@ public class FeastBlock extends Block
 			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 6.0D, 14.0D),
 			Block.box(2.0D, 0.0D, 2.0D, 14.0D, 8.0D, 14.0D),
 	};
+	 */
 
 	/**
 	 * This block provides up to 4 servings of food to players who interact with it.
@@ -60,6 +62,7 @@ public class FeastBlock extends Block
 	 * @param servingItem  The meal to be served.
 	 * @param hasLeftovers Whether the block remains when out of servings. If false, the block vanishes once it runs out.
 	 */
+	/*
 	public FeastBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers, boolean hasServingParticles) {
 		super(properties);
 		this.servingItem = servingItem;
@@ -171,4 +174,5 @@ public class FeastBlock extends Block
 	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return false;
 	}
+	 */
 }

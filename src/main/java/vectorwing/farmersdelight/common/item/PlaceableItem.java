@@ -17,8 +17,10 @@ public class PlaceableItem extends BlockItem
 		super(block, properties);
 	}
 
+	/*
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		tooltip.add(TextUtils.PLACEABLE);
 	}
+	 */
 }

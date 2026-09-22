@@ -9,12 +9,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-@Mixin(Feature.class)
+// @Mixin(Feature.class)
 public class KeepRichSoilGiantTreeMixin
 {
 	/**
 	 * Due to how Trees generate, this mixin is needed to prevent Rich Soil from becoming Podzol under a Giant Spruce Tree growth.
 	 */
+	/*
 	@Inject(at = @At(value = "HEAD"), method = "isGrassOrDirt", cancellable = true)
 	private static void keepRichSoil(LevelSimulatedReader level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
 		if (level.isStateAtPosition(pos, state -> state.is(ModBlocks.RICH_SOIL.get()))) {
@@ -22,4 +23,5 @@ public class KeepRichSoilGiantTreeMixin
 			cir.cancel();
 		}
 	}
+	 */
 }

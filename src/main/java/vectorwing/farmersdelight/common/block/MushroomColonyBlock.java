@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -40,8 +40,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 @SuppressWarnings("deprecation")
-public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
+public class MushroomColonyBlock // extends BushBlock implements BonemealableBlock
 {
+	/*
 	public static final MapCodec<MushroomColonyBlock> CODEC = RecordCodecBuilder.mapCodec(
 			builder -> builder.group(BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("mushroom").forGetter(block -> block.mushroomType), propertiesCodec())
 					.apply(builder, MushroomColonyBlock::new)
@@ -169,4 +170,5 @@ public class MushroomColonyBlock extends BushBlock implements BonemealableBlock
 		int age = Math.min(getMaxAge(), state.getValue(COLONY_AGE) + getBonemealAgeIncrease(level));
 		level.setBlock(pos, state.setValue(COLONY_AGE, age), 2);
 	}
+	 */
 }

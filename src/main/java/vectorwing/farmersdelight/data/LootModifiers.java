@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.advancements.critereon.*;
+// import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -34,8 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class LootModifiers extends GlobalLootModifierProvider
+public class LootModifiers // extends GlobalLootModifierProvider
 {
+	/*
 	public LootModifiers(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
 		super(output, registries, FarmersDelight.MODID);
 	}
@@ -184,4 +185,5 @@ public class LootModifiers extends GlobalLootModifierProvider
 				)
 		);
 	}
+	 */
 }

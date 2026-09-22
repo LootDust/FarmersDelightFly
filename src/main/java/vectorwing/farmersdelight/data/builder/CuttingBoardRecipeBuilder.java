@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data.builder;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.advancements.Criterion;
+// import net.minecraft.MethodsReturnNonnullByDefault;
+// import net.minecraft.advancements.Criterion;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -22,10 +22,11 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-@MethodsReturnNonnullByDefault
+// @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CuttingBoardRecipeBuilder implements RecipeBuilder
+public class CuttingBoardRecipeBuilder // implements RecipeBuilder
 {
+	/*
 	private final NonNullList<ChanceResult> results = NonNullList.createWithCapacity(4);
 	private final Ingredient ingredient;
 	private final Ingredient tool;
@@ -40,24 +41,30 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 		this.tool = tool;
 		this.folder = CuttingRecipeFolder.CUTTING;
 	}
+	 */
 
 	/**
 	 * Creates a new builder for a cutting recipe.
 	 */
+	/*
 	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count) {
 		return new CuttingBoardRecipeBuilder(ingredient, tool, mainResult, count, 1);
 	}
+	 */
 
 	/**
 	 * Creates a new builder for a cutting recipe, providing a chance for the main output to drop.
 	 */
+	/*
 	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult, int count, float chance) {
 		return new CuttingBoardRecipeBuilder(ingredient, tool, mainResult, count, chance);
 	}
+	 */
 
 	/**
 	 * Creates a new builder for a cutting recipe, returning 1 unit of the result.
 	 */
+	/*
 	public static CuttingBoardRecipeBuilder cuttingRecipe(Ingredient ingredient, Ingredient tool, ItemLike mainResult) {
 		return new CuttingBoardRecipeBuilder(ingredient, tool, mainResult, 1, 1);
 	}
@@ -89,10 +96,12 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	public RecipeBuilder unlockedBy(String p_176496_, Criterion<?> p_301065_) {
 		return this; // No-op - Cutting Board has no recipe book unlocks
 	}
+	 */
 
 	/**
 	 * Sets a custom namespace (mod ID) for the recipe. Use this only if the ingredient isn't registered to the mod ID you want.
 	 */
+	/*
 	public CuttingBoardRecipeBuilder setNamespace(String namespace) {
 		this.namespace = namespace;
 		return this;
@@ -116,10 +125,12 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 	public static Identifier getDefaultRecipeId(ItemLike itemLike) {
 		return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem()));
 	}
+	 */
 
 	/**
 	 * Shorthand for saving recipes in the FD namespace.
 	 */
+	/*
 	public void saveToFD(RecipeOutput output) {
 		this.setNamespace(FarmersDelight.MODID).save(output);
 	}
@@ -153,4 +164,5 @@ public class CuttingBoardRecipeBuilder implements RecipeBuilder
 		);
 		output.accept(id, recipe, null);
 	}
+	 */
 }

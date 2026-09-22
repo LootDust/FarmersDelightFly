@@ -5,7 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -32,8 +32,9 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 @SuppressWarnings("deprecation")
-public class RopeBlock extends IronBarsBlock
+public class RopeBlock // extends IronBarsBlock
 {
+	/*
 	public static final BooleanProperty TIED_TO_BELL = BooleanProperty.create("tied_to_bell");
 	protected static final VoxelShape LOWER_SUPPORT_AABB = Block.box(7, 0, 7, 9, 1, 9);
 
@@ -168,4 +169,5 @@ public class RopeBlock extends IronBarsBlock
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED, TIED_TO_BELL);
 	}
+	 */
 }

@@ -11,8 +11,9 @@ import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
-public class FoodServingRecipe extends CustomRecipe
+public class FoodServingRecipe // extends CustomRecipe
 {
+	/*
 	public FoodServingRecipe() {
 		super();
 	}
@@ -88,4 +89,5 @@ public class FoodServingRecipe extends CustomRecipe
 	public RecipeSerializer<?> getSerializer() {
 		return ModRecipeSerializers.FOOD_SERVING.get();
 	}
+	 */
 }

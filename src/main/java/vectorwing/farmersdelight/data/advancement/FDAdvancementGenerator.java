@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.data.advancement;
 
 import net.minecraft.advancements.*;
-import net.minecraft.advancements.critereon.*;
+// import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.DamageTypeTags;
@@ -9,8 +9,8 @@ import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
-import net.neoforged.neoforge.common.data.AdvancementProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+// import net.neoforged.neoforge.common.data.AdvancementProvider;
+// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.advancement.CuttingBoardTrigger;
 import vectorwing.farmersdelight.common.block.TomatoBlock;
@@ -23,8 +23,9 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGenerator
+public class FDAdvancementGenerator // implements AdvancementProvider.AdvancementGenerator
 {
+	/*
 	@Override
 	public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
 		AdvancementHolder farmersDelight = Advancement.Builder.advancement()
@@ -215,4 +216,5 @@ public class FDAdvancementGenerator implements AdvancementProvider.AdvancementGe
 	private String getNameId(String id) {
 		return FarmersDelight.MODID + ":" + id;
 	}
+	 */
 }

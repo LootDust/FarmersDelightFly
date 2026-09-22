@@ -9,9 +9,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-@Mixin(FenceBlock.class)
+// @Mixin(FenceBlock.class)
 public abstract class RopeFenceConnectionMixin
 {
+	/*
 	@Inject(at = @At("HEAD"), method = "connectsTo", cancellable = true)
 	public void denyConnectionToRopeFenceGate(BlockState state, boolean isSideSolid, Direction direction, CallbackInfoReturnable<Boolean> cir) {
 		if (state.is(ModBlocks.ROPE_FENCE_GATE.get())) {
@@ -25,4 +26,5 @@ public abstract class RopeFenceConnectionMixin
 			cir.setReturnValue(false);
 		}
 	}
+	 */
 }

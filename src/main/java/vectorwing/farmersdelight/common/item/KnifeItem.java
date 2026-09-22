@@ -39,7 +39,7 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.Set;
 
-public class KnifeItem extends Item
+public class KnifeItem // extends Item
 {
 	/**
 	 * This action is used on cutting recipes which need a knife.
@@ -48,6 +48,7 @@ public class KnifeItem extends Item
 	/**
 	 * This action is used in gameplay interactions where something is harvested.
 	 */
+	/*
 	public static final ItemAbility KNIFE_HARVEST = ItemAbility.get("knife_harvest");
 
 	public static final Set<ItemAbility> KNIFE_ACTIONS = Set.of(ItemAbilities.SHEARS_CARVE, KNIFE_DIG, KNIFE_HARVEST);
@@ -168,4 +169,5 @@ public class KnifeItem extends Item
 			return InteractionResult.PASS;
 		}
     }
+	 */
 }

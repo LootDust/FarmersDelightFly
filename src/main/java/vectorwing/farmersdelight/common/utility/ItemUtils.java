@@ -13,10 +13,10 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.items.IItemHandler;
+// import net.neoforged.neoforge.items.IItemHandler;
 import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.tag.ModTags;
-import net.neoforged.neoforge.items.ItemStackHandler;
+// import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.util.Optional;
 
@@ -31,6 +31,7 @@ public class ItemUtils
 	 * @param fallbackTag An item tag to check for, if the given ToolAction is absent
 	 * @return true if either condition matches
 	 */
+	/*
 	public static boolean isValidTool(ItemStack stack, ItemAbility toolAction, TagKey<Item> fallbackTag) {
 		return stack.canPerformAction(toolAction) || stack.is(fallbackTag);
 	}
@@ -64,6 +65,7 @@ public class ItemUtils
 		entity.setDeltaMovement(xMotion, yMotion, zMotion);
 		level.addFreshEntity(entity);
 	}
+	 */
 
 	/**
 	 * Checks if the enchantment is registered, and if so, gets that enchantment's level on the passed stack. Defaults to 0 in all edge cases.
@@ -72,8 +74,10 @@ public class ItemUtils
 	 * @param stack The stack to be queried
 	 * @return The enchantment's level, if the stack is enchanted with it. Returns 0 if not, or if the enchantment is disabled.
 	 */
+	/*
 	public static int getValidatedEnchantmentLevel(ResourceKey<Enchantment> enchantment, HolderLookup.Provider registries, ItemStack stack) {
 		Optional<Holder.Reference<Enchantment>> fortune = registries.holder(enchantment);
 		return fortune.map(stack::getEnchantmentLevel).orElse(0);
 	}
+	 */
 }

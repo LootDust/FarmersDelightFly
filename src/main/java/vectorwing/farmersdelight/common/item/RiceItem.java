@@ -14,8 +14,9 @@ import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-public class RiceItem extends BlockItem
+public class RiceItem // extends BlockItem
 {
+	/*
 	public RiceItem(Block block, Item.Properties properties) {
 		super(block, properties);
 	}
@@ -34,4 +35,5 @@ public class RiceItem extends BlockItem
 		}
 		return !result.consumesAction() && context.getPlayer() != null ? this.use(context.getLevel(), context.getPlayer(), context.getHand()) : result;
 	}
+	 */
 }

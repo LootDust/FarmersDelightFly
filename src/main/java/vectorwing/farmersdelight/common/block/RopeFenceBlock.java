@@ -5,7 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -26,8 +26,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-public class RopeFenceBlock extends CrossCollisionBlock
+public class RopeFenceBlock // extends CrossCollisionBlock
 {
+	/*
 	public static final MapCodec<RopeFenceBlock> CODEC = simpleCodec(RopeFenceBlock::new);
 
 	public static final VoxelShape POST = Block.box(7.0F, 0.0F, 7.0F, 9.0F, 16.0F, 9.0F);
@@ -116,4 +117,5 @@ public class RopeFenceBlock extends CrossCollisionBlock
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(NORTH, EAST, WEST, SOUTH, WATERLOGGED);
 	}
+	 */
 }

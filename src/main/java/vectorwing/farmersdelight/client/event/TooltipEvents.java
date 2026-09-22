@@ -19,9 +19,10 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
+// @EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class TooltipEvents
 {
+	/*
 	@SubscribeEvent
 	public static void addTooltipToVanillaSoups(ItemTooltipEvent event) {
 		Item food = event.getItemStack().getItem();
@@ -49,4 +50,5 @@ public class TooltipEvents
 			}
 		}
 	}
+	 */
 }

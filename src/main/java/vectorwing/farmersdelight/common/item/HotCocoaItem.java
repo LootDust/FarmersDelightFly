@@ -8,13 +8,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.EffectCures;
+// import net.neoforged.neoforge.common.EffectCures;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class HotCocoaItem extends DrinkableItem
+public class HotCocoaItem // extends DrinkableItem
 {
+	/*
 	public HotCocoaItem(Item.Properties properties) {
 		super(properties, false, true);
 	}
@@ -38,4 +39,5 @@ public class HotCocoaItem extends DrinkableItem
 			}
 		}
 	}
+	 */
 }

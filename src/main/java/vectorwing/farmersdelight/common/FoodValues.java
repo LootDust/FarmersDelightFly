@@ -14,6 +14,7 @@ import java.util.Optional;
 
 public class FoodValues
 {
+	/*
 	public static final int BRIEF_DURATION = 600;    // 30 seconds
 	public static final int SHORT_DURATION = 1200;    // 1 minute
 	public static final int MEDIUM_DURATION = 3600;    // 3 minutes
@@ -229,4 +230,5 @@ public class FoodValues
 
 	public static final FoodProperties RABBIT_STEW_BUFF = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f).effect(() -> nourishment(LONG_DURATION), 1.0F).usingConvertsTo(Items.BOWL).build();
+	 */
 }

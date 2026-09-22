@@ -2,13 +2,14 @@ package vectorwing.farmersdelight.common.block.entity.inventory;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandler;
+// import net.neoforged.neoforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class CookingPotItemHandler implements IItemHandler
+public class CookingPotItemHandler // implements IItemHandler
 {
+	/*
 	private static final int SLOTS_INPUT = 6;
 	private static final int SLOT_CONTAINER_INPUT = 7;
 	private static final int SLOT_MEAL_OUTPUT = 8;
@@ -60,4 +61,5 @@ public class CookingPotItemHandler implements IItemHandler
 	public int getSlotLimit(int slot) {
 		return itemHandler.getSlotLimit(slot);
 	}
+	 */
 }

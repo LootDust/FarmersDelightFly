@@ -21,8 +21,9 @@ import vectorwing.farmersdelight.common.block.PieBlock;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public class PastrySlicingModifier extends LootModifier
+public class PastrySlicingModifier // extends LootModifier
 {
+	/*
 	public static final Supplier<MapCodec<PastrySlicingModifier>> CODEC = Suppliers.memoize(() ->
 			RecordCodecBuilder.mapCodec(inst -> codecStart(inst)
 					.and(BuiltInRegistries.ITEM.byNameCodec().fieldOf("slice").forGetter((m) -> m.pastrySlice))
@@ -31,6 +32,7 @@ public class PastrySlicingModifier extends LootModifier
 	public static final int MAX_CAKE_BITES = 7;
 	public static final int MAX_PIE_BITES = 4;
 	private final Item pastrySlice;
+	 */
 
 	/**
 	 * This loot modifier drops a slice for every remaining bite of a broken pastry block.
@@ -38,6 +40,7 @@ public class PastrySlicingModifier extends LootModifier
 	 * If the block is a PieBlock, it drops up to 4 slices.
 	 * Otherwise, this does nothing.
 	 */
+	/*
 	public PastrySlicingModifier(LootItemCondition[] conditions, Item pastrySlice) {
 		super(conditions);
 		this.pastrySlice = pastrySlice;
@@ -65,4 +68,5 @@ public class PastrySlicingModifier extends LootModifier
 	public MapCodec<? extends IGlobalLootModifier> codec() {
 		return CODEC.get();
 	}
+	 */
 }

@@ -24,8 +24,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class TatamiMatBlock extends HorizontalDirectionalBlock
+public class TatamiMatBlock // extends HorizontalDirectionalBlock
 {
+	/*
 	public static final MapCodec<TatamiMatBlock> CODEC = simpleCodec(TatamiMatBlock::new);
 	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
@@ -113,4 +114,5 @@ public class TatamiMatBlock extends HorizontalDirectionalBlock
 		}
 		return null;
 	}
+	 */
 }

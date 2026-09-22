@@ -7,11 +7,11 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
+// import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.ChatFormatting;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.gui.GuiGraphics;
+// import net.minecraft.MethodsReturnNonnullByDefault;
+// import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -27,9 +27,10 @@ import vectorwing.farmersdelight.integration.jei.FDRecipeTypes;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class CuttingRecipeCategory implements IRecipeCategory<RecipeHolder<CuttingBoardRecipe>>
+// @MethodsReturnNonnullByDefault
+public class CuttingRecipeCategory // implements IRecipeCategory<RecipeHolder<CuttingBoardRecipe>>
 {
+	/*
 	public static final int OUTPUT_GRID_X = 76;
 	public static final int OUTPUT_GRID_Y = 10;
 	private final IDrawable slot;
@@ -127,4 +128,5 @@ public class CuttingRecipeCategory implements IRecipeCategory<RecipeHolder<Cutti
 			}
 		}
 	}
+	 */
 }

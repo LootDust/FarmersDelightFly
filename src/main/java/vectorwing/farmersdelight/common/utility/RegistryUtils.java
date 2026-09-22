@@ -19,6 +19,7 @@ public class RegistryUtils
 			super(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, namespace);
 		}
 
+		// TODO: Check is this safe
 		public <D> DeferredHolder<DataComponentType<?>, DataComponentType<D>> registerComponentType(String name, UnaryOperator<DataComponentType.Builder<D>> builder) {
 			return this.register(name, () -> ((DataComponentType.Builder)builder.apply(DataComponentType.builder())).build());
 		}

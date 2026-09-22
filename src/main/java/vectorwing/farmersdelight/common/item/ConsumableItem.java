@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.common.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.advancements.CriteriaTriggers;
+// import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,6 +27,7 @@ public class ConsumableItem extends Item
 	 * Items that can be consumed by an entity.
 	 * When consumed, they may affect the consumer somehow, and will give back containers if applicable, regardless of their stack size.
 	 */
+
 	public ConsumableItem(Properties properties) {
 		super(properties);
 		this.hasFoodEffectTooltip = true;
@@ -45,6 +46,7 @@ public class ConsumableItem extends Item
 		this.hasCustomTooltip = hasCustomTooltip;
 	}
 
+	/*
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity consumer) {
 		if (!level.isClientSide) {
@@ -79,13 +81,16 @@ public class ConsumableItem extends Item
 			return stack;
 		}
 	}
+	 */
 
 	/**
 	 * Override this to apply changes to the consumer (e.g. curing effects).
 	 */
+
 	public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
 	}
 
+	/*
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
@@ -97,4 +102,5 @@ public class ConsumableItem extends Item
 			}
 		}
 	}
+	 */
 }

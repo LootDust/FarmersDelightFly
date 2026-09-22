@@ -45,6 +45,7 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 		return this.defaultBlockState().setValue(WATERLOGGED, fluid.getType() == Fluids.WATER);
 	}
 
+	/*
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
 		if (state.getValue(WATERLOGGED)) {
@@ -53,6 +54,7 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 
 		return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 	}
+	 */
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
@@ -64,6 +66,7 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 		return SHAPE;
 	}
 
+	/*
 	@Override
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
 		if (entity.isSuppressingBounce()) {
@@ -81,6 +84,7 @@ public class SafetyNetBlock extends Block implements SimpleWaterloggedBlock
 			this.bounceEntity(entity);
 		}
 	}
+	 */
 
 	private void bounceEntity(Entity entity) {
 		Vec3 vec3d = entity.getDeltaMovement();

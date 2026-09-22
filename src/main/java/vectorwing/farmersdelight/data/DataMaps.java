@@ -6,8 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.DataMapProvider;
-import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
-import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
+// import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
+// import net.neoforged.neoforge.registries.datamaps.builtin.FurnaceFuel;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -17,8 +17,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
-public class DataMaps extends DataMapProvider
+public class DataMaps // extends DataMapProvider
 {
+	/*
 	protected DataMaps(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
 		super(packOutput, lookupProvider);
 	}
@@ -99,4 +100,5 @@ public class DataMaps extends DataMapProvider
 	private static ResourceKey<Item> item(Item item) {
 		return BuiltInRegistries.ITEM.getResourceKey(item).orElseThrow();
 	}
+	 */
 }

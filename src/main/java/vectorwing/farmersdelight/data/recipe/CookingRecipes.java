@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 public class CookingRecipes
 {
+	/*
 	public static final int FAST_COOKING = 100;      // 5 seconds
 	public static final int NORMAL_COOKING = 200;    // 10 seconds
 	public static final int SLOW_COOKING = 400;      // 20 seconds
@@ -269,4 +270,5 @@ public class CookingRecipes
 				.setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
 				.save(output);
 	}
+	 */
 }

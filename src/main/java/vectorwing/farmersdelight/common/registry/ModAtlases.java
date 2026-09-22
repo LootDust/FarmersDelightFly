@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 public class ModAtlases
 {
+	/*
 	public static final Material BLANK_CANVAS_SIGN_MATERIAL = new Material(Sheets.SIGN_SHEET, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/canvas"));
 	public static final Material BLANK_HANGING_CANVAS_SIGN_MATERIAL = new Material(Sheets.SIGN_SHEET, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity/signs/hanging/canvas"));
 
@@ -37,4 +38,5 @@ public class ModAtlases
 	public static Material getHangingCanvasSignMaterial(@Nullable DyeColor dyeColor) {
 		return dyeColor != null ? ModAtlases.DYED_HANGING_CANVAS_SIGN_MATERIALS.get(dyeColor) : ModAtlases.BLANK_HANGING_CANVAS_SIGN_MATERIAL;
 	}
+	 */
 }

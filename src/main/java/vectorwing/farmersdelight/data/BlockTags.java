@@ -6,7 +6,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -17,8 +17,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
-public class BlockTags extends BlockTagsProvider
+public class BlockTags // extends BlockTagsProvider
 {
+	/*
 	public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
 		super(output, lookupProvider, FarmersDelight.MODID, existingFileHelper);
 	}
@@ -405,4 +406,5 @@ public class BlockTags extends BlockTagsProvider
 		tag(CompatibilityTags.SERENE_SEASONS_UNBREAKABLE_FERTILE_CROPS).add(
 			ModBlocks.ONION_CROP.get());
 	}
+	 */
 }

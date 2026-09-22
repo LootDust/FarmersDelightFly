@@ -9,10 +9,10 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
+// import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.gui.GuiGraphics;
+// import net.minecraft.MethodsReturnNonnullByDefault;
+// import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -38,9 +38,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class DecompositionRecipeCategory implements IRecipeCategory<DecompositionDummy>
+// @MethodsReturnNonnullByDefault
+public class DecompositionRecipeCategory // implements IRecipeCategory<DecompositionDummy>
 {
+	/*
 	public static final Identifier UID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "decomposition");
 	private static final int slotSize = 22;
 
@@ -119,5 +120,6 @@ public class DecompositionRecipeCategory implements IRecipeCategory<Decompositio
 			tooltip.add(TextUtils.JEI("decomposition.accelerators"));
 		}
 	}
+	 */
 }
 

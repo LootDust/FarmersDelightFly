@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.data.recipe;
 
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+// import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
@@ -13,6 +13,7 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class SmeltingRecipes
 {
+	/*
 	public static void register(RecipeOutput output) {
 		foodSmeltingRecipes("fried_egg", Items.EGG, ModItems.FRIED_EGG.get(), 0.35F, output);
 		foodSmeltingRecipes("beef_patty", ModItems.MINCED_BEEF.get(), ModItems.BEEF_PATTY.get(), 0.35F, output);
@@ -66,4 +67,5 @@ public class SmeltingRecipes
 				.unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(ingredient))
 				.save(output, namePrefix + "_from_smoking");
 	}
+	 */
 }

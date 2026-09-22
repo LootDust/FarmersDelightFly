@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.common;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import net.minecraft.world.entity.npc.Villager;
+// import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -14,6 +14,7 @@ import java.util.Set;
 
 public class CommonSetup
 {
+	/*
 	public static void init(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			registerDispenserBehaviors();
@@ -46,4 +47,5 @@ public class CommonSetup
 
 		Villager.FOOD_POINTS = ImmutableMap.copyOf(newFoodPoints);
 	}
+	 */
 }

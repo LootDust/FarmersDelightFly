@@ -36,8 +36,9 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
+public class RiceBlock // extends BushBlock implements BonemealableBlock, LiquidBlockContainer
 {
+	/*
 	public static final MapCodec<RiceBlock> CODEC = simpleCodec(RiceBlock::new);
 
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
@@ -207,4 +208,5 @@ public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlo
 	public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
 		return false;
 	}
+	 */
 }

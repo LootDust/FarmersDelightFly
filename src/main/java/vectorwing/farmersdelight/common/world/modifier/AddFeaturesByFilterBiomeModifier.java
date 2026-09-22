@@ -20,8 +20,9 @@ public record AddFeaturesByFilterBiomeModifier(
 		Optional<Float> maximumTemperature,
 		HolderSet<PlacedFeature> features,
 		GenerationStep.Decoration step
-) implements BiomeModifier
+) // implements BiomeModifier
 {
+	/*
 
 	@Override
 	public void modify(Holder<Biome> biome, Phase phase, ModifiableBiomeInfo.BiomeInfo.Builder builder) {
@@ -44,4 +45,5 @@ public record AddFeaturesByFilterBiomeModifier(
 	public MapCodec<? extends BiomeModifier> codec() {
 		return ModBiomeModifiers.ADD_FEATURES_BY_FILTER.get();
 	}
+	*/
 }

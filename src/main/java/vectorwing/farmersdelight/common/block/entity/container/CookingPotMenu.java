@@ -12,9 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+// import net.neoforged.neoforge.items.ItemStackHandler;
+// import net.neoforged.neoforge.items.SlotItemHandler;
+// import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
@@ -25,8 +25,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Objects;
 
-public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotRecipe>
+public class CookingPotMenu // extends RecipeBookMenu<RecipeWrapper, CookingPotRecipe>
 {
+	/*
 	public static final Identifier EMPTY_CONTAINER_SLOT_BOWL = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/empty_container_slot_bowl");
 
 	public static final int INDEX_MEAL = 6;
@@ -209,4 +210,5 @@ public class CookingPotMenu extends RecipeBookMenu<RecipeWrapper, CookingPotReci
 	public boolean shouldMoveToInventory(int slot) {
 		return slot < (getGridWidth() * getGridHeight());
 	}
+	 */
 }

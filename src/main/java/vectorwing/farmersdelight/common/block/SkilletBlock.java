@@ -9,7 +9,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,7 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -46,8 +46,9 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
+public class SkilletBlock // extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
+	/*
 	public static final MapCodec<SkilletBlock> CODEC = simpleCodec(SkilletBlock::new);
 
 	public static final int MINIMUM_COOKING_TIME = 60;
@@ -195,12 +196,14 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 	private boolean getTrayState(LevelAccessor world, BlockPos pos) {
 		return world.getBlockState(pos.below()).is(ModTags.Blocks.TRAY_HEAT_SOURCES);
 	}
+	 */
 
 	/**
 	 * Calculates the total cooking time for the Skillet, affected by Fire Aspect.
 	 * Assuming a default of 30 seconds (600 ticks), the time is divided by 5, then reduced further per level of Fire Aspect, to a minimum of 3 seconds.
 	 * Times are always rounded to a multiple of 20, to ensure exact seconds.
 	 */
+	/*
 	public static int getSkilletCookingTime(int originalCookingTime, int fireAspectLevel) {
 		int cookingTime = originalCookingTime > 0 ? originalCookingTime : 600;
 		int cookingSeconds = cookingTime / 20;
@@ -214,4 +217,5 @@ public class SkilletBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 		return Mth.clamp(result, MINIMUM_COOKING_TIME, originalCookingTime);
 	}
+	 */
 }

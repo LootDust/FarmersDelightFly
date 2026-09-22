@@ -19,9 +19,10 @@ import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.entity.dispenser.CuttingBoardDispenseBehavior;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-@Mixin(DispenserBlock.class)
+// @Mixin(DispenserBlock.class)
 public abstract class CuttingBoardDispenserMixin
 {
+	/*
 	@Shadow
 	protected abstract DispenseItemBehavior getDispenseMethod(Level level, ItemStack stack);
 
@@ -41,4 +42,5 @@ public abstract class CuttingBoardDispenserMixin
 			ci.cancel();
 		}
 	}
+	 */
 }

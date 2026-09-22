@@ -13,9 +13,10 @@ import vectorwing.farmersdelight.common.item.SkilletItem;
 import vectorwing.farmersdelight.common.network.payload.FlipSkilletPayload;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
+// @EventBusSubscriber(modid = FarmersDelight.MODID, value = Dist.CLIENT)
 public class KeybindEvents
 {
+	/*
 	@SubscribeEvent
 	public static void preClientTick(ClientTickEvent.Pre event) { // Run this on pre so inputs don't get eaten up.
 		Minecraft mc = Minecraft.getInstance();
@@ -29,4 +30,5 @@ public class KeybindEvents
 			}
 		}
 	}
+	 */
 }

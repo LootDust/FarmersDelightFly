@@ -45,10 +45,12 @@ public class RicePaniclesBlock extends CropBlock
 		return 3;
 	}
 
+	/*
 	@Override
 	protected ItemLike getBaseSeedId() {
 		return ModItems.RICE.get();
 	}
+	 */
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -60,10 +62,12 @@ public class RicePaniclesBlock extends CropBlock
 		return super.getBonemealAgeIncrease(level) / 3;
 	}
 
+	/*
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.is(ModBlocks.RICE_CROP.get());
 	}
+	 */
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {

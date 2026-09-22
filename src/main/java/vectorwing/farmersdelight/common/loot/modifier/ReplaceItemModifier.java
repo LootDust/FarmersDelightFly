@@ -16,8 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
 
-public class ReplaceItemModifier extends LootModifier
+public class ReplaceItemModifier // extends LootModifier
 {
+	/*
 	public static final Supplier<MapCodec<ReplaceItemModifier>> CODEC = Suppliers.memoize(() ->
 			RecordCodecBuilder.mapCodec(inst -> codecStart(inst).and(
 							inst.group(
@@ -31,10 +32,12 @@ public class ReplaceItemModifier extends LootModifier
 	private final Item removedItem;
 	private final Item addedItem;
 	private final int addedCount;
+	 */
 
 	/**
 	 * This loot modifier removes all instances of the specified item, replacing it by another specified addition.
 	 */
+	/*
 	public ReplaceItemModifier(LootItemCondition[] conditions, Item removedItem, Item addedItem, int addedCount) {
 		super(conditions);
 		this.removedItem = removedItem;
@@ -72,4 +75,5 @@ public class ReplaceItemModifier extends LootModifier
 	public MapCodec<? extends IGlobalLootModifier> codec() {
 		return CODEC.get();
 	}
+	 */
 }

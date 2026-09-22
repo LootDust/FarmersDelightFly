@@ -18,8 +18,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.IShearable;
 import vectorwing.farmersdelight.common.world.WildCropGeneration;
 
-public class SandyShrubBlock extends BushBlock implements IShearable, BonemealableBlock
+public class SandyShrubBlock // extends BushBlock implements IShearable, BonemealableBlock
 {
+	/*
 	public static final MapCodec<SandyShrubBlock> CODEC = simpleCodec(SandyShrubBlock::new);
 
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -59,4 +60,5 @@ public class SandyShrubBlock extends BushBlock implements IShearable, Bonemealab
 			value.value().place(level, level.getChunkSource().getGenerator(), random, pos.above());
 		});
 	}
+	 */
 }

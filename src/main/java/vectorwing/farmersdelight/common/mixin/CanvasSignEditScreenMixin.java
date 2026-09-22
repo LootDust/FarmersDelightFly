@@ -14,9 +14,10 @@ import vectorwing.farmersdelight.client.gui.HangingCanvasSignEditScreen;
 import vectorwing.farmersdelight.common.block.entity.CanvasSignBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.HangingCanvasSignBlockEntity;
 
-@Mixin(LocalPlayer.class)
+// @Mixin(LocalPlayer.class)
 public class CanvasSignEditScreenMixin
 {
+	/*
 	@Shadow
 	@Final
 	protected Minecraft minecraft;
@@ -32,4 +33,5 @@ public class CanvasSignEditScreenMixin
 			ci.cancel();
 		}
 	}
+	 */
 }

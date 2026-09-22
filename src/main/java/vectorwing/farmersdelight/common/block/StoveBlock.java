@@ -21,6 +21,7 @@ import javax.annotation.Nullable;
 
 public class StoveBlock extends AbstractStoveBlock
 {
+	/*
 	public static final MapCodec<StoveBlock> CODEC = simpleCodec(StoveBlock::new);
 
 	@Override
@@ -61,4 +62,5 @@ public class StoveBlock extends AbstractStoveBlock
 		level.addParticle(ParticleTypes.SMOKE, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
 		level.addParticle(ParticleTypes.FLAME, x + xOffset, y + yOffset, z + zOffset, 0.0D, 0.0D, 0.0D);
 	}
+	 */
 }

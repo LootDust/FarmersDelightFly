@@ -13,8 +13,9 @@ import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
 
 import java.util.Optional;
 
-public class CookingPotItem extends BlockItem
+public class CookingPotItem // extends BlockItem
 {
+	/*
 	private static final int BAR_COLOR = Mth.color(0.4F, 0.4F, 1.0F);
 
 	public CookingPotItem(Block block, Properties properties) {
@@ -46,4 +47,5 @@ public class CookingPotItem extends BlockItem
 		ItemStack mealStack = CookingPotBlockEntity.getMealFromItem(stack);
 		return mealStack.getCount();
 	}
+	 */
 }

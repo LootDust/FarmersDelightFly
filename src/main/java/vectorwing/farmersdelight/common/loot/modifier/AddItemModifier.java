@@ -16,8 +16,9 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-public class AddItemModifier extends LootModifier
+public class AddItemModifier // extends LootModifier
 {
+	/*
 	public static final Supplier<MapCodec<AddItemModifier>> CODEC = Suppliers.memoize(() ->
 			RecordCodecBuilder.mapCodec(inst -> codecStart(inst).and(
 							inst.group(
@@ -29,10 +30,12 @@ public class AddItemModifier extends LootModifier
 
 	private final Item addedItem;
 	private final int count;
+	 */
 
 	/**
 	 * This loot modifier adds an item to the loot table, given the conditions specified.
 	 */
+	/*
 	public AddItemModifier(LootItemCondition[] conditions, Item addedItem, int count) {
 		super(conditions);
 		this.addedItem = addedItem;
@@ -64,4 +67,5 @@ public class AddItemModifier extends LootModifier
 	public MapCodec<? extends IGlobalLootModifier> codec() {
 		return CODEC.get();
 	}
+	 */
 }

@@ -19,8 +19,8 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
+// import net.neoforged.neoforge.items.IItemHandler;
+// import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -31,8 +31,9 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.Optional;
 
-public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlockEntity, Clearable
+public class SkilletBlockEntity // extends SyncedBlockEntity implements HeatableBlockEntity, Clearable
 {
+	/*
 	private final ItemStackHandler inventory = createHandler();
 	private int cookingTime;
 	private int cookingTimeTotal;
@@ -213,4 +214,5 @@ public class SkilletBlockEntity extends SyncedBlockEntity implements HeatableBlo
 	public void clearContent() {
 		ItemUtils.clearItems(inventory);
 	}
+	 */
 }

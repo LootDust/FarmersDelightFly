@@ -26,9 +26,10 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.function.BooleanSupplier;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID)
-public class BasketBlockEntity extends RandomizableContainerBlockEntity implements Basket
+// @EventBusSubscriber(modid = FarmersDelight.MODID)
+public class BasketBlockEntity // extends RandomizableContainerBlockEntity implements Basket
 {
+	/*
 	private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
 	private int transferCooldown = -1;
 
@@ -169,4 +170,5 @@ public class BasketBlockEntity extends RandomizableContainerBlockEntity implemen
 			blockEntity.tryTransfer(() -> blockEntity.collectItems(level, facing));
 		}
 	}
+	 */
 }

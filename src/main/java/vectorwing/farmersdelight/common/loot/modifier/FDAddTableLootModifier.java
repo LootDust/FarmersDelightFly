@@ -21,8 +21,9 @@ import static net.minecraft.world.level.storage.loot.LootTable.createStackSplitt
 /**
  * Credits to Commoble for this implementation!
  */
-public class FDAddTableLootModifier extends AddTableLootModifier
+public class FDAddTableLootModifier // extends AddTableLootModifier
 {
+	/*
 	public static final Supplier<MapCodec<FDAddTableLootModifier>> CODEC = Suppliers.memoize(() ->
 			RecordCodecBuilder.mapCodec(inst -> codecStart(inst)
 					.and(ResourceKey.codec(Registries.LOOT_TABLE).fieldOf("lootTable").forGetter((m) -> m.lootTable))
@@ -45,4 +46,5 @@ public class FDAddTableLootModifier extends AddTableLootModifier
 		}
 		return generatedLoot;
 	}
+	 */
 }

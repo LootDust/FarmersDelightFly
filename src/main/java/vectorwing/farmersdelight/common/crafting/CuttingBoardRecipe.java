@@ -20,7 +20,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+// import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
@@ -31,8 +31,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
+public class CuttingBoardRecipe // implements Recipe<CuttingBoardRecipeInput>
 {
+	/*
 	public static final int MAX_RESULTS = 4;
 
 	private final String group;
@@ -241,4 +242,5 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 			return STREAM_CODEC;
 		}
 	}
+	 */
 }

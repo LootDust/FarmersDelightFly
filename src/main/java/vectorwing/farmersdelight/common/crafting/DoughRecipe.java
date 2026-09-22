@@ -13,8 +13,9 @@ import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
 
-public class DoughRecipe extends CustomRecipe
+public class DoughRecipe // extends CustomRecipe
 {
+	/*
 	public DoughRecipe(CraftingBookCategory category) {
 		super(category);
 	}
@@ -70,4 +71,5 @@ public class DoughRecipe extends CustomRecipe
 	public RecipeSerializer<?> getSerializer() {
 		return ModRecipeSerializers.DOUGH.get();
 	}
+	 */
 }

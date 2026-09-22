@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.common.item;
 
-import net.minecraft.advancements.CriteriaTriggers;
+// import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+// import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -54,8 +54,9 @@ import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings({"unused"})
-public class SkilletItem extends BlockItem
+public class SkilletItem // extends BlockItem
 {
+	/*
 	public static final float FLIP_TIME = 12;
 
 	public static final ToolMaterial SKILLET_MATERIAL = ToolMaterial.IRON;
@@ -324,4 +325,5 @@ public class SkilletItem extends BlockItem
 	public int getEnchantmentValue() {
 		return SKILLET_MATERIAL.getEnchantmentValue();
 	}
+	 */
 }

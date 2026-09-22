@@ -14,8 +14,8 @@ import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.animal.horse.Horse;
+// import net.minecraft.world.entity.animal.horse.AbstractHorse;
+// import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -35,8 +35,9 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class HorseFeedItem extends Item
+public class HorseFeedItem // extends Item
 {
+	/*
 	public static final List<MobEffectInstance> EFFECTS = Lists.newArrayList(
 			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 6000, 1),
 			new MobEffectInstance(MobEffects.JUMP, 6000, 0));
@@ -119,4 +120,5 @@ public class HorseFeedItem extends Item
 		}
 		return InteractionResult.PASS;
 	}
+	 */
 }

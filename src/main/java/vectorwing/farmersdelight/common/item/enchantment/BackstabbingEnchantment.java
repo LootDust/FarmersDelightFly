@@ -37,9 +37,10 @@ public class BackstabbingEnchantment
 		return amount * multiplier;
 	}
 
-	@EventBusSubscriber(modid = FarmersDelight.MODID)
+	// @EventBusSubscriber(modid = FarmersDelight.MODID)
 	public static class BackstabbingEvent
 	{
+		/*
 		@SubscribeEvent
 		@SuppressWarnings("unused")
 		public static void onKnifeBackstab(LivingIncomingDamageEvent event) {
@@ -61,5 +62,6 @@ public class BackstabbingEnchantment
 				}
 			}
 		}
+		 */
 	}
 }

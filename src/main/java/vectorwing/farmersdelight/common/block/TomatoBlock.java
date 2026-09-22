@@ -3,13 +3,13 @@ package vectorwing.farmersdelight.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,8 +35,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class TomatoBlock extends CropBlock
+public class TomatoBlock // extends CropBlock
 {
+	/*
 	public static final IntegerProperty VINE_AGE = BlockStateProperties.AGE_3;
 	public static final BooleanProperty ROPELOGGED = BooleanProperty.create("ropelogged");
 	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
@@ -257,14 +258,17 @@ public class TomatoBlock extends CropBlock
 			destroyAndPlaceRope(level, pos);
 		}
 	}
+	 */
 
 	/**
 	 * Deprecated - This block will no longer use its ropelogged state. Refer to HangingTomatoBlock instead.
 	 */
+	/*
 	@Deprecated(forRemoval = true)
 	public static void destroyAndPlaceRope(Level level, BlockPos pos) {
-		Block configuredRopeBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
+		Block configuredRopeBlock = BuiltInRegistries.BLOCK.get(Identifier.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
 		Block finalRopeBlock = configuredRopeBlock != null ? configuredRopeBlock : ModBlocks.ROPE.get();
 		level.setBlockAndUpdate(pos, finalRopeBlock.defaultBlockState());
 	}
+	 */
 }

@@ -18,8 +18,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
 @ParametersAreNonnullByDefault
-public class CopySkilletFunction extends LootItemConditionalFunction
+public class CopySkilletFunction // extends LootItemConditionalFunction
 {
+	/*
 	public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "copy_skillet");
 	public static final MapCodec<CopySkilletFunction> MAP_CODEC = RecordCodecBuilder.mapCodec(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, CopySkilletFunction::new)
@@ -50,4 +51,5 @@ public class CopySkilletFunction extends LootItemConditionalFunction
 	public MapCodec<? extends LootItemFunction> getType() {
 		return ModLootFunctions.COPY_SKILLET.get();
 	}
+	 */
 }

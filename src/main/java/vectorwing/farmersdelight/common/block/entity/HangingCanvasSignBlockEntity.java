@@ -12,10 +12,12 @@ public class HangingCanvasSignBlockEntity extends HangingSignBlockEntity
 		super(pos, state);
 	}
 
+	/*
 	@Override
 	public BlockEntityType<?> getType() {
 		return ModBlockEntityTypes.HANGING_CANVAS_SIGN.get();
 	}
+	 */
 
 	@Override
 	public boolean isValidBlockState(BlockState state) {

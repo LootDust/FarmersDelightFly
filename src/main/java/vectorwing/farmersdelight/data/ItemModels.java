@@ -6,8 +6,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+// import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -18,8 +18,9 @@ import java.util.stream.Collectors;
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
  */
-public class ItemModels extends ItemModelProvider
+public class ItemModels // extends ItemModelProvider
 {
+	/*
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
 	public static final Identifier MUG = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
@@ -216,4 +217,5 @@ public class ItemModels extends ItemModelProvider
 		}
 		return ret;
 	}
+	 */
 }

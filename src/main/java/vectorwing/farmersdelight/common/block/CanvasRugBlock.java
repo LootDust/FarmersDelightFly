@@ -21,8 +21,10 @@ public class CanvasRugBlock extends Block
 		return SHAPE;
 	}
 
+	/*
 	@Override
 	public boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos) {
 		return true;
 	}
+	 */
 }

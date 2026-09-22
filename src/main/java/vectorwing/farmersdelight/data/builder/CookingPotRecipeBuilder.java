@@ -1,13 +1,13 @@
 package vectorwing.farmersdelight.data.builder;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
+// import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+// import net.minecraft.advancements.Criterion;
+// import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+// import net.minecraft.advancements.critereon.ItemPredicate;
+// import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -30,9 +30,10 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class CookingPotRecipeBuilder implements RecipeBuilder
+// @MethodsReturnNonnullByDefault
+public class CookingPotRecipeBuilder // implements RecipeBuilder
 {
+	/*
 	private CookingPotRecipeBookTab tab;
 	private final NonNullList<Ingredient> ingredients = NonNullList.create();
 	private final Item result;
@@ -120,10 +121,12 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 		this.criteria.put("has_any_ingredient", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(items).build()));
 		return this;
 	}
+	 */
 
 	/**
 	 * Sets a custom namespace (mod ID) for the recipe. Use this only if the result isn't registered to the mod ID you want.
 	 */
+	/*
 	public CookingPotRecipeBuilder setNamespace(String namespace) {
 		this.namespace = namespace;
 		return this;
@@ -132,10 +135,12 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 	public static Identifier getDefaultRecipeId(ItemLike itemLike) {
 		return Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(itemLike.asItem()));
 	}
+	 */
 
 	/**
 	 * Shorthand for saving recipes in the FD namespace.
 	 */
+	/*
 	public void saveToFD(RecipeOutput output) {
 		this.setNamespace(FarmersDelight.MODID).save(output);
 	}
@@ -173,4 +178,5 @@ public class CookingPotRecipeBuilder implements RecipeBuilder
 		);
 		output.accept(recipeId, recipe, advancementBuilder.build(id.withPrefix("recipes/")));
 	}
+	 */
 }

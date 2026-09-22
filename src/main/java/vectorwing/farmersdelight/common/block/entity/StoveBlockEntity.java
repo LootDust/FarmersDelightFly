@@ -12,6 +12,7 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 public class StoveBlockEntity extends AbstractStoveBlockEntity
 {
+	/*
 	public StoveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.STOVE.get(), pos, state, RecipeType.CAMPFIRE_COOKING);
 	}
@@ -64,4 +65,5 @@ public class StoveBlockEntity extends AbstractStoveBlockEntity
 		};
 		return OFFSETS[index];
 	}
+	 */
 }

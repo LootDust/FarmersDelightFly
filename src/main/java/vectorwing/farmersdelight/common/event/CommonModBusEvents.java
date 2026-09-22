@@ -13,9 +13,10 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID)
+// @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonModBusEvents
 {
+	/*
 	@SubscribeEvent
 	public static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
 		if (DatagenModLoader.isRunningDataGen()) {
@@ -31,4 +32,5 @@ public class CommonModBusEvents
 			event.modify(Items.RABBIT_STEW, (builder) -> builder.set(DataComponents.FOOD, FoodValues.RABBIT_STEW_BUFF));
 		}
 	}
+	 */
 }

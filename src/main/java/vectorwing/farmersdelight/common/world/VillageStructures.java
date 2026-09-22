@@ -21,6 +21,7 @@ import java.util.List;
 
 public class VillageStructures
 {
+	/*
 	public static void addNewVillageBuilding(final ServerAboutToStartEvent event) {
 		if (Configuration.GENERATE_VILLAGE_COMPOST_HEAPS.get()) {
 			Registry<StructureTemplatePool> templatePools = event.getServer().registryAccess().lookupOrThrow(Registries.TEMPLATE_POOL);
@@ -88,4 +89,5 @@ public class VillageStructures
 					processorList.list = newSafeList;
 				});
 	}
+	 */
 }

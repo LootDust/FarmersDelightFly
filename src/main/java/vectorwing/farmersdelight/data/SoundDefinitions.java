@@ -4,7 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 import org.jetbrains.annotations.Nullable;
@@ -14,8 +14,9 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.function.Supplier;
 
-public class SoundDefinitions extends SoundDefinitionsProvider
+public class SoundDefinitions // extends SoundDefinitionsProvider
 {
+	/*
 	protected SoundDefinitions(PackOutput output, ExistingFileHelper helper) {
 		super(output, FarmersDelight.MODID, helper);
 	}
@@ -77,4 +78,5 @@ public class SoundDefinitions extends SoundDefinitionsProvider
 		this.add(event, definition
 				.with(SoundDefinition.Sound.sound(referencedSound.getLocation(), SoundDefinition.SoundType.EVENT)));
 	}
+	 */
 }

@@ -16,8 +16,9 @@ import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.common.entity.RottenTomatoEntity;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 
-public class RottenTomatoItem extends Item implements ProjectileItem
+public class RottenTomatoItem // extends Item implements ProjectileItem
 {
+	/*
 	public RottenTomatoItem(Properties properties) {
 		super(properties);
 	}
@@ -47,4 +48,5 @@ public class RottenTomatoItem extends Item implements ProjectileItem
 		rottenTomato.setItem(itemStack);
 		return rottenTomato;
 	}
+	 */
 }

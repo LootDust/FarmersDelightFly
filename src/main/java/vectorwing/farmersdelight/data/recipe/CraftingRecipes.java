@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.data.recipe;
 
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+// import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -22,6 +22,7 @@ import vectorwing.farmersdelight.common.utility.RecipeUtils;
 
 public class CraftingRecipes
 {
+	/*
 	public static void register(RecipeOutput output) {
 		recipesVanillaAlternatives(output);
 		recipesBlocks(output);
@@ -49,11 +50,13 @@ public class CraftingRecipes
 				.group("fd_hanging_canvas_sign")
 				.save(output);
 	}
+	 */
 
 	/**
 	 * The following recipes should ALWAYS define a custom save location.
 	 * If not, they fall on the minecraft namespace, overriding vanilla recipes instead of being alternatives.
 	 */
+	/*
 	private static void recipesVanillaAlternatives(RecipeOutput output) {
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PUMPKIN_SEEDS)
 				.requires(ModItems.PUMPKIN_SLICE.get())
@@ -915,4 +918,5 @@ public class CraftingRecipes
 				.unlockedBy("has_rice_roll", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.SALMON_ROLL.get(), ModItems.COD_ROLL.get(), ModItems.KELP_ROLL_SLICE.get()))
 				.save(output);
 	}
+	 */
 }

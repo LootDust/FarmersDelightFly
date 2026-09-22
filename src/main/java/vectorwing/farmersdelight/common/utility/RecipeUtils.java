@@ -10,6 +10,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 
 public class RecipeUtils
 {
+	/*
 	// Copyright (c) 2014-2015 mezz
 	public static ItemStack getResultItem(Recipe<?> recipe) {
 		Minecraft minecraft = Minecraft.getInstance();
@@ -20,6 +21,7 @@ public class RecipeUtils
 		RegistryAccess registryAccess = level.registryAccess();
 		return recipe.assemble(recipe.getSerializer());
 	}
+	*/
 
 	public static Identifier FDLocation(String name) {
 		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name);

@@ -1,7 +1,7 @@
 package vectorwing.farmersdelight.common.utility;
 
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
+// import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -20,6 +20,7 @@ public class MathUtils
 	 * @param handler The inventory to compare.
 	 * @return The redstone signal strength.
 	 */
+	/*
 	public static int calcRedstoneFromItemHandler(@Nullable IItemHandlerModifiable handler) {
 		if (handler == null) {
 			return 0;
@@ -39,4 +40,5 @@ public class MathUtils
 			return net.minecraft.util.Mth.floor(f * 14.0F) + (i > 0 ? 1 : 0);
 		}
 	}
+	 */
 }

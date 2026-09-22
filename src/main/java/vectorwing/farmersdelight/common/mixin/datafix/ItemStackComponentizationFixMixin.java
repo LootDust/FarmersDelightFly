@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @SuppressWarnings({"rawtypes"})
-@Mixin(ItemStackComponentizationFix.class)
+// @Mixin(ItemStackComponentizationFix.class)
 public class ItemStackComponentizationFixMixin
 {
+	/*
 	@Inject(method = "fixItemStack", at = @At("HEAD"))
 	private static void fixCustomStacks(ItemStackComponentizationFix.ItemStackData data, Dynamic tag, CallbackInfo ci) {
 		if (data.is("farmersdelight:cooking_pot")) {
@@ -37,4 +38,5 @@ public class ItemStackComponentizationFixMixin
 			});
 		}
 	}
+	 */
 }

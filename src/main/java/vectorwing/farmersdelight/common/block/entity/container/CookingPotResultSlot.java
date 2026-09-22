@@ -50,6 +50,7 @@ public class CookingPotResultSlot extends ResourceHandlerSlot
 		this.checkTakeAchievements(stack);
 	}
 
+	/*
 	@Override
 	protected void checkTakeAchievements(ItemStack stack) {
 		stack.onCraftedBy(this.player, this.removeCount);
@@ -60,4 +61,5 @@ public class CookingPotResultSlot extends ResourceHandlerSlot
 
 		this.removeCount = 0;
 	}
+	 */
 }

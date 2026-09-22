@@ -15,10 +15,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+// import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+// import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+// import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RandomizedIntStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
@@ -37,6 +37,7 @@ import java.util.List;
 @SuppressWarnings("SameParameterValue")
 public class WildCropGeneration
 {
+	/*
 	public static ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_SANDY_SHRUB = registerConfiguredFeatureKey("patch_sandy_shrub");
 	public static ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_CABBAGES = registerConfiguredFeatureKey("patch_wild_cabbages");
 	public static ResourceKey<ConfiguredFeature<?, ?>> FEATURE_PATCH_WILD_ONIONS = registerConfiguredFeatureKey("patch_wild_onions");
@@ -231,4 +232,5 @@ public class WildCropGeneration
 				BiomeTagFilter.biomeIsInTag(BiomeTags.IS_OVERWORLD)
 		));
 	}
+	 */
 }

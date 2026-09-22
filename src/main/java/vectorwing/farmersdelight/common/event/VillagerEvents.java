@@ -3,16 +3,16 @@ package vectorwing.farmersdelight.common.event;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
+// import net.minecraft.world.entity.npc.VillagerProfession;
+// import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.BasicItemListing;
-import net.neoforged.neoforge.event.village.VillagerTradesEvent;
-import net.neoforged.neoforge.event.village.WandererTradesEvent;
+// import net.neoforged.neoforge.common.BasicItemListing;
+// import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+// import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -20,10 +20,11 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID)
+// @EventBusSubscriber(modid = FarmersDelight.MODID)
 @ParametersAreNonnullByDefault
 public class VillagerEvents
 {
+	/*
 	@SubscribeEvent
 	public static void onVillagerTrades(VillagerTradesEvent event) {
 		if (!Configuration.ENABLE_FARMERS_BUY_FD_CROPS.get()) return;
@@ -58,4 +59,5 @@ public class VillagerEvents
 	public static BasicItemListing itemForEmeraldTrade(ItemLike item, int maxTrades, int xp) {
 		return new BasicItemListing(1, new ItemStack(item), maxTrades, xp, 0.05F);
 	}
+	 */
 }

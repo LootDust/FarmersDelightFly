@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.EffectCures;
+// import net.neoforged.neoforge.common.EffectCures;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,6 +17,7 @@ public class MilkBottleItem extends DrinkableItem
 		super(properties, false, true);
 	}
 
+    /*
 	@Override
 	public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
 		Iterator<MobEffectInstance> itr = consumer.getActiveEffects().iterator();
@@ -36,4 +37,5 @@ public class MilkBottleItem extends DrinkableItem
 			}
 		}
 	}
+	 */
 }

@@ -15,13 +15,14 @@ import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.FarmlandWaterManager;
-import net.neoforged.neoforge.common.util.TriState;
+// import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 import javax.annotation.Nullable;
 
-public class RichSoilFarmlandBlock extends FarmlandBlock
+public class RichSoilFarmlandBlock // extends FarmlandBlock
 {
+	/*
 	public RichSoilFarmlandBlock(Properties properties) {
 		super(properties);
 	}
@@ -97,4 +98,5 @@ public class RichSoilFarmlandBlock extends FarmlandBlock
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
 		entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
 	}
+	 */
 }

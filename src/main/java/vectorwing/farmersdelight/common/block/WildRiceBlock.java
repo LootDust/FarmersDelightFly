@@ -28,8 +28,9 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterloggedBlock, BonemealableBlock
+public class WildRiceBlock // extends DoublePlantBlock implements SimpleWaterloggedBlock, BonemealableBlock
 {
+	/*
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public WildRiceBlock(Properties properties) {
@@ -119,4 +120,5 @@ public class WildRiceBlock extends DoublePlantBlock implements SimpleWaterlogged
 	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
 		popResource(level, pos, new ItemStack(this));
 	}
+	 */
 }

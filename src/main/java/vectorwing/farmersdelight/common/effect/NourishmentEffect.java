@@ -5,15 +5,16 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
-import net.minecraft.world.level.GameRules;
+// import net.minecraft.world.level.GameRules;
 
-public class NourishmentEffect extends MobEffect
+public class NourishmentEffect // extends MobEffect
 {
 	/**
 	 * This effect prevents hunger loss by constantly setting the exhaustion level to zero.
 	 * If the player can spend saturation to heal damage, the effect pauses to let them do so.
 	 * Slow healing won't consume hunger, making it happen indefinitely. A mixin allows the player to always eat when under this effect to compensate.
 	 */
+	/*
 	public NourishmentEffect() {
 		super(MobEffectCategory.BENEFICIAL, 0xF3B300);
 	}
@@ -41,4 +42,5 @@ public class NourishmentEffect extends MobEffect
 	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
 		return true;
 	}
+	 */
 }

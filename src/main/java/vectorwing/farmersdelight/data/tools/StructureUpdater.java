@@ -24,7 +24,7 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.util.datafix.DataFixers;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nonnull;
 import java.io.ByteArrayOutputStream;
@@ -33,8 +33,9 @@ import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
 
-public class StructureUpdater implements DataProvider
+public class StructureUpdater // implements DataProvider
 {
+	/*
 	private final String basePath;
 	private final String modid;
 	private final PackOutput output;
@@ -102,4 +103,5 @@ public class StructureUpdater implements DataProvider
 	public String getName() {
 		return "Update structure files in " + basePath;
 	}
+	 */
 }

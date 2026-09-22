@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.util.RecipeMatcher;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
+// import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
@@ -23,8 +23,9 @@ import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class CookingPotRecipe implements Recipe<RecipeWrapper>
+public class CookingPotRecipe // implements Recipe<RecipeWrapper>
 {
+	/*
 	public static final int INPUT_SLOTS = 6;
 
 	private final String group;
@@ -220,4 +221,5 @@ public class CookingPotRecipe implements Recipe<RecipeWrapper>
 			buffer.writeVarInt(recipe.cookTime);
 		}
 	}
+	 */
 }

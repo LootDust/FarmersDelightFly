@@ -12,8 +12,9 @@ import net.minecraft.world.level.material.FluidState;
 
 import javax.annotation.Nullable;
 
-public class RopeItem extends BlockItem
+public class RopeItem // extends BlockItem
 {
+	/*
 	public RopeItem(Block block, Properties properties) {
 		super(block, properties);
 	}
@@ -65,4 +66,5 @@ public class RopeItem extends BlockItem
 	protected boolean mustSurvive() {
 		return false;
 	}
+	 */
 }

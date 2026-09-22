@@ -12,9 +12,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
-@Mixin(Item.class)
+// @Mixin(Item.class)
 public class PlacePumpkinPieMixin
 {
+	/*
 	@Inject(
 			method = "useOn",
 			at = @At("TAIL"),
@@ -32,4 +33,5 @@ public class PlacePumpkinPieMixin
 			cir.setReturnValue(ModItems.DEBUG_PUMPKIN_PIE.get().useOn(context));
 		}
 	}
+	 */
 }

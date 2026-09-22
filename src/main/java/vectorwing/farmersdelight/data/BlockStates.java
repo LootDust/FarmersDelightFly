@@ -8,11 +8,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.*;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.ModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+// import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+// import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+// import net.neoforged.neoforge.client.model.generators.ModelFile;
+// import net.neoforged.neoforge.client.model.generators.ModelProvider;
+// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -24,8 +24,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-public class BlockStates extends BlockStateProvider
+public class BlockStates // extends BlockStateProvider
 {
+	/*
 	private static final int DEFAULT_ANGLE_OFFSET = 180;
 
 	public BlockStates(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -437,10 +438,12 @@ public class BlockStates extends BlockStateProvider
 				.partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER)
 				.modelForState().modelFile(models().cross(blockName(block) + "_top", resourceFDBlock(blockName(block) + "_top")).renderType("cutout")).addModel();
 	}
+	 */
 
 	/**
 	 * Creates blockstates for a pie whose model is based on the pie template.
 	 */
+	/*
 	public void pieBlock(Block block) {
 		getVariantBuilder(block).forAllStates(state -> {
 			int bites = state.getValue(PieBlock.BITES);
@@ -450,10 +453,12 @@ public class BlockStates extends BlockStateProvider
 					.build();
 		});
 	}
+	 */
 
 	/**
 	 * Creates blockstates for a pie whose model is custom, in an existing file.
 	 */
+	/*
 	public void customPieBlock(Block block) {
 		getVariantBuilder(block).forAllStates(state -> {
 			int bites = state.getValue(PieBlock.BITES);
@@ -463,7 +468,7 @@ public class BlockStates extends BlockStateProvider
 					.rotationY(((int) state.getValue(PieBlock.FACING).toYRot() + DEFAULT_ANGLE_OFFSET) % 360)
 					.build();
 		});
-	}
+	}\
 
 	// Model Functions --------------------------
 
@@ -523,4 +528,5 @@ public class BlockStates extends BlockStateProvider
 				.texture("side", resourceFDBlock(moist ? farmlandName + moistSuffix + "_side" : dirtName))
 				.texture("top", resourceFDBlock(farmlandName + moistSuffix));
 	}
+	 */
 }

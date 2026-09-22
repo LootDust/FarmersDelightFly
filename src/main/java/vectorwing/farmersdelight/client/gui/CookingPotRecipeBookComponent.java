@@ -15,8 +15,9 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class CookingPotRecipeBookComponent extends RecipeBookComponent
+public class CookingPotRecipeBookComponent // extends RecipeBookComponent
 {
+	/*
 	protected static final WidgetSprites RECIPE_BOOK_BUTTONS = new WidgetSprites(
 			Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_enabled"),
 			Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "recipe_book/cooking_pot_disabled"),
@@ -55,4 +56,5 @@ public class CookingPotRecipeBookComponent extends RecipeBookComponent
 
 		this.placeRecipe(this.menu.getGridWidth(), this.menu.getGridHeight(), this.menu.getResultSlotIndex(), recipe, recipe.value().getIngredients().iterator(), 0);
 	}
+	 */
 }

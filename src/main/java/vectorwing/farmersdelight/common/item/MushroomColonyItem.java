@@ -8,8 +8,9 @@ import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
 import javax.annotation.Nullable;
 
-public class MushroomColonyItem extends BlockItem
+public class MushroomColonyItem // extends BlockItem
 {
+	/*
 	public MushroomColonyItem(Block block, Properties properties) {
 		super(block, properties);
 	}
@@ -24,5 +25,6 @@ public class MushroomColonyItem extends BlockItem
 		}
 		return null;
 	}
+	 */
 }
 

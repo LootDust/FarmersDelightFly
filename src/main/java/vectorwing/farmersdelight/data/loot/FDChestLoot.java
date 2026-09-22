@@ -11,15 +11,16 @@ import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+// import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+// import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import vectorwing.farmersdelight.common.registry.ModChestLootTables;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.function.BiConsumer;
 
-public class FDChestLoot implements LootTableSubProvider
+public class FDChestLoot // implements LootTableSubProvider
 {
+	/*
 
 	protected final HolderLookup.Provider registries;
 
@@ -199,4 +200,5 @@ public class FDChestLoot implements LootTableSubProvider
 						.add(LootItem.lootTableItem(ModItems.RICE.get())
 								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))));
 	}
+	 */
 }

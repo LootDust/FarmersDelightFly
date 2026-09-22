@@ -11,8 +11,9 @@ import javax.annotation.Nullable;
  * Deprecated - Fuel is now defined in a NeoForge datamap: {@link NeoForgeDataMaps#FURNACE_FUELS}.
  */
 @Deprecated(forRemoval = true)
-public class FuelItem extends Item
+public class FuelItem // extends Item
 {
+	/*
 	public final int burnTime;
 
 	public FuelItem(Properties properties) {
@@ -29,4 +30,5 @@ public class FuelItem extends Item
 	public int getBurnTime(ItemStack stack, @Nullable RecipeType<?> recipeType) {
 		return this.burnTime;
 	}
+	 */
 }

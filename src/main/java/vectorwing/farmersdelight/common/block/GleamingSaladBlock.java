@@ -14,8 +14,9 @@ import vectorwing.farmersdelight.common.registry.ModParticleTypes;
 
 import java.util.function.Supplier;
 
-public class GleamingSaladBlock extends FeastBlock
+public class GleamingSaladBlock // extends FeastBlock
 {
+	/*
 	protected static final VoxelShape SHAPE = Shapes.or(
 			Block.box(3.0, 0.0, 3.0, 13.0, 2.0, 13.0),
 			Block.box(2.0, 2.0, 2.0, 14.0, 6.0, 14.0)
@@ -43,4 +44,5 @@ public class GleamingSaladBlock extends FeastBlock
 			level.addParticle(ModParticleTypes.SPARKLE.get(), x, y, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
+	 */
 }

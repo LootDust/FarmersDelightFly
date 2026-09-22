@@ -15,8 +15,9 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import javax.annotation.Nullable;
 
-public class WallHangingCanvasSignBlock extends WallHangingSignBlock implements CanvasSign
+public class WallHangingCanvasSignBlock // extends WallHangingSignBlock implements CanvasSign
 {
+	/*
 	private final DyeColor backgroundColor;
 
 	public WallHangingCanvasSignBlock(Properties properties, @Nullable DyeColor backgroundColor) {
@@ -45,4 +46,5 @@ public class WallHangingCanvasSignBlock extends WallHangingSignBlock implements 
 			}
 		}
 	}
+	 */
 }

@@ -19,6 +19,7 @@ import java.util.Optional;
 
 public class FDRecipes
 {
+	/*
 	private final RecipeManager recipeManager;
 
 	public FDRecipes() {
@@ -62,4 +63,5 @@ public class FDRecipes
 			recipeList.add(new RecipeHolder<>(specialRecipe.get().id(), new ShapelessRecipe(group, CraftingBookCategory.MISC, new ItemStack(output.asItem()), inputs)));
 		});
 	}
+	 */
 }

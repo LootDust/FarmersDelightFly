@@ -17,8 +17,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings("deprecation")
-public class TatamiHalfMatBlock extends HorizontalDirectionalBlock
+public class TatamiHalfMatBlock // extends HorizontalDirectionalBlock
 {
+	/*
 	public static final MapCodec<TatamiHalfMatBlock> CODEC = simpleCodec(TatamiHalfMatBlock::new);
 
 	protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
@@ -56,4 +57,5 @@ public class TatamiHalfMatBlock extends HorizontalDirectionalBlock
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
+	 */
 }

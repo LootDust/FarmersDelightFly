@@ -12,8 +12,9 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-public class BuddingTomatoBlock extends BuddingBushBlock implements BonemealableBlock
+public class BuddingTomatoBlock // extends BuddingBushBlock implements BonemealableBlock
 {
+	/*
 	public BuddingTomatoBlock(Properties properties) {
 		super(properties);
 	}
@@ -61,4 +62,5 @@ public class BuddingTomatoBlock extends BuddingBushBlock implements Bonemealable
 			level.setBlockAndUpdate(pos, ModBlocks.TOMATO_CROP.get().defaultBlockState().setValue(TomatoBlock.VINE_AGE, remainingGrowth));
 		}
 	}
+	 */
 }

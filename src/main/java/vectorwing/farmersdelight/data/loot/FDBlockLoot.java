@@ -1,9 +1,9 @@
 package vectorwing.farmersdelight.data.loot;
 
-import net.minecraft.advancements.critereon.BlockPredicate;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+// import net.minecraft.advancements.critereon.BlockPredicate;
+// import net.minecraft.advancements.critereon.ItemPredicate;
+// import net.minecraft.advancements.critereon.LocationPredicate;
+// import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -28,8 +28,8 @@ import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.*;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+// import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+// import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -44,8 +44,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class FDBlockLoot extends BlockLootSubProvider
+public class FDBlockLoot // extends BlockLootSubProvider
 {
+	/*
 	public FDBlockLoot(HolderLookup.Provider holder) {
 		super(Set.of(), FeatureFlags.REGISTRY.allFlags(), holder);
 	}
@@ -390,4 +391,5 @@ public class FDBlockLoot extends BlockLootSubProvider
 						.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 								.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FeastBlock.SERVINGS, servings)).invert()));
 	}
+	 */
 }

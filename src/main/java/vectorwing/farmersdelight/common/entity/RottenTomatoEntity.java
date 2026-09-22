@@ -19,8 +19,9 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class RottenTomatoEntity extends ThrowableItemProjectile
+public class RottenTomatoEntity // extends ThrowableItemProjectile
 {
+	/*
 	public RottenTomatoEntity(EntityType<? extends RottenTomatoEntity> entityType, Level level) {
 		super(entityType, level);
 	}
@@ -70,4 +71,5 @@ public class RottenTomatoEntity extends ThrowableItemProjectile
 			this.discard();
 		}
 	}
+	 */
 }

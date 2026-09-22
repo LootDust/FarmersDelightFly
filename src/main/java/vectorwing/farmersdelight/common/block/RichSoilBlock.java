@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.util.TriState;
+// import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.network.PacketDistributor;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
@@ -22,8 +22,9 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
 
-public class RichSoilBlock extends Block
+public class RichSoilBlock // extends Block
 {
+	/*
 	public RichSoilBlock(Properties properties) {
 		super(properties);
 	}
@@ -104,4 +105,5 @@ public class RichSoilBlock extends Block
 //		PlantType plantType = plantState.getPlantType(level, pos.relative(facing));
 //		return plantType != PlantType.CROP && plantType != PlantType.NETHER && plantType != PlantType.WATER;
 	}
+	 */
 }

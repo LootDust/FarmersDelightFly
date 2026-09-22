@@ -13,9 +13,10 @@ import vectorwing.farmersdelight.common.network.payload.FlipSkilletPayload;
 import vectorwing.farmersdelight.common.network.payload.RichSoilBoostParticlesPayload;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID)
+// @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class ModNetworking
 {
+	/*
 	@SubscribeEvent
 	public static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
 		final PayloadRegistrar registrar = event.registrar("1");
@@ -39,4 +40,5 @@ public class ModNetworking
             }
         }
     }
+	 */
 }

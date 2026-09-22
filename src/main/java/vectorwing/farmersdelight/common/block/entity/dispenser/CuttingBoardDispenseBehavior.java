@@ -1,6 +1,6 @@
 package vectorwing.farmersdelight.common.block.entity.dispenser;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
+// import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
@@ -20,10 +20,11 @@ import java.util.HashMap;
 /**
  * Uses the given item as a tool when facing a Cutting Board.
  */
-@MethodsReturnNonnullByDefault
+// @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
+public class CuttingBoardDispenseBehavior // extends OptionalDispenseItemBehavior
 {
+	/*
 	private static final HashMap<Item, DispenseItemBehavior> DISPENSE_ITEM_BEHAVIOR_HASH_MAP = new HashMap<>();
 	public static final CuttingBoardDispenseBehavior INSTANCE = new CuttingBoardDispenseBehavior();
 
@@ -56,4 +57,5 @@ public class CuttingBoardDispenseBehavior extends OptionalDispenseItemBehavior
 		}
 		return false;
 	}
+	 */
 }

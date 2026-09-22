@@ -32,10 +32,12 @@ public class OnionBlock extends CropBlock
 //		return ModBlocks.ONION_CROP.get().defaultBlockState();
 //	}
 
+	/*
 	@Override
 	protected ItemLike getBaseSeedId() {
 		return ModItems.ONION.get();
 	}
+	 */
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 @ParametersAreNonnullByDefault
-public class SmokerCookFunction extends LootItemConditionalFunction
+public class SmokerCookFunction // extends LootItemConditionalFunction
 {
+	/*
 	public static final Identifier ID = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "smoker_cook");
 	public static final MapCodec<SmokerCookFunction> MAP_CODEC = RecordCodecBuilder.mapCodec(
 			p_298131_ -> commonFields(p_298131_).apply(p_298131_, SmokerCookFunction::new)
@@ -55,4 +56,5 @@ public class SmokerCookFunction extends LootItemConditionalFunction
 	public MapCodec<? extends LootItemFunction> getType() {
 		return ModLootFunctions.SMOKER_COOK.get();
 	}
+	 */
 }

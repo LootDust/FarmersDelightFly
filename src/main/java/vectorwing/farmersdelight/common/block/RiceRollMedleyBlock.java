@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 
 public class RiceRollMedleyBlock extends FeastBlock
 {
+	/*
 	public static final IntegerProperty ROLL_SERVINGS = IntegerProperty.create("servings", 0, 8);
 
 	protected static final VoxelShape SHAPE_NORTH_SOUTH = Shapes.or(
@@ -73,4 +74,5 @@ public class RiceRollMedleyBlock extends FeastBlock
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, ROLL_SERVINGS);
 	}
+	*/
 }

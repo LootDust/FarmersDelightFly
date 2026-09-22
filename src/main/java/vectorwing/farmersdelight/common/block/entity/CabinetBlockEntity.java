@@ -23,16 +23,17 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
+// import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID)
-public class CabinetBlockEntity extends RandomizableContainerBlockEntity
+// @EventBusSubscriber(modid = FarmersDelight.MODID)
+public class CabinetBlockEntity // extends RandomizableContainerBlockEntity
 {
+	/*
 	private NonNullList<ItemStack> contents = NonNullList.withSize(27, ItemStack.EMPTY);
 	private ContainerOpenersCounter openersCounter = new ContainerOpenersCounter()
 	{
@@ -147,4 +148,5 @@ public class CabinetBlockEntity extends RandomizableContainerBlockEntity
 		double z = (double) worldPosition.getZ() + 0.5D + (double) cabinetFacingVector.getZ() / 2.0D;
 		level.playSound(null, x, y, z, sound, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F);
 	}
+	*/
 }

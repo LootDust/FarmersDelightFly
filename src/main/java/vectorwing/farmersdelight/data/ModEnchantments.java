@@ -16,6 +16,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 
 public class ModEnchantments
 {
+	/*
 	public static final ResourceKey<Enchantment> BACKSTABBING = key("backstabbing");
 
 	public static void bootstrap(BootstrapContext<Enchantment> context) {
@@ -42,4 +43,5 @@ public class ModEnchantments
 	private static ResourceKey<Enchantment> key(String name) {
 		return ResourceKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name));
 	}
+	 */
 }

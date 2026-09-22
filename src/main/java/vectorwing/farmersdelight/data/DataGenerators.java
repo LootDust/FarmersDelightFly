@@ -15,7 +15,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
@@ -35,9 +35,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid = FarmersDelight.MODID)
+// @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class DataGenerators
 {
+	/*
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
@@ -75,4 +76,5 @@ public class DataGenerators
 		generator.addProvider(event.includeClient(), new ItemModels(output, blockStates.models().existingFileHelper));
 		generator.addProvider(event.includeClient(), new SoundDefinitions(output, helper));
 	}
+	*/
 }

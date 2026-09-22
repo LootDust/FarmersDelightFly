@@ -7,9 +7,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
-@Mixin(Player.class)
+// @Mixin(Player.class)
 public class NourishmentAlwaysEatMixin
 {
+	/*
 	@Inject(
 			method = "canEat",
 			at = @At("HEAD"),
@@ -19,4 +20,5 @@ public class NourishmentAlwaysEatMixin
 			cir.setReturnValue(true);
 		}
 	}
+	 */
 }

@@ -20,6 +20,7 @@ public class ComfortEffect extends MobEffect
 		super(MobEffectCategory.BENEFICIAL, 14545909);
 	}
 
+	/*
 	@Override
 	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		if (entity.hasEffect(MobEffects.REGENERATION)) {
@@ -35,6 +36,7 @@ public class ComfortEffect extends MobEffect
 		}
 		return true;
 	}
+	 */
 
 	@Override
 	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {

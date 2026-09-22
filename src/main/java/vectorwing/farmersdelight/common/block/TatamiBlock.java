@@ -16,13 +16,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class TatamiBlock extends Block
+public class TatamiBlock // extends Block
 {
+	/*
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty PAIRED = BooleanProperty.create("paired");
 
@@ -84,4 +85,5 @@ public class TatamiBlock extends Block
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
+	 */
 }

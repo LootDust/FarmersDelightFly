@@ -39,6 +39,7 @@ public class OrganicCompostBlock extends Block
 		return 7;
 	}
 
+	/*
 	@Override
 	@SuppressWarnings("deprecation")
 	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
@@ -72,16 +73,19 @@ public class OrganicCompostBlock extends Block
 				level.setBlock(pos, state.setValue(COMPOSTING, state.getValue(COMPOSTING) + 1), 3); // next stage
 		}
 	}
+	 */
 
 	@Override
 	public boolean hasAnalogOutputSignal(BlockState state) {
 		return true;
 	}
 
+	/*
 	@Override
 	public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
 		return (getMaxCompostingStage() + 1 - blockState.getValue(COMPOSTING));
 	}
+	 */
 
 	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {

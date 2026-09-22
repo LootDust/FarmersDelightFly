@@ -35,11 +35,11 @@ public class ModBlocks
 		return (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
 	}
 
+	/*
 	private static ToIntFunction<BlockState> glowingFeastBlockEmission() {
 		return (state) -> state.getValue(FeastBlock.SERVINGS) * 3;
 	}
 
-	/*
 	// Workstations
 	public static final Supplier<Block> STOVE = BLOCKS.register("stove",
 			() -> new StoveBlock(Block.Properties.ofFullCopy(Blocks.BRICKS).lightLevel(litBlockEmission(13))));

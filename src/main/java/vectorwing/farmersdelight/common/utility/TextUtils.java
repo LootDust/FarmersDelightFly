@@ -25,16 +25,20 @@ import java.util.function.Consumer;
  */
 public class TextUtils
 {
+	/*
 	public static final MutableComponent PLACEABLE = tooltip("placeable").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
 	public static final MutableComponent PLACEABLE_SNEAKING = tooltip("placeable_sneaking").withStyle(ChatFormatting.DARK_GRAY).withStyle(ChatFormatting.ITALIC);
 	public static final MutableComponent DEBUG_ITEM = tooltip("debug_item").withStyle(ChatFormatting.RED);
+	 */
 
 	/**
 	 * Syntactic sugar for custom translation keys. Always prefixed with the mod's ID in lang files (e.g. farmersdelight.your.key.here).
 	 */
+	/*
 	public static MutableComponent getTranslation(String key, Object... args) {
 		return Component.translatable(FarmersDelight.MODID + "." + key, args);
 	}
+	 */
 
 	/**
 	 * Gets text from a translation key, where "type" prefixes Farmer's Delight's mod ID.
@@ -44,6 +48,7 @@ public class TextUtils
 	 * @param translationKey  The key itself, added as a suffix after the mod ID
 	 * @param args            Additional values to be keyed into the text, through markers such as %s
 	 */
+	/*
 	public static MutableComponent getTextWithType(String translationType, String translationKey, Object... args) {
 		return Component.translatable(translationType + "." + FarmersDelight.MODID + "." + translationKey, args);
 	}
@@ -75,10 +80,12 @@ public class TextUtils
 	public static String subtitleKey(String key, Object... args) {
 		return getTextWithType("subtitles", key, args).getString();
 	}
+	 */
 
 	/**
 	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food property potion effects instead.
 	 */
+	/*
 	public static void addFoodEffectTooltip(ItemStack stack, Consumer<Component> tooltipAdder, float durationFactor, float tickRate) {
 		FoodProperties foodStats = stack.getFoodProperties(null);
 		if (foodStats == null) {
@@ -133,4 +140,5 @@ public class TextUtils
 			}
 		}
 	}
+	 */
 }

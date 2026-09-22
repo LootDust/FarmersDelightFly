@@ -3,7 +3,7 @@ package vectorwing.farmersdelight.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
@@ -16,8 +16,9 @@ import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 @SuppressWarnings("deprecation")
-public class HangingTomatoBlock extends TomatoBlock
+public class HangingTomatoBlock // extends TomatoBlock
 {
+	/*
 	public HangingTomatoBlock(Properties properties) {
 		super(properties, false);
 		registerDefaultState(stateDefinition.any().setValue(getAgeProperty(), 0));
@@ -45,7 +46,7 @@ public class HangingTomatoBlock extends TomatoBlock
 	}
 
 	public boolean placeRope(Level level, BlockPos pos) {
-		Block configuredRopeBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
+		Block configuredRopeBlock = BuiltInRegistries.BLOCK.get(Identifier.parse(Configuration.DEFAULT_TOMATO_VINE_ROPE.get()));
 		if (configuredRopeBlock == null) {
 			configuredRopeBlock = ModBlocks.ROPE.get();
 		}
@@ -60,4 +61,5 @@ public class HangingTomatoBlock extends TomatoBlock
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(VINE_AGE);
 	}
+	 */
 }

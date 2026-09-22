@@ -13,9 +13,10 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 
-@EventBusSubscriber(modid = FarmersDelight.MODID)
+// @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonEvents
 {
+	/*
 	@SubscribeEvent
 	public static void handleVanillaSoupEffects(LivingEntityUseItemEvent.Finish event) {
 		Item food = event.getItem().getItem();
@@ -35,4 +36,5 @@ public class CommonEvents
 			}
 		}
 	}
+	 */
 }

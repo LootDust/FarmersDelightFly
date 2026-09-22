@@ -24,6 +24,7 @@ import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 public class CuttingRecipes
 {
+	/*
 	public static Ingredient KNIVES = matchesTool(KnifeItem.KNIFE_DIG, CommonTags.Items.TOOLS_KNIFE);
 	public static Ingredient PICKAXES = matchesTool(ItemAbilities.PICKAXE_DIG, ItemTags.PICKAXES);
 	public static Ingredient AXES = matchesTool(ItemAbilities.AXE_DIG, ItemTags.AXES);
@@ -345,18 +346,22 @@ public class CuttingRecipes
 			.salvaging()
 			.saveToFD(output);
 	}
+	 */
 
 	/**
 	 * Generates an axe-cutting recipe for wooded furniture items, with a chance to recover one plank of the given type.
 	 */
+	/*
 	private static void salvagePlankFromFurniture(RecipeOutput output, WoodType woodType, ItemLike plank, ItemLike... furniture) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(furniture), AXES, plank, 1, 0.75F)
 				.save(output, salvagingRecipe(woodType.name() + "_furniture"));
 	}
+	 */
 
 	/**
 	 * Generates an axe-stripping recipe for the pair of given logs, with custom sound and a Tree Bark result attached.
 	 */
+	/*
 	private static void stripLogForBark(RecipeOutput output, ItemLike log, ItemLike strippedLog) {
 		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), AXES_STRIP, strippedLog)
 				.addResult(ModItems.TREE_BARK.get())
@@ -371,4 +376,5 @@ public class CuttingRecipes
 	private static Identifier salvagingRecipe(String name) {
 		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
 	}
+	 */
 }

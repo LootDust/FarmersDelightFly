@@ -10,13 +10,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+// import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+// import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import vectorwing.farmersdelight.common.block.WildRiceBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 
-public class WildRiceFeature extends Feature<RandomPatchConfiguration>
+public class WildRiceFeature // extends Feature<RandomPatchConfiguration>
 {
+	/*
 	public WildRiceFeature(Codec<RandomPatchConfiguration> configFactoryIn) {
 		super(configFactoryIn);
 	}
@@ -50,4 +51,5 @@ public class WildRiceFeature extends Feature<RandomPatchConfiguration>
 
 		return i > 0;
 	}
+	 */
 }

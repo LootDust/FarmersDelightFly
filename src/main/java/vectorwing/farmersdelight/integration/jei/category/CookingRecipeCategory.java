@@ -9,10 +9,10 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
+// import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.client.gui.GuiGraphics;
+// import net.minecraft.MethodsReturnNonnullByDefault;
+// import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -31,9 +31,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
-public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<CookingPotRecipe>>
+// @MethodsReturnNonnullByDefault
+public class CookingRecipeCategory // implements IRecipeCategory<RecipeHolder<CookingPotRecipe>>
 {
+	/*
 	protected final IDrawable heatIndicator;
 	protected final IDrawable timeIcon;
 	protected final IDrawable expIcon;
@@ -137,4 +138,5 @@ public class CookingRecipeCategory implements IRecipeCategory<RecipeHolder<Cooki
 			}
 		}
 	}
+	 */
 }

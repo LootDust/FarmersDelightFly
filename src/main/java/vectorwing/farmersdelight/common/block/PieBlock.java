@@ -10,7 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
+// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -25,7 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -42,8 +42,9 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
-public class PieBlock extends Block
+public class PieBlock // extends Block
 {
+	/*
 	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 3);
 
@@ -115,10 +116,12 @@ public class PieBlock extends Block
 
 		return consumeBite(level, pos, state, player);
 	}
+	 */
 
 	/**
 	 * Eats a slice from the pie, feeding the player.
 	 */
+	/*
 	protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player player) {
 		if (!player.canEat(false)) {
 			return InteractionResult.PASS;
@@ -148,10 +151,12 @@ public class PieBlock extends Block
 			return InteractionResult.SUCCESS;
 		}
 	}
+	 */
 
 	/**
 	 * Cuts off a bite and drops a slice item, without feeding the player.
 	 */
+	/*
 	protected ItemInteractionResult cutSlice(Level level, BlockPos pos, BlockState state, Player player, Item knife) {
 		int bites = state.getValue(BITES);
 		if (bites < getMaxBites() - 1) {
@@ -201,4 +206,5 @@ public class PieBlock extends Block
 	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return false;
 	}
+	 */
 }
