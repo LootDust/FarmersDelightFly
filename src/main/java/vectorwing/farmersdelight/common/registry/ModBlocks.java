@@ -1,7 +1,9 @@
 package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -115,7 +117,7 @@ public class ModBlocks
 	public static final Supplier<Block> FULL_TATAMI_MAT = BLOCKS.register("full_tatami_mat",
 			() -> new TatamiMatBlock(Block.Properties.ofFullCopy(Blocks.WOOL.white()).strength(0.3F)));
 	public static final Supplier<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat",
-			() -> new TatamiHalfMatBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WOOL.white()).strength(0.3F).pushReaction(PushReaction.DESTROY)));
+			() -> new TatamiHalfMatBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WOOL.white()).strength(0.3F).pushReaction(PushReaction.POPPED)));
 
 	public static final Supplier<Block> CANVAS_SIGN = BLOCKS.register("canvas_sign",
 			() -> new StandingCanvasSignBlock(null));
@@ -259,9 +261,9 @@ public class ModBlocks
 
 	// Composting
 	public static final Supplier<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
-			() -> new MushroomColonyBlock(Items.BROWN_MUSHROOM.builtInRegistryHolder(), Block.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
+			() -> new MushroomColonyBlock(BuiltInRegistries.ITEM.getOrThrow(BlockItemIds.BROWN_MUSHROOM.item()), Block.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
 	public static final Supplier<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
-			() -> new MushroomColonyBlock(Items.RED_MUSHROOM.builtInRegistryHolder(), Block.Properties.ofFullCopy(Blocks.RED_MUSHROOM)));
+			() -> new MushroomColonyBlock(BuiltInRegistries.ITEM.getOrThrow(BlockItemIds.RED_MUSHROOM.item()), Block.Properties.ofFullCopy(Blocks.RED_MUSHROOM)));
 	public static final Supplier<Block> ORGANIC_COMPOST = BLOCKS.register("organic_compost",
 			() -> new OrganicCompostBlock(Block.Properties.ofFullCopy(Blocks.DIRT).strength(1.2F).sound(SoundType.CROP)));
 	public static final Supplier<Block> RICH_SOIL = BLOCKS.register("rich_soil",
@@ -314,7 +316,7 @@ public class ModBlocks
 	public static final DeferredHolder<Block, TomatoBlock> TOMATO_CROP = BLOCKS.register("tomatoes",
 			() -> new TomatoBlock(Block.Properties.of().noCollision().randomTicks().instabreak().sound(SoundType.CROP)));
 	public static final DeferredHolder<Block, HangingTomatoBlock> TOMATO_CROP_ON_ROPE = BLOCKS.register("tomatoes_on_rope",
-			() -> new HangingTomatoBlock(Block.Properties.ofFullCopy(ModBlocks.TOMATO_CROP.get()).pushReaction(PushReaction.NORMAL)));
+			() -> new HangingTomatoBlock(Block.Properties.ofFullCopy(ModBlocks.TOMATO_CROP.get()).pushReaction(PushReaction.PUSH_PULL)));
 	public static final Supplier<Block> RICE_CROP = BLOCKS.register("rice",
 			() -> new RiceBlock(Block.Properties.ofFullCopy(Blocks.WHEAT).strength(0.2F)));
 	public static final Supplier<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",

@@ -24,8 +24,11 @@ public class FarmersDelight
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
+		// Somethings with villagers are broken
+		// WIP
 		modEventBus.addListener(CommonSetup::init);
 		if (FMLEnvironment.getDist().isClient()) {
+			// WIP
 			modEventBus.addListener(ClientSetupEvents::init);
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 		}
@@ -33,6 +36,7 @@ public class FarmersDelight
 		modContainer.registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
+		// Basically, recipe and worldgen registries changed a lot, needed to be fix
 		ModSounds.SOUNDS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
@@ -44,9 +48,12 @@ public class FarmersDelight
 		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
+		// WIP
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+		// WIP
 		ModBiomeFeatures.FEATURES.register(modEventBus);
 		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
+		// WIP
 		ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
@@ -57,6 +64,7 @@ public class FarmersDelight
 
 		RegistryAliases.addRegistryAliases();
 
+		// WIP
 		NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);
 	}
 }
