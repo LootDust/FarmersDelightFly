@@ -36,7 +36,7 @@ public class Models extends ModelProvider
 
 	@Override
 	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-		itemModels.createFlatItemModel(ModItems.CABBAGE.get(), ModelTemplates.FLAT_ITEM);
+		itemModels.generateFlatItem(ModItems.CABBAGE.get(), ModelTemplates.FLAT_ITEM);
 		/*
 		Set<Item> items = BuiltInRegistries.ITEM.stream().filter(i -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(i).getNamespace()))
 				.collect(Collectors.toSet());
