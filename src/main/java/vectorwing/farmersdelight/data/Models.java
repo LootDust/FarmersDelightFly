@@ -1,13 +1,18 @@
 package vectorwing.farmersdelight.data;
 
 import com.google.common.collect.Sets;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-// import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 // import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -18,19 +23,21 @@ import java.util.stream.Collectors;
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
  */
-public class ItemModels // extends ItemModelProvider
+@SuppressWarnings("NullableProblems")
+public class Models extends ModelProvider
 {
-	/*
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
 	public static final Identifier MUG = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
 
-	public ItemModels(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, FarmersDelight.MODID, existingFileHelper);
+	public Models(PackOutput output) {
+		super(output, FarmersDelight.MODID);
 	}
 
 	@Override
-	protected void registerModels() {
+	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		itemModels.createFlatItemModel(ModItems.CABBAGE.get(), ModelTemplates.FLAT_ITEM);
+		/*
 		Set<Item> items = BuiltInRegistries.ITEM.stream().filter(i -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(i).getNamespace()))
 				.collect(Collectors.toSet());
 
@@ -151,8 +158,10 @@ public class ItemModels // extends ItemModelProvider
 
 		// Generated items
 		items.forEach(item -> itemGeneratedModel(item, resourceItem(itemName(item))));
-	}
+        */
+    }
 
+	/*
 	public void blockBasedModel(Item item, String suffix) {
 		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));
 	}

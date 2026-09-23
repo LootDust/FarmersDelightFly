@@ -28,22 +28,27 @@ public class FarmersDelight
 		// WIP
 		/*
 		modEventBus.addListener(CommonSetup::init);
+		*/
 		if (FMLEnvironment.getDist().isClient()) {
 			// WIP
 			modEventBus.addListener(ClientSetupEvents::init);
+			/*
 			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+			*/
 		}
-		 */
 
 		modContainer.registerConfig(ModConfig.Type.COMMON, Configuration.COMMON_CONFIG);
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
 		// Basically, recipe and worldgen registries changed a lot, needed to be fix
+		/*
 		ModSounds.SOUNDS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
+		*/
 		ModItems.ITEMS.register(modEventBus);
+		/*
 		ModDataComponents.DATA_COMPONENTS.register(modEventBus);
 		ModDataComponents.ENCHANTMENT_EFFECT_COMPONENTS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
@@ -65,6 +70,7 @@ public class FarmersDelight
 		ModAdvancements.TRIGGERS.register(modEventBus);
 
 		RegistryAliases.addRegistryAliases();
+		 */
 
 		// WIP
 		// NeoForge.EVENT_BUS.addListener(VillageStructures::addNewVillageBuilding);

@@ -25,7 +25,7 @@ import vectorwing.farmersdelight.integration.jei.resource.DecompositionDummy;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-@JeiPlugin
+// @JeiPlugin
 @ParametersAreNonnullByDefault
 // @MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")

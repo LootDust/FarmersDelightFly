@@ -35,9 +35,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
-// @EventBusSubscriber(modid = FarmersDelight.MODID)
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class DataGenerators
 {
+    @SubscribeEvent
+    public static void gatherData(GatherDataEvent.Client event) {
+        event.createProvider(Models::new);
+    }
+
 	/*
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {

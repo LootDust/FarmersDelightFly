@@ -4,6 +4,8 @@ import com.google.common.collect.Sets;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -41,20 +43,22 @@ public class ModItems
 		return new Item.Properties();
 	}
 
+	public static ResourceKey<Item> getItemResourceKey(String name) { return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name)); }
+
 	public static Item.Properties knifeItem(ToolMaterial material, Item.Properties properties) {
 		return material.applyToolProperties(properties, ModTags.Blocks.MINEABLE_WITH_KNIFE,0.5F, -2.0F, 0.0F);
 	}
 
-	public static Item.Properties foodItem(FoodProperties food) {
-		return new Item.Properties().food(food);
+	public static Item.Properties foodItem(String name, FoodProperties food) {
+		return new Item.Properties().setId(getItemResourceKey(name)).food(food);
 	}
 
-	public static Item.Properties bowlFoodItem(FoodProperties food) {
-		return new Item.Properties().food(food).craftRemainder(Items.BOWL).stacksTo(16);
+	public static Item.Properties bowlFoodItem(String name, FoodProperties food) {
+		return new Item.Properties().setId(getItemResourceKey(name)).food(food).craftRemainder(Items.BOWL).stacksTo(16);
 	}
 
-	public static Item.Properties drinkItem() {
-		return new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
+	public static Item.Properties drinkItem(String name) {
+		return new Item.Properties().setId(getItemResourceKey(name)).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
 	}
 
 	/*
@@ -271,10 +275,12 @@ public class ModItems
 			() -> new MushroomColonyItem(ModBlocks.BROWN_MUSHROOM_COLONY.get(), basicItem()));
 	public static final Supplier<Item> RED_MUSHROOM_COLONY = registerWithTab("red_mushroom_colony",
 			() -> new MushroomColonyItem(ModBlocks.RED_MUSHROOM_COLONY.get(), basicItem()));
+	*/
 
 	// Basic Crops
 	public static final Supplier<Item> CABBAGE = registerWithTab("cabbage",
-			() -> new Item(foodItem(FoodValues.CABBAGE)));
+			() -> new Item(foodItem("cabbage", FoodValues.CABBAGE)));
+	/*
 	public static final Supplier<Item> TOMATO = registerWithTab("tomato",
 			() -> new Item(foodItem(FoodValues.TOMATO)));
 	public static final Supplier<Item> ONION = registerWithTab("onion",
