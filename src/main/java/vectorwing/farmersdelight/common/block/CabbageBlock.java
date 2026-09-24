@@ -10,9 +10,9 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
-public class CabbageBlock // extends CropBlock
+@SuppressWarnings("NullableProblems")
+public class CabbageBlock extends CropBlock
 {
-	/*
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 3.0D, 16.0D),
@@ -24,7 +24,7 @@ public class CabbageBlock // extends CropBlock
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D)
 	};
 
-	public CabbageBlock(Properties properties) {
+	public CabbageBlock(Block.Properties properties) {
 		super(properties);
 	}
 
@@ -37,5 +37,4 @@ public class CabbageBlock // extends CropBlock
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
-	 */
 }

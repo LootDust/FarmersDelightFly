@@ -10,6 +10,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
+@SuppressWarnings("NullableProblems")
 public class OnionBlock extends CropBlock
 {
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -32,15 +33,13 @@ public class OnionBlock extends CropBlock
 //		return ModBlocks.ONION_CROP.get().defaultBlockState();
 //	}
 
-	/*
 	@Override
 	protected ItemLike getBaseSeedId() {
 		return ModItems.ONION.get();
 	}
-	 */
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
+		return SHAPE_BY_AGE[this.getAge(state)];
 	}
 }

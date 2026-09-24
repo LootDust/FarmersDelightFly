@@ -12,7 +12,6 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 public class StoveBlockEntity extends AbstractStoveBlockEntity
 {
-	/*
 	public StoveBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.STOVE.get(), pos, state, RecipeType.CAMPFIRE_COOKING);
 	}
@@ -26,9 +25,9 @@ public class StoveBlockEntity extends AbstractStoveBlockEntity
 		assert this.level != null;
 
 		var items = this.getItems();
-		for (int i = 0; i < items.getSlots(); ++i) {
-			if (items.getStackInSlot(i).isEmpty()) continue;
-			if (level.random.nextFloat() >= 0.2F) continue;
+		for (int i = 0; i < items.size(); ++i) {
+			if (items.getResource(i).isEmpty()) continue;
+			if (level.getRandom().nextFloat() >= 0.2F) continue;
 			Vec2 itemOffset = this.getStoveItemOffset(i);
 			Direction direction = this.getBlockState().getValue(AbstractStoveBlock.FACING);
 			if (direction.get2DDataValue() % 2 != 0) {
@@ -65,5 +64,4 @@ public class StoveBlockEntity extends AbstractStoveBlockEntity
 		};
 		return OFFSETS[index];
 	}
-	 */
 }

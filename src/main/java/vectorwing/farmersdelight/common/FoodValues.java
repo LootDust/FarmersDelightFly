@@ -28,12 +28,12 @@ public class FoodValues
 	// Raw Crops
 	public static final FoodProperties CABBAGE = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.4f).build();
-    /*
 	public static final FoodProperties TOMATO = (new FoodProperties.Builder())
 			.nutrition(1).saturationModifier(0.3f).build();
 	public static final FoodProperties ONION = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.4f).build();
 
+    /*
 	// Drinks (mostly for effects)
 	public static final FoodProperties APPLE_CIDER = (new FoodProperties.Builder())
 			.alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 1.0F).build();

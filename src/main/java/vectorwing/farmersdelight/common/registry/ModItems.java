@@ -1,49 +1,50 @@
 package vectorwing.farmersdelight.common.registry;
 
 import com.google.common.collect.Sets;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
-import vectorwing.farmersdelight.common.item.*;
 import vectorwing.farmersdelight.common.tag.ModTags;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 public class ModItems
 {
-	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, FarmersDelight.MODID);
-	public static LinkedHashSet<Supplier<Item>> CREATIVE_TAB_ITEMS = Sets.newLinkedHashSet();
+	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(FarmersDelight.MODID);
+	public static LinkedHashSet<DeferredItem<? extends Item>> CREATIVE_TAB_ITEMS = Sets.newLinkedHashSet();
 
-	public static Supplier<Item> registerWithTab(final String name, final Supplier<Item> supplier) {
-		Supplier<Item> newItem = ITEMS.register(name, supplier);
+	public static DeferredItem<Item> registerWithTab(final String name, final Function<Item.Properties, Item> function) {
+		DeferredItem<Item> newItem = ITEMS.registerItem(name, function);
 		CREATIVE_TAB_ITEMS.add(newItem);
 		return newItem;
 	}
 
-	public static Supplier<Item> registerHidden(final String name, final Supplier<Item> supplier) {
+	public static DeferredItem<Item> registerHidden(final String name, final Supplier<Item> supplier) {
 		return ITEMS.register(name, supplier);
 	}
 
 	// Helper methods
-	public static Item.Properties basicItem() {
-		return new Item.Properties();
+	public static Item.Properties basicItem(String name) {
+		return new Item.Properties().setId(getItemResourceKey(name));
 	}
 
-	public static ResourceKey<Item> getItemResourceKey(String name) { return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name)); }
+	public static Item.Properties basicBlockItem(String name) {
+		return new Item.Properties().setId(getItemResourceKey(name)).useBlockDescriptionPrefix();
+	}
+
+	public static ResourceKey<Item> getItemResourceKey(String name) {
+		return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name));
+	}
 
 	public static Item.Properties knifeItem(ToolMaterial material, Item.Properties properties) {
 		return material.applyToolProperties(properties, ModTags.Blocks.MINEABLE_WITH_KNIFE,0.5F, -2.0F, 0.0F);
@@ -61,10 +62,10 @@ public class ModItems
 		return new Item.Properties().setId(getItemResourceKey(name)).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
 	}
 
-	/*
 	// Blocks
 	public static final Supplier<Item> STOVE = registerWithTab("stove",
-			() -> new BlockItem(ModBlocks.STOVE.get(), basicItem()));
+			_ -> new BlockItem(ModBlocks.STOVE.get(), basicItem("stove").useBlockDescriptionPrefix()));
+	/*
 	public static final Supplier<Item> COOKING_POT = registerWithTab("cooking_pot",
 			() -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
 	public static final Supplier<Item> SKILLET = registerWithTab("skillet",
@@ -278,17 +279,20 @@ public class ModItems
 	*/
 
 	// Basic Crops
-	public static final Supplier<Item> CABBAGE = registerWithTab("cabbage",
-			() -> new Item(foodItem("cabbage", FoodValues.CABBAGE)));
+	public static final DeferredItem<Item> CABBAGE = registerWithTab("cabbage",
+			_ -> new Item(foodItem("cabbage", FoodValues.CABBAGE)));
+	public static final DeferredItem<Item> TOMATO = registerWithTab("tomato",
+			_ -> new Item(foodItem("tomato", FoodValues.TOMATO)));
+	public static final DeferredItem<Item> ONION = registerWithTab("onion",
+			_ -> new BlockItem(ModBlocks.ONION_CROP.get(), foodItem("onion", FoodValues.ONION)));
 	/*
-	public static final Supplier<Item> TOMATO = registerWithTab("tomato",
-			() -> new Item(foodItem(FoodValues.TOMATO)));
-	public static final Supplier<Item> ONION = registerWithTab("onion",
-			() -> new BlockItem(ModBlocks.ONION_CROP.get(), foodItem(FoodValues.ONION)));
 	public static final Supplier<Item> RICE_PANICLE = registerWithTab("rice_panicle", () -> new Item(basicItem()));
 	public static final Supplier<Item> RICE = registerWithTab("rice",
 			() -> new RiceItem(ModBlocks.RICE_CROP.get(), basicItem()));
-	public static final Supplier<Item> CABBAGE_SEEDS = registerWithTab("cabbage_seeds", () -> new BlockItem(ModBlocks.CABBAGE_CROP.get(), basicItem()));
+	*/
+	public static final DeferredItem<Item> CABBAGE_SEEDS = registerWithTab("cabbage_seeds",
+			_ -> new BlockItem(ModBlocks.CABBAGE_CROP.get(), basicItem("cabbage_seeds")));
+	/*
 	public static final Supplier<Item> TOMATO_SEEDS = registerWithTab("tomato_seeds", () -> new BlockItem(ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem())
 	{
 		@Override

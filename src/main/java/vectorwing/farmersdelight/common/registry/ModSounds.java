@@ -12,7 +12,6 @@ public class ModSounds
 {
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(Registries.SOUND_EVENT, FarmersDelight.MODID);
 
-	/*
 	// Stove
 	public static final Supplier<SoundEvent> BLOCK_STOVE_CRACKLE = SOUNDS.register("block.stove.crackle",
 			() -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block.stove.crackle")));
@@ -69,5 +68,4 @@ public class ModSounds
 			() -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity.rotten_tomato.throw")));
 	public static final Supplier<SoundEvent> ENTITY_ROTTEN_TOMATO_HIT = SOUNDS.register("entity.rotten_tomato.hit",
 			() -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "entity.rotten_tomato.hit")));
-	 */
 }

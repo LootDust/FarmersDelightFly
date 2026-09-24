@@ -26,6 +26,7 @@ import java.util.function.Function;
 
 public class BlockStates // extends BlockStateProvider
 {
+
 	/*
 	private static final int DEFAULT_ANGLE_OFFSET = 180;
 

@@ -1,28 +1,53 @@
 package vectorwing.farmersdelight.data;
 
-import com.google.common.collect.Sets;
+import com.mojang.math.Quadrant;
+import it.unimi.dsi.fastutil.booleans.Boolean2ObjectFunction;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.renderer.block.dispatch.Variant;
+import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 // import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.data.internal.VanillaModelProvider;
+import net.neoforged.neoforge.client.model.generators.blockstate.CustomBlockStateModelBuilder;
 import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
  */
+@OnlyIn(Dist.CLIENT)
 @SuppressWarnings("NullableProblems")
 public class Models extends ModelProvider
 {
@@ -34,9 +59,79 @@ public class Models extends ModelProvider
 		super(output, FarmersDelight.MODID);
 	}
 
+	// Helper methods
+	public static void createStoveLikeBlock(BlockModelGenerators generators, Block block) {
+		Map<String, Identifier> models = new Object2ObjectOpenHashMap<>();
+		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(BlockStateProperties.LIT, BlockStateProperties.HORIZONTAL_FACING)
+						.generate((lit, facing) -> {
+								var suffix = lit ? "_on": "";
+								var variant = BlockModelGenerators.plainVariant(models.computeIfAbsent(suffix, _ ->
+										generators.createSuffixedVariant(block, suffix, ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM,
+												_ -> lit ? new TextureMapping()
+														.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_side"))
+														.put(TextureSlot.FRONT, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_front_on"))
+														.put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_top_on"))
+														.put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_bottom"))
+														: TextureMapping.orientableCube(block))));
+								return switch (facing) {
+									case SOUTH -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
+									case WEST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
+									case EAST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
+									default -> variant;
+								};
+						})
+				)
+		);
+	}
+
+	public static void createCrossCropBlock(BlockModelGenerators generators, Block block, Property<Integer> property, int... stages) {
+		generators.registerSimpleFlatItemModel(block.asItem());
+		if (property.getPossibleValues().size() != stages.length) {
+			throw new IllegalArgumentException();
+		}
+
+		Int2ObjectMap<Identifier> models = new Int2ObjectOpenHashMap<>();
+		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(property).generate(i -> {
+			int stage = stages[i];
+			return BlockModelGenerators.plainVariant(models.computeIfAbsent(stage, s -> generators.createSuffixedVariant(block, "_stage" + s, ModelTemplates.CROSS, (material) -> TextureMapping.singleSlot(TextureSlot.CROSS, material))));
+		})));
+	}
+
 	@Override
 	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		createStoveLikeBlock(blockModels, ModBlocks.STOVE.get());
+		/*
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.STOVE.get())
+				.with(PropertyDispatch.initial(BlockStateProperties.LIT, BlockStateProperties.HORIZONTAL_FACING)
+				.generate((b, f) -> {
+						var model = BlockModelGenerators.plainVariant(blockModels.createSuffixedVariant(
+								ModBlocks.STOVE.get(),
+								b ? "_on" : "",
+								ModelTemplates.CUBE_ORIENTABLE,
+								_ -> b ?
+										new TextureMapping()
+												.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_side"))
+												.put(TextureSlot.FRONT, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_front_on"))
+												.put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_top_on"))
+												.put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_bottom"))
+										: TextureMapping.orientableCube(ModBlocks.STOVE.get()))
+								);
+						return switch (f) {
+                            case SOUTH -> model.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
+                            case WEST -> model.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
+                            case EAST -> model.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
+							default -> null;
+                        };
+				})));
+		*/
+		// blockModels.createHorizontallyRotatedBlock(ModBlocks.STOVE.get(), (block) -> TexturedModel.ORIENTABLE.get(ModBlocks.STOVE.get()));
+
+		createCrossCropBlock(blockModels, ModBlocks.CABBAGE_CROP.get(), BlockStateProperties.AGE_7, 0, 1, 2, 3, 4, 5, 6, 7);
+		blockModels.createCropBlock(ModBlocks.ONION_CROP.get(), BlockStateProperties.AGE_7, 0, 0, 1, 1, 2, 2, 3, 3);
+
 		itemModels.generateFlatItem(ModItems.CABBAGE.get(), ModelTemplates.FLAT_ITEM);
+		itemModels.generateFlatItem(ModItems.TOMATO.get(), ModelTemplates.FLAT_ITEM);
 		/*
 		Set<Item> items = BuiltInRegistries.ITEM.stream().filter(i -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(i).getNamespace()))
 				.collect(Collectors.toSet());

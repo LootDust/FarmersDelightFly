@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight;
 
+import net.minecraft.world.item.DebugStickItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -41,25 +42,23 @@ public class FarmersDelight
 		modContainer.registerConfig(ModConfig.Type.CLIENT, Configuration.CLIENT_CONFIG);
 
 		// Basically, recipe and worldgen registries changed a lot, needed to be fix
-		/*
-		ModSounds.SOUNDS.register(modEventBus);
 		ModBlocks.BLOCKS.register(modEventBus);
+		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
+		ModBlockEntityTypes.TILES.register(modEventBus);
+		ModItems.ITEMS.register(modEventBus);
+		ModSounds.SOUNDS.register(modEventBus);
+		/*
 		ModEffects.EFFECTS.register(modEventBus);
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
-		*/
-		ModItems.ITEMS.register(modEventBus);
-		/*
 		ModDataComponents.DATA_COMPONENTS.register(modEventBus);
 		ModDataComponents.ENCHANTMENT_EFFECT_COMPONENTS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
-		ModBlockEntityTypes.TILES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		// WIP
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 		// WIP
 		ModBiomeFeatures.FEATURES.register(modEventBus);
-		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
 		// WIP, TODO: Huge rebuild for whole class
 		// ModPlacementModifiers.PLACEMENT_MODIFIERS.register(modEventBus);
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
