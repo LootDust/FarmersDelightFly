@@ -2,11 +2,13 @@
 
 <img src="https://i.imgur.com/aDELzhM.png" width="50%">
 
+> **Disclaimer:** This is an unofficial fan port of Farmer's Delight. It is not affiliated with, endorsed by, or associated with Vectorwing or the original Farmer's Delight team. All original concepts, code, assets, and credits belong to the original authors.
+
 ### Overview
 
-**Farmer's Delight Fly** is an unofficial port of famous Minecraft mod [Farmer's Delight](https://github.com/vectorwing/FarmersDelight).
+**Farmer's Delight Fly** is an unofficial port of the well-known Minecraft mod [Farmer's Delight](https://github.com/vectorwing/FarmersDelight).
 
-This project is aiming to bring funny stuff in FD back to 26+ NeoForged Minecraft.
+This project is aiming to bring farming, cooking, and exploration features of Farmer's Delight back to **26+ NeoForged Minecraft**.
 
 ### Mod version support
 
