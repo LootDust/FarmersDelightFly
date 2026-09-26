@@ -19,7 +19,7 @@ public class ModDamageTypes
 	public static DamageSource getSimpleDamageSource(Level level, ResourceKey<DamageType> type) {
 		return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(type));
 	}
-	*/
+	 */
 
 	public static void bootstrapDamageTypes(BootstrapContext<DamageType> context) {
 		context.register(STOVE_BURN, new DamageType(

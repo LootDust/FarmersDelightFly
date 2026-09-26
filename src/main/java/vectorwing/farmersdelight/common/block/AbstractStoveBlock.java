@@ -5,7 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -18,7 +17,6 @@ import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -42,12 +40,10 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
-import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
-import java.util.Optional;
 
 // TODO: Further research on BaseEntityBlock
 @SuppressWarnings({"deprecation", "NullableProblems"})
@@ -106,7 +102,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 	}
 
 	protected InteractionResult tryToExtinguish(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		if (/*heldStack.canPerformAction(ItemAbilities.SHOVEL_DIG)*/ true) {
+		if (heldStack.canPerformAction(ItemAbilities.SHOVEL_DOUSE)) {
 			if (!level.isClientSide()) {
 				level.levelEvent(null, LevelEvent.SOUND_EXTINGUISH_FIRE, pos, 0);
 			}
@@ -131,7 +127,7 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 		if (isStoveTopCovered(level, pos, state)) return InteractionResult.PASS;
 		if (!(level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity)) return InteractionResult.PASS;
 
-		var maybeRecipe = stoveEntity.getCookingRecipe(heldStack);
+		var maybeRecipe = stoveEntity.getCookingRecipes(heldStack);
 		if (maybeRecipe.isEmpty()) return InteractionResult.PASS;
 		if (level.isClientSide()) return InteractionResult.CONSUME;
 		boolean placeFoodSuccess = stoveEntity.placeFood(player, player.getAbilities().instabuild ? heldStack.copy() : heldStack, maybeRecipe.get());
@@ -185,19 +181,9 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 		if (!entity.getBoundingBox().intersects(GRILLING_AREA.bounds().move(pos.above()))) return;
 		if (entity.isSteppingCarefully()) return;
 		if (!(entity instanceof LivingEntity)) return;
+		if (level.isClientSide()) return;
 		entity.hurtServer((ServerLevel) level, new DamageSource(level.registryAccess().get(ModDamageTypes.STOVE_BURN).orElseThrow().getDelegate()), 1.0f);
 	}
-
-	/*
-	@Override
-	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.is(newState.getBlock())) return;
-		if (level.getBlockEntity(pos) instanceof AbstractStoveBlockEntity stoveEntity) {
-			ItemUtils.dropItems(level, pos, stoveEntity.getItems());
-		}
-		super.onRemove(state, level, pos, newState, isMoving);
-	}
-	 */
 
 	/**
 	 * Checks if the state is a Stove, and if the grilling area is being obstructed by the block above.

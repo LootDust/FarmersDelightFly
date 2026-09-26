@@ -28,6 +28,8 @@ import vectorwing.farmersdelight.client.particle.StarParticle;
 import vectorwing.farmersdelight.client.particle.SteamParticle;
 import vectorwing.farmersdelight.client.recipebook.RecipeCategories;
 import vectorwing.farmersdelight.client.renderer.*;
+import vectorwing.farmersdelight.client.renderer.blockentity.DefaultStoveRenderer;
+import vectorwing.farmersdelight.client.renderer.blockentity.state.DefaultStoveRenderState;
 import vectorwing.farmersdelight.common.EnumParameters;
 import vectorwing.farmersdelight.common.block.entity.StoveBlockEntity;
 import vectorwing.farmersdelight.common.item.component.ItemStackWrapper;
@@ -77,17 +79,21 @@ public class ClientSetupEvents
 	public static void registerGuiLayers(RegisterGuiLayersEvent event) {
 		HUDOverlays.register(event);
 	}
+	*/
 
 	@SubscribeEvent
 	public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE.get(), DefaultStoveRenderer<StoveBlockEntity, DefaultStoveRenderState>::new);
+		/*
 		event.registerEntityRenderer(ModEntityTypes.ROTTEN_TOMATO.get(), ThrownItemRenderer::new);
-		event.registerBlockEntityRenderer(ModBlockEntityTypes.STOVE.get(), DefaultStoveRenderer<StoveBlockEntity>::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.CUTTING_BOARD.get(), CuttingBoardRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.CANVAS_SIGN.get(), CanvasSignRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.HANGING_CANVAS_SIGN.get(), HangingCanvasSignRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.SKILLET.get(), SkilletRenderer::new);
+		 */
 	}
 
+	/*
 	@SubscribeEvent
 	public static void registerMenuScreens(RegisterMenuScreensEvent event) {
 		event.register(ModMenuTypes.COOKING_POT.get(), CookingPotScreen::new);

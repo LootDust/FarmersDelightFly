@@ -42,9 +42,16 @@ public class DataGenerators
     @SubscribeEvent
     public static void gatherData(GatherDataEvent.Client event) {
         event.createProvider(Models::new);
+
+        RegistrySetBuilder registrySetBuilder = new RegistrySetBuilder()
+                .add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrapDamageTypes);
+
+        event.createWorldRegistryObjects(registrySetBuilder);
+
+        event.createProvider(DamageTypeTags::new);
     }
 
-	/*
+    /*
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
@@ -82,5 +89,5 @@ public class DataGenerators
 		generator.addProvider(event.includeClient(), new ItemModels(output, blockStates.models().existingFileHelper));
 		generator.addProvider(event.includeClient(), new SoundDefinitions(output, helper));
 	}
-	*/
+    */
 }

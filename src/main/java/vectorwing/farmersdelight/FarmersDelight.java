@@ -1,5 +1,6 @@
 package vectorwing.farmersdelight;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.DebugStickItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -9,8 +10,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import vectorwing.farmersdelight.client.event.ClientSetupEvents;
 import vectorwing.farmersdelight.common.CommonSetup;
 import vectorwing.farmersdelight.common.Configuration;
@@ -22,7 +22,7 @@ import vectorwing.farmersdelight.common.world.VillageStructures;
 public class FarmersDelight
 {
 	public static final String MODID = "farmersdelight";
-	public static final Logger LOGGER = LogManager.getLogger();
+	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public FarmersDelight(IEventBus modEventBus, ModContainer modContainer) {
 		// TODO: Fix villagers
