@@ -48,11 +48,11 @@ public class TextUtils
 	 * @param translationKey  The key itself, added as a suffix after the mod ID
 	 * @param args            Additional values to be keyed into the text, through markers such as %s
 	 */
-	/*
 	public static MutableComponent getTextWithType(String translationType, String translationKey, Object... args) {
 		return Component.translatable(translationType + "." + FarmersDelight.MODID + "." + translationKey, args);
 	}
 
+	/*
 	public static MutableComponent block(String key, Object... args) {
 		return getTextWithType("block", key, args);
 	}
@@ -64,19 +64,23 @@ public class TextUtils
 	public static MutableComponent advancement(String key, Object... args) {
 		return getTextWithType("advancements", key, args);
 	}
+	*/
 
 	public static MutableComponent container(String key, Object... args) {
 		return getTextWithType("container", key, args);
 	}
 
+	/*
 	public static MutableComponent JEI(String key, Object... args) {
 		return getTextWithType("jei", key, args);
 	}
+	*/
 
 	public static MutableComponent tooltip(String key, Object... args) {
 		return getTextWithType("tooltip", key, args);
 	}
 
+	/*
 	public static String subtitleKey(String key, Object... args) {
 		return getTextWithType("subtitles", key, args).getString();
 	}

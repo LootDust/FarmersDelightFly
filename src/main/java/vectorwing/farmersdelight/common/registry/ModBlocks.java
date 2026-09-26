@@ -49,9 +49,9 @@ public class ModBlocks
 	// Workstations
 	public static final Supplier<Block> STOVE = BLOCKS.register("stove",
 			() -> new StoveBlock(Block.Properties.ofFullCopy(Blocks.BRICKS).setId(getBlockResourceKey("stove")).lightLevel(litBlockEmission(13))));
-	/*
 	public static final Supplier<Block> COOKING_POT = BLOCKS.register("cooking_pot",
-			() -> new CookingPotBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
+			() -> new CookingPotBlock(Block.Properties.of().setId(getBlockResourceKey("cooking_pot")).mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
+	/*
 	public static final Supplier<Block> SKILLET = BLOCKS.register("skillet",
 			() -> new SkilletBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
 	public static final Supplier<Block> WOODEN_BASKET = BLOCKS.register("wooden_basket",

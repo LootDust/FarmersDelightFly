@@ -16,9 +16,9 @@ public class ModBlockEntityTypes
 
 	public static final Supplier<BlockEntityType<StoveBlockEntity>> STOVE = TILES.register("stove",
 			() -> new BlockEntityType<>(StoveBlockEntity::new, false, ModBlocks.STOVE.get()));
-	/*
 	public static final Supplier<BlockEntityType<CookingPotBlockEntity>> COOKING_POT = TILES.register("cooking_pot",
 			() -> new BlockEntityType<>(CookingPotBlockEntity::new, ModBlocks.COOKING_POT.get()));
+	/*
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasketBlockEntity>> BASKET = TILES.register("basket",
 			() -> new BlockEntityType<>(BasketBlockEntity::new, ModBlocks.WOODEN_BASKET.get(), ModBlocks.BAMBOO_BASKET.get()));
 	public static final Supplier<BlockEntityType<CuttingBoardBlockEntity>> CUTTING_BOARD = TILES.register("cutting_board",

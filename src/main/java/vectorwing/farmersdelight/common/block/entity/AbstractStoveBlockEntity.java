@@ -2,7 +2,6 @@ package vectorwing.farmersdelight.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +22,6 @@ import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec2;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
-import org.slf4j.Logger;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
@@ -37,7 +35,6 @@ import java.util.stream.Stream;
 @SuppressWarnings("NullableProblems")
 public abstract class AbstractStoveBlockEntity extends BlockEntity implements Clearable
 {
-	protected static final Logger LOGGER = FarmersDelight.LOGGER;
 	protected final ItemStacksResourceHandler items;
 	protected final int[] cookingProgress;
 	protected final int[] cookingTime;

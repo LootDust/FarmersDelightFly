@@ -1,26 +1,15 @@
 package vectorwing.farmersdelight.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
-import net.minecraft.world.InteractionHand;
 // import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -28,31 +17,23 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 // import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 // import net.neoforged.neoforge.items.ItemStackHandler;
-import vectorwing.farmersdelight.common.block.entity.CookingPotBlockEntity;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.common.block.state.CookingPotSupport;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
-import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
-import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 @SuppressWarnings("deprecation")
-public class CookingPotBlock // extends Block implements SimpleWaterloggedBlock, EntityBlock
+public class CookingPotBlock extends Block implements SimpleWaterloggedBlock, EntityBlock
 {
-	/*
-	public static final MapCodec<CookingPotBlock> CODEC = simpleCodec(CookingPotBlock::new);
 
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final EnumProperty<CookingPotSupport> SUPPORT = EnumProperty.create("support", CookingPotSupport.class);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -65,10 +46,18 @@ public class CookingPotBlock // extends Block implements SimpleWaterloggedBlock,
 	}
 
 	@Override
-	protected MapCodec<? extends Block> codec() {
-		return CODEC;
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
+		builder.add(FACING, SUPPORT, WATERLOGGED);
 	}
 
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@NonNull BlockPos pos, @NonNull BlockState state) {
+        return ModBlockEntityTypes.COOKING_POT.get().create(pos, state);
+    }
+
+    /*
 	@Override
 	public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (heldStack.isEmpty() && player.isShiftKeyDown()) {
@@ -92,22 +81,49 @@ public class CookingPotBlock // extends Block implements SimpleWaterloggedBlock,
 		}
 		return ItemInteractionResult.SUCCESS;
 	}
+	*/
 
 	@Override
-	public RenderShape getRenderShape(BlockState state) {
+	public @NonNull RenderShape getRenderShape(@NonNull BlockState state) {
 		return RenderShape.MODEL;
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	public @NonNull VoxelShape getShape(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull CollisionContext context) {
 		return SHAPE;
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	public @NonNull VoxelShape getCollisionShape(BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull CollisionContext context) {
 		return state.getValue(SUPPORT).equals(CookingPotSupport.TRAY) ? SHAPE_WITH_TRAY : SHAPE;
 	}
 
+	@Override
+	public @NonNull BlockState updateShape(BlockState state,
+										   @NonNull LevelReader level,
+										   @NonNull ScheduledTickAccess ticks,
+										   @NonNull BlockPos currentPos,
+										   @NonNull Direction facing,
+										   @NonNull BlockPos facingPos,
+										   @NonNull BlockState facingState,
+										   @NonNull RandomSource random) {
+		if (state.getValue(WATERLOGGED)) {
+			ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+		}
+		if (facing.getAxis().equals(Direction.Axis.Y) && !state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)) {
+			return state.setValue(SUPPORT, getTrayState(level, currentPos));
+		}
+		return state;
+	}
+
+	private CookingPotSupport getTrayState(LevelReader level, BlockPos pos) {
+		if (level.getBlockState(pos.below()).is(ModTags.Blocks.TRAY_HEAT_SOURCES)) {
+			return CookingPotSupport.TRAY;
+		}
+		return CookingPotSupport.NONE;
+	}
+
+	/*
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockPos pos = context.getClickedPos();
@@ -122,24 +138,6 @@ public class CookingPotBlock // extends Block implements SimpleWaterloggedBlock,
 			return state.setValue(SUPPORT, CookingPotSupport.HANDLE);
 		}
 		return state.setValue(SUPPORT, getTrayState(level, pos));
-	}
-
-	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		if (state.getValue(WATERLOGGED)) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-		}
-		if (facing.getAxis().equals(Direction.Axis.Y) && !state.getValue(SUPPORT).equals(CookingPotSupport.HANDLE)) {
-			return state.setValue(SUPPORT, getTrayState(level, currentPos));
-		}
-		return state;
-	}
-
-	private CookingPotSupport getTrayState(LevelAccessor level, BlockPos pos) {
-		if (level.getBlockState(pos.below()).is(ModTags.Blocks.TRAY_HEAT_SOURCES)) {
-			return CookingPotSupport.TRAY;
-		}
-		return CookingPotSupport.NONE;
 	}
 
 	@Override
@@ -165,12 +163,6 @@ public class CookingPotBlock // extends Block implements SimpleWaterloggedBlock,
 
 			super.onRemove(state, level, pos, newState, isMoving);
 		}
-	}
-
-	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		super.createBlockStateDefinition(builder);
-		builder.add(FACING, SUPPORT, WATERLOGGED);
 	}
 
 	@Override
@@ -205,12 +197,6 @@ public class CookingPotBlock // extends Block implements SimpleWaterloggedBlock,
 	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-	}
-
-	@Nullable
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.COOKING_POT.get().create(pos, state);
 	}
 
 	@Nullable

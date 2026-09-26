@@ -14,7 +14,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
-import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.client.renderer.blockentity.state.DefaultStoveRenderState;
 import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
 import vectorwing.farmersdelight.common.block.entity.AbstractStoveBlockEntity;

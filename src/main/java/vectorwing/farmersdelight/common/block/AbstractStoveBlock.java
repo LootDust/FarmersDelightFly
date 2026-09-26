@@ -45,11 +45,10 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 import javax.annotation.Nullable;
 import java.util.Objects;
 
-// TODO: Further research on BaseEntityBlock
 @SuppressWarnings({"deprecation", "NullableProblems"})
 public abstract class AbstractStoveBlock extends BaseEntityBlock
 {
-	public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	private static final VoxelShape GRILLING_AREA = Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F);

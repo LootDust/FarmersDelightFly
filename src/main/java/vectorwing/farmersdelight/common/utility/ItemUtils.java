@@ -14,6 +14,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.ItemAbility;
 // import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -47,13 +48,13 @@ public class ItemUtils
 			Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), inventory.getResource(slot).toStack());
 	}
 
-	/*
-	public static void clearItems(ItemStackHandler inventory) {
-		for (int i = 0; i < inventory.getSlots(); i++) {
-			inventory.setStackInSlot(i, ItemStack.EMPTY);
+	public static void clearItems(ItemStacksResourceHandler inventory) {
+		for (int i = 0; i < inventory.size(); i++) {
+			inventory.set(i, ItemResource.EMPTY, 0);
 		}
 	}
 
+	/*
 	public static boolean doesInventoryHaveItems(IItemHandler inventory) {
 		for (int i = 0; i < inventory.getSlots(); i++) {
 			if (!inventory.getStackInSlot(i).isEmpty()) {

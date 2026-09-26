@@ -11,12 +11,10 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
+import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -27,8 +25,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 // import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -36,6 +36,7 @@ import net.neoforged.neoforge.client.data.internal.VanillaModelProvider;
 import net.neoforged.neoforge.client.model.generators.blockstate.CustomBlockStateModelBuilder;
 import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.FarmersDelight;
+import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -85,6 +86,31 @@ public class Models extends ModelProvider
 		);
 	}
 
+	public static void createCookingPotBlock(BlockModelGenerators blockGenerators, ItemModelGenerators itemGenerators) {
+		Identifier cooking_pot_none_support = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/cooking_pot" );
+		Identifier cooking_pot_tray_support = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/cooking_pot_tray");
+		Identifier cooking_pot_handle_support = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/cooking_pot_handle");
+		blockGenerators.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.COOKING_POT.get())
+				.with(PropertyDispatch.initial(CookingPotBlock.SUPPORT, BlockStateProperties.HORIZONTAL_FACING)
+						.generate((support, facing) -> {
+							Identifier model = switch (support) {
+                                case NONE -> cooking_pot_none_support;
+                                case TRAY -> cooking_pot_tray_support;
+                                case HANDLE -> cooking_pot_handle_support;
+                            };
+							var variant = BlockModelGenerators.plainVariant(model);
+							return switch (facing) {
+                                case SOUTH -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
+                                case WEST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
+                                case EAST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
+								default -> variant;
+                            };
+						})
+				)
+		);
+		itemGenerators.itemModelOutput.accept(ModItems.COOKING_POT.get(), ItemModelUtils.plainModel(cooking_pot_none_support));
+	}
+
 	public static void createCrossCropBlock(BlockModelGenerators generators, Block block, Property<Integer> property, int... stages) {
 		generators.registerSimpleFlatItemModel(block.asItem());
 		if (property.getPossibleValues().size() != stages.length) {
@@ -101,31 +127,7 @@ public class Models extends ModelProvider
 	@Override
 	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
 		createStoveLikeBlock(blockModels, ModBlocks.STOVE.get());
-		/*
-		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.STOVE.get())
-				.with(PropertyDispatch.initial(BlockStateProperties.LIT, BlockStateProperties.HORIZONTAL_FACING)
-				.generate((b, f) -> {
-						var model = BlockModelGenerators.plainVariant(blockModels.createSuffixedVariant(
-								ModBlocks.STOVE.get(),
-								b ? "_on" : "",
-								ModelTemplates.CUBE_ORIENTABLE,
-								_ -> b ?
-										new TextureMapping()
-												.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_side"))
-												.put(TextureSlot.FRONT, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_front_on"))
-												.put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_top_on"))
-												.put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_bottom"))
-										: TextureMapping.orientableCube(ModBlocks.STOVE.get()))
-								);
-						return switch (f) {
-                            case SOUTH -> model.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
-                            case WEST -> model.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
-                            case EAST -> model.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
-							default -> null;
-                        };
-				})));
-		*/
-		// blockModels.createHorizontallyRotatedBlock(ModBlocks.STOVE.get(), (block) -> TexturedModel.ORIENTABLE.get(ModBlocks.STOVE.get()));
+		createCookingPotBlock(blockModels, itemModels);
 
 		createCrossCropBlock(blockModels, ModBlocks.CABBAGE_CROP.get(), BlockStateProperties.AGE_7, 0, 1, 2, 3, 4, 5, 6, 7);
 		blockModels.createCropBlock(ModBlocks.ONION_CROP.get(), BlockStateProperties.AGE_7, 0, 0, 1, 1, 2, 2, 3, 3);

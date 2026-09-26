@@ -3,12 +3,10 @@ package vectorwing.farmersdelight.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec2;
 import vectorwing.farmersdelight.common.block.AbstractStoveBlock;
-import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 public class StoveBlockEntity extends AbstractStoveBlockEntity
 {

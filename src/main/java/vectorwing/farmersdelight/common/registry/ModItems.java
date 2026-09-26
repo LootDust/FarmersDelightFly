@@ -10,6 +10,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
+import vectorwing.farmersdelight.common.item.CookingPotItem;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -65,9 +66,9 @@ public class ModItems
 	// Blocks
 	public static final Supplier<Item> STOVE = registerWithTab("stove",
 			_ -> new BlockItem(ModBlocks.STOVE.get(), basicItem("stove").useBlockDescriptionPrefix()));
-	/*
 	public static final Supplier<Item> COOKING_POT = registerWithTab("cooking_pot",
-			() -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem().stacksTo(1)));
+			_ -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem("cooking_pot").stacksTo(1).useBlockDescriptionPrefix()));
+	/*
 	public static final Supplier<Item> SKILLET = registerWithTab("skillet",
 			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1).attributes(SkilletItem.createAttributes(SkilletItem.SKILLET_MATERIAL, 5.0F, -3.1F))));
 	public static final Supplier<Item> CUTTING_BOARD = registerWithTab("cutting_board",
