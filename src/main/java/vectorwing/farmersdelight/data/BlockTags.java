@@ -17,25 +17,25 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
-public class BlockTags // extends BlockTagsProvider
+public class BlockTags extends BlockTagsProvider
 {
-	/*
-	public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, FarmersDelight.MODID, existingFileHelper);
+	public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+		super(output, lookupProvider, FarmersDelight.MODID);
 	}
 
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
-		this.registerModTags();
+		//this.registerModTags();
 		this.registerMinecraftTags();
-		this.registerNeoForgeTags();
-		this.registerCommonTags();
-		this.registerCompatibilityTags();
+		//this.registerNeoForgeTags();
+		//this.registerCommonTags();
+		//this.registerCompatibilityTags();
 
 		this.registerBlockMineables();
 	}
 
 	protected void registerBlockMineables() {
+        /*
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE).add(
 			ModBlocks.WOODEN_BASKET.get(),
 			ModBlocks.BAMBOO_BASKET.get(),
@@ -100,10 +100,11 @@ public class BlockTags // extends BlockTagsProvider
 			.addTag(ModTags.Blocks.STRAW_BLOCKS)
 			.addTag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
 		tag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
-
+		*/
 	}
 
 	protected void registerMinecraftTags() {
+        /*
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
 			ModBlocks.ROPE.get(),
 			ModBlocks.TOMATO_CROP_ON_ROPE.get());
@@ -118,13 +119,15 @@ public class BlockTags // extends BlockTagsProvider
 		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
 			ModBlocks.ORGANIC_COMPOST.get(),
 			ModBlocks.RICH_SOIL.get());
+        */
 		tag(net.minecraft.tags.BlockTags.CROPS).add(
-			ModBlocks.CABBAGE_CROP.get(),
-			ModBlocks.ONION_CROP.get(),
+			ModBlocks.ModBlockEntry.CABBAGE_CROP.getResourceKey(),
+			ModBlocks.ONION_CROP.get().builtInRegistryHolder().getKey()/*,
 			ModBlocks.RICE_CROP_PANICLES.get(),
 			ModBlocks.BUDDING_TOMATO_CROP.get(),
 			ModBlocks.TOMATO_CROP.get(),
-			ModBlocks.TOMATO_CROP_ON_ROPE.get());
+			ModBlocks.TOMATO_CROP_ON_ROPE.get()*/);
+		/*
 		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
 			ModBlocks.CANVAS_SIGN.get(),
 			ModBlocks.WHITE_CANVAS_SIGN.get(),
@@ -405,6 +408,6 @@ public class BlockTags // extends BlockTagsProvider
 			ModBlocks.CABBAGE_CROP.get());
 		tag(CompatibilityTags.SERENE_SEASONS_UNBREAKABLE_FERTILE_CROPS).add(
 			ModBlocks.ONION_CROP.get());
+	*/
 	}
-	 */
 }

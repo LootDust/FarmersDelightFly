@@ -88,17 +88,16 @@ public abstract class AbstractStoveBlockEntity extends BlockEntity implements Cl
 
 		if (input.getIntArray("CookingTimes").isPresent()) {
 			var arrayCookingTimes = input.getIntArray("CookingTimes").get();
-			System.arraycopy(arrayCookingTimes, 0, this.cookingProgress, 0, Math.min(this.cookingTime.length, arrayCookingTimes.length));
+			System.arraycopy(arrayCookingTimes, 0, this.cookingTime, 0, Math.min(this.cookingTime.length, arrayCookingTimes.length));
 		}
 	}
 
 	@Override
 	protected void saveAdditional(ValueOutput output) {
 		super.saveAdditional(output);
-		super.saveAdditional(output);
 		output.putChild("Inventory", items);
-		output.putIntArray("CookingProgresses", this.cookingProgress);
-		output.putIntArray("CookingTimes", this.cookingTime);
+		output.putIntArray("CookingProgresses", cookingProgress);
+		output.putIntArray("CookingTimes", cookingTime);
 	}
 
 	public static void serverTick(Level level, BlockPos pos, BlockState state, AbstractStoveBlockEntity stoveEntity) {

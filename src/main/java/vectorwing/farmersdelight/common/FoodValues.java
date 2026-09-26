@@ -6,6 +6,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.List;
@@ -25,6 +27,10 @@ public class FoodValues
 	}
 	*/
 
+	// faster eating
+	public static final Consumable FAST_EAT = Consumable.builder()
+			.consumeSeconds(0.8f).build();
+
 	// Raw Crops
 	public static final FoodProperties CABBAGE = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.4f).build();
@@ -33,10 +39,11 @@ public class FoodValues
 	public static final FoodProperties ONION = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.4f).build();
 
-    /*
+	/*
 	// Drinks (mostly for effects)
 	public static final FoodProperties APPLE_CIDER = (new FoodProperties.Builder())
 			.alwaysEdible().effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 1.0F).build();
+	*/
 
 	// Basic Foods
 	public static final FoodProperties FRIED_EGG = (new FoodProperties.Builder())
@@ -44,44 +51,51 @@ public class FoodValues
 	public static final FoodProperties TOMATO_SAUCE = (new FoodProperties.Builder())
 			.nutrition(4).saturationModifier(0.4f).build();
 	public static final FoodProperties WHEAT_DOUGH = (new FoodProperties.Builder())
-			.nutrition(2).saturationModifier(0.3f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).build();
+			.nutrition(2).saturationModifier(0.3f).build();
+	public static final Consumable WHEAT_DOUGH_EFFECT = Consumable.builder()
+			.onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3f)).build();
 	public static final FoodProperties RAW_PASTA = (new FoodProperties.Builder())
-			.nutrition(2).saturationModifier(0.3F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).build();
+			.nutrition(2).saturationModifier(0.3F).build();
+	public static final Consumable RAW_PASTA_EFFECT = Consumable.builder()
+			.onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F)).build();
 	public static final FoodProperties PIE_CRUST = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.2f).build();
 	public static final FoodProperties PUMPKIN_SLICE = (new FoodProperties.Builder())
 			.nutrition(3).saturationModifier(0.3f).build();
 	public static final FoodProperties CABBAGE_LEAF = (new FoodProperties.Builder())
-			.nutrition(1).saturationModifier(0.4f).fast().build();
+			.nutrition(1).saturationModifier(0.4f).build();
 	public static final FoodProperties MINCED_BEEF = (new FoodProperties.Builder())
-			.nutrition(2).saturationModifier(0.3f).fast().build();
+			.nutrition(2).saturationModifier(0.3f).build();
 	public static final FoodProperties BEEF_PATTY = (new FoodProperties.Builder())
-			.nutrition(4).saturationModifier(0.8f).fast().build();
+			.nutrition(4).saturationModifier(0.8f).build();
 	public static final FoodProperties CHICKEN_CUTS = (new FoodProperties.Builder())
-			.nutrition(1).saturationModifier(0.3f).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).fast().build();
+			.nutrition(1).saturationModifier(0.3f).build();
+	public static final Consumable CHICKEN_CUTS_EFFECT = Consumable.builder()
+			.consumeSeconds(0.8f).onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F)).build();
 	public static final FoodProperties COOKED_CHICKEN_CUTS = (new FoodProperties.Builder())
-			.nutrition(3).saturationModifier(0.6f).fast().build();
+			.nutrition(3).saturationModifier(0.6f).build();
 	public static final FoodProperties BACON = (new FoodProperties.Builder())
-			.nutrition(2).saturationModifier(0.3f).fast().build();
+			.nutrition(2).saturationModifier(0.3f).build();
 	public static final FoodProperties COOKED_BACON = (new FoodProperties.Builder())
-			.nutrition(4).saturationModifier(0.8f).fast().build();
+			.nutrition(4).saturationModifier(0.8f).build();
 	public static final FoodProperties COD_SLICE = (new FoodProperties.Builder())
-			.nutrition(1).saturationModifier(0.1f).fast().build();
+			.nutrition(1).saturationModifier(0.1f).build();
 	public static final FoodProperties COOKED_COD_SLICE = (new FoodProperties.Builder())
-			.nutrition(3).saturationModifier(0.5f).fast().build();
+			.nutrition(3).saturationModifier(0.5f).build();
 	public static final FoodProperties SALMON_SLICE = (new FoodProperties.Builder())
-			.nutrition(1).saturationModifier(0.1f).fast().build();
+			.nutrition(1).saturationModifier(0.1f).build();
 	public static final FoodProperties COOKED_SALMON_SLICE = (new FoodProperties.Builder())
-			.nutrition(3).saturationModifier(0.8f).fast().build();
+			.nutrition(3).saturationModifier(0.8f).build();
 	public static final FoodProperties MUTTON_CHOPS = (new FoodProperties.Builder())
-			.nutrition(1).saturationModifier(0.3f).fast().build();
+			.nutrition(1).saturationModifier(0.3f).build();
 	public static final FoodProperties COOKED_MUTTON_CHOPS = (new FoodProperties.Builder())
-			.nutrition(3).saturationModifier(0.8f).fast().build();
+			.nutrition(3).saturationModifier(0.8f).build();
 	public static final FoodProperties HAM = (new FoodProperties.Builder())
 			.nutrition(5).saturationModifier(0.3f).build();
 	public static final FoodProperties SMOKED_HAM = (new FoodProperties.Builder())
 			.nutrition(10).saturationModifier(0.8f).build();
 
+	/*
 	// Sweets
 	public static final FoodProperties POPSICLE = (new FoodProperties.Builder())
 			.nutrition(3).saturationModifier(0.2f).fast().alwaysEdible().build();
@@ -90,9 +104,12 @@ public class FoodValues
 	public static final FoodProperties CAKE_SLICE = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.1f).fast()
 			.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F).build();
+	*/
 	public static final FoodProperties PIE_SLICE = (new FoodProperties.Builder())
-			.nutrition(3).saturationModifier(0.3f).fast()
-			.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0, false, false), 1.0F).build();
+			.nutrition(3).saturationModifier(0.3f).build();
+	public static final Consumable PIE_SLICE_EFFECT = Consumable.builder()
+			.consumeSeconds(0.8f).onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.SPEED, 600, 0, false, false), 1.0f)).build();
+	/*
 	public static final FoodProperties FRUIT_SALAD = (new FoodProperties.Builder())
 			.nutrition(6).saturationModifier(0.6f)
 			.effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F).build();
@@ -232,5 +249,5 @@ public class FoodValues
 
 	public static final FoodProperties RABBIT_STEW_BUFF = (new FoodProperties.Builder())
 			.nutrition(14).saturationModifier(0.75f).effect(() -> nourishment(LONG_DURATION), 1.0F).usingConvertsTo(Items.BOWL).build();
-	 */
+	*/
 }

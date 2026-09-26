@@ -6,11 +6,16 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.Consumable;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
+import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.CookingPotItem;
+import vectorwing.farmersdelight.common.item.MilkBottleItem;
+import vectorwing.farmersdelight.common.registry.ModBlocks.ModBlockEntry;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -24,50 +29,129 @@ public class ModItems
 	public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(FarmersDelight.MODID);
 	public static LinkedHashSet<DeferredItem<? extends Item>> CREATIVE_TAB_ITEMS = Sets.newLinkedHashSet();
 
-	public static DeferredItem<Item> registerWithTab(final String name, final Function<Item.Properties, Item> function) {
-		DeferredItem<Item> newItem = ITEMS.registerItem(name, function);
-		CREATIVE_TAB_ITEMS.add(newItem);
-		return newItem;
-	}
+	public enum ModItemEntry {
+		// Blocks
+		STOVE(ModBlockEntry.STOVE.getName(), ModBlocks.STOVE, basicItem()),
+		COOKING_POT(ModBlockEntry.COOKING_POT.getName(), ModBlocks.COOKING_POT, basicItem().stacksTo(1)),
 
-	public static DeferredItem<Item> registerHidden(final String name, final Supplier<Item> supplier) {
-		return ITEMS.register(name, supplier);
-	}
+		// Crops
+		CABBAGE("cabbage", Item::new, foodItem(FoodValues.CABBAGE)),
+		TOMATO("tomato", Item::new, foodItem(FoodValues.TOMATO)),
+		ONION("onion", p -> new BlockItem(ModBlocks.ONION_CROP.get(), p), foodItem(FoodValues.ONION)),
+		RICE_PANICLE("rice_panicle", Item::new, basicItem()),
+		CABBAGE_SEEDS("cabbage_seeds", p -> new BlockItem(ModBlocks.CABBAGE_CROP.get(), p), basicItem()),
 
-	// Helper methods
-	public static Item.Properties basicItem(String name) {
-		return new Item.Properties().setId(getItemResourceKey(name));
-	}
+		// Foodstuffs
+		FRIED_EGG("fried_egg", Item::new, foodItem(FoodValues.FRIED_EGG)),
+		MILK_BOTTLE("milk_bottle", MilkBottleItem::new, drinkItem()),
 
-	public static Item.Properties basicBlockItem(String name) {
-		return new Item.Properties().setId(getItemResourceKey(name)).useBlockDescriptionPrefix();
-	}
+		WHEAT_DOUGH("wheat_dough", Item::new, foodItem(FoodValues.WHEAT_DOUGH, FoodValues.WHEAT_DOUGH_EFFECT)),
+		RAW_PASTA("raw_pasta", Item::new, foodItem(FoodValues.RAW_PASTA, FoodValues.RAW_PASTA_EFFECT)),
+		PUMPKIN_SLICE("pumpkin_slice", Item::new, foodItem(FoodValues.PUMPKIN_SLICE)),
+		CABBAGE_LEAF("cabbage_leaf", Item::new, foodItem(FoodValues.CABBAGE_LEAF, FoodValues.FAST_EAT)),
+		MINCED_BEEF("minced_beef", Item::new, foodItem(FoodValues.MINCED_BEEF, FoodValues.FAST_EAT)),
+		BEEF_PATTY("beef_patty", Item::new, foodItem(FoodValues.BEEF_PATTY, FoodValues.FAST_EAT)),
+		CHICKEN_CUTS("chicken_cuts", Item::new, foodItem(FoodValues.CHICKEN_CUTS, FoodValues.CHICKEN_CUTS_EFFECT)),
+		COOKED_CHICKEN_CUTS("cooked_chicken_cuts", Item::new, foodItem(FoodValues.COOKED_CHICKEN_CUTS, FoodValues.FAST_EAT)),
+		BACON("bacon", Item::new, foodItem(FoodValues.BACON, FoodValues.FAST_EAT)),
+		COOKED_BACON("cooked_bacon", Item::new, foodItem(FoodValues.COOKED_BACON, FoodValues.FAST_EAT)),
+		COD_SLICE("cod_slice", Item::new, foodItem(FoodValues.COD_SLICE, FoodValues.FAST_EAT)),
+		COOKED_COD_SLICE("cooked_cod_slice", Item::new, foodItem(FoodValues.COOKED_COD_SLICE, FoodValues.FAST_EAT)),
+		SALMON_SLICE("salmon_slice", Item::new, foodItem(FoodValues.SALMON_SLICE, FoodValues.FAST_EAT)),
+		COOKED_SALMON_SLICE("cooked_salmon_slice", Item::new, foodItem(FoodValues.COOKED_SALMON_SLICE, FoodValues.FAST_EAT)),
+		MUTTON_CHOPS("mutton_chops", Item::new, foodItem(FoodValues.MUTTON_CHOPS, FoodValues.FAST_EAT)),
+		COOKED_MUTTON_CHOPS("cooked_mutton_chops", Item::new, foodItem(FoodValues.COOKED_MUTTON_CHOPS, FoodValues.FAST_EAT)),
+		HAM("ham", Item::new, foodItem(FoodValues.HAM)),
+		SMOKED_HAM("smoked_ham", Item::new, foodItem(FoodValues.SMOKED_HAM)),
+		PIE_CRUST("pie_crust", Item::new, foodItem(FoodValues.PIE_CRUST)),
 
-	public static ResourceKey<Item> getItemResourceKey(String name) {
-		return ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name));
-	}
+		PUMPKIN_PIE_SLICE("pumpkin_pie_slice", ConsumableItem::new, foodItem(FoodValues.PIE_SLICE, FoodValues.PIE_SLICE_EFFECT)),
 
-	public static Item.Properties knifeItem(ToolMaterial material, Item.Properties properties) {
-		return material.applyToolProperties(properties, ModTags.Blocks.MINEABLE_WITH_KNIFE,0.5F, -2.0F, 0.0F);
-	}
+		// Hidden (Debug) Items
+		DEBUG_PUMPKIN_PIE("debug_pumpkin_pie", false, ModBlocks.PUMPKIN_PIE, basicItem());
 
-	public static Item.Properties foodItem(String name, FoodProperties food) {
-		return new Item.Properties().setId(getItemResourceKey(name)).food(food);
-	}
+		private final String name;
+		private final Identifier identifier;
+		private final ResourceKey<Item> resourceKey;
+		private final boolean isInTab;
+		private final Function<Item.Properties, ? extends Item> factory;
+		private final Item.Properties properties;
 
-	public static Item.Properties bowlFoodItem(String name, FoodProperties food) {
-		return new Item.Properties().setId(getItemResourceKey(name)).food(food).craftRemainder(Items.BOWL).stacksTo(16);
-	}
+		ModItemEntry(String name, Function<Item.Properties, ? extends Item> factory, Item.Properties properties) {
+			this(name, true, factory, properties);
+		}
+		ModItemEntry(String name, Supplier<Block> block, Item.Properties properties) {
+			this(name, true, p -> new BlockItem(block.get(), p), properties.useBlockDescriptionPrefix());
+		}
+		ModItemEntry(String name, boolean isInTab, Supplier<Block> block, Item.Properties properties) {
+			this(name, isInTab, p -> new BlockItem(block.get(), p), properties.useBlockDescriptionPrefix());
+		}
+		ModItemEntry(String name, boolean isInTab, Function<Item.Properties, ? extends Item> factory, Item.Properties properties) {
+			this.name = name;
+			this.identifier = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name);
+			this.resourceKey = ResourceKey.create(Registries.ITEM, this.identifier);
+			this.isInTab = isInTab;
+			this.factory = factory;
+			this.properties = properties;
+		}
 
-	public static Item.Properties drinkItem(String name) {
-		return new Item.Properties().setId(getItemResourceKey(name)).craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
+		public String getName() {
+			return name;
+		}
+
+		public Identifier getIdentifier() {
+			return identifier;
+		}
+
+		public ResourceKey<Item> getResourceKey() {
+			return resourceKey;
+		}
+
+		public Function<Item.Properties, ? extends Item> getFactory() {
+			return factory;
+		}
+
+		public Item.Properties getProperties() {
+			return properties;
+		}
+
+		// Helper methods
+		public static Item.Properties basicItem() {
+			return new Item.Properties();
+		}
+
+		public static Item.Properties basicBlockItem() {
+			return new Item.Properties().useBlockDescriptionPrefix();
+		}
+		public static Item.Properties knifeItem(ToolMaterial material, Item.Properties properties) {
+			return material.applyToolProperties(properties, ModTags.Blocks.MINEABLE_WITH_KNIFE,0.5F, -2.0F, 0.0F);
+		}
+
+		public static Item.Properties foodItem(FoodProperties food) {
+			return new Item.Properties().food(food);
+		}
+		public static Item.Properties foodItem(FoodProperties food, Consumable consumable) {
+			return new Item.Properties().food(food, consumable);
+		}
+
+		public static Item.Properties bowlFoodItem(FoodProperties food) {
+			return new Item.Properties().food(food).craftRemainder(Items.BOWL).stacksTo(16);
+		}
+
+		public static Item.Properties drinkItem() {
+			return new Item.Properties().craftRemainder(Items.GLASS_BOTTLE).stacksTo(16);
+		}
+
+		public DeferredItem<Item> register(DeferredRegister.Items register) {
+			DeferredItem<Item> item = register.registerItem(name, _ -> factory.apply(properties.setId(resourceKey)));
+			if (isInTab) ModItems.CREATIVE_TAB_ITEMS.add(item);
+			return item;
+		}
 	}
 
 	// Blocks
-	public static final Supplier<Item> STOVE = registerWithTab("stove",
-			_ -> new BlockItem(ModBlocks.STOVE.get(), basicItem("stove").useBlockDescriptionPrefix()));
-	public static final Supplier<Item> COOKING_POT = registerWithTab("cooking_pot",
-			_ -> new CookingPotItem(ModBlocks.COOKING_POT.get(), basicItem("cooking_pot").stacksTo(1).useBlockDescriptionPrefix()));
+	public static final Supplier<Item> STOVE = ModItemEntry.STOVE.register(ITEMS);
+	public static final Supplier<Item> COOKING_POT = ModItemEntry.COOKING_POT.register(ITEMS);
 	/*
 	public static final Supplier<Item> SKILLET = registerWithTab("skillet",
 			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1).attributes(SkilletItem.createAttributes(SkilletItem.SKILLET_MATERIAL, 5.0F, -3.1F))));
@@ -280,19 +364,15 @@ public class ModItems
 	*/
 
 	// Basic Crops
-	public static final DeferredItem<Item> CABBAGE = registerWithTab("cabbage",
-			_ -> new Item(foodItem("cabbage", FoodValues.CABBAGE)));
-	public static final DeferredItem<Item> TOMATO = registerWithTab("tomato",
-			_ -> new Item(foodItem("tomato", FoodValues.TOMATO)));
-	public static final DeferredItem<Item> ONION = registerWithTab("onion",
-			_ -> new BlockItem(ModBlocks.ONION_CROP.get(), foodItem("onion", FoodValues.ONION)));
+	public static final Supplier<Item> CABBAGE = ModItemEntry.CABBAGE.register(ITEMS);
+	public static final Supplier<Item> TOMATO = ModItemEntry.TOMATO.register(ITEMS);
+	public static final Supplier<Item> ONION = ModItemEntry.ONION.register(ITEMS);
+	public static final Supplier<Item> RICE_PANICLE = ModItemEntry.RICE_PANICLE.register(ITEMS);
 	/*
-	public static final Supplier<Item> RICE_PANICLE = registerWithTab("rice_panicle", () -> new Item(basicItem()));
 	public static final Supplier<Item> RICE = registerWithTab("rice",
 			() -> new RiceItem(ModBlocks.RICE_CROP.get(), basicItem()));
 	*/
-	public static final DeferredItem<Item> CABBAGE_SEEDS = registerWithTab("cabbage_seeds",
-			_ -> new BlockItem(ModBlocks.CABBAGE_CROP.get(), basicItem("cabbage_seeds")));
+	public static final Supplier<Item> CABBAGE_SEEDS = ModItemEntry.CABBAGE_SEEDS.register(ITEMS);
 	/*
 	public static final Supplier<Item> TOMATO_SEEDS = registerWithTab("tomato_seeds", () -> new BlockItem(ModBlocks.BUDDING_TOMATO_CROP.get(), basicItem())
 	{
@@ -319,12 +399,12 @@ public class ModItems
 	});
 	public static final Supplier<Item> ROTTEN_TOMATO = registerWithTab("rotten_tomato",
 			() -> new RottenTomatoItem(new Item.Properties().stacksTo(16)));
+	*/
 
 	// Foodstuffs
-	public static final Supplier<Item> FRIED_EGG = registerWithTab("fried_egg",
-			() -> new Item(foodItem(FoodValues.FRIED_EGG)));
-	public static final Supplier<Item> MILK_BOTTLE = registerWithTab("milk_bottle",
-			() -> new MilkBottleItem(drinkItem()));
+	public static final Supplier<Item> FRIED_EGG = ModItemEntry.FRIED_EGG.register(ITEMS);
+	public static final Supplier<Item> MILK_BOTTLE = ModItemEntry.MILK_BOTTLE.register(ITEMS);
+	/*
 	public static final Supplier<Item> HOT_COCOA = registerWithTab("hot_cocoa",
 			() -> new HotCocoaItem(drinkItem()));
 	public static final Supplier<Item> APPLE_CIDER = registerWithTab("apple_cider",
@@ -333,45 +413,28 @@ public class ModItems
 			() -> new MelonJuiceItem(drinkItem()));
 	public static final Supplier<Item> TOMATO_SAUCE = registerWithTab("tomato_sauce",
 			() -> new ConsumableItem(foodItem(FoodValues.TOMATO_SAUCE).craftRemainder(Items.BOWL)));
-	public static final Supplier<Item> WHEAT_DOUGH = registerWithTab("wheat_dough",
-			() -> new Item(foodItem(FoodValues.WHEAT_DOUGH)));
-	public static final Supplier<Item> RAW_PASTA = registerWithTab("raw_pasta",
-			() -> new Item(foodItem(FoodValues.RAW_PASTA)));
-	public static final Supplier<Item> PUMPKIN_SLICE = registerWithTab("pumpkin_slice",
-			() -> new Item(foodItem(FoodValues.PUMPKIN_SLICE)));
-	public static final Supplier<Item> CABBAGE_LEAF = registerWithTab("cabbage_leaf",
-			() -> new Item(foodItem(FoodValues.CABBAGE_LEAF)));
-	public static final Supplier<Item> MINCED_BEEF = registerWithTab("minced_beef",
-			() -> new Item(foodItem(FoodValues.MINCED_BEEF)));
-	public static final Supplier<Item> BEEF_PATTY = registerWithTab("beef_patty",
-			() -> new Item(foodItem(FoodValues.BEEF_PATTY)));
-	public static final Supplier<Item> CHICKEN_CUTS = registerWithTab("chicken_cuts",
-			() -> new Item(foodItem(FoodValues.CHICKEN_CUTS)));
-	public static final Supplier<Item> COOKED_CHICKEN_CUTS = registerWithTab("cooked_chicken_cuts",
-			() -> new Item(foodItem(FoodValues.COOKED_CHICKEN_CUTS)));
-	public static final Supplier<Item> BACON = registerWithTab("bacon",
-			() -> new Item(foodItem(FoodValues.BACON)));
-	public static final Supplier<Item> COOKED_BACON = registerWithTab("cooked_bacon",
-			() -> new Item(foodItem(FoodValues.COOKED_BACON)));
-	public static final Supplier<Item> COD_SLICE = registerWithTab("cod_slice",
-			() -> new Item(foodItem(FoodValues.COD_SLICE)));
-	public static final Supplier<Item> COOKED_COD_SLICE = registerWithTab("cooked_cod_slice",
-			() -> new Item(foodItem(FoodValues.COOKED_COD_SLICE)));
-	public static final Supplier<Item> SALMON_SLICE = registerWithTab("salmon_slice",
-			() -> new Item(foodItem(FoodValues.SALMON_SLICE)));
-	public static final Supplier<Item> COOKED_SALMON_SLICE = registerWithTab("cooked_salmon_slice",
-			() -> new Item(foodItem(FoodValues.COOKED_SALMON_SLICE)));
-	public static final Supplier<Item> MUTTON_CHOPS = registerWithTab("mutton_chops",
-			() -> new Item(foodItem(FoodValues.MUTTON_CHOPS)));
-	public static final Supplier<Item> COOKED_MUTTON_CHOPS = registerWithTab("cooked_mutton_chops",
-			() -> new Item(foodItem(FoodValues.COOKED_MUTTON_CHOPS)));
-	public static final Supplier<Item> HAM = registerWithTab("ham",
-			() -> new Item(foodItem(FoodValues.HAM)));
-	public static final Supplier<Item> SMOKED_HAM = registerWithTab("smoked_ham",
-			() -> new Item(foodItem(FoodValues.SMOKED_HAM)));
-	public static final Supplier<Item> PIE_CRUST = registerWithTab("pie_crust",
-			() -> new Item(foodItem(FoodValues.PIE_CRUST)));
+	*/
+	public static final Supplier<Item> WHEAT_DOUGH = ModItemEntry.WHEAT_DOUGH.register(ITEMS);
+	public static final Supplier<Item> RAW_PASTA = ModItemEntry.RAW_PASTA.register(ITEMS);
+	public static final Supplier<Item> PUMPKIN_SLICE = ModItemEntry.PUMPKIN_SLICE.register(ITEMS);
+	public static final Supplier<Item> CABBAGE_LEAF = ModItemEntry.CABBAGE_LEAF.register(ITEMS);
+	public static final Supplier<Item> MINCED_BEEF = ModItemEntry.MINCED_BEEF.register(ITEMS);
+	public static final Supplier<Item> BEEF_PATTY = ModItemEntry.BEEF_PATTY.register(ITEMS);
+	public static final Supplier<Item> CHICKEN_CUTS = ModItemEntry.CHICKEN_CUTS.register(ITEMS);
+	public static final Supplier<Item> COOKED_CHICKEN_CUTS = ModItemEntry.COOKED_CHICKEN_CUTS.register(ITEMS);
+	public static final Supplier<Item> BACON = ModItemEntry.BACON.register(ITEMS);
+	public static final Supplier<Item> COOKED_BACON = ModItemEntry.COOKED_BACON.register(ITEMS);
+	public static final Supplier<Item> COD_SLICE = ModItemEntry.COD_SLICE.register(ITEMS);
+	public static final Supplier<Item> COOKED_COD_SLICE = ModItemEntry.COOKED_COD_SLICE.register(ITEMS);
+	public static final Supplier<Item> SALMON_SLICE = ModItemEntry.SALMON_SLICE.register(ITEMS);
+	public static final Supplier<Item> COOKED_SALMON_SLICE = ModItemEntry.COOKED_SALMON_SLICE.register(ITEMS);
+	public static final Supplier<Item> MUTTON_CHOPS = ModItemEntry.MUTTON_CHOPS.register(ITEMS);
+	public static final Supplier<Item> COOKED_MUTTON_CHOPS = ModItemEntry.COOKED_MUTTON_CHOPS.register(ITEMS);
+	public static final Supplier<Item> HAM = ModItemEntry.HAM.register(ITEMS);
+	public static final Supplier<Item> SMOKED_HAM = ModItemEntry.SMOKED_HAM.register(ITEMS);
+	public static final Supplier<Item> PIE_CRUST = ModItemEntry.PIE_CRUST.register(ITEMS);
 
+	/*
 	// Sweets
 	public static final Supplier<Item> APPLE_PIE = registerWithTab("apple_pie",
 			() -> new PlaceableItem(ModBlocks.APPLE_PIE.get(), basicItem()));
@@ -387,8 +450,9 @@ public class ModItems
 			() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
 	public static final Supplier<Item> CHOCOLATE_PIE_SLICE = registerWithTab("chocolate_pie_slice",
 			() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
-	public static final Supplier<Item> PUMPKIN_PIE_SLICE = registerWithTab("pumpkin_pie_slice",
-			() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
+	*/
+	public static final Supplier<Item> PUMPKIN_PIE_SLICE = ModItemEntry.PUMPKIN_PIE_SLICE.register(ITEMS);
+	/*
 	public static final Supplier<Item> SWEET_BERRY_COOKIE = registerWithTab("sweet_berry_cookie",
 			() -> new Item(foodItem(FoodValues.COOKIES)));
 	public static final Supplier<Item> HONEY_COOKIE = registerWithTab("honey_cookie",
@@ -512,8 +576,11 @@ public class ModItems
 			() -> new DogFoodItem(bowlFoodItem(FoodValues.DOG_FOOD)));
 	public static final Supplier<Item> HORSE_FEED = registerWithTab("horse_feed",
 			() -> new HorseFeedItem(basicItem().stacksTo(16)));
+	 */
 
 	// Hidden (Debug) Items
+	public static final Supplier<Item> DEBUG_PUMPKIN_PIE = ModItemEntry.DEBUG_PUMPKIN_PIE.register(ITEMS);
+	/*
 	public static final Supplier<Item> DEBUG_PUMPKIN_PIE = registerHidden("debug_pumpkin_pie",
 			() -> new BlockItem(ModBlocks.PUMPKIN_PIE.get(), basicItem())
 			{
@@ -521,5 +588,5 @@ public class ModItems
 					tooltip.add(TextUtils.DEBUG_ITEM);
 				}
 			});
-	 */
+	*/
 }

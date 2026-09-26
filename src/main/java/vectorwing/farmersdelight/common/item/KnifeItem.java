@@ -48,9 +48,9 @@ public class KnifeItem // extends Item
 	/**
 	 * This action is used in gameplay interactions where something is harvested.
 	 */
-	/*
 	public static final ItemAbility KNIFE_HARVEST = ItemAbility.get("knife_harvest");
 
+	/*
 	public static final Set<ItemAbility> KNIFE_ACTIONS = Set.of(ItemAbilities.SHEARS_CARVE, KNIFE_DIG, KNIFE_HARVEST);
 
 	public KnifeItem(Properties properties) {

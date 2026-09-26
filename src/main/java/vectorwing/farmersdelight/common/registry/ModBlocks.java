@@ -1,9 +1,7 @@
 package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffects;
@@ -20,25 +18,25 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.BlockShapes;
 import vectorwing.farmersdelight.common.block.*;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
+@SuppressWarnings("unchecked")
 public class ModBlocks
 {
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, FarmersDelight.MODID);
+	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(FarmersDelight.MODID);
 
 	private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
 		return (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
 	}
-
-	public static ResourceKey<Block> getBlockResourceKey(String name) { return ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name)); }
 
 	/*
 	private static ToIntFunction<BlockState> glowingFeastBlockEmission() {
@@ -46,11 +44,59 @@ public class ModBlocks
 	}
 	*/
 
+	public enum ModBlockEntry {
+		// Workstations
+		STOVE("stove", StoveBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BRICKS).lightLevel(litBlockEmission(13))),
+		COOKING_POT("cooking_pot", CookingPotBlock::new,
+				Block.Properties.of().mapColor(MapColor.METAL).strength(0.5f, 6.0f).sound(SoundType.LANTERN)),
+		//SKILLET("skillet", SkilletBlock::new, Block.Properties.of().mapColor(MapColor.METAL).strength(0.5f, 6.0f).sound(SoundType.LANTERN)),
+
+		// Pastries
+		PUMPKIN_PIE("pumpkin_pie", p -> new PieBlock(p, ModItems.PUMPKIN_PIE_SLICE), Block.Properties.ofFullCopy(Blocks.CAKE)),
+
+		// Crops
+		CABBAGE_CROP("cabbages", CabbageBlock::new, Block.Properties.ofFullCopy(Blocks.WHEAT)),
+		ONION_CROP("onions", OnionBlock::new, Block.Properties.ofFullCopy(Blocks.WHEAT));
+
+		private final String name;
+		private final Identifier identifier;
+		private final ResourceKey<Block> resourceKey;
+		private final Function<BlockBehaviour.Properties, ? extends Block> factory;
+		private final BlockBehaviour.Properties properties;
+
+		ModBlockEntry(String name, Function<BlockBehaviour.Properties, ? extends Block> factory, BlockBehaviour.Properties properties) {
+			this.name = name;
+			this.identifier = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name);
+			this.resourceKey = ResourceKey.create(Registries.BLOCK, this.identifier);
+			this.factory = factory;
+			this.properties = properties;
+		}
+
+		public String getName() {
+			return this.name;
+		}
+
+		public Identifier getIdentifier() {
+			return this.identifier;
+		}
+
+        public ResourceKey<Block> getResourceKey() {
+            return resourceKey;
+        }
+
+		public Function<BlockBehaviour.Properties, ? extends Block> getFactory() {
+			return factory;
+		}
+
+		public DeferredBlock<Block> register(DeferredRegister.Blocks register) {
+			return register.register(name, () -> factory.apply(properties.setId(resourceKey)));
+		}
+    }
+
 	// Workstations
-	public static final Supplier<Block> STOVE = BLOCKS.register("stove",
-			() -> new StoveBlock(Block.Properties.ofFullCopy(Blocks.BRICKS).setId(getBlockResourceKey("stove")).lightLevel(litBlockEmission(13))));
-	public static final Supplier<Block> COOKING_POT = BLOCKS.register("cooking_pot",
-			() -> new CookingPotBlock(Block.Properties.of().setId(getBlockResourceKey("cooking_pot")).mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
+	public static final Supplier<Block> STOVE = ModBlockEntry.STOVE.register(BLOCKS);
+	public static final Supplier<Block> COOKING_POT = ModBlockEntry.COOKING_POT.register(BLOCKS);
 	/*
 	public static final Supplier<Block> SKILLET = BLOCKS.register("skillet",
 			() -> new SkilletBlock(Block.Properties.of().mapColor(MapColor.METAL).strength(0.5F, 6.0F).sound(SoundType.LANTERN)));
@@ -288,15 +334,10 @@ public class ModBlocks
 			() -> new PieBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.SWEET_BERRY_CHEESECAKE_SLICE));
 	public static final Supplier<Block> CHOCOLATE_PIE = BLOCKS.register("chocolate_pie",
 			() -> new PieBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.CHOCOLATE_PIE_SLICE));
-	public static final Supplier<Block> PUMPKIN_PIE = BLOCKS.register("pumpkin_pie",
-			() -> new PieBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.PUMPKIN_PIE_SLICE)
-			{
-				@Deprecated
-				public @NotNull ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
-					return new ItemStack(Items.PUMPKIN_PIE);
-				}
-			});
+	*/
+	public static final Supplier<Block> PUMPKIN_PIE = ModBlockEntry.PUMPKIN_PIE.register(BLOCKS);
 
+	/*
 	// Wild Crops
 	public static final Supplier<Block> SANDY_SHRUB = BLOCKS.register("sandy_shrub",
 			() -> new SandyShrubBlock(Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
@@ -318,10 +359,8 @@ public class ModBlocks
 	*/
 
 	// Crops
-	public static final Supplier<Block> CABBAGE_CROP = BLOCKS.register("cabbages",
-			() -> new CabbageBlock(Block.Properties.ofFullCopy(Blocks.WHEAT).setId(getBlockResourceKey("cabbages"))));
-	public static final Supplier<Block> ONION_CROP = BLOCKS.register("onions",
-			() -> new OnionBlock(Block.Properties.ofFullCopy(Blocks.WHEAT).setId(getBlockResourceKey("onions"))));
+	public static final Supplier<Block> CABBAGE_CROP = ModBlockEntry.CABBAGE_CROP.register(BLOCKS);
+	public static final Supplier<Block> ONION_CROP = ModBlockEntry.ONION_CROP.register(BLOCKS);
 	/*
 	public static final Supplier<Block> BUDDING_TOMATO_CROP = BLOCKS.register("budding_tomatoes",
 			() -> new BuddingTomatoBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));

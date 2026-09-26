@@ -21,6 +21,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 // import net.neoforged.neoforge.items.IItemHandler;
 // import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.transfer.item.ItemStackResourceHandler;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
 import vectorwing.farmersdelight.common.block.SkilletBlock;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModItems;
@@ -33,8 +36,8 @@ import java.util.Optional;
 
 public class SkilletBlockEntity // extends SyncedBlockEntity implements HeatableBlockEntity, Clearable
 {
-	/*
-	private final ItemStackHandler inventory = createHandler();
+    /*
+	private final ItemStackResourceHandler inventory = createHandler();
 	private int cookingTime;
 	private int cookingTimeTotal;
 
@@ -43,12 +46,32 @@ public class SkilletBlockEntity // extends SyncedBlockEntity implements Heatable
 
 	private final RecipeManager.CachedCheck<SingleRecipeInput, CampfireCookingRecipe> quickCheck;
 
+    private ItemStackResourceHandler createHandler() {
+        return new ItemStackResourceHandler() {
+            @Override
+            protected ItemStack getStack() {
+                return null;
+            }
+
+            @Override
+            protected void setStack(ItemStack stack) {
+
+            }
+        };
+    }
+
 	public SkilletBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.SKILLET.get(), pos, state);
 		skilletStack = new ItemStack(ModItems.SKILLET.get());
 		quickCheck = RecipeManager.createCheck(RecipeType.CAMPFIRE_COOKING);
 	}
 
+	@Override
+	public void clearContent() {
+		ItemUtils.clearItems(inventory);
+	}
+
+	/*
 	public static void cookingTick(Level level, BlockPos pos, BlockState state, SkilletBlockEntity skillet) {
 		boolean isHeated = skillet.isHeated(level, pos);
 
@@ -195,24 +218,9 @@ public class SkilletBlockEntity // extends SyncedBlockEntity implements Heatable
 		return !getStoredStack().isEmpty();
 	}
 
-	private ItemStackHandler createHandler() {
-		return new ItemStackHandler()
-		{
-			@Override
-			protected void onContentsChanged(int slot) {
-				inventoryChanged();
-			}
-		};
-	}
-
 	@Override
 	public void setRemoved() {
 		super.setRemoved();
-	}
-
-	@Override
-	public void clearContent() {
-		ItemUtils.clearItems(inventory);
 	}
 	 */
 }

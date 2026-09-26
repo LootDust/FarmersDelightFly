@@ -1,49 +1,34 @@
 package vectorwing.farmersdelight.data;
 
 import com.mojang.math.Quadrant;
-import it.unimi.dsi.fastutil.booleans.Boolean2ObjectFunction;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
-import net.minecraft.client.renderer.item.ItemModel;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.random.WeightedList;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.data.internal.VanillaModelProvider;
-import net.neoforged.neoforge.client.model.generators.blockstate.CustomBlockStateModelBuilder;
-import org.jspecify.annotations.NonNull;
+import net.neoforged.neoforge.registries.RegistryManager;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
+import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
@@ -55,6 +40,39 @@ public class Models extends ModelProvider
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
 	public static final Identifier MUG = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
+
+	public static final TextureSlot INNER = TextureSlot.create("inner");
+	public static final ModelTemplate PIE = new ModelTemplate(
+			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie")),
+			Optional.empty(),
+			TextureSlot.TOP,
+			TextureSlot.SIDE,
+			TextureSlot.BOTTOM
+	);
+	public static final ModelTemplate PIE_SLICE1 = new ModelTemplate(
+			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie_slice1")),
+			Optional.of("_slice1"),
+			TextureSlot.TOP,
+			TextureSlot.SIDE,
+			TextureSlot.BOTTOM,
+			INNER
+	);
+	public static final ModelTemplate PIE_SLICE2 = new ModelTemplate(
+			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie_slice2")),
+			Optional.of("_slice2"),
+			TextureSlot.TOP,
+			TextureSlot.SIDE,
+			TextureSlot.BOTTOM,
+			INNER
+	);
+	public static final ModelTemplate PIE_SLICE3 = new ModelTemplate(
+			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie_slice3")),
+			Optional.of("_slice3"),
+			TextureSlot.TOP,
+			TextureSlot.SIDE,
+			TextureSlot.BOTTOM,
+			INNER
+	);
 
 	public Models(PackOutput output) {
 		super(output, FarmersDelight.MODID);
@@ -111,6 +129,46 @@ public class Models extends ModelProvider
 		itemGenerators.itemModelOutput.accept(ModItems.COOKING_POT.get(), ItemModelUtils.plainModel(cooking_pot_none_support));
 	}
 
+	public static void createPieLikeBlock(BlockModelGenerators generators, Block block) {
+		Int2ObjectMap<Identifier> models = new Int2ObjectOpenHashMap<>();
+		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(PieBlock.BITES, PieBlock.FACING)
+						.generate((bite, facing) -> {
+							ModelTemplate template = switch (bite) {
+								case 0 -> PIE;
+								case 1 -> PIE_SLICE1;
+								case 2 -> PIE_SLICE2;
+								default -> PIE_SLICE3;
+							};
+							var variant = BlockModelGenerators.plainVariant(models.computeIfAbsent(bite,
+									b -> generators.createSuffixedVariant(block, "_slice" + b, template,
+											material -> b > 0 ? getDefaultBitedPieTextures(block) : getDefaultPieTextures(block))));
+							return switch (facing) {
+                                case SOUTH -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
+                                case WEST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
+                                case EAST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
+								default -> variant;
+                            };
+						})
+				)
+		);
+	}
+
+	public static TextureMapping getDefaultPieTextures(Block block) {
+		return new TextureMapping()
+				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+				.put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_side")))
+				.put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_bottom")));
+	}
+
+	public static TextureMapping getDefaultBitedPieTextures(Block block) {
+		return new TextureMapping()
+				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+				.put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_side")))
+				.put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_bottom")))
+				.put(INNER, TextureMapping.getBlockTexture(block, "_inner"));
+	}
+
 	public static void createCrossCropBlock(BlockModelGenerators generators, Block block, Property<Integer> property, int... stages) {
 		generators.registerSimpleFlatItemModel(block.asItem());
 		if (property.getPossibleValues().size() != stages.length) {
@@ -118,22 +176,26 @@ public class Models extends ModelProvider
 		}
 
 		Int2ObjectMap<Identifier> models = new Int2ObjectOpenHashMap<>();
-		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(PropertyDispatch.initial(property).generate(i -> {
-			int stage = stages[i];
-			return BlockModelGenerators.plainVariant(models.computeIfAbsent(stage, s -> generators.createSuffixedVariant(block, "_stage" + s, ModelTemplates.CROSS, (material) -> TextureMapping.singleSlot(TextureSlot.CROSS, material))));
-		})));
+		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(property)
+						.generate(i -> {
+							int stage = stages[i];
+							return BlockModelGenerators.plainVariant(models.computeIfAbsent(stage,
+									s -> generators.createSuffixedVariant(block, "_stage" + s, ModelTemplates.CROSS,
+											(material) -> TextureMapping.singleSlot(TextureSlot.CROSS, material))));
+						})
+				)
+		);
+	}
+
+	public static void createFlatItem(ItemModelGenerators generators, Item item) {
+		generators.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
 	}
 
 	@Override
 	protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-		createStoveLikeBlock(blockModels, ModBlocks.STOVE.get());
-		createCookingPotBlock(blockModels, itemModels);
-
-		createCrossCropBlock(blockModels, ModBlocks.CABBAGE_CROP.get(), BlockStateProperties.AGE_7, 0, 1, 2, 3, 4, 5, 6, 7);
-		blockModels.createCropBlock(ModBlocks.ONION_CROP.get(), BlockStateProperties.AGE_7, 0, 0, 1, 1, 2, 2, 3, 3);
-
-		itemModels.generateFlatItem(ModItems.CABBAGE.get(), ModelTemplates.FLAT_ITEM);
-		itemModels.generateFlatItem(ModItems.TOMATO.get(), ModelTemplates.FLAT_ITEM);
+		registerBlockModels(blockModels, itemModels);
+		registerItemModels(itemModels);
 		/*
 		Set<Item> items = BuiltInRegistries.ITEM.stream().filter(i -> FarmersDelight.MODID.equals(BuiltInRegistries.ITEM.getKey(i).getNamespace()))
 				.collect(Collectors.toSet());
@@ -258,6 +320,52 @@ public class Models extends ModelProvider
         */
     }
 
+	private void registerBlockModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		createStoveLikeBlock(blockModels, ModBlocks.STOVE.get());
+		createCookingPotBlock(blockModels, itemModels);
+
+		createPieLikeBlock(blockModels, ModBlocks.PUMPKIN_PIE.get());
+
+		createCrossCropBlock(blockModels, ModBlocks.CABBAGE_CROP.get(), BlockStateProperties.AGE_7, 0, 1, 2, 3, 4, 5, 6, 7);
+		blockModels.createCropBlock(ModBlocks.ONION_CROP.get(), BlockStateProperties.AGE_7, 0, 0, 1, 1, 2, 2, 3, 3);
+
+	}
+
+	private void registerItemModels(ItemModelGenerators itemModels) {
+		// Basic Crops
+		createFlatItem(itemModels, ModItems.CABBAGE.get());
+		createFlatItem(itemModels, ModItems.TOMATO.get());
+		createFlatItem(itemModels, ModItems.RICE_PANICLE.get());
+
+		// Foodstuffs
+		createFlatItem(itemModels, ModItems.FRIED_EGG.get());
+		createFlatItem(itemModels, ModItems.MILK_BOTTLE.get());
+		createFlatItem(itemModels, ModItems.WHEAT_DOUGH.get());
+		createFlatItem(itemModels, ModItems.RAW_PASTA.get());
+		createFlatItem(itemModels, ModItems.PUMPKIN_SLICE.get());
+		createFlatItem(itemModels, ModItems.CABBAGE_LEAF.get());
+		createFlatItem(itemModels, ModItems.MINCED_BEEF.get());
+		createFlatItem(itemModels, ModItems.BEEF_PATTY.get());
+		createFlatItem(itemModels, ModItems.CHICKEN_CUTS.get());
+		createFlatItem(itemModels, ModItems.COOKED_CHICKEN_CUTS.get());
+		createFlatItem(itemModels, ModItems.BACON.get());
+		createFlatItem(itemModels, ModItems.COOKED_BACON.get());
+		createFlatItem(itemModels, ModItems.COD_SLICE.get());
+		createFlatItem(itemModels, ModItems.COOKED_COD_SLICE.get());
+		createFlatItem(itemModels, ModItems.SALMON_SLICE.get());
+		createFlatItem(itemModels, ModItems.COOKED_SALMON_SLICE.get());
+		createFlatItem(itemModels, ModItems.MUTTON_CHOPS.get());
+		createFlatItem(itemModels, ModItems.COOKED_MUTTON_CHOPS.get());
+		createFlatItem(itemModels, ModItems.HAM.get());
+		itemModels.generateFlatItem(ModItems.SMOKED_HAM.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+		createFlatItem(itemModels, ModItems.PIE_CRUST.get());
+
+		// Sweets
+		createFlatItem(itemModels, ModItems.PUMPKIN_PIE_SLICE.get());
+
+		// Hidden (Debug) Items
+		createFlatItem(itemModels, ModItems.DEBUG_PUMPKIN_PIE.get());
+	}
 	/*
 	public void blockBasedModel(Item item, String suffix) {
 		withExistingParent(itemName(item), resourceBlock(itemName(item) + suffix));

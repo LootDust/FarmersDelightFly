@@ -33,7 +33,6 @@ public class ItemUtils
 	 * @param fallbackTag An item tag to check for, if the given ToolAction is absent
 	 * @return true if either condition matches
 	 */
-	/*
 	public static boolean isValidTool(ItemStack stack, ItemAbility toolAction, TagKey<Item> fallbackTag) {
 		return stack.canPerformAction(toolAction) || stack.is(fallbackTag);
 	}
@@ -41,7 +40,6 @@ public class ItemUtils
 	public static boolean isKnife(ItemStack stack) {
 		return isValidTool(stack, KnifeItem.KNIFE_HARVEST, ModTags.Items.KNIVES);
 	}
-	*/
 
 	public static void dropItems(Level level, BlockPos pos, ItemStacksResourceHandler inventory) {
 		for (int slot = 0; slot < inventory.size(); slot++)

@@ -31,6 +31,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 // import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -53,7 +54,7 @@ public class SkilletBlock // extends BaseEntityBlock implements SimpleWaterlogge
 
 	public static final int MINIMUM_COOKING_TIME = 60;
 
-	public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 	public static final BooleanProperty SUPPORT = BooleanProperty.create("support");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -63,6 +64,17 @@ public class SkilletBlock // extends BaseEntityBlock implements SimpleWaterlogge
 	public SkilletBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(SUPPORT, false).setValue(WATERLOGGED, false));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(FACING, SUPPORT, WATERLOGGED);
+	}
+
+	@Nullable
+	@Override
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return ModBlockEntityTypes.SKILLET.get().create(pos, state);
 	}
 
 	@Override
@@ -155,11 +167,6 @@ public class SkilletBlock // extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING, SUPPORT, WATERLOGGED);
-	}
-
-	@Override
 	public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
 		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
 			if (skillet.isCooking()) {
@@ -176,12 +183,6 @@ public class SkilletBlock // extends BaseEntityBlock implements SimpleWaterlogge
 	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-	}
-
-	@Nullable
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return ModBlockEntityTypes.SKILLET.get().create(pos, state);
 	}
 
 	@Nullable
