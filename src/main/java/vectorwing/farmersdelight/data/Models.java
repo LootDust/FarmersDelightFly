@@ -332,6 +332,13 @@ public class Models extends ModelProvider
 	}
 
 	private void registerItemModels(ItemModelGenerators itemModels) {
+		// Tools
+		itemModels.generateFlatItem(ModItems.FLINT_KNIFE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+
+		createFlatItem(itemModels, ModItems.STRAW.get());
+		createFlatItem(itemModels, ModItems.CANVAS.get());
+		createFlatItem(itemModels, ModItems.TREE_BARK.get());
+
 		// Basic Crops
 		createFlatItem(itemModels, ModItems.CABBAGE.get());
 		createFlatItem(itemModels, ModItems.TOMATO.get());
@@ -361,6 +368,7 @@ public class Models extends ModelProvider
 		createFlatItem(itemModels, ModItems.PIE_CRUST.get());
 
 		// Sweets
+		createFlatItem(itemModels, ModItems.CAKE_SLICE.get());
 		createFlatItem(itemModels, ModItems.PUMPKIN_PIE_SLICE.get());
 
 		// Hidden (Debug) Items

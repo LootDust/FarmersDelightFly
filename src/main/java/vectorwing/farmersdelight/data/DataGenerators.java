@@ -1,41 +1,18 @@
 package vectorwing.farmersdelight.data;
 
-import net.minecraft.DetectedVersion;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.metadata.PackMetadataGenerator;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.Logging;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-// import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.registry.ModBiomeModifiers;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
-import vectorwing.farmersdelight.common.world.WildCropGeneration;
-import vectorwing.farmersdelight.data.loot.FDBlockLoot;
-import vectorwing.farmersdelight.data.loot.FDChestLoot;
-import vectorwing.farmersdelight.data.tools.StructureUpdater;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("ALL")
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class DataGenerators
 {
@@ -43,10 +20,18 @@ public class DataGenerators
     public static void gatherData(GatherDataEvent.Client event) {
         event.createProvider(Models::new);
 
-        RegistrySetBuilder registrySetBuilder = new RegistrySetBuilder()
-                .add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrapDamageTypes);
+        event.createWorldRegistryObjects(
+                new RegistrySetBuilder()
+                        .add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrapDamageTypes),
+                Set.of(FarmersDelight.MODID)
+        );
 
-        event.createWorldRegistryObjects(registrySetBuilder);
+        event.createReloadableRegistryObjects(
+                new RegistrySetBuilder()
+                        // Recipes
+                        .add(RecipeProvider.asBootstrap(Recipes::new)),
+                Set.of(FarmersDelight.MODID)
+        );
 
         event.createProvider(DamageTypeTags::new);
     }

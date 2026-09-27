@@ -9,6 +9,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import vectorwing.farmersdelight.common.registry.ModEffects;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.List;
 import java.util.Map;
@@ -101,10 +102,11 @@ public class FoodValues
 			.nutrition(3).saturationModifier(0.2f).fast().alwaysEdible().build();
 	public static final FoodProperties COOKIES = (new FoodProperties.Builder())
 			.nutrition(2).saturationModifier(0.1f).fast().build();
-	public static final FoodProperties CAKE_SLICE = (new FoodProperties.Builder())
-			.nutrition(2).saturationModifier(0.1f).fast()
-			.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F).build();
 	*/
+	public static final FoodProperties CAKE_SLICE = (new FoodProperties.Builder())
+			.nutrition(2).saturationModifier(0.1f).build();
+	public static final Consumable CAKE_SLICE_EFFECT = Consumable.builder()
+			.consumeSeconds(0.8f).onConsume(new ApplyStatusEffectsConsumeEffect(new MobEffectInstance(MobEffects.SPEED, 400, 0, false, false))).build();
 	public static final FoodProperties PIE_SLICE = (new FoodProperties.Builder())
 			.nutrition(3).saturationModifier(0.3f).build();
 	public static final Consumable PIE_SLICE_EFFECT = Consumable.builder()

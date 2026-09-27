@@ -1,16 +1,15 @@
 package vectorwing.farmersdelight.common.utility;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import vectorwing.farmersdelight.FarmersDelight;
+
+import java.util.Objects;
 
 public class RecipeUtils
 {
 	/*
+	// Is this useful?
 	// Copyright (c) 2014-2015 mezz
 	public static ItemStack getResultItem(Recipe<?> recipe) {
 		Minecraft minecraft = Minecraft.getInstance();
@@ -23,7 +22,19 @@ public class RecipeUtils
 	}
 	*/
 
-	public static Identifier FDLocation(String name) {
-		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, name);
+	public static ResourceKey<Recipe<?>> FDRecipeKey(String recipeKey) {
+		return ResourceUtils.FDResourceKey(Registries.RECIPE, recipeKey);
+	}
+
+	// Kind of useful but not really useful
+	public static String getRecipeKeyByFrom(String result, String... ingredients) {
+		StringBuilder recipeKey = new StringBuilder(result + "_from_");
+		for (int i = 0; i < ingredients.length; i ++) {
+			recipeKey.append(ingredients[i]);
+			if (i < ingredients.length - 1) {
+				recipeKey.append("_and_");
+			}
+		}
+		return recipeKey.toString();
 	}
 }

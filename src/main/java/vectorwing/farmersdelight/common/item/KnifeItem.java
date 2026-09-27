@@ -39,7 +39,7 @@ import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.Set;
 
-public class KnifeItem // extends Item
+public class KnifeItem extends Item
 {
 	/**
 	 * This action is used on cutting recipes which need a knife.
@@ -50,11 +50,14 @@ public class KnifeItem // extends Item
 	 */
 	public static final ItemAbility KNIFE_HARVEST = ItemAbility.get("knife_harvest");
 
-	/*
 	public static final Set<ItemAbility> KNIFE_ACTIONS = Set.of(ItemAbilities.SHEARS_CARVE, KNIFE_DIG, KNIFE_HARVEST);
 
 	public KnifeItem(Properties properties) {
 		super(properties);
+	}
+
+	public KnifeItem(ToolMaterial material, Properties properties) {
+		super(properties.tool(material, ModTags.Blocks.MINEABLE_WITH_KNIFE, 0.5f, -2.0f, 0.0f));
 	}
 
 	@Override
@@ -113,6 +116,7 @@ public class KnifeItem // extends Item
 			BlockState state = event.getLevel().getBlockState(pos);
 			Block block = state.getBlock();
 
+			/*
 			if (state.is(ModTags.Blocks.DROPS_CAKE_SLICE)) {
 				level.setBlock(pos, Blocks.CAKE.defaultBlockState().setValue(CakeBlock.BITES, 1), 3);
 				Block.dropResources(state, level, pos);
@@ -142,6 +146,7 @@ public class KnifeItem // extends Item
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
+			*/
 		}
 	}
 
@@ -169,5 +174,4 @@ public class KnifeItem // extends Item
 			return InteractionResult.PASS;
 		}
     }
-	 */
 }

@@ -1,12 +1,16 @@
 package vectorwing.farmersdelight.data.recipe;
 
 // import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.data.recipes.*;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -35,7 +39,9 @@ public class CraftingRecipes
 		SpecialRecipeBuilder.special(() -> new FoodServingRecipe()).save(output, FarmersDelight.MODID + ":food_serving");
 		SpecialRecipeBuilder.special(DoughRecipe::new).save(output, FarmersDelight.MODID + ":wheat_dough_from_water");
 	}
+	*/
 
+	/*
 	public static void canvasSignDyeing(RecipeOutput output, ItemLike canvasSign, ItemLike hangingCanvasSign, TagKey<Item> dyeTag) {
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, canvasSign, 1)
 				.requires(ModTags.Items.CANVAS_SIGNS)
@@ -50,7 +56,7 @@ public class CraftingRecipes
 				.group("fd_hanging_canvas_sign")
 				.save(output);
 	}
-	 */
+	*/
 
 	/**
 	 * The following recipes should ALWAYS define a custom save location.
@@ -141,7 +147,9 @@ public class CraftingRecipes
 				.unlockedBy("has_straw", InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
 				.save(output, RecipeUtils.FDLocation("packed_mud_from_straw"));
 	}
+	*/
 
+	/*
 	private static void recipesCanvasSigns(RecipeOutput output) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModItems.CANVAS_SIGN.get(), 3)
 				.pattern("w#w")

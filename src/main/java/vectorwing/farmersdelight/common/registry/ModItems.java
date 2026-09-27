@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.registry;
 
 import com.google.common.collect.Sets;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -14,6 +15,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.CookingPotItem;
+import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.item.MilkBottleItem;
 import vectorwing.farmersdelight.common.registry.ModBlocks.ModBlockEntry;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -34,7 +36,14 @@ public class ModItems
 		STOVE(ModBlockEntry.STOVE.getName(), ModBlocks.STOVE, basicItem()),
 		COOKING_POT(ModBlockEntry.COOKING_POT.getName(), ModBlocks.COOKING_POT, basicItem().stacksTo(1)),
 
-		// Crops
+		// Tools
+		FLINT_KNIFE("flint_knife", p -> new KnifeItem(ModMaterial.FLINT, p), basicItem()),
+
+		STRAW("straw", Item::new, basicItem()),
+		CANVAS("canvas", Item::new, basicItem()),
+		TREE_BARK("tree_bark", Item::new, basicItem()),
+
+		// Basic Crops
 		CABBAGE("cabbage", Item::new, foodItem(FoodValues.CABBAGE)),
 		TOMATO("tomato", Item::new, foodItem(FoodValues.TOMATO)),
 		ONION("onion", p -> new BlockItem(ModBlocks.ONION_CROP.get(), p), foodItem(FoodValues.ONION)),
@@ -65,6 +74,7 @@ public class ModItems
 		SMOKED_HAM("smoked_ham", Item::new, foodItem(FoodValues.SMOKED_HAM)),
 		PIE_CRUST("pie_crust", Item::new, foodItem(FoodValues.PIE_CRUST)),
 
+		CAKE_SLICE("cake_slice", ConsumableItem::new, foodItem(FoodValues.CAKE_SLICE, FoodValues.CAKE_SLICE_EFFECT)),
 		PUMPKIN_PIE_SLICE("pumpkin_pie_slice", ConsumableItem::new, foodItem(FoodValues.PIE_SLICE, FoodValues.PIE_SLICE_EFFECT)),
 
 		// Hidden (Debug) Items
@@ -124,7 +134,9 @@ public class ModItems
 			return new Item.Properties().useBlockDescriptionPrefix();
 		}
 		public static Item.Properties knifeItem(ToolMaterial material, Item.Properties properties) {
-			return material.applyToolProperties(properties, ModTags.Blocks.MINEABLE_WITH_KNIFE,0.5F, -2.0F, 0.0F);
+			Supplier<Item.Properties> p = () -> properties.delayedHolderComponent(DataComponents.DAMAGE_TYPE, ModDamageTypes.KNIFE)
+					.tool(material, ModTags.Blocks.MINEABLE_WITH_KNIFE, 0.5f, -2.0f, 0.0f);
+			return p.get();
 		}
 
 		public static Item.Properties foodItem(FoodProperties food) {
@@ -236,7 +248,9 @@ public class ModItems
 			() -> new BlockItem(ModBlocks.RICH_SOIL_FARMLAND.get(), basicItem()));
 	public static final Supplier<Item> ROPE = registerWithTab("rope",
 			() -> new RopeItem(ModBlocks.ROPE.get(), basicItem()));
+	*/
 
+	/*
 	// Canvas Signs...
 	public static final Supplier<Item> CANVAS_SIGN = registerWithTab("canvas_sign",
 			() -> new StandingAndWallBlockItem(ModBlocks.CANVAS_SIGN.get(), ModBlocks.CANVAS_WALL_SIGN.get(), Direction.DOWN, basicItem()));
@@ -322,10 +336,11 @@ public class ModItems
 			() -> new StandingAndWallBlockItem(ModBlocks.PINK_CANVAS_SIGN.get(), ModBlocks.PINK_CANVAS_WALL_SIGN.get(), Direction.DOWN, basicItem()));
 	public static final Supplier<Item> PINK_HANGING_CANVAS_SIGN = registerWithTab("pink_hanging_canvas_sign",
 			() -> new HangingSignItem(ModBlocks.PINK_HANGING_CANVAS_SIGN.get(), ModBlocks.PINK_HANGING_CANVAS_WALL_SIGN.get(), basicItem()));
+	*/
 
 	// Tools
-	public static final Supplier<Item> FLINT_KNIFE = registerWithTab("flint_knife",
-			() -> new KnifeItem(knifeItem(ModMaterial.FLINT, basicItem())));
+	public static final Supplier<Item> FLINT_KNIFE = ModItemEntry.FLINT_KNIFE.register(ITEMS);
+	/*
 	public static final Supplier<Item> IRON_KNIFE = registerWithTab("iron_knife",
 			() -> new KnifeItem(knifeItem(ToolMaterial.IRON, basicItem())));
 	public static final Supplier<Item> DIAMOND_KNIFE = registerWithTab("diamond_knife",
@@ -334,11 +349,13 @@ public class ModItems
 			() -> new KnifeItem(knifeItem(ToolMaterial.NETHERITE, basicItem().fireResistant())));
 	public static final Supplier<Item> GOLDEN_KNIFE = registerWithTab("golden_knife",
 			() -> new KnifeItem(knifeItem(ToolMaterial.GOLD, basicItem())));
+	*/
 
-	public static final Supplier<Item> STRAW = registerWithTab("straw", () -> new Item(basicItem()));
-	public static final Supplier<Item> CANVAS = registerWithTab("canvas", () -> new Item(basicItem()));
-	public static final Supplier<Item> TREE_BARK = registerWithTab("tree_bark", () -> new Item(basicItem()));
+	public static final Supplier<Item> STRAW = ModItemEntry.STRAW.register(ITEMS);
+	public static final Supplier<Item> CANVAS = ModItemEntry.CANVAS.register(ITEMS);
+	public static final Supplier<Item> TREE_BARK = ModItemEntry.TREE_BARK.register(ITEMS);
 
+	/*
 	// Wild Crops
 	public static final Supplier<Item> SANDY_SHRUB = registerWithTab("sandy_shrub",
 			() -> new BlockItem(ModBlocks.SANDY_SHRUB.get(), basicItem()));
@@ -442,8 +459,9 @@ public class ModItems
 			() -> new PlaceableItem(ModBlocks.SWEET_BERRY_CHEESECAKE.get(), basicItem()));
 	public static final Supplier<Item> CHOCOLATE_PIE = registerWithTab("chocolate_pie",
 			() -> new PlaceableItem(ModBlocks.CHOCOLATE_PIE.get(), basicItem()));
-	public static final Supplier<Item> CAKE_SLICE = registerWithTab("cake_slice",
-			() -> new ConsumableItem(foodItem(FoodValues.CAKE_SLICE)));
+	*/
+	public static final Supplier<Item> CAKE_SLICE = ModItemEntry.CAKE_SLICE.register(ITEMS);
+	/*
 	public static final Supplier<Item> APPLE_PIE_SLICE = registerWithTab("apple_pie_slice",
 			() -> new ConsumableItem(foodItem(FoodValues.PIE_SLICE)));
 	public static final Supplier<Item> SWEET_BERRY_CHEESECAKE_SLICE = registerWithTab("sweet_berry_cheesecake_slice",
