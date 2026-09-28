@@ -187,7 +187,9 @@ public class CraftingRecipes
 		canvasSignDyeing(output, ModItems.RED_CANVAS_SIGN.get(), ModItems.RED_HANGING_CANVAS_SIGN.get(), Tags.Items.DYES_RED);
 		canvasSignDyeing(output, ModItems.BLACK_CANVAS_SIGN.get(), ModItems.BLACK_HANGING_CANVAS_SIGN.get(), Tags.Items.DYES_BLACK);
 	}
+	*/
 
+	/*
 	private static void recipesBlocks(RecipeOutput output) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModBlocks.STOVE.get())
 				.pattern("iii")
@@ -505,7 +507,9 @@ public class CraftingRecipes
 				.group("fd_tatami")
 				.save(output, RecipeUtils.FDLocation("tatami_block_from_full"));
 	}
+	*/
 
+	/*
 	private static void recipesTools(RecipeOutput output) {
 		ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ModItems.FLINT_KNIFE.get())
 				.pattern("m")

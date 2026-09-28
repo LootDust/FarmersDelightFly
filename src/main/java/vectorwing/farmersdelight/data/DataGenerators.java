@@ -2,14 +2,22 @@ package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
+import vectorwing.farmersdelight.data.loot.FDBlockLoot;
 
+import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("ALL")
@@ -18,7 +26,6 @@ public class DataGenerators
 {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent.Client event) {
-        event.createProvider(Models::new);
 
         event.createWorldRegistryObjects(
                 new RegistrySetBuilder()
@@ -26,14 +33,25 @@ public class DataGenerators
                 Set.of(FarmersDelight.MODID)
         );
 
+        // Tags
+        event.createProvider(DamageTypeTags::new);
+
+        // Models
+        event.createProvider(Models::new);
+
         event.createReloadableRegistryObjects(
                 new RegistrySetBuilder()
+                        .add(Registries.LOOT_TABLE, context -> new LootTableProvider(
+                                BuiltInLootTables.all(),
+                                List.of(new LootTableProvider.SubProviderEntry(
+                                        FDBlockLoot::new,
+                                        LootContextParamSets.BLOCK
+                                ))
+                        ))
                         // Recipes
                         .add(RecipeProvider.asBootstrap(Recipes::new)),
                 Set.of(FarmersDelight.MODID)
         );
-
-        event.createProvider(DamageTypeTags::new);
     }
 
     /*

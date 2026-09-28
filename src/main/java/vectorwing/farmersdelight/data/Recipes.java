@@ -13,8 +13,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
+import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.AdvancementUtils;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
@@ -54,6 +57,12 @@ public class Recipes extends RecipeProvider
 
         public void build() {
             recipesVanillaAlternatives();
+            recipesBlocks();
+            recipesTools();
+            recipesMaterials();
+            recipesFoodstuffs();
+            recipesFoodBlocks();
+            recipesCraftedMeals();
         }
 
         private void recipesVanillaAlternatives() {
@@ -139,6 +148,108 @@ public class Recipes extends RecipeProvider
                     .requires(Items.MUD)
                     .unlockedBy(AdvancementUtils.getItemCriterionName(ModItems.STRAW.get()), InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
                     .save(output, RecipeUtils.FDRecipeKey("packed_mud_from_straw"));
+        }
+
+        private void recipesBlocks() {
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.DECORATIONS, ModBlocks.STOVE.get())
+                    .pattern("iii")
+                    .pattern("b b")
+                    .pattern("bcb")
+                    .define('i', Tags.Items.INGOTS_IRON)
+                    .define('b', Blocks.BRICKS)
+                    .define('c', Blocks.CAMPFIRE)
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(Blocks.CAMPFIRE), InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAMPFIRE))
+                    .save(output);
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.DECORATIONS, ModBlocks.COOKING_POT.get())
+                    .pattern("bsb")
+                    .pattern("iwi")
+                    .pattern("iii")
+                    .define('b', Items.BRICK)
+                    .define('i', Tags.Items.INGOTS_IRON)
+                    .define('s', Items.WOODEN_SHOVEL)
+                    .define('w', Tags.Items.BUCKETS_WATER)
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(Items.IRON_INGOT), InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+                    .save(output);
+        }
+
+        private void recipesTools() {
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, ModItems.FLINT_KNIFE.get())
+                    .pattern("m")
+                    .pattern("s")
+                    .define('m', Items.FLINT)
+                    .define('s', Items.STICK)
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(Items.STICK), InventoryChangeTrigger.TriggerInstance.hasItems(Items.STICK))
+                    .save(output);
+        }
+
+        private void recipesMaterials() {
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, ModItems.CANVAS.get())
+                    .pattern("##")
+                    .pattern("##")
+                    .define('#', ModItems.STRAW.get())
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(ModItems.STRAW.get()), InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.STRAW.get()))
+                    .group("fd_canvas")
+                    .save(output);
+        }
+
+        private void recipesFoodstuffs() {
+
+            ShapelessRecipeBuilder.shapeless(items, RecipeCategory.FOOD, ModItems.MILK_BOTTLE.get(), 4)
+                    .requires(Items.MILK_BUCKET)
+                    .requires(Items.GLASS_BOTTLE)
+                    .requires(Items.GLASS_BOTTLE)
+                    .requires(Items.GLASS_BOTTLE)
+                    .requires(Items.GLASS_BOTTLE)
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(Items.MILK_BUCKET), InventoryChangeTrigger.TriggerInstance.hasItems(Items.MILK_BUCKET))
+                    .save(output);
+
+            ShapelessRecipeBuilder.shapeless(items, RecipeCategory.FOOD, ModItems.WHEAT_DOUGH.get(), 3)
+                    .requires(Tags.Items.CROPS_WHEAT)
+                    .requires(Tags.Items.CROPS_WHEAT)
+                    .requires(Tags.Items.CROPS_WHEAT)
+                    .requires(Tags.Items.EGGS)
+                    .group("fd_dough")
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(Items.WHEAT), InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+                    .save(output, RecipeUtils.FDRecipeKey("wheat_dough_from_egg"));
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.FOOD, ModItems.PIE_CRUST.get())
+                    .pattern("wmw")
+                    .pattern(" w ")
+                    .define('w', Tags.Items.CROPS_WHEAT)
+                    .define('m', Tags.Items.DRINKS_MILK)
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(Items.WHEAT), InventoryChangeTrigger.TriggerInstance.hasItems(Items.WHEAT))
+                    .save(output);
+
+            ShapelessRecipeBuilder.shapeless(items, RecipeCategory.FOOD, ModItems.CABBAGE.get())
+                    .requires(ModItems.CABBAGE_LEAF.get())
+                    .requires(ModItems.CABBAGE_LEAF.get())
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(ModItems.CABBAGE_LEAF.get()), InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.CABBAGE_LEAF.get()))
+                    .save(output, RecipeUtils.FDRecipeKey("cabbage_from_leaves"));
+        }
+
+        private void recipesFoodBlocks() {
+
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.FOOD, Items.PUMPKIN_PIE, 2)
+                    .pattern("cec")
+                    .pattern("csc")
+                    .pattern(" p ")
+                    .define('c', ModItems.PUMPKIN_SLICE.get())
+                    .define('e', Tags.Items.EGGS)
+                    .define('s', Items.SUGAR)
+                    .define('p', ModItems.PIE_CRUST.get())
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(ModItems.PIE_CRUST.get()), InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PIE_CRUST.get()))
+                    .group("fd_pumpkin_pie")
+                    .save(output, RecipeUtils.FDRecipeKey("pumpkin_pie_from_pie_crust"));
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.FOOD, Items.PUMPKIN_PIE, 1)
+                    .pattern("##")
+                    .pattern("##")
+                    .define('#', ModItems.PUMPKIN_PIE_SLICE.get())
+                    .unlockedBy(AdvancementUtils.getItemCriterionName(ModItems.PUMPKIN_PIE_SLICE.get()), InventoryChangeTrigger.TriggerInstance.hasItems(ModItems.PUMPKIN_PIE_SLICE.get()))
+                    .group("fd_pumpkin_pie")
+                    .save(output, RecipeUtils.FDRecipeKey("pumpkin_pie_from_slices"));
+        }
+
+        private void recipesCraftedMeals() {
+
         }
     }
 

@@ -4,55 +4,32 @@ package vectorwing.farmersdelight.data.loot;
 // import net.minecraft.advancements.critereon.ItemPredicate;
 // import net.minecraft.advancements.critereon.LocationPredicate;
 // import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CropBlock;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.state.properties.BedPart;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
-import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.*;
 // import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 // import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.loot.CanItemPerformAbility;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
-import vectorwing.farmersdelight.common.block.*;
-import vectorwing.farmersdelight.common.loot.function.CopySkilletFunction;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.registry.ModDataComponents;
-import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
-public class FDBlockLoot // extends BlockLootSubProvider
+public class FDBlockLoot extends BlockLootSubProvider
 {
-	/*
-	public FDBlockLoot(HolderLookup.Provider holder) {
-		super(Set.of(), FeatureFlags.REGISTRY.allFlags(), holder);
+	public FDBlockLoot(LootTableSubProvider.Context output) {
+		super(Set.of(), FeatureFlags.REGISTRY.allFlags(), output);
+	}
+
+	@Override
+	protected @NotNull Iterable<Block> getKnownBlocks() {
+		return ModBlocks.BLOCKS.getEntries().stream().map(holder -> (Block) holder.value()).toList();
 	}
 
 	@Override
 	protected void generate() {
+		this.dropSelf(ModBlocks.STOVE.get());
+		/*
 		HolderLookup.RegistryLookup<Enchantment> registryLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 
 		dropSelf(ModBlocks.STOVE.get());
@@ -264,17 +241,16 @@ public class FDBlockLoot // extends BlockLootSubProvider
 						.add(LootItem.lootTableItem(block))
 						.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 								.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FeastBlock.SERVINGS, 4)))));
+		*/
 	}
 
+	/*
 	protected void dropNamedContainer(Block block) {
 		add(block, this::createNameableBlockEntityTable);
 	}
+	*/
 
-	@Override
-	protected @NotNull Iterable<Block> getKnownBlocks() {
-		return ModBlocks.BLOCKS.getEntries().stream().map(DeferredHolder::value).collect(Collectors.toList());
-	}
-
+	/*
 	protected LootTable.Builder mushroomColony(Block block, Item mushroom) {
 		return this.applyExplosionDecay(block, LootTable.lootTable().withPool(LootPool.lootPool()
 				.setRolls(ConstantValue.exactly(1.0F))
@@ -303,7 +279,9 @@ public class FDBlockLoot // extends BlockLootSubProvider
 								.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 										.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MushroomColonyBlock.COLONY_AGE, 3)))))));
 	}
+	*/
 
+	/*
 	protected LootTable.Builder createCropDrops(Block block, Item cropItem, Item seeds, HolderLookup.RegistryLookup<Enchantment> registryLookup) {
 		LootItemCondition.Builder maxAgeCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, CropBlock.MAX_AGE));
 		return this.applyExplosionDecay(block, LootTable.lootTable()
@@ -316,7 +294,9 @@ public class FDBlockLoot // extends BlockLootSubProvider
 						.add(LootItem.lootTableItem(seeds)
 								.apply(ApplyBonusCount.addBonusBinomialDistributionCount(registryLookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))));
 	}
+	*/
 
+	/*
 	protected LootTable.Builder createSeedlessCropDrops(Block block, Item cropItem, HolderLookup.RegistryLookup<Enchantment> registryLookup) {
 		LootItemCondition.Builder maxAgeCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, CropBlock.MAX_AGE));
 		return this.applyExplosionDecay(block, LootTable.lootTable()
@@ -329,7 +309,9 @@ public class FDBlockLoot // extends BlockLootSubProvider
 
 
 	}
+	*/
 
+	/*
 	protected LootTable.Builder wildCrop(Block block, Item crop, Item seeds, HolderLookup.RegistryLookup<Enchantment> registryLookup) {
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool()
@@ -346,7 +328,9 @@ public class FDBlockLoot // extends BlockLootSubProvider
 										.apply(ApplyExplosionDecay.explosionDecay())
 										.apply(ApplyBonusCount.addUniformBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE), 2)))));
 	}
+	*/
 
+	/*
 	protected LootTable.Builder wildCropNoSeeds(Block block, Item crop, HolderLookup.RegistryLookup<Enchantment> registryLookup) {
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool()
@@ -358,7 +342,9 @@ public class FDBlockLoot // extends BlockLootSubProvider
 										.apply(ApplyExplosionDecay.explosionDecay())
 										.apply(ApplyBonusCount.addUniformBonusCount(registryLookup.getOrThrow(Enchantments.FORTUNE), 2)))));
 	}
+	*/
 
+	/*
 	protected LootTable.Builder platedFood(Block block, int servings) {
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool()
@@ -372,7 +358,9 @@ public class FDBlockLoot // extends BlockLootSubProvider
 						.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 								.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FeastBlock.SERVINGS, servings)).invert()));
 	}
+	*/
 
+	/*
 	protected LootTable.Builder platedFoodExtraDrop(Block block, Item extraDrop, int servings) {
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool()
@@ -391,5 +379,5 @@ public class FDBlockLoot // extends BlockLootSubProvider
 						.when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
 								.setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FeastBlock.SERVINGS, servings)).invert()));
 	}
-	 */
+	*/
 }
