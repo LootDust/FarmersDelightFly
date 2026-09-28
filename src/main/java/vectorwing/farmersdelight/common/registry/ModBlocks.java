@@ -52,6 +52,26 @@ public class ModBlocks
 				Block.Properties.of().mapColor(MapColor.METAL).strength(0.5f, 6.0f).sound(SoundType.LANTERN)),
 		//SKILLET("skillet", SkilletBlock::new, Block.Properties.of().mapColor(MapColor.METAL).strength(0.5f, 6.0f).sound(SoundType.LANTERN)),
 
+		// Crop Storage
+		CARROT_CRATE("carrot_crate", Block::new,
+				Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)),
+		POTATO_CRATE("potato_crate", Block::new,
+				Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)),
+		BEETROOT_CRATE("beetroot_crate", Block::new,
+				Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)),
+		CABBAGE_CRATE("cabbage_crate", Block::new,
+				Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)),
+		TOMATO_CRATE("tomato_crate", Block::new,
+				Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)),
+		ONION_CRATE("onion_crate", Block::new,
+				Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)),
+		RICE_BALE("rice_bale", RiceBaleBlock::new,
+				Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)),
+		RICE_BAG("rice_bag",  Block::new,
+				Block.Properties.ofFullCopy(Blocks.WOOL.white())),
+		STRAW_BALE("straw_bale",  Block::new,
+				Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)),
+
 		// Pastries
 		PUMPKIN_PIE("pumpkin_pie", p -> new PieBlock(p, ModItems.PUMPKIN_PIE_SLICE), Block.Properties.ofFullCopy(Blocks.CAKE)),
 
@@ -114,27 +134,20 @@ public class ModBlocks
 	/*
 	@Deprecated(forRemoval = true)
 	public static final Supplier<Block> BASKET = BAMBOO_BASKET;
+	*/
 
 	// Crop Storage
-	public static final Supplier<Block> CARROT_CRATE = BLOCKS.register("carrot_crate",
-			() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final Supplier<Block> POTATO_CRATE = BLOCKS.register("potato_crate",
-			() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final Supplier<Block> BEETROOT_CRATE = BLOCKS.register("beetroot_crate",
-			() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final Supplier<Block> CABBAGE_CRATE = BLOCKS.register("cabbage_crate",
-			() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final Supplier<Block> TOMATO_CRATE = BLOCKS.register("tomato_crate",
-			() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final Supplier<Block> ONION_CRATE = BLOCKS.register("onion_crate",
-			() -> new Block(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.WOOD)));
-	public static final Supplier<Block> RICE_BALE = BLOCKS.register("rice_bale",
-			() -> new RiceBaleBlock(Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
-	public static final Supplier<Block> RICE_BAG = BLOCKS.register("rice_bag",
-			() -> new Block(Block.Properties.ofFullCopy(Blocks.WOOL.white())));
-	public static final Supplier<Block> STRAW_BALE = BLOCKS.register("straw_bale",
-			() -> new StrawBaleBlock(Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)));
+	public static final Supplier<Block> CARROT_CRATE = ModBlockEntry.CARROT_CRATE.register(BLOCKS);
+	public static final Supplier<Block> POTATO_CRATE = ModBlockEntry.POTATO_CRATE.register(BLOCKS);
+	public static final Supplier<Block> BEETROOT_CRATE = ModBlockEntry.BEETROOT_CRATE.register(BLOCKS);
+	public static final Supplier<Block> CABBAGE_CRATE = ModBlockEntry.CABBAGE_CRATE.register(BLOCKS);
+	public static final Supplier<Block> TOMATO_CRATE = ModBlockEntry.TOMATO_CRATE.register(BLOCKS);
+	public static final Supplier<Block> ONION_CRATE = ModBlockEntry.ONION_CRATE.register(BLOCKS);
+	public static final Supplier<Block> RICE_BALE = ModBlockEntry.RICE_BALE.register(BLOCKS);
+	public static final Supplier<Block> RICE_BAG = ModBlockEntry.RICE_BAG.register(BLOCKS);
+	public static final Supplier<Block> STRAW_BALE = ModBlockEntry.STRAW_BALE.register(BLOCKS);
 
+	/*
 	// Building
 	public static final Supplier<Block> ROPE = BLOCKS.register("rope",
 			() -> new RopeBlock(Block.Properties.ofFullCopy(Blocks.CARPET.brown()).noCollision().noOcclusion().strength(0.2F).sound(SoundType.WOOL)));
@@ -174,7 +187,9 @@ public class ModBlocks
 			() -> new TatamiMatBlock(Block.Properties.ofFullCopy(Blocks.WOOL.white()).strength(0.3F)));
 	public static final Supplier<Block> HALF_TATAMI_MAT = BLOCKS.register("half_tatami_mat",
 			() -> new TatamiHalfMatBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WOOL.white()).strength(0.3F).pushReaction(PushReaction.POPPED)));
+	*/
 
+	/*
 	public static final Supplier<Block> CANVAS_SIGN = BLOCKS.register("canvas_sign",
 			() -> new StandingCanvasSignBlock(null));
 	public static final Supplier<Block> WHITE_CANVAS_SIGN = BLOCKS.register("white_canvas_sign",
@@ -209,7 +224,9 @@ public class ModBlocks
 			() -> new StandingCanvasSignBlock(DyeColor.RED));
 	public static final Supplier<Block> BLACK_CANVAS_SIGN = BLOCKS.register("black_canvas_sign",
 			() -> new StandingCanvasSignBlock(DyeColor.BLACK));
+	*/
 
+	/*
 	public static final Supplier<Block> CANVAS_WALL_SIGN = BLOCKS.register("canvas_wall_sign",
 			() -> new WallCanvasSignBlock(Block.Properties.ofFullCopy(Blocks.SPRUCE_SIGN).overrideLootTable(CANVAS_SIGN.get().getLootTable()), null));
 	public static final Supplier<Block> WHITE_CANVAS_WALL_SIGN = BLOCKS.register("white_canvas_wall_sign",
@@ -244,7 +261,9 @@ public class ModBlocks
 			() -> new WallCanvasSignBlock(Block.Properties.ofFullCopy(Blocks.SPRUCE_SIGN).overrideLootTable(RED_CANVAS_SIGN.get().getLootTable()), DyeColor.RED));
 	public static final Supplier<Block> BLACK_CANVAS_WALL_SIGN = BLOCKS.register("black_canvas_wall_sign",
 			() -> new WallCanvasSignBlock(Block.Properties.ofFullCopy(Blocks.SPRUCE_SIGN).overrideLootTable(BLACK_CANVAS_SIGN.get().getLootTable()), DyeColor.BLACK));
+	*/
 
+	/*
 	public static final Supplier<Block> HANGING_CANVAS_SIGN = BLOCKS.register("hanging_canvas_sign",
 			() -> new CeilingHangingCanvasSignBlock(null));
 	public static final Supplier<Block> WHITE_HANGING_CANVAS_SIGN = BLOCKS.register("white_hanging_canvas_sign",
@@ -279,7 +298,9 @@ public class ModBlocks
 			() -> new CeilingHangingCanvasSignBlock(DyeColor.RED));
 	public static final Supplier<Block> BLACK_HANGING_CANVAS_SIGN = BLOCKS.register("black_hanging_canvas_sign",
 			() -> new CeilingHangingCanvasSignBlock(DyeColor.BLACK));
+	*/
 
+	/*
 	public static final Supplier<Block> HANGING_CANVAS_WALL_SIGN = BLOCKS.register("wall_hanging_canvas_sign",
 			() -> new WallHangingCanvasSignBlock(Block.Properties.ofFullCopy(Blocks.SPRUCE_WALL_HANGING_SIGN).overrideLootTable(HANGING_CANVAS_SIGN.get().getLootTable()), null));
 	public static final Supplier<Block> WHITE_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("white_wall_hanging_canvas_sign",
@@ -314,7 +335,9 @@ public class ModBlocks
 			() -> new WallHangingCanvasSignBlock(Block.Properties.ofFullCopy(Blocks.SPRUCE_WALL_HANGING_SIGN).overrideLootTable(RED_HANGING_CANVAS_SIGN.get().getLootTable()), DyeColor.RED));
 	public static final Supplier<Block> BLACK_HANGING_CANVAS_WALL_SIGN = BLOCKS.register("black_wall_hanging_canvas_sign",
 			() -> new WallHangingCanvasSignBlock(Block.Properties.ofFullCopy(Blocks.SPRUCE_WALL_HANGING_SIGN).overrideLootTable(BLACK_HANGING_CANVAS_SIGN.get().getLootTable()), DyeColor.BLACK));
+	*/
 
+	/*
 	// Composting
 	public static final Supplier<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(BuiltInRegistries.ITEM.getOrThrow(BlockItemIds.BROWN_MUSHROOM.item()), Block.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
@@ -326,7 +349,9 @@ public class ModBlocks
 			() -> new RichSoilBlock(Block.Properties.ofFullCopy(Blocks.DIRT).randomTicks()));
 	public static final Supplier<Block> RICH_SOIL_FARMLAND = BLOCKS.register("rich_soil_farmland",
 			() -> new RichSoilFarmlandBlock(Block.Properties.ofFullCopy(Blocks.FARMLAND)));
+	*/
 
+	/*
 	// Pastries
 	public static final Supplier<Block> APPLE_PIE = BLOCKS.register("apple_pie",
 			() -> new PieBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.APPLE_PIE_SLICE));
@@ -372,7 +397,9 @@ public class ModBlocks
 			() -> new RiceBlock(Block.Properties.ofFullCopy(Blocks.WHEAT).strength(0.2F)));
 	public static final Supplier<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",
 			() -> new RicePaniclesBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
+	*/
 
+	/*
 	// Feasts
 	public static final Supplier<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",
 			() -> new RotatedFeastBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.ROAST_CHICKEN, true, BlockShapes.ROAST_CHICKEN_SHAPES, BlockShapes.TRAY_SHAPE));

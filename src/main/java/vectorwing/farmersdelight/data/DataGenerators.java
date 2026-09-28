@@ -34,6 +34,7 @@ public class DataGenerators
         );
 
         // Tags
+        event.createProvider(BlockTags::new);
         event.createProvider(DamageTypeTags::new);
 
         // Models
@@ -41,13 +42,7 @@ public class DataGenerators
 
         event.createReloadableRegistryObjects(
                 new RegistrySetBuilder()
-                        .add(Registries.LOOT_TABLE, context -> new LootTableProvider(
-                                BuiltInLootTables.all(),
-                                List.of(new LootTableProvider.SubProviderEntry(
-                                        FDBlockLoot::new,
-                                        LootContextParamSets.BLOCK
-                                ))
-                        ))
+                        .add(Registries.LOOT_TABLE, LootTables.create())
                         // Recipes
                         .add(RecipeProvider.asBootstrap(Recipes::new)),
                 Set.of(FarmersDelight.MODID)

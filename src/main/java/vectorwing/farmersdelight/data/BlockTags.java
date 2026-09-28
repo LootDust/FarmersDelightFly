@@ -2,7 +2,10 @@ package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.references.BlockIds;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -17,6 +20,7 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unchecked")
 public class BlockTags extends BlockTagsProvider
 {
 	public BlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
@@ -25,207 +29,258 @@ public class BlockTags extends BlockTagsProvider
 
 	@Override
 	protected void addTags(HolderLookup.@NotNull Provider provider) {
-		//this.registerModTags();
-		this.registerMinecraftTags();
+		registerModTags();
+		registerMinecraftTags();
 		//this.registerNeoForgeTags();
 		//this.registerCommonTags();
 		//this.registerCompatibilityTags();
 
-		this.registerBlockMineables();
+		registerBlockMineables();
 	}
 
 	protected void registerBlockMineables() {
-        /*
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_AXE).add(
-			ModBlocks.WOODEN_BASKET.get(),
-			ModBlocks.BAMBOO_BASKET.get(),
-			ModBlocks.ROPE_FENCE.get(),
-			ModBlocks.ROPE_FENCE_GATE.get(),
-			ModBlocks.CUTTING_BOARD.get(),
-			ModBlocks.CARROT_CRATE.get(),
-			ModBlocks.POTATO_CRATE.get(),
-			ModBlocks.BEETROOT_CRATE.get(),
-			ModBlocks.CABBAGE_CRATE.get(),
-			ModBlocks.TOMATO_CRATE.get(),
-			ModBlocks.ONION_CRATE.get(),
-			ModBlocks.OAK_CABINET.get(),
-			ModBlocks.BIRCH_CABINET.get(),
-			ModBlocks.SPRUCE_CABINET.get(),
-			ModBlocks.JUNGLE_CABINET.get(),
-			ModBlocks.ACACIA_CABINET.get(),
-			ModBlocks.DARK_OAK_CABINET.get(),
-			ModBlocks.MANGROVE_CABINET.get(),
-			ModBlocks.CHERRY_CABINET.get(),
-			ModBlocks.BAMBOO_CABINET.get(),
-			ModBlocks.CRIMSON_CABINET.get(),
-			ModBlocks.WARPED_CABINET.get(),
-			ModBlocks.SANDY_SHRUB.get(),
-			ModBlocks.ROAST_CHICKEN_BLOCK.get(),
-			ModBlocks.STUFFED_PUMPKIN_BLOCK.get(),
-			ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
-			ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
-			ModBlocks.GLEAMING_SALAD_BLOCK.get(),
-			ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()
+				/*
+				ModBlocks.WOODEN_BASKET.get(),
+				ModBlocks.BAMBOO_BASKET.get(),
+				ModBlocks.ROPE_FENCE.get(),
+				ModBlocks.ROPE_FENCE_GATE.get(),
+				ModBlocks.CUTTING_BOARD.get(),
+				ModBlocks.CARROT_CRATE.get(),
+				ModBlocks.POTATO_CRATE.get(),
+				ModBlocks.BEETROOT_CRATE.get(),
+				ModBlocks.CABBAGE_CRATE.get(),
+				ModBlocks.TOMATO_CRATE.get(),
+				ModBlocks.ONION_CRATE.get(),
+				ModBlocks.OAK_CABINET.get(),
+				ModBlocks.BIRCH_CABINET.get(),
+				ModBlocks.SPRUCE_CABINET.get(),
+				ModBlocks.JUNGLE_CABINET.get(),
+				ModBlocks.ACACIA_CABINET.get(),
+				ModBlocks.DARK_OAK_CABINET.get(),
+				ModBlocks.MANGROVE_CABINET.get(),
+				ModBlocks.CHERRY_CABINET.get(),
+				ModBlocks.BAMBOO_CABINET.get(),
+				ModBlocks.CRIMSON_CABINET.get(),
+				ModBlocks.WARPED_CABINET.get(),
+				ModBlocks.SANDY_SHRUB.get(),
+				ModBlocks.ROAST_CHICKEN_BLOCK.get(),
+				ModBlocks.STUFFED_PUMPKIN_BLOCK.get(),
+				ModBlocks.SHEPHERDS_PIE_BLOCK.get(),
+				ModBlocks.HONEY_GLAZED_HAM_BLOCK.get(),
+				ModBlocks.GLEAMING_SALAD_BLOCK.get(),
+				ModBlocks.RICE_ROLL_MEDLEY_BLOCK.get()
+				*/
 		);
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_HOE).add(
-			ModBlocks.RICE_BALE.get(),
-			ModBlocks.STRAW_BALE.get()
+				/*
+				ModBlocks.RICE_BALE.get(),
+				ModBlocks.STRAW_BALE.get()
+				*/
 		);
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE).add(
-			ModBlocks.STOVE.get(),
-			ModBlocks.COOKING_POT.get(),
-			ModBlocks.SKILLET.get()
+				ModBlocks.ModBlockEntry.STOVE.getResourceKey(),
+				ModBlocks.ModBlockEntry.COOKING_POT.getResourceKey()/*,
+				ModBlocks.SKILLET.get()
+				*/
 		);
 		tag(net.minecraft.tags.BlockTags.MINEABLE_WITH_SHOVEL).add(
-			ModBlocks.ORGANIC_COMPOST.get(),
-			ModBlocks.RICH_SOIL.get(),
-			ModBlocks.RICH_SOIL_FARMLAND.get()
+				/*
+				ModBlocks.ORGANIC_COMPOST.get(),
+				ModBlocks.RICH_SOIL.get(),
+				ModBlocks.RICH_SOIL_FARMLAND.get()
+				*/
 		);
 		tag(ModTags.Blocks.MINEABLE_WITH_KNIFE).add(
-				Blocks.CACTUS,
-				Blocks.MELON,
-				Blocks.PUMPKIN,
-				Blocks.CARVED_PUMPKIN,
-				Blocks.JACK_O_LANTERN,
-				Blocks.COBWEB,
-				Blocks.CAKE,
-				ModBlocks.RICE_BAG.get(),
-				ModBlocks.APPLE_PIE.get(),
-				ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
-				ModBlocks.CHOCOLATE_PIE.get(),
-				ModBlocks.PUMPKIN_PIE.get())
-			.addTag(net.minecraft.tags.BlockTags.WOOL_CARPETS)
-			.addTag(net.minecraft.tags.BlockTags.WOOL)
-			.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
-			.addTag(ModTags.Blocks.STRAW_BLOCKS)
-			.addTag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
+						BlockItemIds.CACTUS.block(),
+						BlockItemIds.MELON.block(),
+						BlockItemIds.PUMPKIN.block(),
+						BlockItemIds.CARVED_PUMPKIN.block(),
+						BlockItemIds.JACK_O_LANTERN.block(),
+						BlockItemIds.COBWEB.block(),
+						BlockItemIds.CAKE.block(),
+						/*
+						ModBlocks.RICE_BAG.get(),
+						ModBlocks.APPLE_PIE.get(),
+						ModBlocks.SWEET_BERRY_CHEESECAKE.get(),
+						ModBlocks.CHOCOLATE_PIE.get(),
+						*/
+						ModBlocks.ModBlockEntry.PUMPKIN_PIE.getResourceKey()
+				)
+				.addTag(net.minecraft.tags.BlockTags.WOOL_CARPETS)
+				.addTag(net.minecraft.tags.BlockTags.WOOL)
+				.addTag(net.minecraft.tags.BlockTags.CANDLE_CAKES)
+				.addTag(ModTags.Blocks.STRAW_BLOCKS)
+				.addTag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
 		tag(CommonTags.Blocks.MINEABLE_WITH_KNIFE);
-		*/
 	}
 
 	protected void registerMinecraftTags() {
-        /*
 		tag(net.minecraft.tags.BlockTags.CLIMBABLE).add(
-			ModBlocks.ROPE.get(),
-			ModBlocks.TOMATO_CROP_ON_ROPE.get());
-		tag(net.minecraft.tags.BlockTags.FENCES).add(ModBlocks.ROPE_FENCE.get());
-		tag(net.minecraft.tags.BlockTags.FENCE_GATES).add(ModBlocks.ROPE_FENCE_GATE.get());
-		tag(net.minecraft.tags.BlockTags.REPLACEABLE).add(
-			ModBlocks.SANDY_SHRUB.get());
-		tag(net.minecraft.tags.BlockTags.REPLACEABLE_BY_TREES).add(
-			ModBlocks.SANDY_SHRUB.get());
-		tag(net.minecraft.tags.BlockTags.BAMBOO_PLANTABLE_ON).add(
-			ModBlocks.RICH_SOIL.get());
-		tag(net.minecraft.tags.BlockTags.MUSHROOM_GROW_BLOCK).add(
-			ModBlocks.ORGANIC_COMPOST.get(),
-			ModBlocks.RICH_SOIL.get());
-        */
-		tag(net.minecraft.tags.BlockTags.CROPS).add(
-			ModBlocks.ModBlockEntry.CABBAGE_CROP.getResourceKey(),
-			ModBlocks.ONION_CROP.get().builtInRegistryHolder().getKey()/*,
-			ModBlocks.RICE_CROP_PANICLES.get(),
-			ModBlocks.BUDDING_TOMATO_CROP.get(),
-			ModBlocks.TOMATO_CROP.get(),
-			ModBlocks.TOMATO_CROP_ON_ROPE.get()*/);
-		/*
-		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
-			ModBlocks.CANVAS_SIGN.get(),
-			ModBlocks.WHITE_CANVAS_SIGN.get(),
-			ModBlocks.ORANGE_CANVAS_SIGN.get(),
-			ModBlocks.MAGENTA_CANVAS_SIGN.get(),
-			ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(),
-			ModBlocks.YELLOW_CANVAS_SIGN.get(),
-			ModBlocks.LIME_CANVAS_SIGN.get(),
-			ModBlocks.PINK_CANVAS_SIGN.get(),
-			ModBlocks.GRAY_CANVAS_SIGN.get(),
-			ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(),
-			ModBlocks.CYAN_CANVAS_SIGN.get(),
-			ModBlocks.PURPLE_CANVAS_SIGN.get(),
-			ModBlocks.BLUE_CANVAS_SIGN.get(),
-			ModBlocks.BROWN_CANVAS_SIGN.get(),
-			ModBlocks.GREEN_CANVAS_SIGN.get(),
-			ModBlocks.RED_CANVAS_SIGN.get(),
-			ModBlocks.BLACK_CANVAS_SIGN.get());
-		tag(net.minecraft.tags.BlockTags.WALL_SIGNS).add(
-			ModBlocks.CANVAS_WALL_SIGN.get(),
-			ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
-			ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
-			ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(),
-			ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(),
-			ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(),
-			ModBlocks.LIME_CANVAS_WALL_SIGN.get(),
-			ModBlocks.PINK_CANVAS_WALL_SIGN.get(),
-			ModBlocks.GRAY_CANVAS_WALL_SIGN.get(),
-			ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(),
-			ModBlocks.CYAN_CANVAS_WALL_SIGN.get(),
-			ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(),
-			ModBlocks.BLUE_CANVAS_WALL_SIGN.get(),
-			ModBlocks.BROWN_CANVAS_WALL_SIGN.get(),
-			ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
-			ModBlocks.RED_CANVAS_WALL_SIGN.get(),
-			ModBlocks.BLACK_CANVAS_WALL_SIGN.get());
-		tag(net.minecraft.tags.BlockTags.CEILING_HANGING_SIGNS).add(
-			ModBlocks.HANGING_CANVAS_SIGN.get(),
-			ModBlocks.WHITE_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.ORANGE_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.MAGENTA_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.LIGHT_BLUE_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.YELLOW_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.LIME_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.PINK_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.GRAY_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.LIGHT_GRAY_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.CYAN_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.PURPLE_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.BLUE_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.BROWN_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.GREEN_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.RED_HANGING_CANVAS_SIGN.get(),
-			ModBlocks.BLACK_HANGING_CANVAS_SIGN.get());
-		tag(net.minecraft.tags.BlockTags.WALL_HANGING_SIGNS).add(
-			ModBlocks.HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.WHITE_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.ORANGE_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.MAGENTA_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.LIGHT_BLUE_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.YELLOW_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.LIME_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.PINK_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.GRAY_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.LIGHT_GRAY_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.CYAN_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.PURPLE_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.BLUE_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.BROWN_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(),
-			ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get());
-		tag(net.minecraft.tags.BlockTags.SMALL_FLOWERS).add(
-			ModBlocks.WILD_CARROTS.get(),
-			ModBlocks.WILD_POTATOES.get(),
-			ModBlocks.WILD_BEETROOTS.get(),
-			ModBlocks.WILD_CABBAGES.get(),
-			ModBlocks.WILD_TOMATOES.get(),
-			ModBlocks.WILD_ONIONS.get()
+				/*
+				ModBlocks.ROPE.get(),
+				ModBlocks.TOMATO_CROP_ON_ROPE.get()
+				*/
 		);
-		tag(net.minecraft.tags.BlockTags.TALL_FLOWERS).add(ModBlocks.WILD_RICE.get());
+		tag(net.minecraft.tags.BlockTags.FENCES).add(
+				/*
+				ModBlocks.ROPE_FENCE.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.FENCE_GATES).add(
+				/*
+				ModBlocks.ROPE_FENCE_GATE.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.REPLACEABLE).add(
+				/*
+				ModBlocks.SANDY_SHRUB.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.REPLACEABLE_BY_TREES).add(
+				/*
+				ModBlocks.SANDY_SHRUB.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.SUPPORTS_BAMBOO).add(
+				/*
+				ModBlocks.RICH_SOIL.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT).add(
+				/*
+				ModBlocks.ORGANIC_COMPOST.get(),
+				ModBlocks.RICH_SOIL.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.CROPS).add(
+				ModBlocks.ModBlockEntry.CABBAGE_CROP.getResourceKey(),
+				ModBlocks.ModBlockEntry.ONION_CROP.getResourceKey()/*,
+				ModBlocks.RICE_CROP_PANICLES.get(),
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP_ON_ROPE.get()*/
+		);
+		tag(net.minecraft.tags.BlockTags.STANDING_SIGNS).add(
+				/*
+				ModBlocks.CANVAS_SIGN.get(),
+				ModBlocks.WHITE_CANVAS_SIGN.get(),
+				ModBlocks.ORANGE_CANVAS_SIGN.get(),
+				ModBlocks.MAGENTA_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_CANVAS_SIGN.get(),
+				ModBlocks.YELLOW_CANVAS_SIGN.get(),
+				ModBlocks.LIME_CANVAS_SIGN.get(),
+				ModBlocks.PINK_CANVAS_SIGN.get(),
+				ModBlocks.GRAY_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_CANVAS_SIGN.get(),
+				ModBlocks.CYAN_CANVAS_SIGN.get(),
+				ModBlocks.PURPLE_CANVAS_SIGN.get(),
+				ModBlocks.BLUE_CANVAS_SIGN.get(),
+				ModBlocks.BROWN_CANVAS_SIGN.get(),
+				ModBlocks.GREEN_CANVAS_SIGN.get(),
+				ModBlocks.RED_CANVAS_SIGN.get(),
+				ModBlocks.BLACK_CANVAS_SIGN.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.WALL_SIGNS).add(
+				/*
+				ModBlocks.CANVAS_WALL_SIGN.get(),
+				ModBlocks.WHITE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.ORANGE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.MAGENTA_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.YELLOW_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIME_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PINK_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_CANVAS_WALL_SIGN.get(),
+				ModBlocks.CYAN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PURPLE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLUE_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BROWN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GREEN_CANVAS_WALL_SIGN.get(),
+				ModBlocks.RED_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLACK_CANVAS_WALL_SIGN.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.CEILING_HANGING_SIGNS).add(
+				/*
+				ModBlocks.HANGING_CANVAS_SIGN.get(),
+				ModBlocks.WHITE_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.ORANGE_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.MAGENTA_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.YELLOW_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.LIME_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.PINK_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.GRAY_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.CYAN_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.PURPLE_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.BLUE_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.BROWN_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.GREEN_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.RED_HANGING_CANVAS_SIGN.get(),
+				ModBlocks.BLACK_HANGING_CANVAS_SIGN.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.WALL_HANGING_SIGNS).add(
+				/*
+				ModBlocks.HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.WHITE_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.ORANGE_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.MAGENTA_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_BLUE_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.YELLOW_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIME_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PINK_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GRAY_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.LIGHT_GRAY_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.CYAN_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.PURPLE_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLUE_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BROWN_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.GREEN_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.RED_HANGING_CANVAS_WALL_SIGN.get(),
+				ModBlocks.BLACK_HANGING_CANVAS_WALL_SIGN.get()
+				*/
+		);
+		tag(net.minecraft.tags.BlockTags.SMALL_FLOWERS).add(
+				/*
+				ModBlocks.WILD_CARROTS.get(),
+				ModBlocks.WILD_POTATOES.get(),
+				ModBlocks.WILD_BEETROOTS.get(),
+				ModBlocks.WILD_CABBAGES.get(),
+				ModBlocks.WILD_TOMATOES.get(),
+				ModBlocks.WILD_ONIONS.get()
+				*/
+		);
 		tag(net.minecraft.tags.BlockTags.DIRT).add(
-			ModBlocks.RICH_SOIL.get());
+				/*
+				ModBlocks.RICH_SOIL.get()
+				*/
+		);
 		tag(net.minecraft.tags.BlockTags.MAINTAINS_FARMLAND).add(
-			ModBlocks.CABBAGE_CROP.get(),
-			ModBlocks.BUDDING_TOMATO_CROP.get(),
-			ModBlocks.TOMATO_CROP.get(),
-			ModBlocks.ONION_CROP.get(),
-			ModBlocks.RICE_CROP.get()
+				ModBlocks.ModBlockEntry.CABBAGE_CROP.getResourceKey(),
+				/*
+				ModBlocks.BUDDING_TOMATO_CROP.get(),
+				ModBlocks.TOMATO_CROP.get(),
+				*/
+				ModBlocks.ModBlockEntry.ONION_CROP.getResourceKey()/*,
+				ModBlocks.RICE_CROP.get()
+				*/
 		);
 		tag(net.minecraft.tags.BlockTags.COMBINATION_STEP_SOUND_BLOCKS).add(
-			ModBlocks.CANVAS_RUG.get(),
-			ModBlocks.FULL_TATAMI_MAT.get(),
-			ModBlocks.HALF_TATAMI_MAT.get(),
-			ModBlocks.CUTTING_BOARD.get()
+				/*
+				ModBlocks.CANVAS_RUG.get(),
+				ModBlocks.FULL_TATAMI_MAT.get(),
+				ModBlocks.HALF_TATAMI_MAT.get(),
+				ModBlocks.CUTTING_BOARD.get()
+				*/
 		);
 	}
 
+	/*
 	protected void registerNeoForgeTags() {
 		tag(Tags.Blocks.ROPES).add(ModBlocks.ROPE.get());
 		tag(Tags.Blocks.VILLAGER_FARMLANDS).add(ModBlocks.RICH_SOIL_FARMLAND.get());
@@ -256,8 +311,10 @@ public class BlockTags extends BlockTagsProvider
 		tag(CommonTags.Blocks.STORAGE_BLOCKS_RICE_PANICLE).add(ModBlocks.RICE_BALE.get());
 		tag(CommonTags.Blocks.STORAGE_BLOCKS_STRAW).add(ModBlocks.STRAW_BALE.get());
 	}
+	*/
 
 	protected void registerModTags() {
+		/*
 		tag(ModTags.Blocks.FEASTS).add(
 			ModBlocks.ROAST_CHICKEN_BLOCK.get(),
 			ModBlocks.STUFFED_PUMPKIN_BLOCK.get(),
@@ -275,14 +332,18 @@ public class BlockTags extends BlockTagsProvider
 		tag(ModTags.Blocks.TERRAIN)
 			.addTag(net.minecraft.tags.BlockTags.DIRT)
 			.addTag(net.minecraft.tags.BlockTags.SAND);
+		*/
 		tag(ModTags.Blocks.STRAW_BLOCKS).add(
-			ModBlocks.ROPE.get(),
-			ModBlocks.SAFETY_NET.get(),
-			ModBlocks.CANVAS_RUG.get(),
-			ModBlocks.TATAMI.get(),
-			ModBlocks.FULL_TATAMI_MAT.get(),
-			ModBlocks.HALF_TATAMI_MAT.get()
+				/*
+				ModBlocks.ROPE.get(),
+				ModBlocks.SAFETY_NET.get(),
+				ModBlocks.CANVAS_RUG.get(),
+				ModBlocks.TATAMI.get(),
+				ModBlocks.FULL_TATAMI_MAT.get(),
+				ModBlocks.HALF_TATAMI_MAT.get()
+				*/
 		);
+		/*
 		tag(ModTags.Blocks.WILD_CROPS).add(
 			ModBlocks.WILD_CARROTS.get(),
 			ModBlocks.WILD_POTATOES.get(),
@@ -368,8 +429,10 @@ public class BlockTags extends BlockTagsProvider
 			Blocks.BLACK_CANDLE_CAKE);
 		tag(ModTags.Blocks.CAMPFIRE_SIGNAL_SMOKE).add(ModBlocks.STRAW_BALE.get()).add(ModBlocks.RICE_BALE.get());
 		tag(ModTags.Blocks.PLANTED_FROM_BELOW).add(Blocks.CAVE_VINES, Blocks.CAVE_VINES_PLANT);
+		*/
 	}
 
+	/*
 	private void registerCompatibilityTags() {
 		tag(CompatibilityTags.CREATE_FAN_TRANSPARENT).add(ModBlocks.SAFETY_NET.get());
 		tag(CompatibilityTags.CREATE_PASSIVE_BOILER_HEATERS).add(ModBlocks.STOVE.get());
@@ -408,6 +471,6 @@ public class BlockTags extends BlockTagsProvider
 			ModBlocks.CABBAGE_CROP.get());
 		tag(CompatibilityTags.SERENE_SEASONS_UNBREAKABLE_FERTILE_CROPS).add(
 			ModBlocks.ONION_CROP.get());
-	*/
 	}
+	*/
 }

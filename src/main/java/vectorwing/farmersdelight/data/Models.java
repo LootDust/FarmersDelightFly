@@ -321,11 +321,25 @@ public class Models extends ModelProvider
     }
 
 	private void registerBlockModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+		// Workstations
 		createStoveLikeBlock(blockModels, ModBlocks.STOVE.get());
 		createCookingPotBlock(blockModels, itemModels);
 
+		// Crop Storage
+		blockModels.createTrivialBlock(ModBlocks.CARROT_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.POTATO_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.BEETROOT_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.CABBAGE_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.TOMATO_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.ONION_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.RICE_BALE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.RICE_BAG.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		blockModels.createTrivialBlock(ModBlocks.STRAW_BALE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+
+		// Pastries
 		createPieLikeBlock(blockModels, ModBlocks.PUMPKIN_PIE.get());
 
+		// Crops
 		createCrossCropBlock(blockModels, ModBlocks.CABBAGE_CROP.get(), BlockStateProperties.AGE_7, 0, 1, 2, 3, 4, 5, 6, 7);
 		blockModels.createCropBlock(ModBlocks.ONION_CROP.get(), BlockStateProperties.AGE_7, 0, 0, 1, 1, 2, 2, 3, 3);
 
@@ -334,6 +348,10 @@ public class Models extends ModelProvider
 	private void registerItemModels(ItemModelGenerators itemModels) {
 		// Tools
 		itemModels.generateFlatItem(ModItems.FLINT_KNIFE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+		itemModels.generateFlatItem(ModItems.IRON_KNIFE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+		itemModels.generateFlatItem(ModItems.GOLDEN_KNIFE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+		itemModels.generateFlatItem(ModItems.DIAMOND_KNIFE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+		itemModels.generateFlatItem(ModItems.NETHERITE_KNIFE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
 		createFlatItem(itemModels, ModItems.STRAW.get());
 		createFlatItem(itemModels, ModItems.CANVAS.get());

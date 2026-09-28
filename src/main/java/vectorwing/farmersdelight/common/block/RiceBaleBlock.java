@@ -12,13 +12,12 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-// import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import org.jspecify.annotations.NonNull;
 
-@SuppressWarnings("deprecation")
-public class RiceBaleBlock // extends Block
+public class RiceBaleBlock extends Block
 {
-	/*
-	public static final DirectionProperty FACING = BlockStateProperties.FACING;
+	public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
 
 	public RiceBaleBlock(Properties properties) {
 		super(properties);
@@ -26,7 +25,7 @@ public class RiceBaleBlock // extends Block
 	}
 
 	@Override
-	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+	public void fallOn(Level level, @NonNull BlockState state, @NonNull BlockPos pos, Entity entity, double fallDistance) {
 		entity.causeFallDamage(fallDistance, 0.2F, level.damageSources().fall());
 	}
 
@@ -36,12 +35,12 @@ public class RiceBaleBlock // extends Block
 	}
 
 	@Override
-	public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
+	public int getFireSpreadSpeed(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Direction face) {
 		return 60;
 	}
 
 	@Override
-	public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
+	public int getFlammability(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Direction face) {
 		return 20;
 	}
 
@@ -51,13 +50,12 @@ public class RiceBaleBlock // extends Block
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, Rotation rotation) {
+	public @NonNull BlockState rotate(BlockState state, Rotation rotation) {
 		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 
 	@Override
-	public BlockState mirror(BlockState state, Mirror mirrorIn) {
+	public @NonNull BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
-	 */
 }

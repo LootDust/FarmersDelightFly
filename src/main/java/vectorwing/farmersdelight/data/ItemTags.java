@@ -1,36 +1,50 @@
 package vectorwing.farmersdelight.data;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 // import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.references.BlockItemIds;
+import net.minecraft.references.ItemIds;
 import net.minecraft.resources.Identifier;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagBuilder;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 // import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.tag.CompatibilityTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
-import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-public class ItemTags // extends ItemTagsProvider
+@SuppressWarnings("unchecked")
+public class ItemTags extends ItemTagsProvider
 {
-	/*
-	public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
-		super(output, provider, blockTagProvider, FarmersDelight.MODID, existingFileHelper);
+    private Map<TagKey<Block>, TagKey<Item>> tagsToCopy;
+
+	public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTagProvider) {
+		super(output, provider, FarmersDelight.MODID);
 	}
 
 	@Override
-	protected void addTags(HolderLookup.@NotNull Provider provider) {
+	protected void addTags(HolderLookup.@NonNull Provider provider) {
+        /*
 		copy(ModTags.Blocks.WILD_CROPS, ModTags.Items.WILD_CROPS);
 		copy(BlockTags.SMALL_FLOWERS, net.minecraft.tags.ItemTags.SMALL_FLOWERS);
+        */
 
 		this.registerMinecraftTags();
 		this.registerModTags();
@@ -40,180 +54,233 @@ public class ItemTags // extends ItemTagsProvider
 	}
 
 	private void registerMinecraftTags() {
-		tag(net.minecraft.tags.ItemTags.BREAKS_DECORATED_POTS).addTag(ModTags.Items.KNIVES);
-		tag(net.minecraft.tags.ItemTags.TALL_FLOWERS).add(ModItems.WILD_RICE.get());
-		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(ModItems.GOLDEN_KNIFE.get());
-		tag(net.minecraft.tags.ItemTags.SIGNS).addTag(ModTags.Items.CANVAS_SIGNS);
-		tag(net.minecraft.tags.ItemTags.HANGING_SIGNS).addTag(ModTags.Items.HANGING_CANVAS_SIGNS);
-		tag(net.minecraft.tags.ItemTags.VILLAGER_PLANTABLE_SEEDS)
-			.add(ModItems.CABBAGE_SEEDS.get())
-			.add(ModItems.TOMATO_SEEDS.get())
-			.add(ModItems.ONION.get());
+		tag(net.minecraft.tags.ItemTags.BREAKS_DECORATED_POTS)
+                .addTag(ModTags.Items.KNIVES);
+		tag(net.minecraft.tags.ItemTags.PIGLIN_LOVED).add(
+                ModItems.ModItemEntry.GOLDEN_KNIFE.getResourceKey()
+        );
+		tag(net.minecraft.tags.ItemTags.SIGNS)
+                .addTag(ModTags.Items.CANVAS_SIGNS);
+		tag(net.minecraft.tags.ItemTags.HANGING_SIGNS)
+                .addTag(ModTags.Items.HANGING_CANVAS_SIGNS);
+		tag(net.minecraft.tags.ItemTags.VILLAGER_PLANTABLE_SEEDS).add(
+                ModItems.ModItemEntry.CABBAGE_SEEDS.getResourceKey(),
+                /*
+                ModItems.ModItemEntry.TOMATO_SEEDS.getResourceKey(),
+                */
+                ModItems.ModItemEntry.ONION.getResourceKey()
+        );
 
-		tag(net.minecraft.tags.ItemTags.DURABILITY_ENCHANTABLE).addTag(ModTags.Items.KNIVES).add(ModItems.SKILLET.get());
-		tag(net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE).addTag(ModTags.Items.KNIVES).add(ModItems.SKILLET.get());
-		tag(net.minecraft.tags.ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(ModTags.Items.KNIVES).add(ModItems.SKILLET.get());
-		tag(net.minecraft.tags.ItemTags.FIRE_ASPECT_ENCHANTABLE).addTag(ModTags.Items.KNIVES).add(ModItems.SKILLET.get());
-		tag(net.minecraft.tags.ItemTags.SWORD_ENCHANTABLE).addTag(ModTags.Items.KNIVES).add(ModItems.SKILLET.get());
-		tag(net.minecraft.tags.ItemTags.MINING_ENCHANTABLE).addTag(ModTags.Items.KNIVES);
-		tag(net.minecraft.tags.ItemTags.MINING_LOOT_ENCHANTABLE).addTag(ModTags.Items.KNIVES);
+		tag(net.minecraft.tags.ItemTags.DURABILITY_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES)
+                .add(/*ModItems.ModItemEntry.SKILLET.getResourceKey()*/);
+		tag(net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES)
+                .add(/*ModItems.ModItemEntry.SKILLET.getResourceKey()*/);
+		tag(net.minecraft.tags.ItemTags.SHARP_WEAPON_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES)
+                .add(/*ModItems.ModItemEntry.SKILLET.getResourceKey()*/);
+		tag(net.minecraft.tags.ItemTags.FIRE_ASPECT_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES)
+                .add(/*ModItems.ModItemEntry.SKILLET.getResourceKey()*/);
+		tag(net.minecraft.tags.ItemTags.MELEE_WEAPON_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES)
+                .add(/*ModItems.ModItemEntry.SKILLET.getResourceKey()*/);
+		tag(net.minecraft.tags.ItemTags.MINING_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES);
+		tag(net.minecraft.tags.ItemTags.MINING_LOOT_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES);
 
-		tag(net.minecraft.tags.ItemTags.MEAT)
-			.add(ModItems.MINCED_BEEF.get())
-			.add(ModItems.BEEF_PATTY.get())
-			.add(ModItems.CHICKEN_CUTS.get())
-			.add(ModItems.COOKED_CHICKEN_CUTS.get())
-			.add(ModItems.BACON.get())
-			.add(ModItems.COOKED_BACON.get())
-			.add(ModItems.MUTTON_CHOPS.get())
-			.add(ModItems.COOKED_MUTTON_CHOPS.get())
-			.add(ModItems.HAM.get())
-			.add(ModItems.SMOKED_HAM.get())
-			.add(ModItems.DOG_FOOD.get());
-		tag(net.minecraft.tags.ItemTags.CAT_FOOD)
-			.add((ModItems.SALMON_SLICE.get()))
-			.add((ModItems.COD_SLICE.get()));
-		tag(net.minecraft.tags.ItemTags.CHICKEN_FOOD)
-			.add(ModItems.CABBAGE_SEEDS.get())
-			.add(ModItems.TOMATO_SEEDS.get())
-			.add(ModItems.RICE.get());
-		tag(net.minecraft.tags.ItemTags.PIG_FOOD)
-			.add(ModItems.CABBAGE.get())
-			.add(ModItems.TOMATO.get());
+		tag(net.minecraft.tags.ItemTags.MEAT).add(
+                ModItems.ModItemEntry.MINCED_BEEF.getResourceKey(),
+                ModItems.ModItemEntry.BEEF_PATTY.getResourceKey(),
+                ModItems.ModItemEntry.CHICKEN_CUTS.getResourceKey(),
+                ModItems.ModItemEntry.COOKED_CHICKEN_CUTS.getResourceKey(),
+                ModItems.ModItemEntry.BACON.getResourceKey(),
+                ModItems.ModItemEntry.COOKED_BACON.getResourceKey(),
+                ModItems.ModItemEntry.MUTTON_CHOPS.getResourceKey(),
+                ModItems.ModItemEntry.COOKED_MUTTON_CHOPS.getResourceKey(),
+                ModItems.ModItemEntry.HAM.getResourceKey(),
+                ModItems.ModItemEntry.SMOKED_HAM.getResourceKey()/*,
+                ModItems.ModItemEntry.DOG_FOOD.getResourceKey()
+                */
+        );
+		tag(net.minecraft.tags.ItemTags.CAT_FOOD).add(
+                ModItems.ModItemEntry.SALMON_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.COD_SLICE.getResourceKey()
+        );
+		tag(net.minecraft.tags.ItemTags.CHICKEN_FOOD).add(
+                ModItems.ModItemEntry.CABBAGE_SEEDS.getResourceKey()/*,
+                ModItems.ModItemEntry.TOMATO_SEEDS.getResourceKey(),
+                ModItems.ModItemEntry.RICE.getResourceKey()
+                */
+        );
+		tag(net.minecraft.tags.ItemTags.PIG_FOOD).add(
+                ModItems.ModItemEntry.CABBAGE.getResourceKey(),
+                ModItems.ModItemEntry.TOMATO.getResourceKey()
+        );
 		tag(net.minecraft.tags.ItemTags.RABBIT_FOOD)
-			.add(ModItems.CABBAGE.get());
-		tag(net.minecraft.tags.ItemTags.PARROT_FOOD)
-			.add(ModItems.CABBAGE_SEEDS.get())
-			.add(ModItems.TOMATO_SEEDS.get())
-			.add(ModItems.RICE.get());
+			.add(ModItems.ModItemEntry.CABBAGE.getResourceKey());
+		tag(net.minecraft.tags.ItemTags.PARROT_FOOD).add(
+                ModItems.ModItemEntry.CABBAGE_SEEDS.getResourceKey()/*,
+                ModItems.ModItemEntry.TOMATO_SEEDS.getResourceKey(),
+                ModItems.ModItemEntry.RICE.getResourceKey()
+                */
+        );
 		tag(net.minecraft.tags.ItemTags.HORSE_TEMPT_ITEMS)
-			.add(ModItems.HORSE_FEED.get());
+			.add(/*ModItems.ModItemEntry.HORSE_FEED.getResourceKey()*/);
 	}
 
 	private void registerModTags() {
 		tag(ModTags.Items.SNACKS).add(
-			ModItems.BARBECUE_STICK.get(),
-			ModItems.EGG_SANDWICH.get(),
-			ModItems.CHICKEN_SANDWICH.get(),
-			ModItems.HAMBURGER.get(),
-			ModItems.BACON_SANDWICH.get(),
-			ModItems.MUTTON_WRAP.get(),
-			ModItems.DUMPLINGS.get(),
-			ModItems.STUFFED_POTATO.get(),
-			ModItems.CABBAGE_ROLLS.get(),
-			ModItems.SALMON_ROLL.get(),
-			ModItems.COD_ROLL.get(),
-			ModItems.KELP_ROLL.get(),
-			ModItems.KELP_ROLL_SLICE.get()
+                /*
+                ModItems.ModItemEntry.BARBECUE_STICK.getResourceKey(),
+                ModItems.ModItemEntry.EGG_SANDWICH.getResourceKey(),
+                ModItems.ModItemEntry.CHICKEN_SANDWICH.getResourceKey(),
+                ModItems.ModItemEntry.HAMBURGER.getResourceKey(),
+                ModItems.ModItemEntry.BACON_SANDWICH.getResourceKey(),
+                ModItems.ModItemEntry.MUTTON_WRAP.getResourceKey(),
+                ModItems.ModItemEntry.DUMPLINGS.getResourceKey(),
+                ModItems.ModItemEntry.STUFFED_POTATO.getResourceKey(),
+                ModItems.ModItemEntry.CABBAGE_ROLLS.getResourceKey(),
+                ModItems.ModItemEntry.SALMON_ROLL.getResourceKey(),
+                ModItems.ModItemEntry.COD_ROLL.getResourceKey(),
+                ModItems.ModItemEntry.KELP_ROLL.getResourceKey(),
+                ModItems.ModItemEntry.KELP_ROLL_SLICE.getResourceKey()
+                */
 		);
 		tag(ModTags.Items.MEALS).add(
-			Items.MUSHROOM_STEW,
-			Items.BEETROOT_SOUP,
-			Items.RABBIT_STEW,
-			ModItems.MIXED_SALAD.get(),
-			ModItems.COOKED_RICE.get(),
-			ModItems.BONE_BROTH.get(),
-			ModItems.BEEF_STEW.get(),
-			ModItems.VEGETABLE_SOUP.get(),
-			ModItems.FISH_STEW.get(),
-			ModItems.CHICKEN_SOUP.get(),
-			ModItems.FRIED_RICE.get(),
-			ModItems.PUMPKIN_SOUP.get(),
-			ModItems.BAKED_COD_STEW.get(),
-			ModItems.NOODLE_SOUP.get(),
-			ModItems.ONION_SOUP.get(),
-			ModItems.BACON_AND_EGGS.get(),
-			ModItems.RATATOUILLE.get(),
-			ModItems.STEAK_AND_POTATOES.get(),
-			ModItems.PASTA_WITH_MEATBALLS.get(),
-			ModItems.PASTA_WITH_MUTTON_CHOP.get(),
-			ModItems.MUSHROOM_RICE.get(),
-			ModItems.ROASTED_MUTTON_CHOPS.get(),
-			ModItems.VEGETABLE_NOODLES.get(),
-			ModItems.SQUID_INK_PASTA.get(),
-			ModItems.GRILLED_SALMON.get(),
-			ModItems.ROAST_CHICKEN.get(),
-			ModItems.STUFFED_PUMPKIN.get(),
-			ModItems.HONEY_GLAZED_HAM.get(),
-			ModItems.SHEPHERDS_PIE.get(),
-			ModItems.GLEAMING_SALAD.get()
+			    ItemIds.MUSHROOM_STEW,
+                ItemIds.BEETROOT_SOUP,
+                ItemIds.RABBIT_STEW/*,
+                ModItems.ModItemEntry.MIXED_SALAD.getResourceKey(),
+                ModItems.ModItemEntry.COOKED_RICE.getResourceKey(),
+                ModItems.ModItemEntry.BONE_BROTH.getResourceKey(),
+                ModItems.ModItemEntry.BEEF_STEW.getResourceKey(),
+                ModItems.ModItemEntry.VEGETABLE_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.FISH_STEW.getResourceKey(),
+                ModItems.ModItemEntry.CHICKEN_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.FRIED_RICE.getResourceKey(),
+                ModItems.ModItemEntry.PUMPKIN_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.BAKED_COD_STEW.getResourceKey(),
+                ModItems.ModItemEntry.NOODLE_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.ONION_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.BACON_AND_EGGS.getResourceKey(),
+                ModItems.ModItemEntry.RATATOUILLE.getResourceKey(),
+                ModItems.ModItemEntry.STEAK_AND_POTATOES.getResourceKey(),
+                ModItems.ModItemEntry.PASTA_WITH_MEATBALLS.getResourceKey(),
+                ModItems.ModItemEntry.PASTA_WITH_MUTTON_CHOP.getResourceKey(),
+                ModItems.ModItemEntry.MUSHROOM_RICE.getResourceKey(),
+                ModItems.ModItemEntry.ROASTED_MUTTON_CHOPS.getResourceKey(),
+                ModItems.ModItemEntry.VEGETABLE_NOODLES.getResourceKey(),
+                ModItems.ModItemEntry.SQUID_INK_PASTA.getResourceKey(),
+                ModItems.ModItemEntry.GRILLED_SALMON.getResourceKey(),
+                ModItems.ModItemEntry.ROAST_CHICKEN.getResourceKey(),
+                ModItems.ModItemEntry.STUFFED_PUMPKIN.getResourceKey(),
+                ModItems.ModItemEntry.HONEY_GLAZED_HAM.getResourceKey(),
+                ModItems.ModItemEntry.SHEPHERDS_PIE.getResourceKey(),
+                ModItems.ModItemEntry.GLEAMING_SALAD.getResourceKey()
+                */
 		);
 		tag(ModTags.Items.DRINKS).add(
-			ModItems.MILK_BOTTLE.get(),
-			ModItems.APPLE_CIDER.get(),
-			ModItems.MELON_JUICE.get(),
-			ModItems.HOT_COCOA.get()
+                ModItems.ModItemEntry.MILK_BOTTLE.getResourceKey()/*,
+                ModItems.ModItemEntry.APPLE_CIDER.getResourceKey(),
+                ModItems.ModItemEntry.MELON_JUICE.getResourceKey(),
+                ModItems.ModItemEntry.HOT_COCOA.getResourceKey()
+                */
 		);
 		tag(ModTags.Items.SWEETS).add(
-			Items.CAKE,
-			Items.COOKIE,
-			ModItems.CAKE_SLICE.get(),
-			ModItems.APPLE_PIE_SLICE.get(),
-			ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(),
-			ModItems.CHOCOLATE_PIE_SLICE.get(),
-			ModItems.PUMPKIN_PIE_SLICE.get(),
-			ModItems.SWEET_BERRY_COOKIE.get(),
-			ModItems.HONEY_COOKIE.get(),
-			ModItems.MELON_POPSICLE.get(),
-			ModItems.GLOW_BERRY_CUSTARD.get(),
-			ModItems.FRUIT_SALAD.get()
+                BlockItemIds.CAKE.item(),
+                ItemIds.COOKIE,
+                ModItems.ModItemEntry.CAKE_SLICE.getResourceKey(),
+                /*
+                ModItems.ModItemEntry.APPLE_PIE_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.SWEET_BERRY_CHEESECAKE_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.CHOCOLATE_PIE_SLICE.getResourceKey(),
+                */
+                ModItems.ModItemEntry.PUMPKIN_PIE_SLICE.getResourceKey()/*,
+                ModItems.ModItemEntry.SWEET_BERRY_COOKIE.getResourceKey(),
+                ModItems.ModItemEntry.HONEY_COOKIE.getResourceKey(),
+                ModItems.ModItemEntry.MELON_POPSICLE.getResourceKey(),
+                ModItems.ModItemEntry.GLOW_BERRY_CUSTARD.getResourceKey(),
+                ModItems.ModItemEntry.FRUIT_SALAD.getResourceKey()
+                */
 		);
+        /*
 		copy(ModTags.Blocks.FEASTS, ModTags.Items.FEASTS);
+		*/
 		tag(ModTags.Items.PIES).add(
-			Items.PUMPKIN_PIE,
-			ModItems.APPLE_PIE.get(),
-			ModItems.SWEET_BERRY_CHEESECAKE.get(),
-			ModItems.CHOCOLATE_PIE.get()
+			ItemIds.PUMPKIN_PIE/*,
+			ModItems.ModItemEntry.APPLE_PIE.getResourceKey(),
+			ModItems.ModItemEntry.SWEET_BERRY_CHEESECAKE.getResourceKey(),
+			ModItems.ModItemEntry.CHOCOLATE_PIE.getResourceKey()
+			*/
 		);
-		tag(ModTags.Items.KNIVES).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
-		tag(ModTags.Items.KNIFE_ENCHANTABLE).addTag(ModTags.Items.KNIVES);
-		tag(ModTags.Items.STRAW_HARVESTERS).addTag(ModTags.Items.KNIVES);
-		tag(ModTags.Items.CANVAS_SIGNS)
-			.add(ModItems.CANVAS_SIGN.get())
-			.add(ModItems.WHITE_CANVAS_SIGN.get())
-			.add(ModItems.ORANGE_CANVAS_SIGN.get())
-			.add(ModItems.MAGENTA_CANVAS_SIGN.get())
-			.add(ModItems.LIGHT_BLUE_CANVAS_SIGN.get())
-			.add(ModItems.YELLOW_CANVAS_SIGN.get())
-			.add(ModItems.LIME_CANVAS_SIGN.get())
-			.add(ModItems.PINK_CANVAS_SIGN.get())
-			.add(ModItems.GRAY_CANVAS_SIGN.get())
-			.add(ModItems.LIGHT_GRAY_CANVAS_SIGN.get())
-			.add(ModItems.CYAN_CANVAS_SIGN.get())
-			.add(ModItems.PURPLE_CANVAS_SIGN.get())
-			.add(ModItems.BLUE_CANVAS_SIGN.get())
-			.add(ModItems.BROWN_CANVAS_SIGN.get())
-			.add(ModItems.GREEN_CANVAS_SIGN.get())
-			.add(ModItems.RED_CANVAS_SIGN.get())
-			.add(ModItems.BLACK_CANVAS_SIGN.get());
-		tag(ModTags.Items.HANGING_CANVAS_SIGNS)
-			.add(ModItems.HANGING_CANVAS_SIGN.get())
-			.add(ModItems.WHITE_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.ORANGE_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.MAGENTA_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.LIGHT_BLUE_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.YELLOW_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.LIME_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.PINK_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.GRAY_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.LIGHT_GRAY_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.CYAN_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.PURPLE_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.BLUE_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.BROWN_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.GREEN_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.RED_HANGING_CANVAS_SIGN.get())
-			.add(ModItems.BLACK_HANGING_CANVAS_SIGN.get());
+		tag(ModTags.Items.KNIVES).add(
+                ModItems.ModItemEntry.FLINT_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.IRON_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.DIAMOND_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.GOLDEN_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.NETHERITE_KNIFE.getResourceKey()
+        );
+		tag(ModTags.Items.KNIFE_ENCHANTABLE)
+                .addTag(ModTags.Items.KNIVES);
+		tag(ModTags.Items.STRAW_HARVESTERS)
+                .addTag(ModTags.Items.KNIVES);
+		tag(ModTags.Items.CANVAS_SIGNS).add(
+                /*
+                ModItems.ModItemEntry.CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.WHITE_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.ORANGE_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.MAGENTA_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.LIGHT_BLUE_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.YELLOW_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.LIME_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.PINK_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.GRAY_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.LIGHT_GRAY_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.CYAN_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.PURPLE_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.BLUE_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.BROWN_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.GREEN_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.RED_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.BLACK_CANVAS_SIGN.getResourceKey()
+                */
+        );
+		tag(ModTags.Items.HANGING_CANVAS_SIGNS).add(
+                /*
+                ModItems.ModItemEntry.HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.WHITE_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.ORANGE_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.MAGENTA_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.LIGHT_BLUE_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.YELLOW_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.LIME_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.PINK_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.GRAY_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.LIGHT_GRAY_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.CYAN_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.PURPLE_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.BLUE_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.BROWN_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.GREEN_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.RED_HANGING_CANVAS_SIGN.getResourceKey(),
+                ModItems.ModItemEntry.BLACK_HANGING_CANVAS_SIGN.getResourceKey()
+                */
+        );
+        /*
 		copy(ModTags.Blocks.CABINETS, ModTags.Items.CABINETS);
 		copy(ModTags.Blocks.CABINETS_WOODEN, ModTags.Items.CABINETS_WOODEN);
 
 		copy(ModTags.Blocks.MUSHROOM_COLONIES, ModTags.Items.MUSHROOM_COLONIES);
+		*/
 
-		tag(ModTags.Items.SERVING_CONTAINERS).add(Items.BOWL, Items.GLASS_BOTTLE, Items.BUCKET);
-		tag(ModTags.Items.FLAT_ON_CUTTING_BOARD).add(Items.TRIDENT, Items.SPYGLASS)
-			.addOptional(Identifier.parse("supplementaries:quiver"))
-			.addOptional(Identifier.parse("autumnity:turkey"))
-			.addOptional(Identifier.parse("autumnity:cooked_turkey"));
+		tag(ModTags.Items.SERVING_CONTAINERS).add(ItemIds.BOWL, ItemIds.GLASS_BOTTLE, ItemIds.BUCKET);
+		tag(ModTags.Items.FLAT_ON_CUTTING_BOARD).add(ItemIds.TRIDENT, ItemIds.SPYGLASS)
+			.addOptional(ResourceKey.create(Registries.ITEM, Identifier.parse("supplementaries:quiver")))
+			.addOptional(ResourceKey.create(Registries.ITEM, Identifier.parse("autumnity:turkey")))
+			.addOptional(ResourceKey.create(Registries.ITEM, Identifier.parse("autumnity:cooked_turkey")));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -223,63 +290,119 @@ public class ItemTags // extends ItemTagsProvider
 			.addTag(CommonTags.Items.CROPS_GRAIN);
 		tag(Tags.Items.DRINKS)
 			.addTag(ModTags.Items.DRINKS);
-		tag(Tags.Items.FOODS)
-			.add(ModItems.TOMATO_SAUCE.get())
-			.add(ModItems.PIE_CRUST.get())
-			.add(ModItems.PUMPKIN_SLICE.get())
-			.add(ModItems.HAM.get())
-			.add(ModItems.SMOKED_HAM.get())
-			.add(ModItems.DOG_FOOD.get())
-			.addTag(ModTags.Items.SNACKS)
-			.addTag(ModTags.Items.MEALS)
-			.addTag(ModTags.Items.SWEETS)
-			.addTag(CommonTags.Items.FOODS_LEAFY_GREEN)
-			.addTag(CommonTags.Items.FOODS_DOUGH)
-			.addTag(CommonTags.Items.FOODS_PASTA)
-			.addTag(CommonTags.Items.FOODS_COOKED_EGG);
+		tag(Tags.Items.FOODS).add(
+                        /*
+                        ModItems.ModItemEntry.TOMATO_SAUCE.getResourceKey(),
+                        */
+                        ModItems.ModItemEntry.PIE_CRUST.getResourceKey(),
+                        ModItems.ModItemEntry.PUMPKIN_SLICE.getResourceKey(),
+                        ModItems.ModItemEntry.HAM.getResourceKey(),
+                        ModItems.ModItemEntry.SMOKED_HAM.getResourceKey()/*,
+                        ModItems.ModItemEntry.DOG_FOOD.getResourceKey()
+                        */
+                )
+                .addTags(
+                        ModTags.Items.SNACKS,
+                        ModTags.Items.MEALS,
+                        ModTags.Items.SWEETS,
+                        CommonTags.Items.FOODS_LEAFY_GREEN,
+                        CommonTags.Items.FOODS_DOUGH,
+                        CommonTags.Items.FOODS_PASTA,
+                        CommonTags.Items.FOODS_COOKED_EGG
+                );
 
-		tag(Tags.Items.FENCES).add(ModItems.ROPE_FENCE.get());
-		tag(Tags.Items.FENCE_GATES).add(ModItems.ROPE_FENCE_GATE.get());
+		tag(Tags.Items.FENCES)
+                .add(/*ModItems.ModItemEntry.ROPE_FENCE.getResourceKey()*/);
+		tag(Tags.Items.FENCE_GATES)
+                .add(/*ModItems.ModItemEntry.ROPE_FENCE_GATE.getResourceKey()*/);
 
-		tag(Tags.Items.DRINKS_MILK).add(ModItems.MILK_BOTTLE.get());
+		tag(Tags.Items.DRINKS_MILK)
+                .add(ModItems.ModItemEntry.MILK_BOTTLE.getResourceKey());
 
-		tag(Tags.Items.FOODS_VEGETABLE).add(ModItems.ONION.get(), ModItems.TOMATO.get());
-		tag(Tags.Items.FOODS_COOKIE).add(ModItems.HONEY_COOKIE.get(), ModItems.SWEET_BERRY_COOKIE.get());
-		tag(Tags.Items.FOODS_DOUGH).addTag(CommonTags.Items.FOODS_DOUGH_WHEAT);
-		tag(Tags.Items.FOODS_RAW_MEAT).addTags(CommonTags.Items.FOODS_RAW_CHICKEN, CommonTags.Items.FOODS_RAW_PORK, CommonTags.Items.FOODS_RAW_BEEF, CommonTags.Items.FOODS_RAW_MUTTON);
-		tag(Tags.Items.FOODS_RAW_FISH).addTags(CommonTags.Items.FOODS_RAW_COD, CommonTags.Items.FOODS_RAW_SALMON);
-		tag(Tags.Items.FOODS_COOKED_MEAT).addTags(CommonTags.Items.FOODS_COOKED_CHICKEN, CommonTags.Items.FOODS_COOKED_PORK, CommonTags.Items.FOODS_COOKED_BEEF, CommonTags.Items.FOODS_COOKED_MUTTON);
-		tag(Tags.Items.FOODS_COOKED_FISH).addTags(CommonTags.Items.FOODS_COOKED_COD, CommonTags.Items.FOODS_COOKED_SALMON);
+		tag(Tags.Items.FOODS_VEGETABLE).add(
+                ModItems.ModItemEntry.ONION.getResourceKey(),
+                ModItems.ModItemEntry.TOMATO.getResourceKey()
+        );
+		tag(Tags.Items.FOODS_COOKIE).add(
+                /*
+                ModItems.ModItemEntry.HONEY_COOKIE.getResourceKey(),
+                ModItems.ModItemEntry.SWEET_BERRY_COOKIE.getResourceKey()
+                */
+        );
+		tag(Tags.Items.FOODS_DOUGH)
+                .addTag(CommonTags.Items.FOODS_DOUGH_WHEAT);
+		tag(Tags.Items.FOODS_RAW_MEAT).addTags(
+                CommonTags.Items.FOODS_RAW_CHICKEN,
+                CommonTags.Items.FOODS_RAW_PORK,
+                CommonTags.Items.FOODS_RAW_BEEF,
+                CommonTags.Items.FOODS_RAW_MUTTON
+        );
+		tag(Tags.Items.FOODS_RAW_FISH).addTags(
+                CommonTags.Items.FOODS_RAW_COD,
+                CommonTags.Items.FOODS_RAW_SALMON
+        );
+		tag(Tags.Items.FOODS_COOKED_MEAT).addTags(
+                CommonTags.Items.FOODS_COOKED_CHICKEN,
+                CommonTags.Items.FOODS_COOKED_PORK,
+                CommonTags.Items.FOODS_COOKED_BEEF,
+                CommonTags.Items.FOODS_COOKED_MUTTON
+        );
+		tag(Tags.Items.FOODS_COOKED_FISH).addTags(
+                CommonTags.Items.FOODS_COOKED_COD,
+                CommonTags.Items.FOODS_COOKED_SALMON
+        );
 		tag(Tags.Items.FOODS_FOOD_POISONING).add(
-			ModItems.WHEAT_DOUGH.get(),
-			ModItems.RAW_PASTA.get(),
-			ModItems.CHICKEN_CUTS.get(),
-			ModItems.NETHER_SALAD.get()
+			ModItems.ModItemEntry.WHEAT_DOUGH.getResourceKey(),
+			ModItems.ModItemEntry.RAW_PASTA.getResourceKey(),
+			ModItems.ModItemEntry.CHICKEN_CUTS.getResourceKey()/*,
+			ModItems.ModItemEntry.NETHER_SALAD.getResourceKey()
+			*/
 		);
-		tag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED)
-			.add(ModItems.APPLE_PIE.get())
-			.add(ModItems.SWEET_BERRY_CHEESECAKE.get())
-			.add(ModItems.CHOCOLATE_PIE.get())
-			.addTag(ModTags.Items.FEASTS);
-		tag(Tags.Items.FOODS_SOUP)
-			.add(ModItems.BONE_BROTH.get())
-			.add(ModItems.BEEF_STEW.get())
-			.add(ModItems.VEGETABLE_SOUP.get())
-			.add(ModItems.CHICKEN_SOUP.get())
-			.add(ModItems.FISH_STEW.get())
-			.add(ModItems.PUMPKIN_SOUP.get())
-			.add(ModItems.BAKED_COD_STEW.get())
-			.add(ModItems.NOODLE_SOUP.get());
-		tag(Tags.Items.FOODS_PIE)
-			.add(ModItems.APPLE_PIE_SLICE.get())
-			.add(ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get())
-			.add(ModItems.CHOCOLATE_PIE_SLICE.get())
-			.add(ModItems.PUMPKIN_PIE_SLICE.get());
+		tag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED).add(
+                        /*
+                        ModItems.ModItemEntry.APPLE_PIE.getResourceKey(),
+                        ModItems.ModItemEntry.SWEET_BERRY_CHEESECAKE.getResourceKey(),
+                        ModItems.ModItemEntry.CHOCOLATE_PIE.getResourceKey()
+                        */
+                )
+			    .addTag(ModTags.Items.FEASTS);
+		tag(Tags.Items.FOODS_SOUP).add(
+                /*
+                ModItems.ModItemEntry.BONE_BROTH.getResourceKey(),
+                ModItems.ModItemEntry.BEEF_STEW.getResourceKey(),
+                ModItems.ModItemEntry.VEGETABLE_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.CHICKEN_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.FISH_STEW.getResourceKey(),
+                ModItems.ModItemEntry.PUMPKIN_SOUP.getResourceKey(),
+                ModItems.ModItemEntry.BAKED_COD_STEW.getResourceKey(),
+                ModItems.ModItemEntry.NOODLE_SOUP.getResourceKey()
+                */
+        );
+		tag(Tags.Items.FOODS_PIE).add(
+                /*
+                ModItems.ModItemEntry.APPLE_PIE_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.SWEET_BERRY_CHEESECAKE_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.CHOCOLATE_PIE_SLICE.getResourceKey(),
+                */
+                ModItems.ModItemEntry.PUMPKIN_PIE_SLICE.getResourceKey()
+        );
 
-		tag(Tags.Items.TOOLS).addTag(CommonTags.Items.TOOLS_KNIFE);
-		tag(Tags.Items.ROPES).add(ModItems.ROPE.get());
-		tag(Tags.Items.SEEDS).add(ModItems.CABBAGE_SEEDS.get(), ModItems.RICE.get(), ModItems.TOMATO_SEEDS.get());
-		tag(Tags.Items.CROPS).addTags(CommonTags.Items.CROPS_CABBAGE, CommonTags.Items.CROPS_ONION, CommonTags.Items.CROPS_RICE, CommonTags.Items.CROPS_TOMATO);
+		tag(Tags.Items.TOOLS)
+                .addTag(CommonTags.Items.TOOLS_KNIFE);
+		tag(Tags.Items.ROPES)
+                .add(/*ModItems.ModItemEntry.ROPE.getResourceKey()*/);
+		tag(Tags.Items.SEEDS).add(
+                ModItems.ModItemEntry.CABBAGE_SEEDS.getResourceKey()/*,
+                ModItems.ModItemEntry.RICE.getResourceKey(),
+                ModItems.ModItemEntry.TOMATO_SEEDS.getResourceKey()
+                */
+        );
+		tag(Tags.Items.CROPS).addTags(
+                CommonTags.Items.CROPS_CABBAGE,
+                CommonTags.Items.CROPS_ONION,
+                CommonTags.Items.CROPS_RICE,
+                CommonTags.Items.CROPS_TOMATO
+        );
 		tag(Tags.Items.STORAGE_BLOCKS).addTags(
 			CommonTags.Items.STORAGE_BLOCKS_CARROT,
 			CommonTags.Items.STORAGE_BLOCKS_POTATO,
@@ -294,95 +417,185 @@ public class ItemTags // extends ItemTagsProvider
 	}
 
 	public void registerCommonTags() {
-		tag(CommonTags.Items.CROPS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
-		tag(CommonTags.Items.CROPS_ONION).add(ModItems.ONION.get());
-		tag(CommonTags.Items.CROPS_TOMATO).add(ModItems.TOMATO.get());
-		tag(CommonTags.Items.CROPS_RICE).add(ModItems.RICE.get());
+		tag(CommonTags.Items.CROPS_CABBAGE).add(
+                ModItems.ModItemEntry.CABBAGE.getResourceKey(),
+                ModItems.ModItemEntry.CABBAGE_LEAF.getResourceKey()
+        );
+		tag(CommonTags.Items.CROPS_ONION)
+                .add(ModItems.ModItemEntry.ONION.getResourceKey());
+		tag(CommonTags.Items.CROPS_TOMATO)
+                .add(ModItems.ModItemEntry.TOMATO.getResourceKey());
+		tag(CommonTags.Items.CROPS_RICE)
+                .add(/*ModItems.ModItemEntry.RICE.getResourceKey()*/);
 
-		tag(CommonTags.Items.FOODS_CABBAGE).add(ModItems.CABBAGE.get(), ModItems.CABBAGE_LEAF.get());
-		tag(CommonTags.Items.FOODS_TOMATO).add(ModItems.TOMATO.get());
-		tag(CommonTags.Items.FOODS_ONION).add(ModItems.ONION.get());
+		tag(CommonTags.Items.FOODS_CABBAGE).add(
+                ModItems.ModItemEntry.CABBAGE.getResourceKey(),
+                ModItems.ModItemEntry.CABBAGE_LEAF.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_TOMATO)
+                .add(ModItems.ModItemEntry.TOMATO.getResourceKey());
+		tag(CommonTags.Items.FOODS_ONION)
+                .add(ModItems.ModItemEntry.ONION.getResourceKey());
 
-		tag(CommonTags.Items.FOODS_DOUGH_WHEAT).add(ModItems.WHEAT_DOUGH.get());
-		tag(CommonTags.Items.CROPS_GRAIN).add(Items.WHEAT, ModItems.RICE.get());
-		tag(CommonTags.Items.FOODS_PASTA).add(ModItems.RAW_PASTA.get());
-		tag(CommonTags.Items.FOODS_LEAFY_GREEN).addTag(CommonTags.Items.FOODS_CABBAGE);
+		tag(CommonTags.Items.FOODS_DOUGH_WHEAT)
+                .add(ModItems.ModItemEntry.WHEAT_DOUGH.getResourceKey());
+		tag(CommonTags.Items.CROPS_GRAIN).add(
+                ItemIds.WHEAT/*,
+                ModItems.ModItemEntry.RICE.getResourceKey()
+                */
+        );
+		tag(CommonTags.Items.FOODS_PASTA)
+                .add(ModItems.ModItemEntry.RAW_PASTA.getResourceKey());
+		tag(CommonTags.Items.FOODS_LEAFY_GREEN)
+                .addTag(CommonTags.Items.FOODS_CABBAGE);
 
-		tag(CommonTags.Items.FOODS_RAW_BACON).add(ModItems.BACON.get());
-		tag(CommonTags.Items.FOODS_RAW_BEEF).add(Items.BEEF, ModItems.MINCED_BEEF.get());
-		tag(CommonTags.Items.FOODS_RAW_CHICKEN).add(Items.CHICKEN, ModItems.CHICKEN_CUTS.get());
-		tag(CommonTags.Items.FOODS_RAW_PORK).add(Items.PORKCHOP).addTag(CommonTags.Items.FOODS_RAW_BACON);
-		tag(CommonTags.Items.FOODS_RAW_MUTTON).add(Items.MUTTON, ModItems.MUTTON_CHOPS.get());
-		tag(CommonTags.Items.FOODS_RAW_COD).add(Items.COD, ModItems.COD_SLICE.get());
-		tag(CommonTags.Items.FOODS_RAW_SALMON).add(Items.SALMON, ModItems.SALMON_SLICE.get());
-		tag(CommonTags.Items.FOODS_SAFE_RAW_FISH).addTag(Tags.Items.FOODS_RAW_FISH).remove(Items.PUFFERFISH);
+		tag(CommonTags.Items.FOODS_RAW_BACON)
+                .add(ModItems.ModItemEntry.BACON.getResourceKey());
+		tag(CommonTags.Items.FOODS_RAW_BEEF).add(
+                ItemIds.BEEF,
+                ModItems.ModItemEntry.MINCED_BEEF.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_RAW_CHICKEN).add(
+                ItemIds.CHICKEN,
+                ModItems.ModItemEntry.CHICKEN_CUTS.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_RAW_PORK)
+                .add(ItemIds.PORKCHOP)
+                .addTag(CommonTags.Items.FOODS_RAW_BACON);
+		tag(CommonTags.Items.FOODS_RAW_MUTTON).add(
+                ItemIds.MUTTON,
+                ModItems.ModItemEntry.MUTTON_CHOPS.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_RAW_COD).add(
+                ItemIds.COD,
+                ModItems.ModItemEntry.COD_SLICE.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_RAW_SALMON).add(
+                ItemIds.SALMON,
+                ModItems.ModItemEntry.SALMON_SLICE.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_SAFE_RAW_FISH)
+                .addTag(Tags.Items.FOODS_RAW_FISH)
+                .remove(ItemIds.PUFFERFISH);
 
-		tag(CommonTags.Items.FOODS_COOKED_BACON).add(ModItems.COOKED_BACON.get());
-		tag(CommonTags.Items.FOODS_COOKED_BEEF).add(Items.COOKED_BEEF, ModItems.BEEF_PATTY.get());
-		tag(CommonTags.Items.FOODS_COOKED_CHICKEN).add(Items.COOKED_CHICKEN, ModItems.COOKED_CHICKEN_CUTS.get());
-		tag(CommonTags.Items.FOODS_COOKED_PORK).add(Items.COOKED_PORKCHOP).addTag(CommonTags.Items.FOODS_COOKED_BACON);
-		tag(CommonTags.Items.FOODS_COOKED_MUTTON).add(Items.COOKED_MUTTON, ModItems.COOKED_MUTTON_CHOPS.get());
-		tag(CommonTags.Items.FOODS_COOKED_COD).add(Items.COOKED_COD, ModItems.COOKED_COD_SLICE.get());
-		tag(CommonTags.Items.FOODS_COOKED_SALMON).add(Items.COOKED_SALMON, ModItems.COOKED_SALMON_SLICE.get());
-		tag(CommonTags.Items.FOODS_COOKED_EGG).add(ModItems.FRIED_EGG.get());
+		tag(CommonTags.Items.FOODS_COOKED_BACON)
+                .add(ModItems.ModItemEntry.COOKED_BACON.getResourceKey());
+		tag(CommonTags.Items.FOODS_COOKED_BEEF).add(
+                ItemIds.COOKED_BEEF,
+                ModItems.ModItemEntry.BEEF_PATTY.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_COOKED_CHICKEN).add(
+                ItemIds.COOKED_CHICKEN,
+                ModItems.ModItemEntry.COOKED_CHICKEN_CUTS.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_COOKED_PORK)
+                .add(ItemIds.COOKED_PORKCHOP)
+                .addTag(CommonTags.Items.FOODS_COOKED_BACON);
+		tag(CommonTags.Items.FOODS_COOKED_MUTTON).add(
+                ItemIds.COOKED_MUTTON,
+                ModItems.ModItemEntry.COOKED_MUTTON_CHOPS.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_COOKED_COD).add(
+                ItemIds.COOKED_COD,
+                ModItems.ModItemEntry.COOKED_COD_SLICE.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_COOKED_SALMON).add(
+                ItemIds.COOKED_SALMON,
+                ModItems.ModItemEntry.COOKED_SALMON_SLICE.getResourceKey()
+        );
+		tag(CommonTags.Items.FOODS_COOKED_EGG)
+                .add(ModItems.ModItemEntry.FRIED_EGG.getResourceKey());
 
-		tag(CommonTags.Items.STORAGE_BLOCKS_CARROT).add(ModItems.CARROT_CRATE.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_POTATO).add(ModItems.POTATO_CRATE.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_BEETROOT).add(ModItems.BEETROOT_CRATE.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_CABBAGE).add(ModItems.CABBAGE_CRATE.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_TOMATO).add(ModItems.TOMATO_CRATE.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_ONION).add(ModItems.ONION_CRATE.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_RICE).add(ModItems.RICE_BAG.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_RICE_PANICLE).add(ModItems.RICE_BALE.get());
-		tag(CommonTags.Items.STORAGE_BLOCKS_STRAW).add(ModItems.STRAW_BALE.get());
+		tag(CommonTags.Items.STORAGE_BLOCKS_CARROT)
+                .add(ModItems.ModItemEntry.CARROT_CRATE.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_POTATO)
+                .add(ModItems.ModItemEntry.POTATO_CRATE.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_BEETROOT)
+                .add(ModItems.ModItemEntry.BEETROOT_CRATE.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_CABBAGE)
+                .add(ModItems.ModItemEntry.CABBAGE_CRATE.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_TOMATO)
+                .add(ModItems.ModItemEntry.TOMATO_CRATE.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_ONION)
+                .add(ModItems.ModItemEntry.ONION_CRATE.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_RICE)
+                .add(ModItems.ModItemEntry.RICE_BAG.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_RICE_PANICLE)
+                .add(ModItems.ModItemEntry.RICE_BALE.getResourceKey());
+		tag(CommonTags.Items.STORAGE_BLOCKS_STRAW)
+                .add(ModItems.ModItemEntry.STRAW_BALE.getResourceKey());
 
-		tag(CommonTags.Items.TOOLS_KNIFE).add(ModItems.FLINT_KNIFE.get(), ModItems.IRON_KNIFE.get(), ModItems.DIAMOND_KNIFE.get(), ModItems.GOLDEN_KNIFE.get(), ModItems.NETHERITE_KNIFE.get());
+		tag(CommonTags.Items.TOOLS_KNIFE).add(
+                ModItems.ModItemEntry.FLINT_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.IRON_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.DIAMOND_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.GOLDEN_KNIFE.getResourceKey(),
+                ModItems.ModItemEntry.NETHERITE_KNIFE.getResourceKey()
+        );
 	}
 
 	public void registerCompatibilityTags() {
-		tag(CompatibilityTags.CREATE_UPRIGHT_ON_BELT)
-			.addTag(ModTags.Items.MEALS)
-			.addTag(ModTags.Items.DRINKS)
-			.addTag(ModTags.Items.FEASTS)
-			.add(ModItems.TOMATO_SAUCE.get())
-			.add(ModItems.DOG_FOOD.get())
-			.add(ModItems.FRUIT_SALAD.get())
-			.add(ModItems.NETHER_SALAD.get())
-			.add(ModItems.PIE_CRUST.get())
-			.add(ModItems.APPLE_PIE.get())
-			.add(ModItems.SWEET_BERRY_CHEESECAKE.get())
-			.add(ModItems.CHOCOLATE_PIE.get());
+		tag(CompatibilityTags.CREATE_UPRIGHT_ON_BELT).addTags(
+                        ModTags.Items.MEALS,
+                        ModTags.Items.DRINKS,
+                        ModTags.Items.FEASTS
+                )
+                .add(
+                        /*
+                        ModItems.ModItemEntry.TOMATO_SAUCE.getResourceKey(),
+                        ModItems.ModItemEntry.DOG_FOOD.getResourceKey(),
+                        ModItems.ModItemEntry.FRUIT_SALAD.getResourceKey(),
+                        ModItems.ModItemEntry.NETHER_SALAD.getResourceKey(),
+                        */
+                        ModItems.ModItemEntry.PIE_CRUST.getResourceKey()/*,
+                        ModItems.ModItemEntry.APPLE_PIE.getResourceKey(),
+                        ModItems.ModItemEntry.SWEET_BERRY_CHEESECAKE.getResourceKey(),
+                        ModItems.ModItemEntry.CHOCOLATE_PIE.getResourceKey()
+                        */
+                );
 
-		tag(CompatibilityTags.CREATE_CA_PLANT_FOODS)
-			.add(ModItems.PUMPKIN_SLICE.get())
-			.add(ModItems.ROTTEN_TOMATO.get())
-			.add(ModItems.RICE_PANICLE.get());
-		tag(CompatibilityTags.CREATE_CA_PLANTS)
-			.add(ModItems.SANDY_SHRUB.get())
-			.add(ModItems.BROWN_MUSHROOM_COLONY.get())
-			.add(ModItems.RED_MUSHROOM_COLONY.get());
+		tag(CompatibilityTags.CREATE_CA_PLANT_FOODS).add(
+                ModItems.ModItemEntry.PUMPKIN_SLICE.getResourceKey(),
+                /*
+                ModItems.ModItemEntry.ROTTEN_TOMATO.getResourceKey(),
+                */
+                ModItems.ModItemEntry.RICE_PANICLE.getResourceKey()
+        );
+		tag(CompatibilityTags.CREATE_CA_PLANTS).add(
+                /*
+                ModItems.ModItemEntry.SANDY_SHRUB.getResourceKey(),
+                ModItems.ModItemEntry.BROWN_MUSHROOM_COLONY.getResourceKey(),
+                ModItems.ModItemEntry.RED_MUSHROOM_COLONY.getResourceKey()
+                */
+        );
 
-		tag(CompatibilityTags.ORIGINS_MEAT)
-			.add(ModItems.FRIED_EGG.get())
-			.add(ModItems.COD_SLICE.get())
-			.add(ModItems.COOKED_COD_SLICE.get())
-			.add(ModItems.SALMON_SLICE.get())
-			.add(ModItems.COOKED_SALMON_SLICE.get())
-			.add(ModItems.BACON_AND_EGGS.get());
+		tag(CompatibilityTags.ORIGINS_MEAT).add(
+                ModItems.ModItemEntry.FRIED_EGG.getResourceKey(),
+                ModItems.ModItemEntry.COD_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.COOKED_COD_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.SALMON_SLICE.getResourceKey(),
+                ModItems.ModItemEntry.COOKED_SALMON_SLICE.getResourceKey()/*,
+                ModItems.ModItemEntry.BACON_AND_EGGS.getResourceKey()
+                */
+        );
 
-		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS)
-			.add(ModItems.CABBAGE_SEEDS.get())
-			.add(ModItems.ONION.get())
-			.add(ModItems.RICE.get());
+		tag(CompatibilityTags.SERENE_SEASONS_AUTUMN_CROPS).add(
+                ModItems.ModItemEntry.CABBAGE_SEEDS.getResourceKey(),
+                ModItems.ModItemEntry.ONION.getResourceKey()/*,
+                ModItems.ModItemEntry.RICE.getResourceKey()
+                */
+        );
 		tag(CompatibilityTags.SERENE_SEASONS_SPRING_CROPS)
-			.add(ModItems.ONION.get());
-		tag(CompatibilityTags.SERENE_SEASONS_SUMMER_CROPS)
-			.add(ModItems.TOMATO_SEEDS.get())
-			.add(ModItems.RICE.get());
+			.add(ModItems.ModItemEntry.ONION.getResourceKey());
+		tag(CompatibilityTags.SERENE_SEASONS_SUMMER_CROPS).add(
+                /*
+                ModItems.ModItemEntry.TOMATO_SEEDS.getResourceKey(),
+                ModItems.ModItemEntry.RICE.getResourceKey()
+                */
+        );
 		tag(CompatibilityTags.SERENE_SEASONS_WINTER_CROPS)
-			.add(ModItems.CABBAGE_SEEDS.get());
+			.add(ModItems.ModItemEntry.CABBAGE_SEEDS.getResourceKey());
 
-		tag(CompatibilityTags.TINKERS_CONSTRUCT_SEEDS).add(ModItems.ONION.get());
+		tag(CompatibilityTags.TINKERS_CONSTRUCT_SEEDS).add(ModItems.ModItemEntry.ONION.getResourceKey());
 	}
-	 */
 }

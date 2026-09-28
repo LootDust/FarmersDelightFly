@@ -9,10 +9,13 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.FoodValues;
+import vectorwing.farmersdelight.common.block.RiceBaleBlock;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.CookingPotItem;
 import vectorwing.farmersdelight.common.item.KnifeItem;
@@ -36,8 +39,23 @@ public class ModItems
 		STOVE(ModBlockEntry.STOVE.getName(), ModBlocks.STOVE, basicItem()),
 		COOKING_POT(ModBlockEntry.COOKING_POT.getName(), ModBlocks.COOKING_POT, basicItem().stacksTo(1)),
 
+
+		CARROT_CRATE("carrot_crate", ModBlocks.CARROT_CRATE, basicItem()),
+		POTATO_CRATE("potato_crate", ModBlocks.POTATO_CRATE, basicItem()),
+		BEETROOT_CRATE("beetroot_crate", ModBlocks.BEETROOT_CRATE, basicItem()),
+		CABBAGE_CRATE("cabbage_crate", ModBlocks.CABBAGE_CRATE, basicItem()),
+		TOMATO_CRATE("tomato_crate", ModBlocks.TOMATO_CRATE, basicItem()),
+		ONION_CRATE("onion_crate", ModBlocks.ONION_CRATE, basicItem()),
+		RICE_BALE("rice_bale", ModBlocks.RICE_BALE, basicItem()),
+		RICE_BAG("rice_bag",  ModBlocks.RICE_BAG, basicItem()),
+		STRAW_BALE("straw_bale",  ModBlocks.STRAW_BALE, basicItem()),
+
 		// Tools
 		FLINT_KNIFE("flint_knife", p -> new KnifeItem(ModMaterial.FLINT, p), basicItem()),
+		IRON_KNIFE("iron_knife", p -> new KnifeItem(ToolMaterial.IRON, p), basicItem()),
+		GOLDEN_KNIFE("golden_knife", p -> new KnifeItem(ToolMaterial.GOLD, p), basicItem()),
+		DIAMOND_KNIFE("diamond_knife", p -> new KnifeItem(ToolMaterial.DIAMOND, p), basicItem()),
+		NETHERITE_KNIFE("netherite_knife", p -> new KnifeItem(ToolMaterial.NETHERITE, p), basicItem()),
 
 		STRAW("straw", Item::new, basicItem()),
 		CANVAS("canvas", Item::new, basicItem()),
@@ -184,26 +202,19 @@ public class ModItems
 		since = "1.3"
 	)
 	public static final Supplier<Item> BASKET = BAMBOO_BASKET;
+	*/
 
-	public static final Supplier<Item> CARROT_CRATE = registerWithTab("carrot_crate",
-			() -> new BlockItem(ModBlocks.CARROT_CRATE.get(), basicItem()));
-	public static final Supplier<Item> POTATO_CRATE = registerWithTab("potato_crate",
-			() -> new BlockItem(ModBlocks.POTATO_CRATE.get(), basicItem()));
-	public static final Supplier<Item> BEETROOT_CRATE = registerWithTab("beetroot_crate",
-			() -> new BlockItem(ModBlocks.BEETROOT_CRATE.get(), basicItem()));
-	public static final Supplier<Item> CABBAGE_CRATE = registerWithTab("cabbage_crate",
-			() -> new BlockItem(ModBlocks.CABBAGE_CRATE.get(), basicItem()));
-	public static final Supplier<Item> TOMATO_CRATE = registerWithTab("tomato_crate",
-			() -> new BlockItem(ModBlocks.TOMATO_CRATE.get(), basicItem()));
-	public static final Supplier<Item> ONION_CRATE = registerWithTab("onion_crate",
-			() -> new BlockItem(ModBlocks.ONION_CRATE.get(), basicItem()));
-	public static final Supplier<Item> RICE_BALE = registerWithTab("rice_bale",
-			() -> new BlockItem(ModBlocks.RICE_BALE.get(), basicItem()));
-	public static final Supplier<Item> RICE_BAG = registerWithTab("rice_bag",
-			() -> new BlockItem(ModBlocks.RICE_BAG.get(), basicItem()));
-	public static final Supplier<Item> STRAW_BALE = registerWithTab("straw_bale",
-			() -> new BlockItem(ModBlocks.STRAW_BALE.get(), basicItem()));
+	public static final Supplier<Item> CARROT_CRATE = ModItemEntry.CARROT_CRATE.register(ITEMS);
+	public static final Supplier<Item> POTATO_CRATE = ModItemEntry.POTATO_CRATE.register(ITEMS);
+	public static final Supplier<Item> BEETROOT_CRATE = ModItemEntry.BEETROOT_CRATE.register(ITEMS);
+	public static final Supplier<Item> CABBAGE_CRATE = ModItemEntry.CABBAGE_CRATE.register(ITEMS);
+	public static final Supplier<Item> TOMATO_CRATE = ModItemEntry.TOMATO_CRATE.register(ITEMS);
+	public static final Supplier<Item> ONION_CRATE = ModItemEntry.ONION_CRATE.register(ITEMS);
+	public static final Supplier<Item> RICE_BALE = ModItemEntry.RICE_BALE.register(ITEMS);
+	public static final Supplier<Item> RICE_BAG = ModItemEntry.RICE_BAG.register(ITEMS);
+	public static final Supplier<Item> STRAW_BALE = ModItemEntry.STRAW_BALE.register(ITEMS);
 
+	/*
 	public static final Supplier<Item> SAFETY_NET = registerWithTab("safety_net",
 			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), basicItem()));
 	public static final Supplier<Item> OAK_CABINET = registerWithTab("oak_cabinet",
@@ -340,16 +351,10 @@ public class ModItems
 
 	// Tools
 	public static final Supplier<Item> FLINT_KNIFE = ModItemEntry.FLINT_KNIFE.register(ITEMS);
-	/*
-	public static final Supplier<Item> IRON_KNIFE = registerWithTab("iron_knife",
-			() -> new KnifeItem(knifeItem(ToolMaterial.IRON, basicItem())));
-	public static final Supplier<Item> DIAMOND_KNIFE = registerWithTab("diamond_knife",
-			() -> new KnifeItem(knifeItem(ToolMaterial.DIAMOND, basicItem())));
-	public static final Supplier<Item> NETHERITE_KNIFE = registerWithTab("netherite_knife",
-			() -> new KnifeItem(knifeItem(ToolMaterial.NETHERITE, basicItem().fireResistant())));
-	public static final Supplier<Item> GOLDEN_KNIFE = registerWithTab("golden_knife",
-			() -> new KnifeItem(knifeItem(ToolMaterial.GOLD, basicItem())));
-	*/
+	public static final Supplier<Item> IRON_KNIFE = ModItemEntry.IRON_KNIFE.register(ITEMS);
+	public static final Supplier<Item> GOLDEN_KNIFE = ModItemEntry.GOLDEN_KNIFE.register(ITEMS);
+	public static final Supplier<Item> DIAMOND_KNIFE = ModItemEntry.DIAMOND_KNIFE.register(ITEMS);
+	public static final Supplier<Item> NETHERITE_KNIFE = ModItemEntry.NETHERITE_KNIFE.register(ITEMS);
 
 	public static final Supplier<Item> STRAW = ModItemEntry.STRAW.register(ITEMS);
 	public static final Supplier<Item> CANVAS = ModItemEntry.CANVAS.register(ITEMS);

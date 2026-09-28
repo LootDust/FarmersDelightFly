@@ -1,17 +1,24 @@
 package vectorwing.farmersdelight.data.loot;
 
-// import net.minecraft.advancements.critereon.BlockPredicate;
-// import net.minecraft.advancements.critereon.ItemPredicate;
-// import net.minecraft.advancements.critereon.LocationPredicate;
-// import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.advancements.predicates.StatePropertiesPredicate;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
-// import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-// import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import org.jetbrains.annotations.NotNull;
+import vectorwing.farmersdelight.common.block.CabbageBlock;
+import vectorwing.farmersdelight.common.block.OnionBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
+import vectorwing.farmersdelight.common.registry.ModDataComponents;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.util.Set;
 
@@ -22,13 +29,46 @@ public class FDBlockLoot extends BlockLootSubProvider
 	}
 
 	@Override
-	protected @NotNull Iterable<Block> getKnownBlocks() {
+	public @NotNull Iterable<Block> getKnownBlocks() {
 		return ModBlocks.BLOCKS.getEntries().stream().map(holder -> (Block) holder.value()).toList();
 	}
 
 	@Override
 	protected void generate() {
-		this.dropSelf(ModBlocks.STOVE.get());
+		// Workstations
+		dropSelf(ModBlocks.STOVE.get());
+		add(ModBlocks.COOKING_POT.get(), block -> LootTable.lootTable()
+				.withPool(applyExplosionCondition(block, LootPool.lootPool().setRolls(ContextIntProviders.exactly(1)).add(LootItem.lootTableItem(block))))
+				.apply(CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
+						.include(DataComponents.CUSTOM_NAME)
+						.include(ModDataComponents.MEAL.get())
+						.include(ModDataComponents.CONTAINER.get())
+				)
+		);
+
+		// Crop Storage
+		dropSelf(ModBlocks.CARROT_CRATE.get());
+		dropSelf(ModBlocks.POTATO_CRATE.get());
+		dropSelf(ModBlocks.BEETROOT_CRATE.get());
+		dropSelf(ModBlocks.CABBAGE_CRATE.get());
+		dropSelf(ModBlocks.TOMATO_CRATE.get());
+		dropSelf(ModBlocks.ONION_CRATE.get());
+		dropSelf(ModBlocks.RICE_BALE.get());
+		dropSelf(ModBlocks.RICE_BAG.get());
+		dropSelf(ModBlocks.STRAW_BALE.get());
+
+		// Pastries
+		add(ModBlocks.PUMPKIN_PIE.get(), LootTable.lootTable());
+
+		// Crops
+		add(ModBlocks.CABBAGE_CROP.get(), createCropDrops(ModBlocks.CABBAGE_CROP.get(), ModItems.CABBAGE.get(), ModItems.CABBAGE_SEEDS.get(), MatchBlock.blockMatches(
+				this.blocks, ModBlocks.CABBAGE_CROP.get(), StatePropertiesPredicate.Builder.properties().hasProperty(CabbageBlock.AGE, 7)
+		)));
+		add(ModBlocks.ONION_CROP.get(), createCropDrops(ModBlocks.ONION_CROP.get(), ModItems.ONION.get(), ModItems.ONION.get(), MatchBlock.blockMatches(
+				this.blocks, ModBlocks.ONION_CROP.get(), StatePropertiesPredicate.Builder.properties().hasProperty(OnionBlock.AGE, 7)
+		)));
+
+
 		/*
 		HolderLookup.RegistryLookup<Enchantment> registryLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 
