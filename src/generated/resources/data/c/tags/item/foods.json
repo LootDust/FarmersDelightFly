@@ -1,0 +1,15 @@
+{
+  "values": [
+    "farmersdelight:pie_crust",
+    "farmersdelight:pumpkin_slice",
+    "farmersdelight:ham",
+    "farmersdelight:smoked_ham",
+    "#farmersdelight:snacks",
+    "#farmersdelight:meals",
+    "#farmersdelight:sweets",
+    "#c:foods/leafy_green",
+    "#c:foods/dough",
+    "#c:foods/pasta",
+    "#c:foods/cooked_egg"
+  ]
+}

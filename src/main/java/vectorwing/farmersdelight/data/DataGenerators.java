@@ -36,6 +36,7 @@ public class DataGenerators
         // Tags
         event.createProvider(BlockTags::new);
         event.createProvider(DamageTypeTags::new);
+        event.createProvider(ItemTags::new);
 
         // Models
         event.createProvider(Models::new);

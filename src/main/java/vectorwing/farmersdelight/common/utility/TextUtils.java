@@ -52,11 +52,11 @@ public class TextUtils
 		return Component.translatable(translationType + "." + FarmersDelight.MODID + "." + translationKey, args);
 	}
 
-	/*
 	public static MutableComponent block(String key, Object... args) {
 		return getTextWithType("block", key, args);
 	}
 
+	/*
 	public static MutableComponent item(String key, Object... args) {
 		return getTextWithType("item", key, args);
 	}

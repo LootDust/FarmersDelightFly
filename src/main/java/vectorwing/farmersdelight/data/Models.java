@@ -23,6 +23,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
+import vectorwing.farmersdelight.common.block.RiceBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.ResourceUtils;
@@ -206,6 +207,20 @@ public class Models extends ModelProvider
 		);
 	}
 
+	public static void createRiceBlock(BlockModelGenerators generators) {
+		Int2ObjectMap<Identifier> models = new Int2ObjectOpenHashMap<>();
+		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.RICE_CROP.get())
+				.with(PropertyDispatch.initial(RiceBlock.SUPPORTING, RiceBlock.AGE)
+						.generate((supporting, age) -> supporting && age == 3 ?
+								plainVariant(generators.createSuffixedVariant(ModBlocks.RICE_CROP.get(), "_supporting", ModelTemplates.CROSS,
+                                material -> TextureMapping.singleSlot(TextureSlot.CROSS, material)))
+                                : plainVariant(models.computeIfAbsent(age,
+                                a -> generators.createSuffixedVariant(ModBlocks.RICE_CROP.get(), "_stage" + a, ModelTemplates.CROSS,
+                                        material -> TextureMapping.singleSlot(TextureSlot.CROSS, material)))))
+				)
+		);
+	}
+
 	public static void createFlatItem(ItemModelGenerators generators, Item item) {
 		generators.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
 	}
@@ -381,6 +396,8 @@ public class Models extends ModelProvider
 		createCrossCropBlock(blockModels, ModBlocks.CABBAGE_CROP.get(), BlockStateProperties.AGE_7, 0, 1, 2, 3, 4, 5, 6, 7);
 		blockModels.createCropBlock(ModBlocks.ONION_CROP.get(), BlockStateProperties.AGE_7, 0, 0, 1, 1, 2, 2, 3, 3);
 
+		createRiceBlock(blockModels);
+		createCrossCropBlock(blockModels, ModBlocks.RICE_CROP_PANICLES.get(), BlockStateProperties.AGE_3, 0, 1, 2, 3);
 	}
 
 	private void registerItemModels(ItemModelGenerators itemModels) {
@@ -398,11 +415,16 @@ public class Models extends ModelProvider
 		// Basic Crops
 		createFlatItem(itemModels, ModItems.CABBAGE.get());
 		createFlatItem(itemModels, ModItems.TOMATO.get());
+		createFlatItem(itemModels, ModItems.RICE.get());
 		createFlatItem(itemModels, ModItems.RICE_PANICLE.get());
 
 		// Foodstuffs
 		createFlatItem(itemModels, ModItems.FRIED_EGG.get());
 		createFlatItem(itemModels, ModItems.MILK_BOTTLE.get());
+		// createFlatItem(itemModels, ModItems.HOT_COCOA.get());
+		// createFlatItem(itemModels, ModItems.APPLE_CIDER.get());
+		// createFlatItem(itemModels, ModItems.MELON_JUICE.get());
+		createFlatItem(itemModels, ModItems.TOMATO_SAUCE.get());
 		createFlatItem(itemModels, ModItems.WHEAT_DOUGH.get());
 		createFlatItem(itemModels, ModItems.RAW_PASTA.get());
 		createFlatItem(itemModels, ModItems.PUMPKIN_SLICE.get());
@@ -425,7 +447,64 @@ public class Models extends ModelProvider
 
 		// Sweets
 		createFlatItem(itemModels, ModItems.CAKE_SLICE.get());
+		createFlatItem(itemModels, ModItems.APPLE_PIE_SLICE.get());
+		createFlatItem(itemModels, ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get());
+		createFlatItem(itemModels, ModItems.CHOCOLATE_PIE_SLICE.get());
 		createFlatItem(itemModels, ModItems.PUMPKIN_PIE_SLICE.get());
+		createFlatItem(itemModels, ModItems.SWEET_BERRY_COOKIE.get());
+		createFlatItem(itemModels, ModItems.HONEY_COOKIE.get());
+		// createFlatItem(itemModels, ModItems.MELON_POPSICLE.get());
+		createFlatItem(itemModels, ModItems.GLOW_BERRY_CUSTARD.get());
+		createFlatItem(itemModels, ModItems.FRUIT_SALAD.get());
+
+		// Basic Meals
+		createFlatItem(itemModels, ModItems.MIXED_SALAD.get());
+		createFlatItem(itemModels, ModItems.NETHER_SALAD.get());
+		createFlatItem(itemModels, ModItems.BARBECUE_STICK.get());
+		createFlatItem(itemModels, ModItems.EGG_SANDWICH.get());
+		createFlatItem(itemModels, ModItems.CHICKEN_SANDWICH.get());
+		createFlatItem(itemModels, ModItems.HAMBURGER.get());
+		createFlatItem(itemModels, ModItems.BACON_SANDWICH.get());
+		createFlatItem(itemModels, ModItems.MUTTON_WRAP.get());
+		createFlatItem(itemModels, ModItems.DUMPLINGS.get());
+		createFlatItem(itemModels, ModItems.STUFFED_POTATO.get());
+		createFlatItem(itemModels, ModItems.CABBAGE_ROLLS.get());
+		createFlatItem(itemModels, ModItems.SALMON_ROLL.get());
+		createFlatItem(itemModels, ModItems.COD_ROLL.get());
+		createFlatItem(itemModels, ModItems.KELP_ROLL.get());
+		createFlatItem(itemModels, ModItems.KELP_ROLL_SLICE.get());
+
+		// Soups and Stews
+		createFlatItem(itemModels, ModItems.COOKED_RICE.get());
+		// createFlatItem(itemModels, ModItems.BONE_BROTH.get());
+		createFlatItem(itemModels, ModItems.BEEF_STEW.get());
+		createFlatItem(itemModels, ModItems.CHICKEN_SOUP.get());
+		createFlatItem(itemModels, ModItems.VEGETABLE_SOUP.get());
+		createFlatItem(itemModels, ModItems.FISH_STEW.get());
+		createFlatItem(itemModels, ModItems.FRIED_RICE.get());
+		createFlatItem(itemModels, ModItems.PUMPKIN_SOUP.get());
+		createFlatItem(itemModels, ModItems.BAKED_COD_STEW.get());
+		createFlatItem(itemModels, ModItems.NOODLE_SOUP.get());
+		createFlatItem(itemModels, ModItems.ONION_SOUP.get());
+
+		// Plated Meals
+		createFlatItem(itemModels, ModItems.BACON_AND_EGGS.get());
+		createFlatItem(itemModels, ModItems.PASTA_WITH_MEATBALLS.get());
+		createFlatItem(itemModels, ModItems.PASTA_WITH_MUTTON_CHOP.get());
+		createFlatItem(itemModels, ModItems.MUSHROOM_RICE.get());
+		createFlatItem(itemModels, ModItems.ROASTED_MUTTON_CHOPS.get());
+		createFlatItem(itemModels, ModItems.VEGETABLE_NOODLES.get());
+		createFlatItem(itemModels, ModItems.STEAK_AND_POTATOES.get());
+		createFlatItem(itemModels, ModItems.RATATOUILLE.get());
+		createFlatItem(itemModels, ModItems.SQUID_INK_PASTA.get());
+		createFlatItem(itemModels, ModItems.GRILLED_SALMON.get());
+
+		// Feasts
+		createFlatItem(itemModels, ModItems.ROAST_CHICKEN.get());
+		createFlatItem(itemModels, ModItems.STUFFED_PUMPKIN.get());
+		createFlatItem(itemModels, ModItems.HONEY_GLAZED_HAM.get());
+		createFlatItem(itemModels, ModItems.SHEPHERDS_PIE.get());
+		createFlatItem(itemModels, ModItems.GLEAMING_SALAD.get());
 
 		// Hidden (Debug) Items
 		createFlatItem(itemModels, ModItems.DEBUG_PUMPKIN_PIE.get());

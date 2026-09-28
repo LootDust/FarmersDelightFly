@@ -43,13 +43,14 @@ public class FarmersDelight
 
 		// Basically, recipe and worldgen registries changed a lot, needed to be fix
 		ModBlocks.BLOCKS.register(modEventBus);
+		ModBlockEntityTypes.TILES.register(modEventBus);
+		ModConditionCodecs.CONDITION_CODECS.register(modEventBus);
 		ModCreativeTabs.CREATIVE_TABS.register(modEventBus);
 		ModDataComponents.DATA_COMPONENTS.register(modEventBus);
-		ModBlockEntityTypes.TILES.register(modEventBus);
+		ModEffects.EFFECTS.register(modEventBus);
 		ModItems.ITEMS.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
 		/*
-		ModEffects.EFFECTS.register(modEventBus);
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 		ModDataComponents.ENCHANTMENT_EFFECT_COMPONENTS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
@@ -64,7 +65,6 @@ public class FarmersDelight
 		ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 		ModLootFunctions.LOOT_FUNCTIONS.register(modEventBus);
 		ModLootModifiers.LOOT_MODIFIERS.register(modEventBus);
-		ModConditionCodecs.CONDITION_CODECS.register(modEventBus);
 		ModIngredientTypes.INGREDIENT_TYPES.register(modEventBus);
 		ModAdvancements.TRIGGERS.register(modEventBus);
 

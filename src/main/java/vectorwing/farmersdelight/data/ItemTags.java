@@ -35,10 +35,11 @@ public class ItemTags extends ItemTagsProvider
 {
     private Map<TagKey<Block>, TagKey<Item>> tagsToCopy;
 
-	public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, CompletableFuture<TagsProvider.TagLookup<Block>> blockTagProvider) {
+	public ItemTags(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
 		super(output, provider, FarmersDelight.MODID);
 	}
 
+	// TODO: add left tags back
 	@Override
 	protected void addTags(HolderLookup.@NonNull Provider provider) {
         /*
@@ -209,6 +210,9 @@ public class ItemTags extends ItemTagsProvider
         /*
 		copy(ModTags.Blocks.FEASTS, ModTags.Items.FEASTS);
 		*/
+		tag(ModTags.Items.FEASTS).add(
+				ModItems.ModItemEntry.ROAST_CHICKEN.getResourceKey()
+		);
 		tag(ModTags.Items.PIES).add(
 			ItemIds.PUMPKIN_PIE/*,
 			ModItems.ModItemEntry.APPLE_PIE.getResourceKey(),

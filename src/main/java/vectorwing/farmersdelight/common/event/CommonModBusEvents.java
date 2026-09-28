@@ -13,10 +13,9 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.FoodValues;
 
-// @EventBusSubscriber(modid = FarmersDelight.MODID)
+@EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CommonModBusEvents
 {
-	/*
 	@SubscribeEvent
 	public static void onModifyDefaultComponents(ModifyDefaultComponentsEvent event) {
 		if (DatagenModLoader.isRunningDataGen()) {
@@ -24,13 +23,14 @@ public class CommonModBusEvents
 		}
 		if (Configuration.ENABLE_STACKABLE_SOUP_ITEMS.get()) {
 			Configuration.SOUP_ITEM_LIST.get().forEach((key) -> {
-				Item item = BuiltInRegistries.ITEM.get(Identifier.parse(key));
-				event.modify(item, (builder) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
+				Item food = BuiltInRegistries.ITEM.getValue(Identifier.parse(key));
+				if (!food.equals(Items.AIR)) event.modify(food, (builder, provider, item) -> builder.set(DataComponents.MAX_STACK_SIZE, 16));
 			});
 		}
 		if (Configuration.ENABLE_RABBIT_STEW_BUFF.get()) {
-			event.modify(Items.RABBIT_STEW, (builder) -> builder.set(DataComponents.FOOD, FoodValues.RABBIT_STEW_BUFF));
+			event.modify(Items.RABBIT_STEW, (builder, provider, item) -> builder
+                    .set(DataComponents.FOOD, FoodValues.RABBIT_STEW_BUFF)
+                    .set(DataComponents.CONSUMABLE, FoodValues.RABBIT_STEW_BUFF_EFFECT));
 		}
 	}
-	 */
 }

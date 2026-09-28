@@ -1,6 +1,5 @@
 package vectorwing.farmersdelight.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -8,17 +7,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.LiquidBlockContainer;
+import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -30,17 +24,14 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import javax.annotation.Nullable;
 
-@SuppressWarnings("deprecation")
-public class RiceBlock // extends BushBlock implements BonemealableBlock, LiquidBlockContainer
+public class RiceBlock extends BushBlock implements BonemealableBlock, LiquidBlockContainer
 {
-	/*
-	public static final MapCodec<RiceBlock> CODEC = simpleCodec(RiceBlock::new);
-
 	public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 	public static final BooleanProperty SUPPORTING = BooleanProperty.create("supporting");
 	private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -51,16 +42,13 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 
 	public RiceBlock(Properties properties) {
 		super(properties);
-		this.registerDefaultState(this.defaultBlockState().setValue(AGE, 0).setValue(SUPPORTING, false));
+		this.registerDefaultState(this.defaultBlockState()
+				.setValue(BlockStateProperties.AGE_3, 0)
+				.setValue(SUPPORTING, false));
 	}
 
 	@Override
-	protected MapCodec<? extends BushBlock> codec() {
-		return CODEC;
-	}
-
-	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+	public void randomTick(@NonNull BlockState state, @NonNull ServerLevel level, @NonNull BlockPos pos, @NonNull RandomSource random) {
 		super.tick(state, level, pos, random);
 		if (!level.isAreaLoaded(pos, 1)) return;
 		if (level.getRawBrightness(pos.above(), 0) >= 6) {
@@ -75,7 +63,7 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 							CommonHooks.fireCropGrowPost(level, pos, state);
 						}
 					} else {
-						level.setBlock(pos, this.withAge(age + 1), 2);
+						level.setBlock(pos, this.withAge(age + 1), UPDATE_CLIENTS);
 						CommonHooks.fireCropGrowPost(level, pos, state);
 					}
 				}
@@ -84,18 +72,18 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	public @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+	public boolean canSurvive(@NonNull BlockState state, LevelReader level, @NonNull BlockPos pos) {
 		FluidState fluid = level.getFluidState(pos);
 		return super.canSurvive(state, level, pos) && fluid.is(FluidTags.WATER) && fluid.getAmount() == 8;
 	}
 
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+	protected boolean mayPlaceOn(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos) {
 		return super.mayPlaceOn(state, level, pos) || state.is(BlockTags.DIRT);
 	}
 
@@ -112,7 +100,7 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+	public @NonNull ItemStack getCloneItemStack(@NonNull LevelReader level, @NonNull BlockPos pos, @NonNull BlockState state, boolean includeData, @NonNull Player player) {
 		return new ItemStack(ModItems.RICE.get());
 	}
 
@@ -120,25 +108,32 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 		return this.defaultBlockState().setValue(this.getAgeProperty(), age);
 	}
 
-//	public boolean isMaxAge(BlockState state) {
-//		return state.getValue(this.getAgeProperty()) >= this.getMaxAge();
-//	}
+	//	public boolean isMaxAge(BlockState state) {
+	//		return state.getValue(this.getAgeProperty()) >= this.getMaxAge();
+	//	}
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		super.createBlockStateDefinition(builder);
 		builder.add(AGE, SUPPORTING);
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-		BlockState updatedState = super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+	public @NonNull BlockState updateShape(@NonNull BlockState state,
+                                           @NonNull LevelReader level,
+                                           @NonNull ScheduledTickAccess ticks,
+                                           @NonNull BlockPos currentPos,
+                                           @NonNull Direction facing,
+                                           @NonNull BlockPos facingPos,
+                                           @NonNull BlockState facingState,
+                                           @NonNull RandomSource random) {
+		BlockState updatedState = super.updateShape(state, level, ticks, currentPos, facing, facingPos, facingState, random);
 		if (!updatedState.isAir()) {
-			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+			ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 			if (facing == Direction.UP) {
 				return updatedState.setValue(SUPPORTING, isSupportingRiceUpper(facingState));
 			}
 		}
-
 		return updatedState;
 	}
 
@@ -154,7 +149,7 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, @NonNull BlockState state, @NonNull BonemealSource source) {
 		BlockState upperState = level.getBlockState(pos.above());
 		if (upperState.getBlock() instanceof RicePaniclesBlock) {
 			return !((RicePaniclesBlock) upperState.getBlock()).isMaxAge(upperState);
@@ -163,16 +158,16 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(@NonNull Level level, @NonNull RandomSource random, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull BonemealSource source) {
 		return true;
 	}
 
 	protected int getBonemealAgeIncrease(Level level) {
-		return Mth.nextInt(level.random, 1, 4);
+		return Mth.nextInt(level.getRandom(), 1, 4);
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+	public void performBonemeal(@NonNull ServerLevel level, @NonNull RandomSource random, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull BonemealSource source) {
 		int ageGrowth = Math.min(this.getAge(state) + this.getBonemealAgeIncrease(level), 7);
 		if (ageGrowth <= this.getMaxAge()) {
 			level.setBlockAndUpdate(pos, state.setValue(AGE, ageGrowth));
@@ -180,33 +175,32 @@ public class RiceBlock // extends BushBlock implements BonemealableBlock, Liquid
 			BlockState top = level.getBlockState(pos.above());
 			if (top.getBlock() == ModBlocks.RICE_CROP_PANICLES.get()) {
 				BonemealableBlock growable = (BonemealableBlock) level.getBlockState(pos.above()).getBlock();
-				if (growable.isValidBonemealTarget(level, pos.above(), top)) {
-					growable.performBonemeal(level, level.random, pos.above(), top);
+				if (growable.isValidBonemealTarget(level, pos.above(), top, source)) {
+					growable.performBonemeal(level, level.getRandom(), pos.above(), top, source);
 				}
 			} else {
 				RicePaniclesBlock riceUpper = (RicePaniclesBlock) ModBlocks.RICE_CROP_PANICLES.get();
 				int remainingGrowth = ageGrowth - this.getMaxAge() - 1;
 				if (riceUpper.defaultBlockState().canSurvive(level, pos.above()) && level.isEmptyBlock(pos.above())) {
 					level.setBlockAndUpdate(pos, state.setValue(AGE, this.getMaxAge()));
-					level.setBlock(pos.above(), riceUpper.defaultBlockState().setValue(RicePaniclesBlock.RICE_AGE, remainingGrowth), 2);
+					level.setBlock(pos.above(), riceUpper.defaultBlockState().setValue(RicePaniclesBlock.RICE_AGE, remainingGrowth), UPDATE_CLIENTS);
 				}
 			}
 		}
 	}
 
 	@Override
-	public FluidState getFluidState(BlockState state) {
+	public @NonNull FluidState getFluidState(@NonNull BlockState state) {
 		return Fluids.WATER.getSource(false);
 	}
 
 	@Override
-	public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid) {
+	public boolean canPlaceLiquid(@Nullable LivingEntity user, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull Fluid type) {
 		return false;
 	}
 
 	@Override
-	public boolean placeLiquid(LevelAccessor level, BlockPos pos, BlockState state, FluidState fluidState) {
+	public boolean placeLiquid(@NonNull LevelAccessor level, @NonNull BlockPos pos, @NonNull BlockState state, @NonNull FluidState fluidState) {
 		return false;
 	}
-	 */
 }

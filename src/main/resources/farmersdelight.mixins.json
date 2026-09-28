@@ -2,6 +2,7 @@
     "required": true,
     "package": "vectorwing.farmersdelight.common.mixin",
     "mixins": [
+        "FoodDataAccessMixin",
         "PlacePumpkinPieMixin"
     ],
     "client": [

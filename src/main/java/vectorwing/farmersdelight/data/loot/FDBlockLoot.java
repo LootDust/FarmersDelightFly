@@ -1,26 +1,34 @@
 package vectorwing.farmersdelight.data.loot;
 
+import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.AlternativesEntry;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.MatchBlock;
+import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 import org.jetbrains.annotations.NotNull;
 import vectorwing.farmersdelight.common.block.CabbageBlock;
 import vectorwing.farmersdelight.common.block.OnionBlock;
+import vectorwing.farmersdelight.common.block.RicePaniclesBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModDataComponents;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 public class FDBlockLoot extends BlockLootSubProvider
 {
@@ -67,7 +75,19 @@ public class FDBlockLoot extends BlockLootSubProvider
 		add(ModBlocks.ONION_CROP.get(), createCropDrops(ModBlocks.ONION_CROP.get(), ModItems.ONION.get(), ModItems.ONION.get(), MatchBlock.blockMatches(
 				this.blocks, ModBlocks.ONION_CROP.get(), StatePropertiesPredicate.Builder.properties().hasProperty(OnionBlock.AGE, 7)
 		)));
-
+		dropOther(ModBlocks.RICE_CROP.get(), ModItems.RICE.get());
+		add(ModBlocks.RICE_CROP_PANICLES.get(), block -> LootTable.lootTable().withPool(this.applyExplosionDecay(block, LootPool.lootPool()
+				.setRolls(ContextIntProviders.exactly(1))
+				.add(AlternativesEntry.alternatives(
+						LootItem.lootTableItem(ModItems.RICE.get())
+								.when(MatchBlock.blockMatches(blocks, ModBlocks.RICE_CROP_PANICLES.get(),
+										StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3)))
+								.when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(items, ModTags.Items.KNIVES))),
+						LootItem.lootTableItem(ModItems.RICE_PANICLE.get())
+								.when(MatchBlock.blockMatches(blocks, ModBlocks.RICE_CROP_PANICLES.get(),
+										StatePropertiesPredicate.Builder.properties().hasProperty(RicePaniclesBlock.RICE_AGE, 3)))
+				))
+		)));
 
 		/*
 		HolderLookup.RegistryLookup<Enchantment> registryLookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);

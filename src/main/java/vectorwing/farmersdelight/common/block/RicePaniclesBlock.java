@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
@@ -31,12 +32,12 @@ public class RicePaniclesBlock extends CropBlock
 	}
 
 	@Override
-	public IntegerProperty getAgeProperty() {
+	public @NonNull IntegerProperty getAgeProperty() {
 		return RICE_AGE;
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+	public @NonNull VoxelShape getShape(BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull CollisionContext context) {
 		return SHAPE_BY_AGE[state.getValue(this.getAgeProperty())];
 	}
 
@@ -45,12 +46,10 @@ public class RicePaniclesBlock extends CropBlock
 		return 3;
 	}
 
-	/*
 	@Override
-	protected ItemLike getBaseSeedId() {
+	protected @NonNull ItemLike getBaseSeedId() {
 		return ModItems.RICE.get();
 	}
-	 */
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -58,19 +57,17 @@ public class RicePaniclesBlock extends CropBlock
 	}
 
 	@Override
-	protected int getBonemealAgeIncrease(Level level) {
+	protected int getBonemealAgeIncrease(@NonNull Level level) {
 		return super.getBonemealAgeIncrease(level) / 3;
 	}
 
-	/*
 	@Override
-	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+	protected boolean mayPlaceOn(BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos) {
 		return state.is(ModBlocks.RICE_CROP.get());
 	}
-	 */
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+	public boolean canSurvive(@NonNull BlockState state, LevelReader level, @NonNull BlockPos pos) {
 		return (level.getRawBrightness(pos, 0) >= 8 || level.canSeeSky(pos)) && this.mayPlaceOn(level.getBlockState(pos.below()), level, pos);
 	}
 }

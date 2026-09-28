@@ -4,37 +4,36 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.BlockShapes;
 import vectorwing.farmersdelight.common.block.*;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("ALL")
 public class ModBlocks
 {
 	public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(FarmersDelight.MODID);
 
-	private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
+    private static ToIntFunction<BlockState> litBlockEmission(int lightValue) {
 		return (state) -> state.getValue(BlockStateProperties.LIT) ? lightValue : 0;
 	}
 
@@ -73,11 +72,18 @@ public class ModBlocks
 				Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)),
 
 		// Pastries
-		PUMPKIN_PIE("pumpkin_pie", p -> new PieBlock(p, ModItems.PUMPKIN_PIE_SLICE), Block.Properties.ofFullCopy(Blocks.CAKE)),
+		PUMPKIN_PIE("pumpkin_pie", p -> new PieBlock(p, ModItems.PUMPKIN_PIE_SLICE) {
+			@Override
+			public @NonNull ItemStack getCloneItemStack(@NonNull LevelReader level, @NonNull BlockPos pos, @NonNull BlockState state, boolean includeData, @NonNull Player player) {
+				return new ItemStack(Items.PUMPKIN_PIE);
+			}
+		}, Block.Properties.ofFullCopy(Blocks.CAKE)),
 
 		// Crops
-		CABBAGE_CROP("cabbages", CabbageBlock::new, Block.Properties.ofFullCopy(Blocks.WHEAT)),
-		ONION_CROP("onions", OnionBlock::new, Block.Properties.ofFullCopy(Blocks.WHEAT));
+		CABBAGE_CROP("cabbages", CabbageBlock::new, overrideWheatProperties(CabbageBlock.AGE)),
+		ONION_CROP("onions", OnionBlock::new, overrideWheatProperties(OnionBlock.AGE)),
+		RICE_CROP("rice", RiceBlock::new, overrideWheatProperties(RiceBlock.AGE).strength(0.2F)),
+		RICE_CROP_PANICLES("rice_panicles", RicePaniclesBlock::new, overrideWheatProperties(RicePaniclesBlock.RICE_AGE));
 
 		private final String name;
 		private final Identifier identifier;
@@ -111,6 +117,24 @@ public class ModBlocks
 
 		public DeferredBlock<Block> register(DeferredRegister.Blocks register) {
 			return register.register(name, () -> factory.apply(properties.setId(resourceKey)));
+		}
+
+		/**
+		 * For crops that do not use {@link net.minecraft.world.level.block.state.properties.BlockStateProperties#AGE_7},
+		 * simply calling {@code Block.Properties.ofFullCopy(Blocks.WHEAT)} will cause an exception.
+		 * <p>
+		 * This is because the map color of the wheat block is defined using
+		 * {@link net.minecraft.world.level.block.CropBlock#AGE}, which is an {@code AGE_7} property.
+		 * Even if you override {@link net.minecraft.world.level.block.Block#createBlockStateDefinition(StateDefinition.Builder)}
+		 * in your block class, a {@link NullPointerException} will still be thrown when the block state is constructed,
+		 * because the copied {@code mapColor} function attempts to read {@code AGE_7} before your state definition is applied.
+		 * <p>
+		 * It is better to use this dedicated method (or manually build the whole properties) for any crop.
+		 */
+		public static BlockBehaviour.Properties overrideWheatProperties(IntegerProperty property) {
+			return Block.Properties.ofFullCopy(Blocks.WHEAT)
+					.mapColor(state ->
+							state.getValue(property) >= property.getPossibleValues().getLast() - 2 ? MapColor.COLOR_YELLOW : MapColor.PLANT);
 		}
     }
 
@@ -147,8 +171,8 @@ public class ModBlocks
 	public static final Supplier<Block> RICE_BAG = ModBlockEntry.RICE_BAG.register(BLOCKS);
 	public static final Supplier<Block> STRAW_BALE = ModBlockEntry.STRAW_BALE.register(BLOCKS);
 
-	/*
 	// Building
+	/*
 	public static final Supplier<Block> ROPE = BLOCKS.register("rope",
 			() -> new RopeBlock(Block.Properties.ofFullCopy(Blocks.CARPET.brown()).noCollision().noOcclusion().strength(0.2F).sound(SoundType.WOOL)));
 	public static final Supplier<Block> SAFETY_NET = BLOCKS.register("safety_net",
@@ -337,8 +361,8 @@ public class ModBlocks
 			() -> new WallHangingCanvasSignBlock(Block.Properties.ofFullCopy(Blocks.SPRUCE_WALL_HANGING_SIGN).overrideLootTable(BLACK_HANGING_CANVAS_SIGN.get().getLootTable()), DyeColor.BLACK));
 	*/
 
-	/*
 	// Composting
+	/*
 	public static final Supplier<Block> BROWN_MUSHROOM_COLONY = BLOCKS.register("brown_mushroom_colony",
 			() -> new MushroomColonyBlock(BuiltInRegistries.ITEM.getOrThrow(BlockItemIds.BROWN_MUSHROOM.item()), Block.Properties.ofFullCopy(Blocks.BROWN_MUSHROOM)));
 	public static final Supplier<Block> RED_MUSHROOM_COLONY = BLOCKS.register("red_mushroom_colony",
@@ -351,8 +375,8 @@ public class ModBlocks
 			() -> new RichSoilFarmlandBlock(Block.Properties.ofFullCopy(Blocks.FARMLAND)));
 	*/
 
-	/*
 	// Pastries
+	/*
 	public static final Supplier<Block> APPLE_PIE = BLOCKS.register("apple_pie",
 			() -> new PieBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.APPLE_PIE_SLICE));
 	public static final Supplier<Block> SWEET_BERRY_CHEESECAKE = BLOCKS.register("sweet_berry_cheesecake",
@@ -362,8 +386,8 @@ public class ModBlocks
 	*/
 	public static final Supplier<Block> PUMPKIN_PIE = ModBlockEntry.PUMPKIN_PIE.register(BLOCKS);
 
-	/*
 	// Wild Crops
+	/*
 	public static final Supplier<Block> SANDY_SHRUB = BLOCKS.register("sandy_shrub",
 			() -> new SandyShrubBlock(Block.Properties.ofFullCopy(Blocks.TALL_GRASS)));
 
@@ -393,14 +417,12 @@ public class ModBlocks
 			() -> new TomatoBlock(Block.Properties.of().noCollision().randomTicks().instabreak().sound(SoundType.CROP)));
 	public static final DeferredHolder<Block, HangingTomatoBlock> TOMATO_CROP_ON_ROPE = BLOCKS.register("tomatoes_on_rope",
 			() -> new HangingTomatoBlock(Block.Properties.ofFullCopy(ModBlocks.TOMATO_CROP.get()).pushReaction(PushReaction.PUSH_PULL)));
-	public static final Supplier<Block> RICE_CROP = BLOCKS.register("rice",
-			() -> new RiceBlock(Block.Properties.ofFullCopy(Blocks.WHEAT).strength(0.2F)));
-	public static final Supplier<Block> RICE_CROP_PANICLES = BLOCKS.register("rice_panicles",
-			() -> new RicePaniclesBlock(Block.Properties.ofFullCopy(Blocks.WHEAT)));
 	*/
+	public static final Supplier<Block> RICE_CROP = ModBlockEntry.RICE_CROP.register(BLOCKS);
+	public static final Supplier<Block> RICE_CROP_PANICLES = ModBlockEntry.RICE_CROP_PANICLES.register(BLOCKS);
 
-	/*
 	// Feasts
+	/*
 	public static final Supplier<Block> ROAST_CHICKEN_BLOCK = BLOCKS.register("roast_chicken_block",
 			() -> new RotatedFeastBlock(Block.Properties.ofFullCopy(Blocks.CAKE), ModItems.ROAST_CHICKEN, true, BlockShapes.ROAST_CHICKEN_SHAPES, BlockShapes.TRAY_SHAPE));
 	public static final Supplier<Block> STUFFED_PUMPKIN_BLOCK = BLOCKS.register("stuffed_pumpkin_block",
@@ -413,5 +435,5 @@ public class ModBlocks
 			() -> new GleamingSaladBlock(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).lightLevel(glowingFeastBlockEmission()), ModItems.GLEAMING_SALAD, true));
 	public static final Supplier<Block> RICE_ROLL_MEDLEY_BLOCK = BLOCKS.register("rice_roll_medley_block",
 			() -> new RiceRollMedleyBlock(Block.Properties.ofFullCopy(Blocks.CAKE)));
-	 */
+	*/
 }
