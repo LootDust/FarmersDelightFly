@@ -69,7 +69,7 @@ public class ModBlocks
 				Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)),
 		RICE_BAG("rice_bag",  Block::new,
 				Block.Properties.ofFullCopy(Blocks.WOOL.white())),
-		STRAW_BALE("straw_bale",  Block::new,
+		STRAW_BALE("straw_bale", StrawBaleBlock::new,
 				Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)),
 
 		// Pastries

@@ -17,18 +17,20 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.registries.RegistryManager;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CookingPotBlock;
 import vectorwing.farmersdelight.common.block.PieBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.utility.ResourceUtils;
 
 import java.util.*;
+
+import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
+import static net.minecraft.client.data.models.model.TextureMapping.getBlockTexture;
 
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
@@ -78,6 +80,12 @@ public class Models extends ModelProvider
 		super(output, FarmersDelight.MODID);
 	}
 
+	// Fix something wrong in vanilla TextureMapping class
+	// Why, Mojang? Why "_top" instead of "_end"?
+	public TextureMapping column(Block block) {
+		return new TextureMapping().put(TextureSlot.SIDE, getBlockTexture(block, "_side")).put(TextureSlot.END, getBlockTexture(block, "_end"));
+	}
+
 	// Helper methods
 	public static void createStoveLikeBlock(BlockModelGenerators generators, Block block) {
 		Map<String, Identifier> models = new Object2ObjectOpenHashMap<>();
@@ -85,13 +93,13 @@ public class Models extends ModelProvider
 				.with(PropertyDispatch.initial(BlockStateProperties.LIT, BlockStateProperties.HORIZONTAL_FACING)
 						.generate((lit, facing) -> {
 								var suffix = lit ? "_on": "";
-								var variant = BlockModelGenerators.plainVariant(models.computeIfAbsent(suffix, _ ->
+								var variant = plainVariant(models.computeIfAbsent(suffix, _ ->
 										generators.createSuffixedVariant(block, suffix, ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM,
 												_ -> lit ? new TextureMapping()
-														.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_side"))
-														.put(TextureSlot.FRONT, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_front_on"))
-														.put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_top_on"))
-														.put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(ModBlocks.STOVE.get(), "_bottom"))
+														.put(TextureSlot.SIDE, getBlockTexture(ModBlocks.STOVE.get(), "_side"))
+														.put(TextureSlot.FRONT, getBlockTexture(ModBlocks.STOVE.get(), "_front_on"))
+														.put(TextureSlot.TOP, getBlockTexture(ModBlocks.STOVE.get(), "_top_on"))
+														.put(TextureSlot.BOTTOM, getBlockTexture(ModBlocks.STOVE.get(), "_bottom"))
 														: TextureMapping.orientableCube(block))));
 								return switch (facing) {
 									case SOUTH -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
@@ -116,7 +124,7 @@ public class Models extends ModelProvider
                                 case TRAY -> cooking_pot_tray_support;
                                 case HANDLE -> cooking_pot_handle_support;
                             };
-							var variant = BlockModelGenerators.plainVariant(model);
+							var variant = plainVariant(model);
 							return switch (facing) {
                                 case SOUTH -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
                                 case WEST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
@@ -127,6 +135,16 @@ public class Models extends ModelProvider
 				)
 		);
 		itemGenerators.itemModelOutput.accept(ModItems.COOKING_POT.get(), ItemModelUtils.plainModel(cooking_pot_none_support));
+	}
+
+	public static void createCrateBlock(BlockModelGenerators generators, Block block) {
+		generators.createTrivialBlock(block, TexturedModel.createDefault(
+				b -> new TextureMapping()
+						.put(TextureSlot.SIDE, getBlockTexture(b, "_side"))
+						.put(TextureSlot.TOP, getBlockTexture(b, "_top"))
+						.put(TextureSlot.BOTTOM, new Material(ResourceUtils.FDIdentifier("block/crate_bottom"))),
+				ModelTemplates.CUBE_BOTTOM_TOP)
+		);
 	}
 
 	public static void createPieLikeBlock(BlockModelGenerators generators, Block block) {
@@ -140,7 +158,7 @@ public class Models extends ModelProvider
 								case 2 -> PIE_SLICE2;
 								default -> PIE_SLICE3;
 							};
-							var variant = BlockModelGenerators.plainVariant(models.computeIfAbsent(bite,
+							var variant = plainVariant(models.computeIfAbsent(bite,
 									b -> generators.createSuffixedVariant(block, "_slice" + b, template,
 											material -> b > 0 ? getDefaultBitedPieTextures(block) : getDefaultPieTextures(block))));
 							return switch (facing) {
@@ -156,17 +174,17 @@ public class Models extends ModelProvider
 
 	public static TextureMapping getDefaultPieTextures(Block block) {
 		return new TextureMapping()
-				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+				.put(TextureSlot.TOP, getBlockTexture(block, "_top"))
 				.put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_side")))
 				.put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_bottom")));
 	}
 
 	public static TextureMapping getDefaultBitedPieTextures(Block block) {
 		return new TextureMapping()
-				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(block, "_top"))
+				.put(TextureSlot.TOP, getBlockTexture(block, "_top"))
 				.put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_side")))
 				.put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_bottom")))
-				.put(INNER, TextureMapping.getBlockTexture(block, "_inner"));
+				.put(INNER, getBlockTexture(block, "_inner"));
 	}
 
 	public static void createCrossCropBlock(BlockModelGenerators generators, Block block, Property<Integer> property, int... stages) {
@@ -180,7 +198,7 @@ public class Models extends ModelProvider
 				.with(PropertyDispatch.initial(property)
 						.generate(i -> {
 							int stage = stages[i];
-							return BlockModelGenerators.plainVariant(models.computeIfAbsent(stage,
+							return plainVariant(models.computeIfAbsent(stage,
 									s -> generators.createSuffixedVariant(block, "_stage" + s, ModelTemplates.CROSS,
 											(material) -> TextureMapping.singleSlot(TextureSlot.CROSS, material))));
 						})
@@ -326,15 +344,35 @@ public class Models extends ModelProvider
 		createCookingPotBlock(blockModels, itemModels);
 
 		// Crop Storage
-		blockModels.createTrivialBlock(ModBlocks.CARROT_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.POTATO_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.BEETROOT_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.CABBAGE_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.TOMATO_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.ONION_CRATE.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.RICE_BALE.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.RICE_BAG.get(), TexturedModel.CUBE_BOTTOM_TOP);
-		blockModels.createTrivialBlock(ModBlocks.STRAW_BALE.get(), TexturedModel.CUBE_BOTTOM_TOP);
+		createCrateBlock(blockModels, ModBlocks.CARROT_CRATE.get());
+		createCrateBlock(blockModels, ModBlocks.POTATO_CRATE.get());
+		createCrateBlock(blockModels, ModBlocks.BEETROOT_CRATE.get());
+		createCrateBlock(blockModels, ModBlocks.CABBAGE_CRATE.get());
+		createCrateBlock(blockModels, ModBlocks.TOMATO_CRATE.get());
+		createCrateBlock(blockModels, ModBlocks.ONION_CRATE.get());
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(
+						ModBlocks.RICE_BALE.get(),
+						BlockModelGenerators.plainVariant(
+							blockModels.createSuffixedVariant(ModBlocks.RICE_BALE.get(), "", ModelTemplates.CUBE_BOTTOM_TOP,
+									_ -> TextureMapping.cubeBottomTop(ModBlocks.RICE_BALE.get()))
+						)
+				).with(BlockModelGenerators.ROTATIONS_COLUMN_WITH_FACING)
+		);
+		blockModels.createTrivialBlock(ModBlocks.RICE_BAG.get(),
+				TexturedModel.createDefault(
+                        _ -> new TextureMapping()
+								.put(TextureSlot.DOWN, new Material(ResourceUtils.FDIdentifier("block/rice_bag_bottom")))
+								.put(TextureSlot.EAST, new Material(ResourceUtils.FDIdentifier("block/rice_bag_side")))
+								.put(TextureSlot.NORTH, new Material(ResourceUtils.FDIdentifier("block/rice_bag_side_tied")))
+								.put(TextureSlot.PARTICLE, new Material(ResourceUtils.FDIdentifier("block/rice_bag_top")))
+								.put(TextureSlot.SOUTH, new Material(ResourceUtils.FDIdentifier("block/rice_bag_side_tied")))
+								.put(TextureSlot.UP, new Material(ResourceUtils.FDIdentifier("block/rice_bag_top")))
+								.put(TextureSlot.WEST, new Material(ResourceUtils.FDIdentifier("block/rice_bag_side"))),
+						ModelTemplates.CUBE)
+		);
+		blockModels.createRotatedPillarWithHorizontalVariant(ModBlocks.STRAW_BALE.get(),
+				TexturedModel.createDefault(this::column, ModelTemplates.CUBE_COLUMN),
+				TexturedModel.createDefault(this::column, ModelTemplates.CUBE_COLUMN_HORIZONTAL));
 
 		// Pastries
 		createPieLikeBlock(blockModels, ModBlocks.PUMPKIN_PIE.get());

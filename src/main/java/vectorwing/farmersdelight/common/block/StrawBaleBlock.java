@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.HayBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
 
 public class StrawBaleBlock extends HayBlock
 {
@@ -13,12 +14,12 @@ public class StrawBaleBlock extends HayBlock
 	}
 
 	@Override
-	public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
+	public int getFireSpreadSpeed(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Direction face) {
 		return 60;
 	}
 
 	@Override
-	public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction face) {
+	public int getFlammability(@NonNull BlockState state, @NonNull BlockGetter level, @NonNull BlockPos pos, @NonNull Direction face) {
 		return 20;
 	}
 }
