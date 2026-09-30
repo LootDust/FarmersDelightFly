@@ -47,6 +47,20 @@ public class ModItems
 		RICE_BAG("rice_bag",  ModBlocks.RICE_BAG, basicItem()),
 		STRAW_BALE("straw_bale",  ModBlocks.STRAW_BALE, basicItem()),
 
+		OAK_CABINET("oak_cabinet", ModBlocks.OAK_CABINET, basicItem()),
+		SPRUCE_CABINET("spruce_cabinet", ModBlocks.SPRUCE_CABINET, basicItem()),
+		BIRCH_CABINET("birch_cabinet", ModBlocks.BIRCH_CABINET, basicItem()),
+		JUNGLE_CABINET("jungle_cabinet", ModBlocks.JUNGLE_CABINET, basicItem()),
+		ACACIA_CABINET("acacia_cabinet", ModBlocks.ACACIA_CABINET, basicItem()),
+		DARK_OAK_CABINET("dark_oak_cabinet", ModBlocks.DARK_OAK_CABINET, basicItem()),
+		MANGROVE_CABINET("mangrove_cabinet", ModBlocks.MANGROVE_CABINET, basicItem()),
+		CHERRY_CABINET("cherry_cabinet", ModBlocks.CHERRY_CABINET, basicItem()),
+		PALE_OAK_CABINET("pale_oak_cabinet", ModBlocks.PALE_OAK_CABINET, basicItem()),
+		POPLAR_CABINET("poplar_cabinet", ModBlocks.POPLAR_CABINET, basicItem()),
+		BAMBOO_CABINET("bamboo_cabinet", ModBlocks.BAMBOO_CABINET, basicItem()),
+		CRIMSON_CABINET("crimson_cabinet", ModBlocks.CRIMSON_CABINET, basicItem()),
+		WARPED_CABINET("warped_cabinet", ModBlocks.WARPED_CABINET, basicItem()),
+
 		// Tools
 		FLINT_KNIFE("flint_knife", p -> new KnifeItem(ModMaterial.FLINT, p), basicItem()),
 		IRON_KNIFE("iron_knife", p -> new KnifeItem(ToolMaterial.IRON, p), basicItem()),
@@ -284,8 +298,21 @@ public class ModItems
 	/*
 	public static final Supplier<Item> SAFETY_NET = registerWithTab("safety_net",
 			() -> new BlockItem(ModBlocks.SAFETY_NET.get(), basicItem()));
-	public static final Supplier<Item> OAK_CABINET = registerWithTab("oak_cabinet",
-			() -> new BlockItem(ModBlocks.OAK_CABINET.get(), basicItem()));
+	*/
+	public static final Supplier<Item> OAK_CABINET = ModItemEntry.OAK_CABINET.register(ITEMS);
+	public static final Supplier<Item> SPRUCE_CABINET = ModItemEntry.SPRUCE_CABINET.register(ITEMS);
+	public static final Supplier<Item> BIRCH_CABINET = ModItemEntry.BIRCH_CABINET.register(ITEMS);
+	public static final Supplier<Item> JUNGLE_CABINET = ModItemEntry.JUNGLE_CABINET.register(ITEMS);
+	public static final Supplier<Item> ACACIA_CABINET = ModItemEntry.ACACIA_CABINET.register(ITEMS);
+	public static final Supplier<Item> DARK_OAK_CABINET = ModItemEntry.DARK_OAK_CABINET.register(ITEMS);
+	public static final Supplier<Item> MANGROVE_CABINET = ModItemEntry.MANGROVE_CABINET.register(ITEMS);
+	public static final Supplier<Item> CHERRY_CABINET = ModItemEntry.CHERRY_CABINET.register(ITEMS);
+	public static final Supplier<Item> PALE_OAK_CABINET = ModItemEntry.PALE_OAK_CABINET.register(ITEMS);
+	public static final Supplier<Item> POPLAR_CABINET = ModItemEntry.POPLAR_CABINET.register(ITEMS);
+	public static final Supplier<Item> BAMBOO_CABINET = ModItemEntry.BAMBOO_CABINET.register(ITEMS);
+	public static final Supplier<Item> CRIMSON_CABINET = ModItemEntry.CRIMSON_CABINET.register(ITEMS);
+	public static final Supplier<Item> WARPED_CABINET = ModItemEntry.WARPED_CABINET.register(ITEMS);
+	/*
 	public static final Supplier<Item> SPRUCE_CABINET = registerWithTab("spruce_cabinet",
 			() -> new BlockItem(ModBlocks.SPRUCE_CABINET.get(), basicItem()));
 	public static final Supplier<Item> BIRCH_CABINET = registerWithTab("birch_cabinet",

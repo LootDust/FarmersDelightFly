@@ -2,12 +2,10 @@ package vectorwing.farmersdelight.common.registry;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.entity.*;
 
-import java.util.HashSet;
 import java.util.function.Supplier;
 
 public class ModBlockEntityTypes
@@ -23,8 +21,25 @@ public class ModBlockEntityTypes
 			() -> new BlockEntityType<>(SkilletBlockEntity::new, ModBlocks.SKILLET.get()));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BasketBlockEntity>> BASKET = TILES.register("basket",
 			() -> new BlockEntityType<>(BasketBlockEntity::new, ModBlocks.WOODEN_BASKET.get(), ModBlocks.BAMBOO_BASKET.get()));
+	*/
 	public static final Supplier<BlockEntityType<CuttingBoardBlockEntity>> CUTTING_BOARD = TILES.register("cutting_board",
 			() -> new BlockEntityType<>(CuttingBoardBlockEntity::new, ModBlocks.CUTTING_BOARD.get()));
+	public static final Supplier<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("cabinet",
+			() -> new BlockEntityType<>(CabinetBlockEntity::new,
+					ModBlocks.OAK_CABINET.get(),
+					ModBlocks.SPRUCE_CABINET.get(),
+					ModBlocks.BIRCH_CABINET.get(),
+					ModBlocks.JUNGLE_CABINET.get(),
+					ModBlocks.ACACIA_CABINET.get(),
+					ModBlocks.DARK_OAK_CABINET.get(),
+					ModBlocks.MANGROVE_CABINET.get(),
+					ModBlocks.CHERRY_CABINET.get(),
+					ModBlocks.PALE_OAK_CABINET.get(),
+					ModBlocks.POPLAR_CABINET.get(),
+					ModBlocks.BAMBOO_CABINET.get(),
+					ModBlocks.CRIMSON_CABINET.get(),
+					ModBlocks.WARPED_CABINET.get()));
+	/*
 	public static final Supplier<BlockEntityType<CabinetBlockEntity>> CABINET = TILES.register("cabinet",
 			() -> new BlockEntityType<>(CabinetBlockEntity::new,
 							ModBlocks.OAK_CABINET.get(),
@@ -38,6 +53,8 @@ public class ModBlockEntityTypes
 							ModBlocks.CHERRY_CABINET.get(),
 							ModBlocks.CRIMSON_CABINET.get(),
 							ModBlocks.WARPED_CABINET.get()));
+	*/
+	/*
 	public static final Supplier<BlockEntityType<CanvasSignBlockEntity>> CANVAS_SIGN = TILES.register("canvas_sign",
 			() -> new BlockEntityType<>(CanvasSignBlockEntity::new,
 							ModBlocks.CANVAS_SIGN.get(),

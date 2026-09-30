@@ -65,10 +65,10 @@ public abstract class AbstractStoveBlock extends BaseEntityBlock
 	public InteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (state.getValue(LIT)) {
 			var extinguishResult = tryToExtinguish(heldStack, state, level, pos, player, hand, hit);
-			if (extinguishResult != InteractionResult.PASS) return extinguishResult;
+			if (extinguishResult != InteractionResult.TRY_WITH_EMPTY_HAND) return extinguishResult;
 		} else {
 			var igniteResult = tryToIgnite(heldStack, state, level, pos, player, hand, hit);
-			if (igniteResult != InteractionResult.PASS) return igniteResult;
+			if (igniteResult != InteractionResult.TRY_WITH_EMPTY_HAND) return igniteResult;
 		}
 
 		return tryToPlaceFoodItem(heldStack, state, level, pos, player, hand, hit);

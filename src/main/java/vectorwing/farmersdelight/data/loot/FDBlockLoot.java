@@ -65,6 +65,20 @@ public class FDBlockLoot extends BlockLootSubProvider
 		dropSelf(ModBlocks.RICE_BAG.get());
 		dropSelf(ModBlocks.STRAW_BALE.get());
 
+		add(ModBlocks.OAK_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.SPRUCE_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.BIRCH_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.JUNGLE_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.ACACIA_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.DARK_OAK_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.MANGROVE_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.CHERRY_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.PALE_OAK_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.POPLAR_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.BAMBOO_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.CRIMSON_CABINET.get(), this::createNameableBlockEntityTable);
+		add(ModBlocks.WARPED_CABINET.get(), this::createNameableBlockEntityTable);
+
 		// Pastries
 		add(ModBlocks.PUMPKIN_PIE.get(), LootTable.lootTable());
 

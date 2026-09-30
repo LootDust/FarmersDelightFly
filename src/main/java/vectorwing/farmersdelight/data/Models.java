@@ -21,9 +21,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.block.CookingPotBlock;
-import vectorwing.farmersdelight.common.block.PieBlock;
-import vectorwing.farmersdelight.common.block.RiceBlock;
+import vectorwing.farmersdelight.common.block.*;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.utility.ResourceUtils;
@@ -42,18 +40,18 @@ public class Models extends ModelProvider
 {
 	public static final String GENERATED = "item/generated";
 	public static final String HANDHELD = "item/handheld";
-	public static final Identifier MUG = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "item/mug");
+	public static final Identifier MUG = ResourceUtils.FDIdentifier("item/mug");
 
 	public static final TextureSlot INNER = TextureSlot.create("inner");
 	public static final ModelTemplate PIE = new ModelTemplate(
-			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie")),
+			Optional.of(ResourceUtils.FDIdentifier("block/template_pie")),
 			Optional.empty(),
 			TextureSlot.TOP,
 			TextureSlot.SIDE,
 			TextureSlot.BOTTOM
 	);
 	public static final ModelTemplate PIE_SLICE1 = new ModelTemplate(
-			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie_slice1")),
+			Optional.of(ResourceUtils.FDIdentifier("block/template_pie_slice1")),
 			Optional.of("_slice1"),
 			TextureSlot.TOP,
 			TextureSlot.SIDE,
@@ -61,7 +59,7 @@ public class Models extends ModelProvider
 			INNER
 	);
 	public static final ModelTemplate PIE_SLICE2 = new ModelTemplate(
-			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie_slice2")),
+			Optional.of(ResourceUtils.FDIdentifier("block/template_pie_slice2")),
 			Optional.of("_slice2"),
 			TextureSlot.TOP,
 			TextureSlot.SIDE,
@@ -69,7 +67,7 @@ public class Models extends ModelProvider
 			INNER
 	);
 	public static final ModelTemplate PIE_SLICE3 = new ModelTemplate(
-			Optional.of(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/template_pie_slice3")),
+			Optional.of(ResourceUtils.FDIdentifier("block/template_pie_slice3")),
 			Optional.of("_slice3"),
 			TextureSlot.TOP,
 			TextureSlot.SIDE,
@@ -97,10 +95,10 @@ public class Models extends ModelProvider
 								var variant = plainVariant(models.computeIfAbsent(suffix, _ ->
 										generators.createSuffixedVariant(block, suffix, ModelTemplates.CUBE_ORIENTABLE_TOP_BOTTOM,
 												_ -> lit ? new TextureMapping()
-														.put(TextureSlot.SIDE, getBlockTexture(ModBlocks.STOVE.get(), "_side"))
-														.put(TextureSlot.FRONT, getBlockTexture(ModBlocks.STOVE.get(), "_front_on"))
-														.put(TextureSlot.TOP, getBlockTexture(ModBlocks.STOVE.get(), "_top_on"))
-														.put(TextureSlot.BOTTOM, getBlockTexture(ModBlocks.STOVE.get(), "_bottom"))
+														.put(TextureSlot.SIDE, getBlockTexture(block, "_side"))
+														.put(TextureSlot.FRONT, getBlockTexture(block, "_front_on"))
+														.put(TextureSlot.TOP, getBlockTexture(block, "_top_on"))
+														.put(TextureSlot.BOTTOM, getBlockTexture(block, "_bottom"))
 														: TextureMapping.orientableCube(block))));
 								return switch (facing) {
 									case SOUTH -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
@@ -114,9 +112,9 @@ public class Models extends ModelProvider
 	}
 
 	public static void createCookingPotBlock(BlockModelGenerators blockGenerators, ItemModelGenerators itemGenerators) {
-		Identifier cooking_pot_none_support = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/cooking_pot" );
-		Identifier cooking_pot_tray_support = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/cooking_pot_tray");
-		Identifier cooking_pot_handle_support = Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/cooking_pot_handle");
+		Identifier cooking_pot_none_support = ResourceUtils.FDIdentifier("block/cooking_pot");
+		Identifier cooking_pot_tray_support = ResourceUtils.FDIdentifier("block/cooking_pot_tray");
+		Identifier cooking_pot_handle_support = ResourceUtils.FDIdentifier("block/cooking_pot_handle");
 		blockGenerators.blockStateOutput.accept(MultiVariantGenerator.dispatch(ModBlocks.COOKING_POT.get())
 				.with(PropertyDispatch.initial(CookingPotBlock.SUPPORT, BlockStateProperties.HORIZONTAL_FACING)
 						.generate((support, facing) -> {
@@ -148,6 +146,28 @@ public class Models extends ModelProvider
 		);
 	}
 
+	public static void createCabinetBlock(BlockModelGenerators generators, Block block) {
+		Int2ObjectMap<Identifier> models = new Int2ObjectOpenHashMap<>();
+		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+				.with(PropertyDispatch.initial(CabinetBlock.OPEN, CabinetBlock.FACING)
+						.generate((open, facing) -> {
+							var variant = plainVariant(models.computeIfAbsent(open ? 1 : 0,
+                               _ -> generators.createSuffixedVariant(block, open ? "_open" : "", ModelTemplates.CUBE_ORIENTABLE,
+                                       _ -> open ?
+											   TextureMapping.orientableCube(block).put(TextureSlot.FRONT, getBlockTexture(block, "_front_open"))
+											   : TextureMapping.orientableCube(block)))
+							);
+							return switch (facing) {
+								case SOUTH -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R180));
+								case WEST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R270));
+								case EAST -> variant.with(VariantMutator.Y_ROT.withValue(Quadrant.R90));
+								default -> variant;
+							};
+						})
+				)
+		);
+	}
+
 	public static void createPieLikeBlock(BlockModelGenerators generators, Block block) {
 		Int2ObjectMap<Identifier> models = new Int2ObjectOpenHashMap<>();
 		generators.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
@@ -174,17 +194,15 @@ public class Models extends ModelProvider
 	}
 
 	public static TextureMapping getDefaultPieTextures(Block block) {
-		return new TextureMapping()
-				.put(TextureSlot.TOP, getBlockTexture(block, "_top"))
-				.put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_side")))
-				.put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_bottom")));
+		return TextureMapping.cubeBottomTop(block)
+				.put(TextureSlot.SIDE, new Material(ResourceUtils.FDIdentifier("block/pie_side")))
+				.put(TextureSlot.BOTTOM, new Material(ResourceUtils.FDIdentifier("block/pie_bottom")));
 	}
 
 	public static TextureMapping getDefaultBitedPieTextures(Block block) {
-		return new TextureMapping()
-				.put(TextureSlot.TOP, getBlockTexture(block, "_top"))
-				.put(TextureSlot.SIDE, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_side")))
-				.put(TextureSlot.BOTTOM, new Material(Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "block/pie_bottom")))
+		return TextureMapping.cubeBottomTop(block)
+				.put(TextureSlot.SIDE, new Material(ResourceUtils.FDIdentifier("block/pie_side")))
+				.put(TextureSlot.BOTTOM, new Material(ResourceUtils.FDIdentifier("block/pie_bottom")))
 				.put(INNER, getBlockTexture(block, "_inner"));
 	}
 
@@ -388,6 +406,21 @@ public class Models extends ModelProvider
 		blockModels.createRotatedPillarWithHorizontalVariant(ModBlocks.STRAW_BALE.get(),
 				TexturedModel.createDefault(this::column, ModelTemplates.CUBE_COLUMN),
 				TexturedModel.createDefault(this::column, ModelTemplates.CUBE_COLUMN_HORIZONTAL));
+
+		// Building
+		createCabinetBlock(blockModels, ModBlocks.OAK_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.SPRUCE_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.BIRCH_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.JUNGLE_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.ACACIA_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.DARK_OAK_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.MANGROVE_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.CHERRY_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.PALE_OAK_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.POPLAR_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.BAMBOO_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.CRIMSON_CABINET.get());
+		createCabinetBlock(blockModels, ModBlocks.WARPED_CABINET.get());
 
 		// Pastries
 		createPieLikeBlock(blockModels, ModBlocks.PUMPKIN_PIE.get());

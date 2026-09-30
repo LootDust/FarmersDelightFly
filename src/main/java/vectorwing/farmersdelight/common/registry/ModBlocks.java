@@ -10,7 +10,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -49,7 +48,10 @@ public class ModBlocks
 				Block.Properties.ofFullCopy(Blocks.BRICKS).lightLevel(litBlockEmission(13))),
 		COOKING_POT("cooking_pot", CookingPotBlock::new,
 				Block.Properties.of().mapColor(MapColor.METAL).strength(0.5f, 6.0f).sound(SoundType.LANTERN)),
-		//SKILLET("skillet", SkilletBlock::new, Block.Properties.of().mapColor(MapColor.METAL).strength(0.5f, 6.0f).sound(SoundType.LANTERN)),
+		// SKILLET("skillet", SkilletBlock::new, Block.Properties.of().mapColor(MapColor.METAL).strength(0.5f, 6.0f).sound(SoundType.LANTERN)),
+		// WOODEN_BASKET("wooden_basket", BasketBlock::new, Block.Properties.of().strength(1.5F).sound(SoundType.WOOD)),
+		// BAMBOO_BASKET("bamboo_basket", BasketBlock::new, Block.Properties.of().strength(1.5F).sound(SoundType.BAMBOO_WOOD)),
+		CUTTING_BOARD("cutting_board", CuttingBoardBlock::new, Block.Properties.ofFullCopy(Blocks.SPRUCE_PLANKS).strength(2.0F).sound(SoundType.WOOD)),
 
 		// Crop Storage
 		CARROT_CRATE("carrot_crate", Block::new,
@@ -70,6 +72,34 @@ public class ModBlocks
 				Block.Properties.ofFullCopy(Blocks.WOOL.white())),
 		STRAW_BALE("straw_bale", StrawBaleBlock::new,
 				Block.Properties.ofFullCopy(Blocks.HAY_BLOCK)),
+
+		// Building
+		OAK_CABINET("oak_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		SPRUCE_CABINET("spruce_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		BIRCH_CABINET("birch_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		JUNGLE_CABINET("jungle_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		ACACIA_CABINET("acacia_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		DARK_OAK_CABINET("dark_oak_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		MANGROVE_CABINET("mangrove_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		CHERRY_CABINET("cherry_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.CHERRY_WOOD)),
+		PALE_OAK_CABINET("pale_oak_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		POPLAR_CABINET("poplar_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL)),
+		BAMBOO_CABINET("bamboo_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.BAMBOO_WOOD)),
+		CRIMSON_CABINET("crimson_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)),
+		WARPED_CABINET("warped_cabinet", CabinetBlock::new,
+				Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)),
 
 		// Pastries
 		PUMPKIN_PIE("pumpkin_pie", p -> new PieBlock(p, ModItems.PUMPKIN_PIE_SLICE) {
@@ -148,9 +178,8 @@ public class ModBlocks
 			() -> new BasketBlock(Block.Properties.of().strength(1.5F).sound(SoundType.WOOD)));
 	public static final Supplier<Block> BAMBOO_BASKET = BLOCKS.register("bamboo_basket",
 			() -> new BasketBlock(Block.Properties.of().strength(1.5F).sound(SoundType.BAMBOO_WOOD)));
-	public static final Supplier<Block> CUTTING_BOARD = BLOCKS.register("cutting_board",
-			() -> new CuttingBoardBlock(Block.Properties.ofFullCopy(Blocks.OAK_PLANKS).strength(2.0F).sound(SoundType.WOOD)));
 	*/
+	public static final Supplier<Block> CUTTING_BOARD = ModBlockEntry.CUTTING_BOARD.register(BLOCKS);
 
 	/**
 	 * Deprecated reference added for backwards compatibility. Use BAMBOO_BASKET instead.
@@ -181,28 +210,21 @@ public class ModBlocks
 			() -> new RopeFenceBlock(Block.Properties.ofFullCopy(Blocks.OAK_FENCE).strength(1.0F)));
 	public static final Supplier<Block> ROPE_FENCE_GATE = BLOCKS.register("rope_fence_gate",
 			() -> new RopeFenceGateBlock(Block.Properties.ofFullCopy(Blocks.OAK_FENCE).strength(1.0F)));
-	public static final Supplier<Block> OAK_CABINET = BLOCKS.register("oak_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL)));
-	public static final Supplier<Block> SPRUCE_CABINET = BLOCKS.register("spruce_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL)));
-	public static final Supplier<Block> BIRCH_CABINET = BLOCKS.register("birch_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL)));
-	public static final Supplier<Block> JUNGLE_CABINET = BLOCKS.register("jungle_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL)));
-	public static final Supplier<Block> ACACIA_CABINET = BLOCKS.register("acacia_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL)));
-	public static final Supplier<Block> DARK_OAK_CABINET = BLOCKS.register("dark_oak_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL)));
-	public static final Supplier<Block> MANGROVE_CABINET = BLOCKS.register("mangrove_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL)));
-	public static final Supplier<Block> CHERRY_CABINET = BLOCKS.register("cherry_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.CHERRY_WOOD)));
-	public static final Supplier<Block> BAMBOO_CABINET = BLOCKS.register("bamboo_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.BAMBOO_WOOD)));
-	public static final Supplier<Block> CRIMSON_CABINET = BLOCKS.register("crimson_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
-	public static final Supplier<Block> WARPED_CABINET = BLOCKS.register("warped_cabinet",
-			() -> new CabinetBlock(Block.Properties.ofFullCopy(Blocks.BARREL).sound(SoundType.NETHER_WOOD)));
+	*/
+	public static final Supplier<Block> OAK_CABINET = ModBlockEntry.OAK_CABINET.register(BLOCKS);
+	public static final Supplier<Block> SPRUCE_CABINET = ModBlockEntry.SPRUCE_CABINET.register(BLOCKS);
+	public static final Supplier<Block> BIRCH_CABINET = ModBlockEntry.BIRCH_CABINET.register(BLOCKS);
+	public static final Supplier<Block> JUNGLE_CABINET = ModBlockEntry.JUNGLE_CABINET.register(BLOCKS);
+	public static final Supplier<Block> ACACIA_CABINET = ModBlockEntry.ACACIA_CABINET.register(BLOCKS);
+	public static final Supplier<Block> DARK_OAK_CABINET = ModBlockEntry.DARK_OAK_CABINET.register(BLOCKS);
+	public static final Supplier<Block> MANGROVE_CABINET = ModBlockEntry.MANGROVE_CABINET.register(BLOCKS);
+	public static final Supplier<Block> CHERRY_CABINET = ModBlockEntry.CHERRY_CABINET.register(BLOCKS);
+	public static final Supplier<Block> PALE_OAK_CABINET = ModBlockEntry.PALE_OAK_CABINET.register(BLOCKS);
+	public static final Supplier<Block> POPLAR_CABINET = ModBlockEntry.POPLAR_CABINET.register(BLOCKS);
+	public static final Supplier<Block> BAMBOO_CABINET = ModBlockEntry.BAMBOO_CABINET.register(BLOCKS);
+	public static final Supplier<Block> CRIMSON_CABINET = ModBlockEntry.CRIMSON_CABINET.register(BLOCKS);
+	public static final Supplier<Block> WARPED_CABINET = ModBlockEntry.WARPED_CABINET.register(BLOCKS);
+	/*
 	public static final Supplier<Block> CANVAS_RUG = BLOCKS.register("canvas_rug",
 			() -> new CanvasRugBlock(Block.Properties.ofFullCopy(Blocks.CARPET.white()).sound(SoundType.GRASS).strength(0.2F)));
 	public static final Supplier<Block> TATAMI = BLOCKS.register("tatami",

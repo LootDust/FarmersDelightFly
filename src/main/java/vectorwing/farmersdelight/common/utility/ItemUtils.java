@@ -76,10 +76,8 @@ public class ItemUtils
 	 * @param stack The stack to be queried
 	 * @return The enchantment's level, if the stack is enchanted with it. Returns 0 if not, or if the enchantment is disabled.
 	 */
-	/*
 	public static int getValidatedEnchantmentLevel(ResourceKey<Enchantment> enchantment, HolderLookup.Provider registries, ItemStack stack) {
 		Optional<Holder.Reference<Enchantment>> fortune = registries.holder(enchantment);
 		return fortune.map(stack::getEnchantmentLevel).orElse(0);
 	}
-	 */
 }

@@ -49,13 +49,14 @@ public class FarmersDelight
 		ModDataComponents.DATA_COMPONENTS.register(modEventBus);
 		ModEffects.EFFECTS.register(modEventBus);
 		ModItems.ITEMS.register(modEventBus);
+		ModRecipeBookCategories.RECIPE_BOOK_CATEGORIES.register(modEventBus);
+		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
 		/*
 		ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
 		ModDataComponents.ENCHANTMENT_EFFECT_COMPONENTS.register(modEventBus);
 		ModEntityTypes.ENTITIES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
-		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		// WIP
 		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 		// WIP

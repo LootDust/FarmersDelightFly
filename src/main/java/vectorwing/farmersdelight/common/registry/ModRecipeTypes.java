@@ -7,6 +7,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
+import vectorwing.farmersdelight.common.utility.ResourceUtils;
 
 import java.util.function.Supplier;
 
@@ -16,14 +17,14 @@ public class ModRecipeTypes
 
 	/*
 	public static final Supplier<RecipeType<CookingPotRecipe>> COOKING = RECIPE_TYPES.register("cooking", () -> registerRecipeType("cooking"));
+	*/
 	public static final Supplier<RecipeType<CuttingBoardRecipe>> CUTTING = RECIPE_TYPES.register("cutting", () -> registerRecipeType("cutting"));
-	 */
 
 	public static <T extends Recipe<?>> RecipeType<T> registerRecipeType(final String identifier) {
 		return new RecipeType<>()
 		{
 			public String toString() {
-				return FarmersDelight.MODID + ":" + identifier;
+				return ResourceUtils.FDIdentifier(identifier).toString();
 			}
 		};
 	}
