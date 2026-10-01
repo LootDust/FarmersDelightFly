@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:dark_oak_wood",
+  "result": [
+    {
+      "item": {
+        "id": "minecraft:stripped_dark_oak_wood"
+      }
+    },
+    {
+      "item": {
+        "id": "farmersdelight:tree_bark"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "minecraft:item.axe.strip"
+  },
+  "tool": "#minecraft:axes"
+}

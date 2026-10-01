@@ -1,0 +1,27 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": [
+    "minecraft:spruce_door",
+    "minecraft:spruce_trapdoor",
+    "minecraft:spruce_sign",
+    "minecraft:spruce_hanging_sign",
+    "minecraft:spruce_fence",
+    "minecraft:spruce_fence_gate",
+    "minecraft:spruce_pressure_plate",
+    "minecraft:spruce_button",
+    "minecraft:spruce_boat",
+    "farmersdelight:spruce_cabinet"
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:spruce_planks"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:axes"
+}

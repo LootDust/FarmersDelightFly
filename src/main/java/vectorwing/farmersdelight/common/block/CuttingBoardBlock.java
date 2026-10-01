@@ -2,15 +2,17 @@ package vectorwing.farmersdelight.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-// import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
@@ -20,7 +22,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-// import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -73,10 +74,11 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 				player.setItemSlot(EquipmentSlot.MAINHAND, remainderStack);
 			}
 			Vec3 centerPos = new Vec3(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f);
+			player.swing(hand, SwingAnimation.DEFAULT, true);
 			level.playSound(null, centerPos.x(), centerPos.y(), centerPos.z(), ModSounds.BLOCK_CUTTING_BOARD_PLACE.get(), SoundSource.BLOCKS, 1.0F, 0.8F);
 			return InteractionResult.SUCCESS;
 		} else {
-			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player)) {
+			if (cuttingBoard.processStoredItemUsingTool(mainHandStack, player, hand)) {
 				return InteractionResult.SUCCESS;
 			}
 		}
@@ -93,13 +95,14 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 		}
 
 		if (cuttingBoard.isEmpty()) {
-			return  InteractionResult.CONSUME;
+			return InteractionResult.CONSUME;
 		}
 		ItemStack removedStack = cuttingBoard.removeItem();
 		if (!player.isCreative()) {
 			player.getInventory().add(removedStack);
 		}
 		Vec3 centerPos = new Vec3(pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f);
+		player.swing(InteractionHand.MAIN_HAND, SwingAnimation.DEFAULT, true);
 		level.playSound(null, centerPos.x(), centerPos.y(), centerPos.z(), ModSounds.BLOCK_CUTTING_BOARD_REMOVE.get(), SoundSource.BLOCKS, 0.25F, 0.5F);
 		return InteractionResult.SUCCESS;
 	}
@@ -208,6 +211,11 @@ public class CuttingBoardBlock extends BaseEntityBlock implements SimpleWaterlog
 	@Override
 	public @NonNull BlockState mirror(BlockState state, Mirror mirror) {
 		return state.rotate(mirror.getRotation(state.getValue(FACING)));
+	}
+
+	@Override
+	protected void affectNeighborsAfterRemoval(@NonNull BlockState state, @NonNull ServerLevel level, @NonNull BlockPos pos, boolean movedByPiston) {
+		Containers.updateNeighboursAfterDestroy(state, level, pos);
 	}
 
 	@EventBusSubscriber(modid = FarmersDelight.MODID)

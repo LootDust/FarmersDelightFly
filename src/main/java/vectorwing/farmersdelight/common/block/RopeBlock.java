@@ -55,8 +55,8 @@ public class RopeBlock // extends IronBarsBlock
 		return true;
 	}
 
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-		if (stack.is(ModItems.ROPE.get())) {
+	protected ItemInteractionResult useItemOn(ItemStack item, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		if (item.is(ModItems.ROPE.get())) {
 			return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
 		}
 		return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

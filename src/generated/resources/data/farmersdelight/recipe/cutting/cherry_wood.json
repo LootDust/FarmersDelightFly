@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:cherry_wood",
+  "result": [
+    {
+      "item": {
+        "id": "minecraft:stripped_cherry_wood"
+      }
+    },
+    {
+      "item": {
+        "id": "farmersdelight:tree_bark"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "minecraft:item.axe.strip"
+  },
+  "tool": "#minecraft:axes"
+}

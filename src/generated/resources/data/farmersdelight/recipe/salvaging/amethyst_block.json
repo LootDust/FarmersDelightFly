@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:amethyst_block",
+  "result": [
+    {
+      "item": {
+        "count": 4,
+        "id": "minecraft:amethyst_shard"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:pickaxes"
+}

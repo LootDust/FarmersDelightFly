@@ -1,6 +1,7 @@
 package vectorwing.farmersdelight.common.utility;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
 
@@ -23,6 +24,10 @@ public class RecipeUtils
 	*/
 
 	public static ResourceKey<Recipe<?>> FDRecipeKey(String recipeKey) {
+		return ResourceUtils.FDResourceKey(Registries.RECIPE, recipeKey);
+	}
+
+	public static ResourceKey<Recipe<?>> FDRecipeKey(Identifier recipeKey) {
 		return ResourceUtils.FDResourceKey(Registries.RECIPE, recipeKey);
 	}
 

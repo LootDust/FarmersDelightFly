@@ -36,8 +36,8 @@ public class WallHangingCanvasSignBlock // extends WallHangingSignBlock implemen
 	}
 
 	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.setPlacedBy(level, pos, state, placer, stack);
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack item) {
+		super.setPlacedBy(level, pos, state, placer, item);
 
 		if (level.getBlockEntity(pos) instanceof SignBlockEntity sign && state.getBlock() instanceof CanvasSign canvasSignBlock) {
 			if (canvasSignBlock.isDarkBackground()) {

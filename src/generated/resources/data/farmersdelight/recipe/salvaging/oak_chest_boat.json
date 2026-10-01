@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:oak_chest_boat",
+  "result": [
+    {
+      "item": {
+        "id": "minecraft:oak_boat"
+      }
+    },
+    {
+      "item": {
+        "id": "minecraft:chest"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:hoes"
+}

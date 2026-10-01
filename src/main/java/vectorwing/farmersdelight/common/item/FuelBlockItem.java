@@ -28,7 +28,7 @@ public class FuelBlockItem // extends BlockItem
 	}
 
 	@Override
-	public int getBurnTime(ItemStack stack, @Nullable RecipeType<?> recipeType) {
+	public int getBurnTime(ItemStack item, @Nullable RecipeType<?> recipeType) {
 		return this.burnTime;
 	}
 	 */

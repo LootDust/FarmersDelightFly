@@ -1,0 +1,15 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:stone",
+  "result": [
+    {
+      "item": {
+        "id": "minecraft:cobblestone"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:pickaxes"
+}

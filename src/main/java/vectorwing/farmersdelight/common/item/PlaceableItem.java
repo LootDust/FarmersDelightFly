@@ -19,7 +19,7 @@ public class PlaceableItem extends BlockItem
 
 	/*
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack item, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		tooltip.add(TextUtils.PLACEABLE);
 	}
 	 */

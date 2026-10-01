@@ -34,7 +34,6 @@ import static net.minecraft.client.data.models.model.TextureMapping.getBlockText
 /**
  * Credits to Vazkii and team for some references on mass-reading blocks to datagen!
  */
-@OnlyIn(Dist.CLIENT)
 @SuppressWarnings("NullableProblems")
 public class Models extends ModelProvider
 {
@@ -43,6 +42,8 @@ public class Models extends ModelProvider
 	public static final Identifier MUG = ResourceUtils.FDIdentifier("item/mug");
 
 	public static final TextureSlot INNER = TextureSlot.create("inner");
+	public static final TextureSlot MAIN = TextureSlot.create("main");
+
 	public static final ModelTemplate PIE = new ModelTemplate(
 			Optional.of(ResourceUtils.FDIdentifier("block/template_pie")),
 			Optional.empty(),
@@ -73,6 +74,12 @@ public class Models extends ModelProvider
 			TextureSlot.SIDE,
 			TextureSlot.BOTTOM,
 			INNER
+	);
+	public static final ModelTemplate CUTTING_BOARD = new ModelTemplate(
+			Optional.of(ResourceUtils.FDIdentifier("block/cutting_board")),
+			Optional.empty(),
+			TextureSlot.PARTICLE,
+			MAIN
 	);
 
 	public Models(PackOutput output) {
@@ -375,6 +382,13 @@ public class Models extends ModelProvider
 		// Workstations
 		createStoveLikeBlock(blockModels, ModBlocks.STOVE.get());
 		createCookingPotBlock(blockModels, itemModels);
+		blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(
+						ModBlocks.CUTTING_BOARD.get(),
+						BlockModelGenerators.plainVariant(
+								ResourceUtils.FDIdentifier("block/cutting_board")
+						)
+				).with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING)
+		);
 
 		// Crop Storage
 		createCrateBlock(blockModels, ModBlocks.CARROT_CRATE.get());

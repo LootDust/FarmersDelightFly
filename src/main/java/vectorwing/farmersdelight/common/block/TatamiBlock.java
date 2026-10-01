@@ -47,8 +47,8 @@ public class TatamiBlock // extends Block
 	}
 
 	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.setPlacedBy(level, pos, state, placer, stack);
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack item) {
+		super.setPlacedBy(level, pos, state, placer, item);
 		if (!level.isClientSide) {
 			if (placer != null && placer.isShiftKeyDown()) {
 				return;

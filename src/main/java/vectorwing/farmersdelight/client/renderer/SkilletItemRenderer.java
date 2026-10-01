@@ -28,15 +28,15 @@ public class SkilletItemRenderer // extends BlockEntityWithoutLevelRenderer
 	}
 
 	@Override
-	public void renderByItem(ItemStack stack, ItemDisplayContext displayContext, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+	public void renderByItem(ItemStack item, ItemDisplayContext displayContext, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		//render block
-		BlockItem item = ((BlockItem) stack.getItem());
+		BlockItem item = ((BlockItem) item.getItem());
 		BlockState state = item.getBlock().defaultBlockState();
 
 
 		Minecraft mc = Minecraft.getInstance();
 
-		ItemStackWrapper stackWrapper = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT.get(), ItemStackWrapper.EMPTY);
+		ItemStackWrapper stackWrapper = item.getOrDefault(ModDataComponents.SKILLET_INGREDIENT.get(), ItemStackWrapper.EMPTY);
 		ItemStack ingredientStack = stackWrapper.getStack();
 
 		float animation = 0;
@@ -46,17 +46,17 @@ public class SkilletItemRenderer // extends BlockEntityWithoutLevelRenderer
 			poseStack.translate(0.5, 1 / 16f, 0.5);
 
 			long gameTime = mc.level.getGameTime();
-			if (stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) && displayContext != ItemDisplayContext.GUI) {
-				long time = stack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+			if (item.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get()) && displayContext != ItemDisplayContext.GUI) {
+				long time = item.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
 				float partialTicks = mc.getTimer().getGameTimeDeltaPartialTick(false);
 				animation = ((gameTime - time) + partialTicks) / SkilletItem.FLIP_TIME;
 				animation = Mth.clamp(animation, 0, 1);
 				float maxH = 0.4F;
 				poseStack.translate(0, maxH * Mth.sin(animation * Mth.PI), 0);
-				float rotationAnimation = stack.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false) ? animation + 1.0F : animation;
+				float rotationAnimation = item.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false) ? animation + 1.0F : animation;
 				poseStack.mulPose(Axis.XP.rotationDegrees(180 * rotationAnimation));
 			} else {
-				poseStack.mulPose(Axis.XP.rotationDegrees(stack.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false) ? 180 : 0));
+				poseStack.mulPose(Axis.XP.rotationDegrees(item.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false) ? 180 : 0));
 			}
 
 			poseStack.mulPose(Axis.XP.rotationDegrees(90));
@@ -87,9 +87,9 @@ public class SkilletItemRenderer // extends BlockEntityWithoutLevelRenderer
 	public static class ArmPoseTransformer implements IArmPoseTransformer {
 		@Override
 		public void applyTransform(HumanoidModel<?> model, LivingEntity entity, HumanoidArm arm) {
-			ItemStack stack = entity.getUseItem();
-			if (stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
-				long time = stack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+			ItemStack item = entity.getUseItem();
+			if (item.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
+				long time = item.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
 				float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(false);
 				float animation = ((entity.level().getGameTime() - time) + partialTicks) / SkilletItem.FLIP_TIME;
 				animation = Mth.clamp(animation, 0, 1);

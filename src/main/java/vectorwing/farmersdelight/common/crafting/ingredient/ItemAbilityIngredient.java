@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.stream.Stream;
 
 /**
- * Ingredient that checks if the given stack can perform a ItemAbility from Forge.
+ * Ingredient that checks if the given item can perform a ItemAbility from Forge.
  */
 @ParametersAreNonnullByDefault
 // @MethodsReturnNonnullByDefault
@@ -38,13 +38,13 @@ public class ItemAbilityIngredient // implements ICustomIngredient
 		if (this.itemStacks == null) {
 			itemStacks = BuiltInRegistries.ITEM.stream()
 					.map(ItemStack::new)
-					.filter(stack -> stack.canPerformAction(itemAbility));
+					.filter(item -> item.canPerformAction(itemAbility));
 		}
 	}
 
 	@Override
-	public boolean test(@Nullable ItemStack stack) {
-		return stack != null && stack.canPerformAction(itemAbility);
+	public boolean test(@Nullable ItemStack item) {
+		return item != null && item.canPerformAction(itemAbility);
 	}
 
 	@Override

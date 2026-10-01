@@ -1,10 +1,8 @@
 package vectorwing.farmersdelight.common.crafting;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -14,11 +12,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.level.Level;
-// import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import org.jspecify.annotations.NonNull;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModRecipeBookCategories;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +88,7 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 
 	@Override
 	public @NonNull ItemStack assemble(@NonNull CuttingBoardRecipeInput inv) {
-		return this.results.getFirst().stack().create();
+		return this.results.getFirst().item().create();
 	}
 
 	@Override
@@ -137,7 +135,7 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
         List<ItemStack> results = new ArrayList<>();
         List<ChanceResult> rollableResults = getResults();
         for (ChanceResult output : rollableResults) {
-            ItemStack stack = output.rollOutput(random, fortuneLevel).create();
+            ItemStack stack = output.rollOutput(random, fortuneLevel);
             if (!stack.isEmpty())
                 results.add(stack);
         }
@@ -145,7 +143,6 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
     }
 
     /*
-
 	public CuttingBoardRecipe(Recipe.CommonInfo commonInfo, BookInfo bookInfo, String group, Ingredient input, Ingredient tool, NonNullList<ChanceResult> results, Optional<SoundEvent> soundEvent) {
 		this.commonInfo = commonInfo;
         this.bookInfo = bookInfo;
@@ -169,12 +166,12 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 
 	@Override
 	public ItemStack getResultItem(HolderLookup.Provider provider) {
-		return this.results.getFirst().stack();
+		return this.results.getFirst().item();
 	}
 
 	public List<ItemStack> getResults() {
 		return getRollableResults().stream()
-				.map(ChanceResult::stack)
+				.map(ChanceResult::item)
 				.collect(Collectors.toList());
 	}
 
@@ -186,9 +183,9 @@ public class CuttingBoardRecipe implements Recipe<CuttingBoardRecipeInput>
 		List<ItemStack> results = new ArrayList<>();
 		NonNullList<ChanceResult> rollableResults = getRollableResults();
 		for (ChanceResult output : rollableResults) {
-			ItemStack stack = output.rollOutput(random, fortuneLevel);
-			if (!stack.isEmpty())
-				results.add(stack);
+			ItemStack item = output.rollOutput(random, fortuneLevel);
+			if (!item.isEmpty())
+				results.add(item);
 		}
 		return results;
 	}

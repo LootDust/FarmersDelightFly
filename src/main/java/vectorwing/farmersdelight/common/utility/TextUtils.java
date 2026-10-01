@@ -90,8 +90,8 @@ public class TextUtils
 	 * An alternate version of PotionUtils.addPotionTooltip, that obtains the item's food property potion effects instead.
 	 */
 	/*
-	public static void addFoodEffectTooltip(ItemStack stack, Consumer<Component> tooltipAdder, float durationFactor, float tickRate) {
-		FoodProperties foodStats = stack.getFoodProperties(null);
+	public static void addFoodEffectTooltip(ItemStack item, Consumer<Component> tooltipAdder, float durationFactor, float tickRate) {
+		FoodProperties foodStats = item.getFoodProperties(null);
 		if (foodStats == null) {
 			return;
 		}

@@ -21,7 +21,7 @@ public class HotCocoaItem // extends DrinkableItem
 	}
 
 	@Override
-	public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
+	public void affectConsumer(ItemStack item, Level level, LivingEntity consumer) {
 		Iterator<MobEffectInstance> itr = consumer.getActiveEffects().iterator();
 		ArrayList<Holder<MobEffect>> compatibleEffects = new ArrayList<>();
 

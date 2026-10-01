@@ -31,12 +31,12 @@ public class SkilletRenderer // implements BlockEntityRenderer<SkilletBlockEntit
 		IItemHandler inventory = skillet.getInventory();
 		int posLong = (int) skillet.getBlockPos().asLong();
 
-		ItemStack stack = inventory.getStackInSlot(0);
-		int seed = stack.isEmpty() ? 187 : Item.getId(stack.getItem()) + stack.getDamageValue();
+		ItemStack item = inventory.getStackInSlot(0);
+		int seed = item.isEmpty() ? 187 : Item.getId(item.getItem()) + item.getDamageValue();
 		this.random.setSeed(seed);
 
-		if (!stack.isEmpty()) {
-			int itemRenderCount = this.getModelCount(stack);
+		if (!item.isEmpty()) {
+			int itemRenderCount = this.getModelCount(item);
 			for (int i = 0; i < itemRenderCount; i++) {
 				poseStack.pushPose();
 
@@ -56,17 +56,17 @@ public class SkilletRenderer // implements BlockEntityRenderer<SkilletBlockEntit
 				poseStack.scale(0.5F, 0.5F, 0.5F);
 
 				if (skillet.getLevel() != null)
-					Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, skillet.getLevel(), posLong);
+					Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, skillet.getLevel(), posLong);
 				poseStack.popPose();
 			}
 		}
 	}
 
-	protected int getModelCount(ItemStack stack) {
+	protected int getModelCount(ItemStack item) {
 		int modelCount = 1;
 
-		if (stack.getCount() > 1) {
-			modelCount += Mth.ceil(((float) stack.getCount() / stack.getMaxStackSize()) * 4);
+		if (item.getCount() > 1) {
+			modelCount += Mth.ceil(((float) item.getCount() / item.getMaxStackSize()) * 4);
 		}
 
 		return modelCount;

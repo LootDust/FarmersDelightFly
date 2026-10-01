@@ -1,39 +1,43 @@
 package vectorwing.farmersdelight.data.recipe;
 
+import com.sun.jna.platform.win32.WinDef;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.crafting.CompoundIngredient;
-import vectorwing.farmersdelight.FarmersDelight;
-import vectorwing.farmersdelight.common.crafting.ingredient.ItemAbilityIngredient;
-import vectorwing.farmersdelight.common.item.KnifeItem;
+import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.RecipeUtils;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
+import java.util.List;
+import java.util.Map;
+
 public class CuttingRecipes
 {
-	/*
-	public static Ingredient KNIVES = matchesTool(KnifeItem.KNIFE_DIG, CommonTags.Items.TOOLS_KNIFE);
-	public static Ingredient PICKAXES = matchesTool(ItemAbilities.PICKAXE_DIG, ItemTags.PICKAXES);
-	public static Ingredient AXES = matchesTool(ItemAbilities.AXE_DIG, ItemTags.AXES);
-	public static Ingredient AXES_STRIP = matchesTool(ItemAbilities.AXE_STRIP, ItemTags.AXES);
-	public static Ingredient SHOVELS = matchesTool(ItemAbilities.SHOVEL_DIG, ItemTags.SHOVELS);
-	public static Ingredient HOES = matchesTool(ItemAbilities.HOE_DIG, ItemTags.HOES);
-	public static Ingredient SHEARS = matchesTool(ItemAbilities.SHEARS_DIG, Tags.Items.TOOLS_SHEAR);
 
-	public static void register(RecipeOutput output) {
+	private final HolderLookup<Item> items;
+	private final RecipeOutput output;
+
+	public CuttingRecipes(HolderLookup<Item> items, RecipeOutput output) {
+		this.items = items;
+		this.output = output;
+	}
+
+	public void register() {
+
 		// Knife
 		cuttingAnimalItems(output);
 		cuttingVegetables(output);
@@ -57,152 +61,190 @@ public class CuttingRecipes
 		salvagingBlockFromVehicle(output);
 	}
 
-	private static void cuttingAnimalItems(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BEEF), KNIVES, ModItems.MINCED_BEEF.get(), 2)
+	private void cuttingAnimalItems(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cutting(items, Items.BEEF, CommonTags.Items.TOOLS_KNIFE, ModItems.MINCED_BEEF.get(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/beef"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.PORKCHOP, CommonTags.Items.TOOLS_KNIFE, ModItems.BACON.get(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/porkchop"));
+		/*
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.BACON.get(), 2)
+				.requires(Items.PORKCHOP)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PORKCHOP), KNIVES, ModItems.BACON.get(), 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CHICKEN), KNIVES, ModItems.CHICKEN_CUTS.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.CHICKEN_CUTS.get(), 2)
 				.addResult(Items.BONE_MEAL)
+				.requires(Items.CHICKEN)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_CHICKEN), KNIVES, ModItems.COOKED_CHICKEN_CUTS.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.COOKED_CHICKEN_CUTS.get(), 2)
 				.addResult(Items.BONE_MEAL)
+				.requires(Items.COOKED_CHICKEN)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COD), KNIVES, ModItems.COD_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.COD_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
+				.requires(Items.COD)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_COD), KNIVES, ModItems.COOKED_COD_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.COOKED_COD_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
+				.requires(Items.COOKED_COD)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SALMON), KNIVES, ModItems.SALMON_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.SALMON_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
+				.requires(Items.SALMON)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_SALMON), KNIVES, ModItems.COOKED_SALMON_SLICE.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.COOKED_SALMON_SLICE.get(), 2)
 				.addResult(Items.BONE_MEAL)
+				.requires(Items.COOKED_SALMON)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.HAM.get()), KNIVES, Items.PORKCHOP, 2)
+		CuttingBoardRecipeBuilder.cutting(items, Items.PORKCHOP, 2)
+				.addResult(Items.BONE)
+				.requires(ModItems.HAM.get())
+				.tool(CommonTags.Items.TOOLS_KNIFE)
+				.saveToFD(output);
+		CuttingBoardRecipeBuilder.cutting(items, Items.COOKED_PORKCHOP, 2)
+				.requires(ModItems.SMOKED_HAM.get())
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.addResult(Items.BONE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.SMOKED_HAM.get()), KNIVES, Items.COOKED_PORKCHOP, 2)
-				.addResult(Items.BONE)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.MUTTON_CHOPS.get(), 2)
+				.requires(Items.MUTTON)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MUTTON), KNIVES, ModItems.MUTTON_CHOPS.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.COOKED_MUTTON_CHOPS.get(), 2)
+				.requires(Items.COOKED_MUTTON)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.COOKED_MUTTON), KNIVES, ModItems.COOKED_MUTTON_CHOPS.get(), 2)
+		CuttingBoardRecipeBuilder.cutting(items, Items.DYE.black(), 2)
+				.requires(Items.INK_SAC)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.INK_SAC), KNIVES, Items.BLACK_DYE, 2)
-				.saveToFD(output);
+		*/
 	}
 
-	private static void cuttingVegetables(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CABBAGE.get()), KNIVES, ModItems.CABBAGE_LEAF.get(), 2)
+	private void cuttingVegetables(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.CABBAGE.get(), CommonTags.Items.TOOLS_KNIFE, ModItems.CABBAGE_LEAF.get(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/cabbage"));
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.RICE_PANICLE.get(), CommonTags.Items.TOOLS_KNIFE,
+						List.of(new ChanceResult(new ItemStackTemplate(ModItems.RICE.get()), 1.0f),
+								new ChanceResult(new ItemStackTemplate(ModItems.STRAW.get()), 1.0f)
+						))
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/rice_panicle"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.MELON, CommonTags.Items.TOOLS_KNIFE, Items.MELON_SLICE, 9)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/melon"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.PUMPKIN, CommonTags.Items.TOOLS_KNIFE, ModItems.PUMPKIN_SLICE.get(), 4)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/pumpkin"));
+		/*
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.BROWN_MUSHROOM_COLONY.get()), KNIVES, Items.BROWN_MUSHROOM, 5)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RICE_PANICLE.get()), KNIVES, ModItems.RICE.get(), 1)
-				.addResult(ModItems.STRAW.get())
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.RED_MUSHROOM_COLONY.get()), KNIVES, Items.RED_MUSHROOM, 5)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MELON), KNIVES, Items.MELON_SLICE, 9)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PUMPKIN), KNIVES, ModItems.PUMPKIN_SLICE.get(), 4)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.BROWN_MUSHROOM_COLONY.get()), KNIVES, Items.BROWN_MUSHROOM, 5)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.RED_MUSHROOM_COLONY.get()), KNIVES, Items.RED_MUSHROOM, 5)
-				.saveToFD(output);
+		*/
 	}
 
-	private static void cuttingFoods(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(CommonTags.Items.FOODS_DOUGH), KNIVES, ModItems.RAW_PASTA.get(), 1)
-				.save(output, RecipeUtils.FDLocation("cutting/tag_dough"));
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.KELP_ROLL.get()), KNIVES, ModItems.KELP_ROLL_SLICE.get(), 3)
+	private void cuttingFoods(RecipeOutput output) {
+		/*
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.RAW_PASTA.get(), 1)
+				.requires(CommonTags.Items.FOODS_DOUGH)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
+				.save(output, RecipeUtils.FDRecipeKey("cutting/tag_dough"));
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.KELP_ROLL.get(), CommonTags.Items.TOOLS_KNIFE, ModItems.KELP_ROLL_SLICE.get(), 3)
+				.requires(ModItems.KELP_ROLL.get())
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CAKE), KNIVES, ModItems.CAKE_SLICE.get(), 7)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.CAKE_SLICE.get(), 7)
+				.requires(Items.CAKE)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.APPLE_PIE.get()), KNIVES, ModItems.APPLE_PIE_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.APPLE_PIE.get()), KNIVES, ModItems.APPLE_PIE_SLICE.get(), 4)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.SWEET_BERRY_CHEESECAKE.get()), KNIVES, ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.SWEET_BERRY_CHEESECAKE.get()), KNIVES, ModItems.SWEET_BERRY_CHEESECAKE_SLICE.get(), 4)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.CHOCOLATE_PIE.get()), KNIVES, ModItems.CHOCOLATE_PIE_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.CHOCOLATE_PIE.get()), KNIVES, ModItems.CHOCOLATE_PIE_SLICE.get(), 4)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PUMPKIN_PIE), KNIVES, ModItems.PUMPKIN_PIE_SLICE.get(), 4)
+		CuttingBoardRecipeBuilder.cutting(items, ModItems.PUMPKIN_PIE_SLICE.get(), 4)
+				.requires(Items.PUMPKIN_PIE)
+				.tool(CommonTags.Items.TOOLS_KNIFE)
 				.saveToFD(output);
+		*/
 	}
 
-	private static void cuttingFlowers(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WITHER_ROSE), KNIVES, Items.BLACK_DYE, 2)
+	private void cuttingFlowers(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cutting(items, Items.WITHER_ROSE, CommonTags.Items.TOOLS_KNIFE, Items.DYE.black(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/black_dye_from_wither_rose"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.CORNFLOWER, CommonTags.Items.TOOLS_KNIFE, Items.DYE.blue(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/blue_dye_from_cornflower"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.BLUE_ORCHID, CommonTags.Items.TOOLS_KNIFE, Items.DYE.lightBlue(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/light_blue_dye_from_blue_orchid"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.AZURE_BLUET, CommonTags.Items.TOOLS_KNIFE, Items.DYE.lightGray(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/light_gray_dye_from_azure_bluet"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.OXEYE_DAISY, CommonTags.Items.TOOLS_KNIFE, Items.DYE.lightGray(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/light_gray_dye_from_oxeye_daisy"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.WHITE_TULIP, CommonTags.Items.TOOLS_KNIFE, Items.DYE.lightGray(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/light_gray_dye_from_white_tulip"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.ALLIUM, CommonTags.Items.TOOLS_KNIFE, Items.DYE.orange(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/orange_dye_from_allium"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.ORANGE_TULIP, CommonTags.Items.TOOLS_KNIFE, Items.DYE.orange(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/orange_dye_from_orange_tulip"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.PINK_TULIP, CommonTags.Items.TOOLS_KNIFE, Items.DYE.pink(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/pink_dye_from_pink_tulip"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.RED_TULIP, CommonTags.Items.TOOLS_KNIFE, Items.DYE.red(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/red_dye_from_red_tulip"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.POPPY, CommonTags.Items.TOOLS_KNIFE, Items.DYE.red(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/red_dye_from_poppy"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.LILY_OF_THE_VALLEY, CommonTags.Items.TOOLS_KNIFE, Items.DYE.white(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/white_dye_from_lily_of_the_valley"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.DANDELION, CommonTags.Items.TOOLS_KNIFE, Items.DYE.yellow(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/yellow_dye_from_dandelion"));
+		CuttingBoardRecipeBuilder.cutting(items, Items.TORCHFLOWER, CommonTags.Items.TOOLS_KNIFE,Items.DYE.orange(), 2)
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/orange_dye_from_torchflower"));
+		/*
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WILD_BEETROOTS.get()), KNIVES, Items.BEETROOT_SEEDS, 1)
+				.addResult(Items.DYE.red())
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CORNFLOWER), KNIVES, Items.BLUE_DYE, 2)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WILD_CABBAGES.get()), KNIVES, ModItems.CABBAGE_SEEDS.get(), 1)
+				.addResultWithChance(Items.DYE.yellow(), 0.5F, 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BLUE_ORCHID), KNIVES, Items.LIGHT_BLUE_DYE, 2)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WILD_CARROTS.get()), KNIVES, Items.CARROT, 1)
+				.addResultWithChance(Items.DYE.lightGray(), 0.5F, 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AZURE_BLUET), KNIVES, Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WILD_ONIONS.get()), KNIVES, ModItems.ONION.get(), 1)
+				.addResult(Items.DYE.magenta(), 2)
+				.addResultWithChance(Items.DYE.lime(), 0.1F)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.OXEYE_DAISY), KNIVES, Items.LIGHT_GRAY_DYE, 2)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WILD_POTATOES.get()), KNIVES, Items.POTATO, 1)
+				.addResultWithChance(Items.DYE.purple(), 0.5F, 2)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.WHITE_TULIP), KNIVES, Items.LIGHT_GRAY_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ALLIUM), KNIVES, Items.MAGENTA_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ORANGE_TULIP), KNIVES, Items.ORANGE_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.PINK_TULIP), KNIVES, Items.PINK_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.RED_TULIP), KNIVES, Items.RED_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.POPPY), KNIVES, Items.RED_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LILY_OF_THE_VALLEY), KNIVES, Items.WHITE_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DANDELION), KNIVES, Items.YELLOW_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.TORCHFLOWER), KNIVES, Items.ORANGE_DYE, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_BEETROOTS.get()), KNIVES, Items.BEETROOT_SEEDS, 1)
-				.addResult(Items.RED_DYE)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CABBAGES.get()), KNIVES, ModItems.CABBAGE_SEEDS.get(), 1)
-				.addResultWithChance(Items.YELLOW_DYE, 0.5F, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_CARROTS.get()), KNIVES, Items.CARROT, 1)
-				.addResultWithChance(Items.LIGHT_GRAY_DYE, 0.5F, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_ONIONS.get()), KNIVES, ModItems.ONION.get(), 1)
-				.addResult(Items.MAGENTA_DYE, 2)
-				.addResultWithChance(Items.LIME_DYE, 0.1F)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_POTATOES.get()), KNIVES, Items.POTATO, 1)
-				.addResultWithChance(Items.PURPLE_DYE, 0.5F, 2)
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_RICE.get()), KNIVES, ModItems.RICE.get(), 1)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WILD_RICE.get()), KNIVES, ModItems.RICE.get(), 1)
 				.addResultWithChance(ModItems.STRAW.get(), 0.5F)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WILD_TOMATOES.get()), KNIVES, ModItems.TOMATO_SEEDS.get(), 1)
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WILD_TOMATOES.get()), KNIVES, ModItems.TOMATO_SEEDS.get(), 1)
 				.addResultWithChance(ModItems.TOMATO.get(), 0.2F)
-				.addResultWithChance(Items.GREEN_DYE, 0.1F)
+				.addResultWithChance(Items.DYE.green(), 0.1F)
 				.saveToFD(output);
+		*/
 	}
 
-	private static void salvagingMinerals(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BRICKS), PICKAXES, Items.BRICK, 4)
-				.salvaging()
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.NETHER_BRICKS), PICKAXES, Items.NETHER_BRICK, 4)
-				.salvaging()
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.STONE), PICKAXES, Items.COBBLESTONE, 1)
-				.salvaging()
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DEEPSLATE), PICKAXES, Items.COBBLED_DEEPSLATE, 1)
-				.salvaging()
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.QUARTZ_BLOCK), PICKAXES, Items.QUARTZ, 4)
-				.salvaging()
-				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.AMETHYST_BLOCK), PICKAXES, Items.AMETHYST_SHARD, 4)
-				.salvaging()
-				.saveToFD(output);
+	private void salvagingMinerals(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cutting(items, Items.BRICKS, ItemTags.PICKAXES, Items.BRICK, 4)
+				.saveToFD(output, salvagingRecipe(Items.BRICKS));
+		CuttingBoardRecipeBuilder.cutting(items, Items.NETHER_BRICKS, ItemTags.PICKAXES, Items.NETHER_BRICK, 4)
+				.saveToFD(output, salvagingRecipe(Items.NETHER_BRICKS));
+		CuttingBoardRecipeBuilder.cutting(items, Items.STONE, ItemTags.PICKAXES, Items.COBBLESTONE, 1)
+				.saveToFD(output, salvagingRecipe(Items.STONE));
+		CuttingBoardRecipeBuilder.cutting(items, Items.DEEPSLATE, ItemTags.PICKAXES, Items.COBBLED_DEEPSLATE, 1)
+				.saveToFD(output, salvagingRecipe(Items.DEEPSLATE));
+		CuttingBoardRecipeBuilder.cutting(items, Items.QUARTZ_BLOCK, ItemTags.PICKAXES, Items.QUARTZ, 4)
+				.saveToFD(output, salvagingRecipe(Items.QUARTZ_BLOCK));
+		CuttingBoardRecipeBuilder.cutting(items, Items.AMETHYST_BLOCK, ItemTags.PICKAXES, Items.AMETHYST_SHARD, 4)
+				.saveToFD(output, salvagingRecipe(Items.AMETHYST_BLOCK));
 	}
 
-	private static void strippingWood(RecipeOutput output) {
+	private void strippingWood(RecipeOutput output) {
 		stripLogForBark(output, Items.OAK_LOG, Items.STRIPPED_OAK_LOG);
 		stripLogForBark(output, Items.OAK_WOOD, Items.STRIPPED_OAK_WOOD);
 		stripLogForBark(output, Items.SPRUCE_LOG, Items.STRIPPED_SPRUCE_LOG);
@@ -219,16 +261,16 @@ public class CuttingRecipes
 		stripLogForBark(output, Items.MANGROVE_WOOD, Items.STRIPPED_MANGROVE_WOOD);
 		stripLogForBark(output, Items.CHERRY_LOG, Items.STRIPPED_CHERRY_LOG);
 		stripLogForBark(output, Items.CHERRY_WOOD, Items.STRIPPED_CHERRY_WOOD);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BAMBOO_BLOCK), AXES_STRIP, Items.STRIPPED_BAMBOO_BLOCK)
+		CuttingBoardRecipeBuilder.cutting(items, Items.BAMBOO_BLOCK, ItemTags.AXES, Items.STRIPPED_BAMBOO_BLOCK)
 				.addResult(ModItems.STRAW.get())
-				.addSound(SoundEvents.AXE_STRIP).saveToFD(output);
+				.setSound(SoundEvents.AXE_STRIP.value()).saveToFD(output);
 		stripLogForBark(output, Items.CRIMSON_STEM, Items.STRIPPED_CRIMSON_STEM);
 		stripLogForBark(output, Items.CRIMSON_HYPHAE, Items.STRIPPED_CRIMSON_HYPHAE);
 		stripLogForBark(output, Items.WARPED_STEM, Items.STRIPPED_WARPED_STEM);
 		stripLogForBark(output, Items.WARPED_HYPHAE, Items.STRIPPED_WARPED_HYPHAE);
 	}
 
-	private static void salvagingWoodenFurniture(RecipeOutput output) {
+	private void salvagingWoodenFurniture(RecipeOutput output) {
 		salvagePlankFromFurniture(output, WoodType.OAK,
 				Items.OAK_PLANKS, Items.OAK_DOOR, Items.OAK_TRAPDOOR, Items.OAK_SIGN, Items.OAK_HANGING_SIGN, Items.OAK_FENCE, Items.OAK_FENCE_GATE,
 				Items.OAK_PRESSURE_PLATE, Items.OAK_BUTTON, Items.OAK_BOAT, ModItems.OAK_CABINET.get());
@@ -256,125 +298,123 @@ public class CuttingRecipes
 		salvagePlankFromFurniture(output, WoodType.BAMBOO,
 				Items.BAMBOO_PLANKS, Items.BAMBOO_DOOR, Items.BAMBOO_TRAPDOOR, Items.BAMBOO_SIGN, Items.BAMBOO_HANGING_SIGN, Items.BAMBOO_FENCE, Items.BAMBOO_FENCE_GATE,
 				Items.BAMBOO_PRESSURE_PLATE, Items.BAMBOO_BUTTON, Items.BAMBOO_RAFT, ModItems.BAMBOO_CABINET.get());
+		salvagePlankFromFurniture(output, WoodType.PALE_OAK,
+				Items.PALE_OAK_PLANKS, Items.PALE_OAK_DOOR, Items.PALE_OAK_TRAPDOOR, Items.PALE_OAK_SIGN, Items.PALE_OAK_HANGING_SIGN, Items.PALE_OAK_FENCE, Items.PALE_OAK_FENCE_GATE,
+				Items.PALE_OAK_PRESSURE_PLATE, Items.PALE_OAK_BUTTON, Items.PALE_OAK_BOAT, ModItems.PALE_OAK_CABINET.get());
+		salvagePlankFromFurniture(output, WoodType.POPLAR,
+				Items.POPLAR_PLANKS, Items.POPLAR_DOOR, Items.POPLAR_TRAPDOOR, Items.POPLAR_SIGN, Items.POPLAR_HANGING_SIGN, Items.POPLAR_FENCE, Items.POPLAR_FENCE_GATE,
+				Items.POPLAR_PRESSURE_PLATE, Items.POPLAR_BUTTON, Items.POPLAR_BOAT, ModItems.POPLAR_CABINET.get());
 		salvagePlankFromFurniture(output, WoodType.CRIMSON,
 				Items.CRIMSON_PLANKS, Items.CRIMSON_DOOR, Items.CRIMSON_TRAPDOOR, Items.CRIMSON_SIGN, Items.CRIMSON_HANGING_SIGN, Items.CRIMSON_FENCE, Items.CRIMSON_FENCE_GATE,
 				Items.CRIMSON_PRESSURE_PLATE, Items.CRIMSON_BUTTON, ModItems.CRIMSON_CABINET.get());
 		salvagePlankFromFurniture(output, WoodType.WARPED,
 				Items.WARPED_PLANKS, Items.WARPED_DOOR, Items.WARPED_TRAPDOOR, Items.WARPED_SIGN, Items.WARPED_HANGING_SIGN, Items.WARPED_FENCE, Items.WARPED_FENCE_GATE,
 				Items.WARPED_PRESSURE_PLATE, Items.WARPED_BUTTON, ModItems.WARPED_CABINET.get());
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.WOODEN_BASKET.get()), AXES, ModItems.CANVAS.get())
+		/*
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.WOODEN_BASKET.get()), AXES, ModItems.CANVAS.get())
 				.addResult(Items.STICK)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(ModItems.BAMBOO_BASKET.get()), AXES, ModItems.CANVAS.get())
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(ModItems.BAMBOO_BASKET.get()), AXES, ModItems.CANVAS.get())
 				.addResult(Items.BAMBOO)
 				.saveToFD(output);
+		*/
 	}
 
-	private static void diggingSediments(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CLAY), SHOVELS, Items.CLAY_BALL, 4)
+	private void diggingSediments(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cutting(items, Items.CLAY, ItemTags.SHOVELS, Items.CLAY_BALL, 4)
 				.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.GRAVEL), SHOVELS, Items.GRAVEL, 1)
-				.addResultWithChance(Items.FLINT, 0.1F)
+		CuttingBoardRecipeBuilder.cutting(items, Items.GRAVEL, ItemTags.SHOVELS, Items.GRAVEL, 1)
+				.addResult(Items.FLINT, 1, 0.1F)
 				.saveToFD(output);
 	}
 
-	private static void salvagingUsingShears(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SADDLE), SHEARS, Items.LEATHER, 2)
-				.addResultWithChance(Items.IRON_NUGGET, 0.5F, 2)
+	private void salvagingUsingShears(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cutting(items, Items.SADDLE, Tags.Items.TOOLS_SHEAR, Items.LEATHER, 2)
+				.addResult(Items.IRON_NUGGET, 2, 0.5F)
 				.save(output, salvagingRecipe("saddle"));
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LEATHER_HORSE_ARMOR), SHEARS, Items.LEATHER, 2)
+		CuttingBoardRecipeBuilder.cutting(items, Items.LEATHER_HORSE_ARMOR, Tags.Items.TOOLS_SHEAR, Items.LEATHER, 2)
 				.save(output, salvagingRecipe("leather_horse_armor"));
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS), SHEARS, Items.LEATHER, 1)
+		/*
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(Items.LEATHER_HELMET, Items.LEATHER_CHESTPLATE, Items.LEATHER_LEGGINGS, Items.LEATHER_BOOTS), SHEARS, Items.LEATHER, 1)
 				.save(output, salvagingRecipe("leather_armor"));
+		*/
 	}
 
-	private static void salvagingBlockFromVehicle(RecipeOutput output) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CHEST_MINECART), HOES, Items.MINECART)
+	private void salvagingBlockFromVehicle(RecipeOutput output) {
+		CuttingBoardRecipeBuilder.cutting(items, Items.CHEST_MINECART, ItemTags.HOES, Items.MINECART)
 			.addResult(Items.CHEST)
-			.addSound(SoundEvents.METAL_BREAK)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.FURNACE_MINECART), HOES, Items.MINECART)
+			.setSound(SoundEvents.METAL_BREAK)
+			.saveToFD(output, salvagingRecipe(Items.CHEST_MINECART));
+		CuttingBoardRecipeBuilder.cutting(items, Items.FURNACE_MINECART, ItemTags.HOES, Items.MINECART)
 			.addResult(Items.FURNACE)
-			.addSound(SoundEvents.METAL_BREAK)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.HOPPER_MINECART), HOES, Items.MINECART)
+			.setSound(SoundEvents.METAL_BREAK)
+			.saveToFD(output, salvagingRecipe(Items.FURNACE_MINECART));
+		CuttingBoardRecipeBuilder.cutting(items, Items.HOPPER_MINECART, ItemTags.HOES, Items.MINECART)
 			.addResult(Items.HOPPER)
-			.addSound(SoundEvents.METAL_BREAK)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.TNT_MINECART), HOES, Items.MINECART)
+			.setSound(SoundEvents.METAL_BREAK)
+			.saveToFD(output, salvagingRecipe(Items.HOPPER_MINECART));
+		CuttingBoardRecipeBuilder.cutting(items, Items.TNT_MINECART, ItemTags.HOES, Items.MINECART)
 			.addResult(Items.TNT)
-			.addSound(SoundEvents.METAL_BREAK)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.OAK_CHEST_BOAT), HOES, Items.OAK_BOAT)
+			.setSound(SoundEvents.METAL_BREAK)
+			.saveToFD(output, salvagingRecipe(Items.TNT_MINECART));
+		CuttingBoardRecipeBuilder.cutting(items, Items.OAK_CHEST_BOAT, ItemTags.HOES, Items.OAK_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SPRUCE_CHEST_BOAT), HOES, Items.SPRUCE_BOAT)
+			.saveToFD(output, salvagingRecipe(Items.OAK_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.SPRUCE_CHEST_BOAT, ItemTags.HOES, Items.SPRUCE_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BIRCH_CHEST_BOAT), HOES, Items.BIRCH_BOAT)
+			.saveToFD(output, salvagingRecipe(Items.SPRUCE_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.BIRCH_CHEST_BOAT, ItemTags.HOES, Items.BIRCH_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.JUNGLE_CHEST_BOAT), HOES, Items.JUNGLE_BOAT)
+			.saveToFD(output, salvagingRecipe(Items.BIRCH_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.JUNGLE_CHEST_BOAT, ItemTags.HOES, Items.JUNGLE_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.ACACIA_CHEST_BOAT), HOES, Items.ACACIA_BOAT)
+			.saveToFD(output, salvagingRecipe(Items.JUNGLE_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.ACACIA_CHEST_BOAT, ItemTags.HOES, Items.ACACIA_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.DARK_OAK_CHEST_BOAT), HOES, Items.DARK_OAK_BOAT)
+			.saveToFD(output, salvagingRecipe(Items.ACACIA_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.DARK_OAK_CHEST_BOAT, ItemTags.HOES, Items.DARK_OAK_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.MANGROVE_CHEST_BOAT), HOES, Items.MANGROVE_BOAT)
+			.saveToFD(output, salvagingRecipe(Items.DARK_OAK_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.MANGROVE_CHEST_BOAT, ItemTags.HOES, Items.MANGROVE_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CHERRY_CHEST_BOAT), HOES, Items.CHERRY_BOAT)
+			.saveToFD(output, salvagingRecipe(Items.MANGROVE_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.CHERRY_CHEST_BOAT, ItemTags.HOES, Items.CHERRY_BOAT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BAMBOO_CHEST_RAFT), HOES, Items.BAMBOO_RAFT)
+			.saveToFD(output, salvagingRecipe(Items.CHERRY_CHEST_BOAT));
+		CuttingBoardRecipeBuilder.cutting(items, Items.BAMBOO_CHEST_RAFT, ItemTags.HOES, Items.BAMBOO_RAFT)
 			.addResult(Items.CHEST)
-			.salvaging()
-			.saveToFD(output);
+			.saveToFD(output, salvagingRecipe(Items.BAMBOO_CHEST_RAFT));
 	}
-	 */
 
 	/**
 	 * Generates an axe-cutting recipe for wooded furniture items, with a chance to recover one plank of the given type.
 	 */
-	/*
-	private static void salvagePlankFromFurniture(RecipeOutput output, WoodType woodType, ItemLike plank, ItemLike... furniture) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(furniture), AXES, plank, 1, 0.75F)
+	private void salvagePlankFromFurniture(RecipeOutput output, WoodType woodType, ItemLike plank, ItemLike... furniture) {
+		CuttingBoardRecipeBuilder.cutting(items, Ingredient.of(furniture), ItemTags.AXES, List.of(new ChanceResult(new ItemStackTemplate(plank.asItem()), 0.75f)))
 				.save(output, salvagingRecipe(woodType.name() + "_furniture"));
 	}
-	 */
 
 	/**
 	 * Generates an axe-stripping recipe for the pair of given logs, with custom sound and a Tree Bark result attached.
 	 */
-	/*
-	private static void stripLogForBark(RecipeOutput output, ItemLike log, ItemLike strippedLog) {
-		CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), AXES_STRIP, strippedLog)
-				.addResult(ModItems.TREE_BARK.get())
-				.addSound(SoundEvents.AXE_STRIP)
-				.saveToFD(output);
+	private void stripLogForBark(RecipeOutput output, ItemLike log, ItemLike strippedLog) {
+		CuttingBoardRecipeBuilder.cutting(items, log, ItemTags.AXES,
+						List.of(new ChanceResult(new ItemStackTemplate(strippedLog.asItem()), 1.0f),
+								new ChanceResult(new ItemStackTemplate(ModItems.TREE_BARK.get()), 1.0f)
+						))
+				.setSound(SoundEvents.AXE_STRIP.value())
+				.saveToFD(output, RecipeUtils.FDRecipeKey("cutting/" + BuiltInRegistries.ITEM.getKey(log.asItem()).getPath()));
 	}
 
-	private static Ingredient matchesTool(ItemAbility toolAction, TagKey<Item> fallbackTag) {
-		return CompoundIngredient.of(new ItemAbilityIngredient(toolAction).toVanilla(), Ingredient.of(fallbackTag));
+	private Ingredient matchesTool(TagKey<Item> fallbackTag) {
+		return Ingredient.of(items.getOrThrow(fallbackTag));
 	}
 
-	private static Identifier salvagingRecipe(String name) {
-		return Identifier.fromNamespaceAndPath(FarmersDelight.MODID, "salvaging/" + name);
+	private static ResourceKey<Recipe<?>> salvagingRecipe(String name) {
+		return RecipeUtils.FDRecipeKey("salvaging/" + name);
 	}
-	 */
+
+	private static ResourceKey<Recipe<?>> salvagingRecipe(Item item) {
+		return RecipeUtils.FDRecipeKey("salvaging/" + BuiltInRegistries.ITEM.getKey(item).getPath());
+	}
 }

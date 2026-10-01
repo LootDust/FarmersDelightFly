@@ -28,7 +28,7 @@ import java.util.Optional;
 public class ItemUtils
 {
 	/**
-	 * Shorthand method for checking if the given stack either has a required ToolAction, or is otherwise part of a given tag.
+	 * Shorthand method for checking if the given item either has a required ToolAction, or is otherwise part of a given tag.
 	 * @param toolAction The ToolAction to check for
 	 * @param fallbackTag An item tag to check for, if the given ToolAction is absent
 	 * @return true if either condition matches
@@ -70,11 +70,11 @@ public class ItemUtils
 	}
 
 	/**
-	 * Checks if the enchantment is registered, and if so, gets that enchantment's level on the passed stack. Defaults to 0 in all edge cases.
+	 * Checks if the enchantment is registered, and if so, gets that enchantment's level on the passed item. Defaults to 0 in all edge cases.
 	 * @param enchantment The ResourceKey for the enchantment
 	 * @param registries The provider for registry lookup
-	 * @param stack The stack to be queried
-	 * @return The enchantment's level, if the stack is enchanted with it. Returns 0 if not, or if the enchantment is disabled.
+	 * @param stack The item to be queried
+	 * @return The enchantment's level, if the item is enchanted with it. Returns 0 if not, or if the enchantment is disabled.
 	 */
 	public static int getValidatedEnchantmentLevel(ResourceKey<Enchantment> enchantment, HolderLookup.Provider registries, ItemStack stack) {
 		Optional<Holder.Reference<Enchantment>> fortune = registries.holder(enchantment);

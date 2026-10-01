@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:furnace_minecart",
+  "result": [
+    {
+      "item": {
+        "id": "minecraft:minecart"
+      }
+    },
+    {
+      "item": {
+        "id": "minecraft:furnace"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "minecraft:block.metal.break"
+  },
+  "tool": "#minecraft:hoes"
+}

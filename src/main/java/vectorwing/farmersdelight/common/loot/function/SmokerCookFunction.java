@@ -37,19 +37,19 @@ public class SmokerCookFunction // extends LootItemConditionalFunction
 	}
 
 	@Override
-	protected @NonNull ItemStack run(ItemStack stack, LootContext context) {
-		if (stack.isEmpty()) {
-			return stack;
+	protected @NonNull ItemStack run(ItemStack item, LootContext context) {
+		if (item.isEmpty()) {
+			return item;
 		}
 
-		Optional<RecipeHolder<SmokingRecipe>> recipe = context.getLevel().recipeAccess().getRecipeFor(RecipeType.SMOKING, new SingleRecipeInput(stack), context.getLevel()).stream().findFirst();
+		Optional<RecipeHolder<SmokingRecipe>> recipe = context.getLevel().recipeAccess().getRecipeFor(RecipeType.SMOKING, new SingleRecipeInput(item), context.getLevel()).stream().findFirst();
 		if (recipe.isPresent()) {
-			ItemStack resultStack = recipe.get().value().assemble(new SingleRecipeInput(stack)).copy();
-			resultStack.setCount(resultStack.getCount() * stack.getCount());
+			ItemStack resultStack = recipe.get().value().assemble(new SingleRecipeInput(item)).copy();
+			resultStack.setCount(resultStack.getCount() * item.getCount());
 			return resultStack;
 		}
 
-		return stack;
+		return item;
 	}
 
 	@Deprecated

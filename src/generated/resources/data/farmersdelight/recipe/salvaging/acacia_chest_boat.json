@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:acacia_chest_boat",
+  "result": [
+    {
+      "item": {
+        "id": "minecraft:acacia_boat"
+      }
+    },
+    {
+      "item": {
+        "id": "minecraft:chest"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:hoes"
+}

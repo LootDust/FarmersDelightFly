@@ -92,8 +92,8 @@ public class TatamiMatBlock // extends HorizontalDirectionalBlock
 	}
 
 	@Override
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.setPlacedBy(level, pos, state, placer, stack);
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack item) {
+		super.setPlacedBy(level, pos, state, placer, item);
 		if (!level.isClientSide) {
 			BlockPos facingPos = pos.relative(state.getValue(FACING));
 			level.setBlock(facingPos, state.setValue(PART, BedPart.HEAD), 3);

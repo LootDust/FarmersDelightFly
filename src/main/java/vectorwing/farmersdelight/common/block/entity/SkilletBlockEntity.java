@@ -54,7 +54,7 @@ public class SkilletBlockEntity // extends SyncedBlockEntity implements Heatable
             }
 
             @Override
-            protected void setStack(ItemStack stack) {
+            protected void setStack(ItemStack item) {
 
             }
         };
@@ -143,9 +143,9 @@ public class SkilletBlockEntity // extends SyncedBlockEntity implements Heatable
 		return false;
 	}
 
-	private Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack stack) {
+	private Optional<RecipeHolder<CampfireCookingRecipe>> getMatchingRecipe(ItemStack item) {
 		if (level == null) return Optional.empty();
-		return this.quickCheck.getRecipeFor(new SingleRecipeInput(stack), this.level);
+		return this.quickCheck.getRecipeFor(new SingleRecipeInput(item), this.level);
 	}
 
 	@Override
@@ -173,9 +173,9 @@ public class SkilletBlockEntity // extends SyncedBlockEntity implements Heatable
 		return skilletStack;
 	}
 
-	public void setSkilletItem(ItemStack stack) {
-		skilletStack = stack.copy();
-		fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, level.registryAccess(), stack);
+	public void setSkilletItem(ItemStack item) {
+		skilletStack = item.copy();
+		fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, level.registryAccess(), item);
 		inventoryChanged();
 	}
 

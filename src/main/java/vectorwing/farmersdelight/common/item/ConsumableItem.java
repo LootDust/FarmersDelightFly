@@ -25,7 +25,7 @@ public class ConsumableItem extends Item
 
 	/**
 	 * Items that can be consumed by an entity.
-	 * When consumed, they may affect the consumer somehow, and will give back containers if applicable, regardless of their stack size.
+	 * When consumed, they may affect the consumer somehow, and will give back containers if applicable, regardless of their item size.
 	 */
 
 	public ConsumableItem(Properties properties) {
@@ -48,29 +48,29 @@ public class ConsumableItem extends Item
 
 	/*
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity consumer) {
+	public ItemStack finishUsingItem(ItemStack item, Level level, LivingEntity consumer) {
 		if (!level.isClientSide) {
-			this.affectConsumer(stack, level, consumer);
+			this.affectConsumer(item, level, consumer);
 		}
 
-		ItemStack containerStack = stack.getCraftingRemainingItem();
+		ItemStack containerStack = item.getCraftingRemainingItem();
 
-		if (stack.getFoodProperties(consumer) != null) {
-			super.finishUsingItem(stack, level, consumer);
+		if (item.getFoodProperties(consumer) != null) {
+			super.finishUsingItem(item, level, consumer);
 		} else {
 			Player player = consumer instanceof Player ? (Player) consumer : null;
 			if (player instanceof ServerPlayer) {
-				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
+				CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, item);
 			}
 			if (player != null) {
 				player.awardStat(Stats.ITEM_USED.get(this));
 				if (!player.getAbilities().instabuild) {
-					stack.shrink(1);
+					item.shrink(1);
 				}
 			}
 		}
 
-		if (stack.isEmpty()) {
+		if (item.isEmpty()) {
 			return containerStack;
 		} else {
 			if (consumer instanceof Player player && !((Player) consumer).getAbilities().instabuild) {
@@ -78,7 +78,7 @@ public class ConsumableItem extends Item
 					player.drop(containerStack, false);
 				}
 			}
-			return stack;
+			return item;
 		}
 	}
 	 */
@@ -92,13 +92,13 @@ public class ConsumableItem extends Item
 
 	/*
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack item, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			if (this.hasCustomTooltip) {
 				tooltip.add(TextUtils.tooltip(BuiltInRegistries.ITEM.getKey(this).getPath()).withStyle(ChatFormatting.BLUE));
 			}
 			if (this.hasFoodEffectTooltip) {
-				TextUtils.addFoodEffectTooltip(stack, tooltip::add, 1.0F, context.tickRate());
+				TextUtils.addFoodEffectTooltip(item, tooltip::add, 1.0F, context.tickRate());
 			}
 		}
 	}

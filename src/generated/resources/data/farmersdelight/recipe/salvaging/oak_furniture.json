@@ -1,0 +1,27 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": [
+    "minecraft:oak_door",
+    "minecraft:oak_trapdoor",
+    "minecraft:oak_sign",
+    "minecraft:oak_hanging_sign",
+    "minecraft:oak_fence",
+    "minecraft:oak_fence_gate",
+    "minecraft:oak_pressure_plate",
+    "minecraft:oak_button",
+    "minecraft:oak_boat",
+    "farmersdelight:oak_cabinet"
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:oak_planks"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:axes"
+}

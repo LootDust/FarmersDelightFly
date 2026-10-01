@@ -24,7 +24,7 @@ public abstract class CuttingBoardDispenserMixin
 {
 	/*
 	@Shadow
-	protected abstract DispenseItemBehavior getDispenseMethod(Level level, ItemStack stack);
+	protected abstract DispenseItemBehavior getDispenseMethod(Level level, ItemStack item);
 
 	@Inject(
 			method = "dispenseFrom",
@@ -35,10 +35,10 @@ public abstract class CuttingBoardDispenserMixin
 			locals = LocalCapture.CAPTURE_FAILHARD,
 			cancellable = true
 	)
-	public void onCuttingBoardDispenseFromInject(ServerLevel level, BlockState state, BlockPos pos, CallbackInfo ci, DispenserBlockEntity dispenser, BlockSource source, int slot, ItemStack stack) {
+	public void onCuttingBoardDispenseFromInject(ServerLevel level, BlockState state, BlockPos pos, CallbackInfo ci, DispenserBlockEntity dispenser, BlockSource source, int slot, ItemStack item) {
 		BlockState facingState = level.getBlockState(pos.relative(state.getValue(DispenserBlock.FACING)));
 		if (Configuration.ENABLE_DISPENSER_TOOLS_CUTTING_BOARD.get() && facingState.is(ModBlocks.CUTTING_BOARD.get())) {
-			dispenser.setItem(slot, CuttingBoardDispenseBehavior.INSTANCE.dispense(source, stack));
+			dispenser.setItem(slot, CuttingBoardDispenseBehavior.INSTANCE.dispense(source, item));
 			ci.cancel();
 		}
 	}

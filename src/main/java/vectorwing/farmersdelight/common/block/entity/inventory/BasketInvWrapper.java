@@ -15,19 +15,19 @@ public class BasketInvWrapper // extends InvWrapper
     }
 
     @Override
-    public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+    public ItemStack insertItem(int slot, ItemStack item, boolean simulate) {
         if (simulate) {
-            return super.insertItem(slot, stack, true);
+            return super.insertItem(slot, item, true);
         } else {
             boolean wasEmpty = basket.isEmpty();
-            int originalCount = stack.getCount();
-            stack = super.insertItem(slot, stack, false);
-            if (wasEmpty && originalCount > stack.getCount()) {
+            int originalCount = item.getCount();
+            item = super.insertItem(slot, item, false);
+            if (wasEmpty && originalCount > item.getCount()) {
                 if (!basket.isOnCustomCooldown()) {
                     basket.setCooldown(8);
                 }
             }
-            return stack;
+            return item;
         }
     }
      */

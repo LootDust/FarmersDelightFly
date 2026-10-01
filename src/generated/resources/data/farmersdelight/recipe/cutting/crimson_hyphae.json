@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:crimson_hyphae",
+  "result": [
+    {
+      "item": {
+        "id": "minecraft:stripped_crimson_hyphae"
+      }
+    },
+    {
+      "item": {
+        "id": "farmersdelight:tree_bark"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "minecraft:item.axe.strip"
+  },
+  "tool": "#minecraft:axes"
+}

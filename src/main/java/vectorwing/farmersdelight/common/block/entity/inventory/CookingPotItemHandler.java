@@ -24,8 +24,8 @@ public class CookingPotItemHandler // extends ItemStacksResourceHandler
 	}
 
 	@Override
-	public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-		return itemHandler.isItemValid(slot, stack);
+	public boolean isItemValid(int slot, @Nonnull ItemStack item) {
+		return itemHandler.isItemValid(slot, item);
 	}
 
 	@Override
@@ -41,11 +41,11 @@ public class CookingPotItemHandler // extends ItemStacksResourceHandler
 
 	@Override
 	@Nonnull
-	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+	public ItemStack insertItem(int slot, @Nonnull ItemStack item, boolean simulate) {
 		if (side == null || side.equals(Direction.UP)) {
-			return slot < SLOTS_INPUT ? itemHandler.insertItem(slot, stack, simulate) : stack;
+			return slot < SLOTS_INPUT ? itemHandler.insertItem(slot, item, simulate) : item;
 		} else {
-			return slot == SLOT_CONTAINER_INPUT ? itemHandler.insertItem(slot, stack, simulate) : stack;
+			return slot == SLOT_CONTAINER_INPUT ? itemHandler.insertItem(slot, item, simulate) : item;
 		}
 	}
 

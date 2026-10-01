@@ -10,7 +10,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import java.util.Collections;
 import java.util.List;
 
-@OnlyIn(Dist.CLIENT)
 public class DefaultStoveRenderState extends BlockEntityRenderState {
     public List<ItemStackRenderState> items = Collections.emptyList();
     public List<Vec2> itemOffsets = Collections.emptyList();

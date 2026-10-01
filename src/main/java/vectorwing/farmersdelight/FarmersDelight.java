@@ -50,6 +50,7 @@ public class FarmersDelight
 		ModEffects.EFFECTS.register(modEventBus);
 		ModItems.ITEMS.register(modEventBus);
 		ModRecipeBookCategories.RECIPE_BOOK_CATEGORIES.register(modEventBus);
+		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 		ModRecipeTypes.RECIPE_TYPES.register(modEventBus);
 		ModSounds.SOUNDS.register(modEventBus);
 		/*
@@ -58,7 +59,6 @@ public class FarmersDelight
 		ModEntityTypes.ENTITIES.register(modEventBus);
 		ModMenuTypes.MENU_TYPES.register(modEventBus);
 		// WIP
-		ModRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 		// WIP
 		ModBiomeFeatures.FEATURES.register(modEventBus);
 		// WIP, TODO: Huge rebuild for whole class

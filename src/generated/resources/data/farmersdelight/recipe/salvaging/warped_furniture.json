@@ -1,0 +1,26 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": [
+    "minecraft:warped_door",
+    "minecraft:warped_trapdoor",
+    "minecraft:warped_sign",
+    "minecraft:warped_hanging_sign",
+    "minecraft:warped_fence",
+    "minecraft:warped_fence_gate",
+    "minecraft:warped_pressure_plate",
+    "minecraft:warped_button",
+    "farmersdelight:warped_cabinet"
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:warped_planks"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:axes"
+}

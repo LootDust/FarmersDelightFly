@@ -1,0 +1,27 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": [
+    "minecraft:poplar_door",
+    "minecraft:poplar_trapdoor",
+    "minecraft:poplar_sign",
+    "minecraft:poplar_hanging_sign",
+    "minecraft:poplar_fence",
+    "minecraft:poplar_fence_gate",
+    "minecraft:poplar_pressure_plate",
+    "minecraft:poplar_button",
+    "minecraft:poplar_boat",
+    "farmersdelight:poplar_cabinet"
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:poplar_planks"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:axes"
+}

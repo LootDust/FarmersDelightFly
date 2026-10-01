@@ -53,6 +53,7 @@ public class FDBlockLoot extends BlockLootSubProvider
 						.include(ModDataComponents.CONTAINER.get())
 				)
 		);
+		dropSelf(ModBlocks.CUTTING_BOARD.get());
 
 		// Crop Storage
 		dropSelf(ModBlocks.CARROT_CRATE.get());

@@ -83,7 +83,7 @@ public class SkilletBlock // extends BaseEntityBlock implements SimpleWaterlogge
 	}
 
 	@Override
-	public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+	public ItemInteractionResult useItemOn(ItemStack item, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
 			if (level.isClientSide) {
 				return ItemInteractionResult.CONSUME;

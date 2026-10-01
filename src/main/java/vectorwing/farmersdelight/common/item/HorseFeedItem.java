@@ -85,7 +85,7 @@ public class HorseFeedItem // extends Item
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack item, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		if (!Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
 			return;
 		}
@@ -112,7 +112,7 @@ public class HorseFeedItem // extends Item
 	}
 
 	@Override
-	public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+	public InteractionResult interactLivingEntity(ItemStack item, Player player, LivingEntity target, InteractionHand hand) {
 		if (target instanceof Horse horse) {
 			if (horse.isAlive() && horse.isTamed()) {
 				return InteractionResult.SUCCESS;

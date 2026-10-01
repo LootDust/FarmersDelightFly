@@ -78,11 +78,11 @@ public class BasketBlockEntity // extends RandomizableContainerBlockEntity imple
 	}
 
 	@Override
-	public void setItem(int index, ItemStack stack) {
+	public void setItem(int index, ItemStack item) {
 		this.unpackLootTable(null);
-		this.getItems().set(index, stack);
-		if (stack.getCount() > this.getMaxStackSize()) {
-			stack.setCount(this.getMaxStackSize());
+		this.getItems().set(index, item);
+		if (item.getCount() > this.getMaxStackSize()) {
+			item.setCount(this.getMaxStackSize());
 		}
 	}
 

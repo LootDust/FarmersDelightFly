@@ -34,9 +34,9 @@ public class ModNetworking
     public static class ServerPayloadHandler
     {
         public static void handleFlipSkillet(FlipSkilletPayload payload, IPayloadContext context) {
-            ItemStack stack = context.player().getUseItem();
-            if (stack.getItem() instanceof SkilletItem) {
-                stack.set(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get(), context.player().level().getGameTime());
+            ItemStack item = context.player().getUseItem();
+            if (item.getItem() instanceof SkilletItem) {
+                item.set(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get(), context.player().level().getGameTime());
             }
         }
     }

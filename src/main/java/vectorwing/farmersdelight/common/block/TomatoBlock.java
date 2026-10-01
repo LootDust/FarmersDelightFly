@@ -51,10 +51,10 @@ public class TomatoBlock // extends CropBlock
 		super(properties);
 	}
 
-	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+	protected ItemInteractionResult useItemOn(ItemStack item, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		int age = state.getValue(getAgeProperty());
 		boolean isMature = age == getMaxAge();
-		return !isMature && stack.is(Items.BONE_MEAL) ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+		return !isMature && item.is(Items.BONE_MEAL) ? ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION : super.useItemOn(item, state, level, pos, player, hand, hitResult);
 	}
 
 	@Override
@@ -250,9 +250,9 @@ public class TomatoBlock // extends CropBlock
 
 	@Deprecated(forRemoval = true)
 	@Override
-	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+	public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack item) {
 		boolean isRopelogged = state.getValue(TomatoBlock.ROPELOGGED);
-		super.playerDestroy(level, player, pos, state, blockEntity, stack);
+		super.playerDestroy(level, player, pos, state, blockEntity, item);
 
 		if (isRopelogged) {
 			destroyAndPlaceRope(level, pos);

@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "farmersdelight:rice_panicle",
+  "result": [
+    {
+      "item": {
+        "id": "farmersdelight:rice"
+      }
+    },
+    {
+      "item": {
+        "id": "farmersdelight:straw"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#c:tools/knife"
+}

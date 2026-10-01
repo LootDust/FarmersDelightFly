@@ -17,11 +17,13 @@ public class ModRecipeSerializers
 
 	/*
 	public static final Supplier<RecipeSerializer<?>> COOKING = RECIPE_SERIALIZERS.register("cooking", CookingPotRecipe.Serializer::new);
-	public static final Supplier<RecipeSerializer<?>> CUTTING = RECIPE_SERIALIZERS.register("cutting", CuttingBoardRecipe.Serializer::new);
+	*/
+	public static final Supplier<RecipeSerializer<?>> CUTTING = RECIPE_SERIALIZERS.register("cutting", () -> CuttingBoardRecipe.SERIALIZER);
 
+	/*
 	public static final Supplier<RecipeSerializer<?>> FOOD_SERVING =
 			RECIPE_SERIALIZERS.register("food_serving", () -> new RecipeSerializer<>(FoodServingRecipe::new));
 	public static final Supplier<RecipeSerializer<?>> DOUGH =
 			RECIPE_SERIALIZERS.register("dough", () -> new RecipeSerializer<>(DoughRecipe::new));
-	 */
+	*/
 }

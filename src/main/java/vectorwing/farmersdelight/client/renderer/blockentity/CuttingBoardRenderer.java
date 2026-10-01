@@ -1,28 +1,77 @@
-package vectorwing.farmersdelight.client.renderer;
+package vectorwing.farmersdelight.client.renderer.blockentity;
+
+// import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.entity.ItemRenderer;
+
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-// import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-// import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.*;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
+import vectorwing.farmersdelight.client.renderer.blockentity.state.CuttingBoardRenderState;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.block.entity.CuttingBoardBlockEntity;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.Random;
 
-public class CuttingBoardRenderer // implements BlockEntityRenderer<CuttingBoardBlockEntity>
+public class CuttingBoardRenderer<T extends CuttingBoardBlockEntity, S extends CuttingBoardRenderState> implements BlockEntityRenderer<T, S>
 {
-	/*
-	private final Random random = new Random();
+    private static final float SIZE = 0.6f;
+    private final ItemModelResolver itemModelResolver;
 
-	public CuttingBoardRenderer(BlockEntityRendererProvider.Context context) {
-	}
+    public CuttingBoardRenderer(BlockEntityRendererProvider.Context context) {
+        this.itemModelResolver = context.itemModelResolver();
+    }
+
+    public S createRenderState() {
+        return (S) (new CuttingBoardRenderState());
+    }
+
+    @Override
+    public void extractRenderState(T blockEntity, S state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+        int seed = (int) blockEntity.getBlockPos().asLong();
+        ItemStackRenderState itemState = new ItemStackRenderState();
+        var storedItem = blockEntity.getStoredItem();
+        itemModelResolver.updateForTopItem(itemState, storedItem, ItemDisplayContext.FIXED, blockEntity.getLevel(), null, seed);
+        state.facing = blockEntity.getBlockState().getValue(CuttingBoardBlock.FACING);
+        state.item = itemState;
+        state.isBlockLike = storedItem.getItem() instanceof BlockItem && !storedItem.is(ModTags.Items.FLAT_ON_CUTTING_BOARD);
+        state.itemCount = storedItem.getCount();
+    }
+
+    @Override
+    public void submit(S state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
+        Direction direction = state.facing.getOpposite();
+        ItemStackRenderState item = state.item;
+
+        if (!item.isEmpty()) {
+            poseStack.pushPose();
+            poseStack.translate(0.5d, 0.08d, 0.5d);
+            float angle = -direction.toYRot();
+            poseStack.rotateDegrees(Axis.YP, angle);
+            poseStack.rotateDegrees(Axis.XP, 90.0f);
+            poseStack.scale(SIZE, SIZE, SIZE);
+            item.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, 0);
+            poseStack.popPose();
+        }
+    }
+
+    /*
+	private final Random random = new Random();
 
 	@Override
 	public void render(CuttingBoardBlockEntity cuttingBoard, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
@@ -113,14 +162,14 @@ public class CuttingBoardRenderer // implements BlockEntityRenderer<CuttingBoard
 		matrixStackIn.scale(0.6F, 0.6F, 0.6F);
 	}
 
-	protected int getModelCount(ItemStack stack) {
+	protected int getModelCount(ItemStack item) {
 		int modelCount = 1;
 
-		if (stack.getCount() > 1) {
-			modelCount += Mth.ceil(((float) stack.getCount() / stack.getMaxStackSize()) * 4);
+		if (item.getCount() > 1) {
+			modelCount += Mth.ceil(((float) item.getCount() / item.getMaxStackSize()) * 4);
 		}
 
 		return modelCount;
 	}
-	 */
+	*/
 }

@@ -14,8 +14,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Clearable;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -40,7 +44,6 @@ import vectorwing.farmersdelight.FarmersDelight;
 import vectorwing.farmersdelight.common.block.CuttingBoardBlock;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipeInput;
-import vectorwing.farmersdelight.common.registry.ModAdvancements;
 import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 import vectorwing.farmersdelight.common.registry.ModRecipeTypes;
 import vectorwing.farmersdelight.common.registry.ModSounds;
@@ -55,26 +58,20 @@ import java.util.Optional;
 @EventBusSubscriber(modid = FarmersDelight.MODID)
 public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Clearable
 {
-	private final ItemStacksResourceHandler inventory;
+	private final ItemStacksResourceHandler inventory = new ItemStacksResourceHandler(1) {
+		@Override
+		protected void onContentsChanged(int index, @NonNull ItemStack previousContents) {
+			inventoryChanged();
+		}
+	};
 	private final RecipeManager.CachedCheck<CuttingBoardRecipeInput, CuttingBoardRecipe> quickCheck;
 	private Identifier lastRecipeID;
 	private boolean isItemCarvingBoard;
 
 	public CuttingBoardBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.CUTTING_BOARD.get(), pos, state);
-		inventory = createHandler();
 		isItemCarvingBoard = false;
 		quickCheck = RecipeManager.createCheck(ModRecipeTypes.CUTTING.get());
-	}
-
-	private ItemStacksResourceHandler createHandler() {
-		return new ItemStacksResourceHandler(1)
-		{
-			@Override
-			protected void onContentsChanged(int index, @NonNull ItemStack previousContents) {
-				inventoryChanged();
-			}
-		};
 	}
 
 	@SubscribeEvent
@@ -82,7 +79,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 		event.registerBlockEntity(
 				Capabilities.Item.BLOCK,
 				ModBlockEntityTypes.CUTTING_BOARD.get(),
-				(be, context) -> be.getInventory()
+				(be, _) -> be.getInventory()
 		);
 	}
 
@@ -110,7 +107,14 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 		ItemUtils.clearItems(inventory);
 	}
 
-	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player) {
+	@Override
+	public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+		super.preRemoveSideEffects(pos, state);
+		if (level != null && !level.isClientSide() && !inventory.getResource(0).isEmpty())
+			Containers.dropItemStack(level, pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, inventory.getResource(0).toStack(inventory.getAmountAsInt(0)));
+	}
+
+	public boolean processStoredItemUsingTool(ItemStack toolStack, @Nullable Player player, @Nullable InteractionHand hand) {
 		if (level == null) return false;
 
 		if (isItemCarvingBoard) return false;
@@ -134,8 +138,13 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 			if (level instanceof ServerLevel serverLevel) {
 				spawnCuttingParticles(serverLevel, getBlockPos(), getStoredItem());
 			}
+			if (player != null && hand != null)
+					player.swing(hand, SwingAnimation.DEFAULT, true);
 			playProcessingSound(recipe.value().getSoundEvent().orElse(null), toolStack, getStoredItem());
-			inventory.extract(0, inventory.getResource(0), 1, Transaction.openRoot());
+			try (Transaction tx = Transaction.openRoot()) {
+				inventory.extract(0, inventory.getResource(0), 1, tx);
+				tx.commit();
+			}
 			if (player instanceof ServerPlayer) {
 				// ModAdvancements.USE_CUTTING_BOARD.get().trigger((ServerPlayer) player);
 				if (!getStoredItem().isEmpty()) {
@@ -195,20 +204,29 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 		if (isItemCarvingBoard || addedStack.isEmpty()) {
 			return false;
 		}
-		return inventory.insert(0, ItemResource.of(addedStack), addedStack.getCount(), Transaction.openRoot()) != addedStack.getCount();
+		if (inventory.getResource(0).isEmpty()) {
+			return true;
+		}
+		return inventory.matches(addedStack, inventory.getResource(0)) && inventory.getAmountAsInt(0) < inventory.getResource(0).getMaxStackSize();
 	}
 
 	public ItemStack addItem(ItemStack addedStack) {
 		if (!isItemCarvingBoard) {
-			addedStack.setCount(addedStack.count() - inventory.insert(0, ItemResource.of(addedStack), addedStack.getCount(), Transaction.openRoot()));
+			try (Transaction tx = Transaction.openRoot()) {
+				addedStack.setCount(addedStack.getCount() - inventory.insert(0, ItemResource.of(addedStack), addedStack.getCount(), tx));
+				tx.commit();
+			}
 		}
 		return addedStack;
 	}
 
 	public ItemStack removeItem() {
 		isItemCarvingBoard = false;
-		ItemStack removedStack = inventory.getResource(0).toStack();
-		inventory.extract(0, ItemResource.of(Items.AIR), getMaxStackSize(), Transaction.openRoot());
+		ItemStack removedStack = inventory.getResource(0).toStack(inventory.getAmountAsInt(0));
+		try (Transaction tx = Transaction.openRoot()) {
+			inventory.extract(0, inventory.getResource(0), inventory.getAmountAsInt(0), tx);
+			tx.commit();
+		}
 		return removedStack;
 	}
 
@@ -227,7 +245,7 @@ public class CuttingBoardBlockEntity extends SyncedBlockEntity implements Cleara
 	}
 
 	public ItemStack getStoredItem() {
-		return inventory.getResource(0).toStack();
+		return inventory.getResource(0).toStack(inventory.getAmountAsInt(0));
 	}
 
 	public int getMaxStackSize() {

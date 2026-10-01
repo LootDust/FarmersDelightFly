@@ -120,8 +120,8 @@ public class SkilletItem // extends BlockItem
 	}
 
 	@Override
-	public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+	public void postHurtEnemy(ItemStack item, LivingEntity target, LivingEntity attacker) {
+		item.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
 	}
 
 	private static boolean isPlayerNearHeatSource(Player player, LevelReader level) {
@@ -138,14 +138,14 @@ public class SkilletItem // extends BlockItem
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+	public void appendHoverText(ItemStack item, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 		tooltip.add(TextUtils.PLACEABLE_SNEAKING);
 	}
 
 	@Override
-	public int getUseDuration(ItemStack stack, LivingEntity entity) {
-		int fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, entity.level().registryAccess(), stack);
-		int cookingTime = stack.getOrDefault(ModDataComponents.COOKING_TIME_LENGTH, 0);
+	public int getUseDuration(ItemStack item, LivingEntity entity) {
+		int fireAspectLevel = ItemUtils.getValidatedEnchantmentLevel(Enchantments.FIRE_ASPECT, entity.level().registryAccess(), item);
+		int cookingTime = item.getOrDefault(ModDataComponents.COOKING_TIME_LENGTH, 0);
 		return SkilletBlock.getSkilletCookingTime(cookingTime, fireAspectLevel);
 	}
 
@@ -182,17 +182,17 @@ public class SkilletItem // extends BlockItem
 	}
 
 	@Override
-	public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int count) {
+	public void onUseTick(Level level, LivingEntity entity, ItemStack item, int count) {
 		if (entity instanceof Player player) {
-			if (stack.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
-				long flipTimeStamp = stack.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+			if (item.has(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get())) {
+				long flipTimeStamp = item.get(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
 				long l = level.getGameTime() - flipTimeStamp;
 				if (l > FLIP_TIME) {
-					stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
-					stack.set(ModDataComponents.SKILLET_FLIPPED.get(), !stack.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false));
+					item.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+					item.set(ModDataComponents.SKILLET_FLIPPED.get(), !item.getOrDefault(ModDataComponents.SKILLET_FLIPPED.get(), false));
 				} else if (level.isClientSide && l == FLIP_TIME - 8) {
 					//why does it need to play early? idk
-					//plays instantly right before it lands & on client only so its instant. cant be done in statement above as that might not run fo player as stack is sent when updated
+					//plays instantly right before it lands & on client only so its instant. cant be done in statement above as that might not run fo player as item is sent when updated
 					level.playSound(player, entity, ModSounds.BLOCK_SKILLET_ADD_FOOD.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
 				} else if (level.isClientSide && level.random.nextInt(50) == 0 && l < FLIP_TIME - 8 || l > FLIP_TIME - 3) {
 					level.playSound(null, entity, ModSounds.BLOCK_SKILLET_SIZZLE.get(), SoundSource.PLAYERS, 0.4F, level.random.nextFloat() * 0.2F + 0.9F);
@@ -204,24 +204,24 @@ public class SkilletItem // extends BlockItem
 	}
 
 	@Override
-	public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+	public void releaseUsing(ItemStack item, Level level, LivingEntity entity, int timeLeft) {
 		if (entity instanceof Player player) {
-			ItemStackWrapper storedStack = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
+			ItemStackWrapper storedStack = item.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
 			if (!storedStack.getStack().isEmpty()) {
 				ItemStack cookingStack = storedStack.getStack();
 				player.getInventory().placeItemBackInInventory(cookingStack);
-				stack.remove(ModDataComponents.SKILLET_INGREDIENT);
-				stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
-				stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
-				stack.remove(ModDataComponents.SKILLET_FLIPPED.get());
+				item.remove(ModDataComponents.SKILLET_INGREDIENT);
+				item.remove(ModDataComponents.COOKING_TIME_LENGTH);
+				item.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+				item.remove(ModDataComponents.SKILLET_FLIPPED.get());
 			}
 		}
 	}
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+	public ItemStack finishUsingItem(ItemStack item, Level level, LivingEntity entity) {
 		if (entity instanceof Player player) {
-			ItemStackWrapper storedStack = stack.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
+			ItemStackWrapper storedStack = item.getOrDefault(ModDataComponents.SKILLET_INGREDIENT, ItemStackWrapper.EMPTY);
 			if (!storedStack.getStack().isEmpty()) {
 				ItemStack cookingStack = storedStack.getStack();
 				Optional<RecipeHolder<CampfireCookingRecipe>> cookingRecipe = getCookingRecipe(cookingStack, level);
@@ -232,52 +232,52 @@ public class SkilletItem // extends BlockItem
 						player.drop(resultStack, false);
 					}
 					if (player instanceof ServerPlayer) {
-						CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, stack);
+						CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer) player, item);
 					}
 				});
-				stack.remove(ModDataComponents.SKILLET_INGREDIENT);
-				stack.remove(ModDataComponents.COOKING_TIME_LENGTH);
-				stack.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
-				stack.remove(ModDataComponents.SKILLET_FLIPPED.get());
+				item.remove(ModDataComponents.SKILLET_INGREDIENT);
+				item.remove(ModDataComponents.COOKING_TIME_LENGTH);
+				item.remove(ModDataComponents.SKILLET_FLIP_TIMESTAMP.get());
+				item.remove(ModDataComponents.SKILLET_FLIPPED.get());
 			}
 		}
 
-		return stack;
+		return item;
 	}
 
 	@Override
-	public int getBarWidth(ItemStack stack) {
-		if (stack.has(ModDataComponents.COOKING_TIME_LENGTH.get())) {
-			return Math.round(13.0F - (float) ClientRenderUtils.getClientPlayerHack().getUseItemRemainingTicks() * 13.0F / (float) this.getUseDuration(stack, ClientRenderUtils.getClientPlayerHack()));
+	public int getBarWidth(ItemStack item) {
+		if (item.has(ModDataComponents.COOKING_TIME_LENGTH.get())) {
+			return Math.round(13.0F - (float) ClientRenderUtils.getClientPlayerHack().getUseItemRemainingTicks() * 13.0F / (float) this.getUseDuration(item, ClientRenderUtils.getClientPlayerHack()));
 		} else {
-			return super.getBarWidth(stack);
+			return super.getBarWidth(item);
 		}
 	}
 
 	@Override
-	public int getBarColor(ItemStack stack) {
-		if (stack.has(ModDataComponents.COOKING_TIME_LENGTH.get())) {
+	public int getBarColor(ItemStack item) {
+		if (item.has(ModDataComponents.COOKING_TIME_LENGTH.get())) {
 			return 0xFF8B4F;
-		} else return super.getBarColor(stack);
+		} else return super.getBarColor(item);
 	}
 
 	@Override
-	public boolean isBarVisible(ItemStack stack) {
-		return super.isBarVisible(stack) || stack.has(ModDataComponents.COOKING_TIME_LENGTH.get());
+	public boolean isBarVisible(ItemStack item) {
+		return super.isBarVisible(item) || item.has(ModDataComponents.COOKING_TIME_LENGTH.get());
 	}
 
-	public static Optional<RecipeHolder<CampfireCookingRecipe>> getCookingRecipe(ItemStack stack, Level level) {
-		if (stack.isEmpty()) {
+	public static Optional<RecipeHolder<CampfireCookingRecipe>> getCookingRecipe(ItemStack item, Level level) {
+		if (item.isEmpty()) {
 			return Optional.empty();
 		}
-		return level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(stack), level);
+		return level.getRecipeManager().getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(item), level);
 	}
 
 	@Override
-	protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, @Nullable Player player, ItemStack stack, BlockState state) {
-		super.updateCustomBlockEntityTag(pos, level, player, stack, state);
+	protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, @Nullable Player player, ItemStack item, BlockState state) {
+		super.updateCustomBlockEntityTag(pos, level, player, item, state);
 		if (level.getBlockEntity(pos) instanceof SkilletBlockEntity skillet) {
-			skillet.setSkilletItem(stack);
+			skillet.setSkilletItem(item);
 			return true;
 		}
 		return false;
@@ -288,9 +288,9 @@ public class SkilletItem // extends BlockItem
 		return SKILLET_MATERIAL.getRepairIngredient().test(repair) || super.isValidRepairItem(toRepair, repair);
 	}
 
-	public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
+	public boolean mineBlock(ItemStack item, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
 		if (!level.isClientSide && state.getDestroySpeed(level, pos) != 0.0F) {
-			stack.hurtAndBreak(1, entity, EquipmentSlot.MAINHAND);
+			item.hurtAndBreak(1, entity, EquipmentSlot.MAINHAND);
 		}
 
 		return true;
@@ -306,19 +306,19 @@ public class SkilletItem // extends BlockItem
 	}
 
 	@Override
-	public boolean isPrimaryItemFor(ItemStack stack, Holder<Enchantment> enchantment) {
+	public boolean isPrimaryItemFor(ItemStack item, Holder<Enchantment> enchantment) {
 		if (enchantment.is(Enchantments.SWEEPING_EDGE)) {
 			return false;
 		}
-		return super.isPrimaryItemFor(stack, enchantment);
+		return super.isPrimaryItemFor(item, enchantment);
 	}
 
 	@Override
-	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
+	public boolean supportsEnchantment(ItemStack item, Holder<Enchantment> enchantment) {
 		if (enchantment.is(Enchantments.SWEEPING_EDGE)) {
 			return false;
 		}
-		return super.supportsEnchantment(stack, enchantment);
+		return super.supportsEnchantment(item, enchantment);
 	}
 
 	@Override

@@ -40,11 +40,11 @@ public class CopySkilletFunction // extends LootItemConditionalFunction
 	}
 
 	@Override
-	protected @NonNull ItemStack run(ItemStack stack, LootContext context) {
+	protected @NonNull ItemStack run(ItemStack item, LootContext context) {
 		if (context.getParameter(LootContextParams.BLOCK_ENTITY) instanceof SkilletBlockEntity skillet) {
-			stack = skillet.getSkilletAsItem();
+			item = skillet.getSkilletAsItem();
 		}
-		return stack;
+		return item;
 	}
 
 	@Deprecated

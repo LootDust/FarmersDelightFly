@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:blue_orchid",
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "minecraft:light_blue_dye"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#c:tools/knife"
+}

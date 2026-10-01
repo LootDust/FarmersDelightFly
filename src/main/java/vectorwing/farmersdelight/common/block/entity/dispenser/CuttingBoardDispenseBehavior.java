@@ -34,23 +34,23 @@ public class CuttingBoardDispenseBehavior // extends OptionalDispenseItemBehavio
 	}
 
 	@Override
-	public final ItemStack dispense(BlockSource source, ItemStack stack) {
-		if (tryDispenseStackOnCuttingBoard(source, stack)) {
+	public final ItemStack dispense(BlockSource source, ItemStack item) {
+		if (tryDispenseStackOnCuttingBoard(source, item)) {
 			this.playSound(source); // I added this because i completely overrode the super implementation which had the sounds.
 			this.playAnimation(source, source.state().getValue(DispenserBlock.FACING)); // see above, same reasoning
-			return stack;
+			return item;
 		}
-		return DISPENSE_ITEM_BEHAVIOR_HASH_MAP.get(stack.getItem()).dispense(source, stack); // Not targetted on cutting board, use vanilla/other mods behaviour
+		return DISPENSE_ITEM_BEHAVIOR_HASH_MAP.get(item.getItem()).dispense(source, item); // Not targetted on cutting board, use vanilla/other mods behaviour
 	}
 
-	public boolean tryDispenseStackOnCuttingBoard(BlockSource source, ItemStack stack) {
+	public boolean tryDispenseStackOnCuttingBoard(BlockSource source, ItemStack item) {
 		setSuccess(false);
 		Level level = source.level();
 		BlockPos pos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
 		BlockState state = level.getBlockState(pos);
 		Block block = state.getBlock();
 		if (block instanceof CuttingBoardBlock && level.getBlockEntity(pos) instanceof CuttingBoardBlockEntity cuttingBoard) {
-			if (!cuttingBoard.isEmpty() && cuttingBoard.processStoredItemUsingTool(stack, null)) {
+			if (!cuttingBoard.isEmpty() && cuttingBoard.processStoredItemUsingTool(item, null)) {
 				setSuccess(true);
 			}
 			return true;

@@ -1,0 +1,27 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": [
+    "minecraft:mangrove_door",
+    "minecraft:mangrove_trapdoor",
+    "minecraft:mangrove_sign",
+    "minecraft:mangrove_hanging_sign",
+    "minecraft:mangrove_fence",
+    "minecraft:mangrove_fence_gate",
+    "minecraft:mangrove_pressure_plate",
+    "minecraft:mangrove_button",
+    "minecraft:mangrove_boat",
+    "farmersdelight:mangrove_cabinet"
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:mangrove_planks"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:axes"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": [
+    "minecraft:dark_oak_door",
+    "minecraft:dark_oak_trapdoor",
+    "minecraft:dark_oak_sign",
+    "minecraft:dark_oak_hanging_sign",
+    "minecraft:dark_oak_fence",
+    "minecraft:dark_oak_fence_gate",
+    "minecraft:dark_oak_pressure_plate",
+    "minecraft:dark_oak_button",
+    "minecraft:dark_oak_boat",
+    "farmersdelight:dark_oak_cabinet"
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:dark_oak_planks"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:axes"
+}

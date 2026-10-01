@@ -1,0 +1,26 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": [
+    "minecraft:crimson_door",
+    "minecraft:crimson_trapdoor",
+    "minecraft:crimson_sign",
+    "minecraft:crimson_hanging_sign",
+    "minecraft:crimson_fence",
+    "minecraft:crimson_fence_gate",
+    "minecraft:crimson_pressure_plate",
+    "minecraft:crimson_button",
+    "farmersdelight:crimson_cabinet"
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": {
+        "id": "minecraft:crimson_planks"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#minecraft:axes"
+}

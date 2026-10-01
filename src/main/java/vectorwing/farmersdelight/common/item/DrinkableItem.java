@@ -25,12 +25,12 @@ public class DrinkableItem extends ConsumableItem
 
 	/*
 	@Override
-	public UseAnim getUseAnimation(ItemStack stack) {
+	public UseAnim getUseAnimation(ItemStack item) {
 		return UseAnim.DRINK;
 	}
 
 	@Override
-	public int getUseDuration(ItemStack stack, LivingEntity entity) {
+	public int getUseDuration(ItemStack item, LivingEntity entity) {
 		return 32;
 	}
 

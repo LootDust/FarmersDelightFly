@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredient": "minecraft:porkchop",
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "farmersdelight:bacon"
+      }
+    }
+  ],
+  "sound": {
+    "sound_id": "farmersdelight:block.cutting_board.knife_cut"
+  },
+  "tool": "#c:tools/knife"
+}

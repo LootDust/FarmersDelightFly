@@ -35,31 +35,31 @@ public class ModItems
 		// Blocks
 		STOVE(ModBlockEntry.STOVE.getName(), ModBlocks.STOVE, basicItem()),
 		COOKING_POT(ModBlockEntry.COOKING_POT.getName(), ModBlocks.COOKING_POT, basicItem().stacksTo(1)),
+		CUTTING_BOARD(ModBlockEntry.CUTTING_BOARD.getName(), ModBlocks.CUTTING_BOARD, basicItem()),
 
+		CARROT_CRATE(ModBlockEntry.CARROT_CRATE.getName(), ModBlocks.CARROT_CRATE, basicItem()),
+		POTATO_CRATE(ModBlockEntry.POTATO_CRATE.getName(), ModBlocks.POTATO_CRATE, basicItem()),
+		BEETROOT_CRATE(ModBlockEntry.BEETROOT_CRATE.getName(), ModBlocks.BEETROOT_CRATE, basicItem()),
+		CABBAGE_CRATE(ModBlockEntry.CABBAGE_CRATE.getName(), ModBlocks.CABBAGE_CRATE, basicItem()),
+		TOMATO_CRATE(ModBlockEntry.TOMATO_CRATE.getName(), ModBlocks.TOMATO_CRATE, basicItem()),
+		ONION_CRATE(ModBlockEntry.ONION_CRATE.getName(), ModBlocks.ONION_CRATE, basicItem()),
+		RICE_BALE(ModBlockEntry.RICE_BALE.getName(), ModBlocks.RICE_BALE, basicItem()),
+		RICE_BAG(ModBlockEntry.RICE_BAG.getName(),  ModBlocks.RICE_BAG, basicItem()),
+		STRAW_BALE(ModBlockEntry.STRAW_BALE.getName(),  ModBlocks.STRAW_BALE, basicItem()),
 
-		CARROT_CRATE("carrot_crate", ModBlocks.CARROT_CRATE, basicItem()),
-		POTATO_CRATE("potato_crate", ModBlocks.POTATO_CRATE, basicItem()),
-		BEETROOT_CRATE("beetroot_crate", ModBlocks.BEETROOT_CRATE, basicItem()),
-		CABBAGE_CRATE("cabbage_crate", ModBlocks.CABBAGE_CRATE, basicItem()),
-		TOMATO_CRATE("tomato_crate", ModBlocks.TOMATO_CRATE, basicItem()),
-		ONION_CRATE("onion_crate", ModBlocks.ONION_CRATE, basicItem()),
-		RICE_BALE("rice_bale", ModBlocks.RICE_BALE, basicItem()),
-		RICE_BAG("rice_bag",  ModBlocks.RICE_BAG, basicItem()),
-		STRAW_BALE("straw_bale",  ModBlocks.STRAW_BALE, basicItem()),
-
-		OAK_CABINET("oak_cabinet", ModBlocks.OAK_CABINET, basicItem()),
-		SPRUCE_CABINET("spruce_cabinet", ModBlocks.SPRUCE_CABINET, basicItem()),
-		BIRCH_CABINET("birch_cabinet", ModBlocks.BIRCH_CABINET, basicItem()),
-		JUNGLE_CABINET("jungle_cabinet", ModBlocks.JUNGLE_CABINET, basicItem()),
-		ACACIA_CABINET("acacia_cabinet", ModBlocks.ACACIA_CABINET, basicItem()),
-		DARK_OAK_CABINET("dark_oak_cabinet", ModBlocks.DARK_OAK_CABINET, basicItem()),
-		MANGROVE_CABINET("mangrove_cabinet", ModBlocks.MANGROVE_CABINET, basicItem()),
-		CHERRY_CABINET("cherry_cabinet", ModBlocks.CHERRY_CABINET, basicItem()),
-		PALE_OAK_CABINET("pale_oak_cabinet", ModBlocks.PALE_OAK_CABINET, basicItem()),
-		POPLAR_CABINET("poplar_cabinet", ModBlocks.POPLAR_CABINET, basicItem()),
-		BAMBOO_CABINET("bamboo_cabinet", ModBlocks.BAMBOO_CABINET, basicItem()),
-		CRIMSON_CABINET("crimson_cabinet", ModBlocks.CRIMSON_CABINET, basicItem()),
-		WARPED_CABINET("warped_cabinet", ModBlocks.WARPED_CABINET, basicItem()),
+		OAK_CABINET(ModBlockEntry.OAK_CABINET.getName(), ModBlocks.OAK_CABINET, basicItem()),
+		SPRUCE_CABINET(ModBlockEntry.SPRUCE_CABINET.getName(), ModBlocks.SPRUCE_CABINET, basicItem()),
+		BIRCH_CABINET(ModBlockEntry.BIRCH_CABINET.getName(), ModBlocks.BIRCH_CABINET, basicItem()),
+		JUNGLE_CABINET(ModBlockEntry.JUNGLE_CABINET.getName(), ModBlocks.JUNGLE_CABINET, basicItem()),
+		ACACIA_CABINET(ModBlockEntry.ACACIA_CABINET.getName(), ModBlocks.ACACIA_CABINET, basicItem()),
+		DARK_OAK_CABINET(ModBlockEntry.DARK_OAK_CABINET.getName(), ModBlocks.DARK_OAK_CABINET, basicItem()),
+		MANGROVE_CABINET(ModBlockEntry.MANGROVE_CABINET.getName(), ModBlocks.MANGROVE_CABINET, basicItem()),
+		CHERRY_CABINET(ModBlockEntry.CHERRY_CABINET.getName(), ModBlocks.CHERRY_CABINET, basicItem()),
+		PALE_OAK_CABINET(ModBlockEntry.PALE_OAK_CABINET.getName(), ModBlocks.PALE_OAK_CABINET, basicItem()),
+		POPLAR_CABINET(ModBlockEntry.POPLAR_CABINET.getName(), ModBlocks.POPLAR_CABINET, basicItem()),
+		BAMBOO_CABINET(ModBlockEntry.BAMBOO_CABINET.getName(), ModBlocks.BAMBOO_CABINET, basicItem()),
+		CRIMSON_CABINET(ModBlockEntry.CRIMSON_CABINET.getName(), ModBlocks.CRIMSON_CABINET, basicItem()),
+		WARPED_CABINET(ModBlockEntry.WARPED_CABINET.getName(), ModBlocks.WARPED_CABINET, basicItem()),
 
 		// Tools
 		FLINT_KNIFE("flint_knife", p -> new KnifeItem(ModMaterial.FLINT, p), basicItem()),
@@ -266,8 +266,9 @@ public class ModItems
 	/*
 	public static final Supplier<Item> SKILLET = registerWithTab("skillet",
 			() -> new SkilletItem(ModBlocks.SKILLET.get(), basicItem().stacksTo(1).attributes(SkilletItem.createAttributes(SkilletItem.SKILLET_MATERIAL, 5.0F, -3.1F))));
-	public static final Supplier<Item> CUTTING_BOARD = registerWithTab("cutting_board",
-			() -> new BlockItem(ModBlocks.CUTTING_BOARD.get(), basicItem()));
+	*/
+	public static final Supplier<Item> CUTTING_BOARD = ModItemEntry.CUTTING_BOARD.register(ITEMS);
+	/*
 	public static final Supplier<Item> WOODEN_BASKET = registerWithTab("wooden_basket",
 			() -> new BlockItem(ModBlocks.WOODEN_BASKET.get(), basicItem()));
 	public static final Supplier<Item> BAMBOO_BASKET = registerWithTab("bamboo_basket",
@@ -664,7 +665,7 @@ public class ModItems
 	public static final Supplier<Item> DEBUG_PUMPKIN_PIE = registerHidden("debug_pumpkin_pie",
 			() -> new BlockItem(ModBlocks.PUMPKIN_PIE.get(), basicItem())
 			{
-				public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
+				public void appendHoverText(ItemStack item, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
 					tooltip.add(TextUtils.DEBUG_ITEM);
 				}
 			});
